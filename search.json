@@ -1,0 +1,1430 @@
+[
+  {
+    "objectID": "course_presentation.html#course-evaluation-13",
+    "href": "course_presentation.html#course-evaluation-13",
+    "title": "Advanced applied Statistics",
+    "section": "Course evaluation – 1/3",
+    "text": "Course evaluation – 1/3\nBeyond the technical skills acquired in this course, the objective is to develop a habit of scientific monitoring and research that students can leverage in their future roles. The evaluation project is designed to put this aptitude into practice.\nStudents will be graded on their ability to:\n\nGrasp a topic and its innovative solutions at the forefront of research.\nImagine a concrete application for this paradigm.\nPresent the findings in a way that is understandable to both management and technical audiences."
+  },
+  {
+    "objectID": "course_presentation.html#course-evaluation-23",
+    "href": "course_presentation.html#course-evaluation-23",
+    "title": "Advanced applied Statistics",
+    "section": "Course evaluation – 2/3",
+    "text": "Course evaluation – 2/3\n\nWith this in mind, students should step into the shoes of a data science consultant working for a company in any industry. The problem this company wants to solve has no “off-the-shelf” solution and requires an innovative approach. Students must apply the knowledge acquired in the “Advanced Applied Statistics” course and may also draw on their own background to propose an alternative approach, ultimately comparing methods.\nThere will be one or two one-hour in-class sessions during which students will build their project and final deliverable. The specific project topic will be provided at the beginning of the session.\nThe format of the final deliverable is open: it can be a commented notebook, a PDF with simulations sections, a .md file, a .qmd file, etc. All code must be reproducible and written in Python. A link to Database should be provided (not the Database itself). Upload your .zip file project in the assignment folder on Edunao dedicated to the project. Use lastname_firstname.zip to name your submission."
+  },
+  {
+    "objectID": "course_presentation.html#course-evaluation-33",
+    "href": "course_presentation.html#course-evaluation-33",
+    "title": "Advanced applied Statistics",
+    "section": "Course evaluation – 3/3",
+    "text": "Course evaluation – 3/3\n\nThe final grade will be based solely on these project submissions.\nStudents are allowed to prepare materials at home and search for relevant datasets beforehand, even though the exact topic is only revealed at the start of the session. It can be: Compressed sensing, Matrix completion, Community detection, convex relaxation, etc..\n\nI want you to think (not AI) about these topics and how they can be used to solved technical/business problems.\nThe use of AI is permitted and recommended, but it must be clearly disclosed in a dedicated section detailing how it was used for specific parts of the work. The student’s modus operandi regarding AI usage must be carefully described, as an AI detector will be utilized during grading. If any doubts arise regarding a student’s understanding of or contribution to the material during the evaluation, the professor reserves the right to organize an oral defense to question the student on their project and assess their actual level of comprehension."
+  },
+  {
+    "objectID": "compressed_sensing.html#why-compressed-sensing",
+    "href": "compressed_sensing.html#why-compressed-sensing",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Why compressed sensing?",
+    "text": "Why compressed sensing?\n\n\n\nClassical approach: acquisition and compression are two separate steps.\n\n\n\n\n\n\n\n\n\n\nRAW photograph: about 1 MB\nJPEG (Discrete Cosine Transform + quantization): up to \\(25\\times\\) smaller.\n\n\n\n\n\nCompressed sensing (CS): acquire and compress in a single step, with a few “intelligent” measurements."
+  },
+  {
+    "objectID": "compressed_sensing.html#sparsity-of-natural-signals-in-a-well-chosen-basis",
+    "href": "compressed_sensing.html#sparsity-of-natural-signals-in-a-well-chosen-basis",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Sparsity of natural signals in a well-chosen basis",
+    "text": "Sparsity of natural signals in a well-chosen basis\n\n\nAn image \\(f\\in\\R^{n\\times n}\\) can be expanded in an orthonormal basis: \\[f=\\sum_{j=1}^{n^2} \\inr{f,\\psi_j}\\psi_j\\]\nIf the basis \\((\\psi_j)\\) is well-chosen then:\n\nMost coefficients are negligible; a handful carry the information: keeping the \\(s\\) largest ones, \\(f^*_s=\\sum_{j\\in J_s}\\inr{f,\\psi_j}\\psi_j\\), is visually indistinguishable from \\(f\\).\na local perturbation in time produces a local perturbation in frequencies: the basis is localized in time and frequency.\n\n\n\n\n\nLog of the wavelet coefficients, sorted decreasingly\n\n\n\n\nOrthonormal basis (such as the Trigonometric basis in \\(L^2([0,1])\\)) are used to represent functions/ signals. There are however many different ways to choose such a basis. We seek for basis that are:\n\nrobust to local perturbations\nsignals can be represented in an ‘economical way’; i.e. sparse"
+  },
+  {
+    "objectID": "compressed_sensing.html#sparsity-in-practice-hard-thresholding",
+    "href": "compressed_sensing.html#sparsity-in-practice-hard-thresholding",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Sparsity in practice: hard thresholding",
+    "text": "Sparsity in practice: hard thresholding\n\n\n\n\nLeft: original. Right: hard thresholding, keeping only 16% of the coefficients.\n\n\n\n\nPhotographs are well approximated by objects of small dimension: sparsity holds approximately."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-haar-basis-in-l201",
+    "href": "compressed_sensing.html#the-haar-basis-in-l201",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The Haar basis in \\(L^2([0,1])\\)",
+    "text": "The Haar basis in \\(L^2([0,1])\\)\n\n\n\nMother wavelet \\(\\Psi=\\mathbb{1}_{[0,1/2)}-\\mathbb{1}_{[1/2,1)}\\), scaling function \\(\\Phi\\equiv 1\\).\nTranslations and dilations, for \\(j\\in\\N\\) and \\(i=0,\\ldots,2^j-1\\): \\[\\Psi_i^j(t)=\\sqrt{2^j}\\,\\Psi\\big(2^j(t-i/2^j)\\big),\\] for all \\(t\\in\\{0, \\cdots, n-1\\}.\\)\nThe Fourier basis of \\(L^2([0,1])\\): \\((1, \\sqrt{2}\\cos(2\\pi k t), \\sin(2\\pi (k+1) t):k\\geq1)\\) is not robust to local perturbations.\n\n\n\n\n\n\n\nHaar mother wavelet (red) and level \\(j=1\\) (blue, green)."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-haar-basis-in-l20cdots-n-12",
+    "href": "compressed_sensing.html#the-haar-basis-in-l20cdots-n-12",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The Haar basis in \\(L^2(\\{0,\\cdots, n-1\\}^2)\\)",
+    "text": "The Haar basis in \\(L^2(\\{0,\\cdots, n-1\\}^2)\\)\nThe tensor basis is used to represent images (\\(n\\times n\\)): for all \\(t_1, t_2\\in\\{0, \\cdots, n-1\\}\\), \\[\n\\Psi_{i_1}^{j_1}\\otimes \\Psi_{i_2}^{j_2}(t_1, t_2) = \\Psi_{i_1}^{j_1}(t_1)\\times \\psi_{i_2}^{j_2}(t_2)\n\\]"
+  },
+  {
+    "objectID": "compressed_sensing.html#check-the-sparsity-of-pictures-in-practice",
+    "href": "compressed_sensing.html#check-the-sparsity-of-pictures-in-practice",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Check the sparsity of pictures in practice",
+    "text": "Check the sparsity of pictures in practice\n\n\nOpen the notebook 0_lab_wavelets_transform.ipynb"
+  },
+  {
+    "objectID": "compressed_sensing.html#the-compressed-sensing-problem",
+    "href": "compressed_sensing.html#the-compressed-sensing-problem",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The compressed sensing problem",
+    "text": "The compressed sensing problem\n\n\n\nLinear measurements \\(y_i=\\inr{x,X_i}\\), \\(i=1,\\ldots,m\\), i.e. \\[y=Ax,\\qquad A=\\begin{pmatrix}X_1^\\top\\\\ \\vdots\\\\ X_m^\\top\\end{pmatrix}\\in\\R^{m\\times N}\\]\nHigh-dimensional regime: \\(m&lt;N\\) (often \\(m\\ll N\\)).\nHighly underdetermined system: infinitely many solutions.\n\n\n\n\n\n\n\nSolving \\(y=Ax\\) with far more unknowns than equations.\n\n\n\n\n\n\n\n\n\n\n\n\nHighly underdetermined system of linear equations\n\n\nGiven \\(A\\) and \\(y\\) find signal \\(x\\) such that \\(Ax=y\\). There are \\(m\\) equations and \\(N\\) unknown variables with \\(N&gt;&gt;m\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#sparse-vectors",
+    "href": "compressed_sensing.html#sparse-vectors",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Sparse vectors",
+    "text": "Sparse vectors\n\n\n\n\nDefinition (sparsity)\n\n\n\\({\\rm supp}(x)=\\{j: x_j\\neq0\\}\\) and \\(\\norm{x}_0=|{\\rm supp}(x)|\\). The vector \\(x\\) is \\(s\\)-sparse when \\(\\norm{x}_0\\leq s\\) and the set of all \\(s\\)-sparse vectors is \\[\\Sigma_s=\\{x\\in\\R^N:\\norm{x}_0\\leq s\\}.\\]\n\n\n\n\n\nStructured sparsity: \\(x=F\\theta\\) with \\(\\theta\\in\\Sigma_s\\) for a dictionary \\(F\\). Replace \\(A\\) by \\(AF\\).\nGood dictionaries (e.g. wavelets) come from approximation theory."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-two-cs-problems",
+    "href": "compressed_sensing.html#the-two-cs-problems",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The two CS problems",
+    "text": "The two CS problems\n\n\n\n\n\n\n\n\n\n\nCS problem 1 — measurement design\n\n\nConstruct, in minimal number, measurement vectors \\(X_1,\\ldots,X_m\\) such that every \\(x\\in\\Sigma_s\\) can be reconstructed efficiently from \\(y=Ax\\) and \\(A\\).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCS problem 2 — reconstruction algorithm\n\n\nGiven \\(A\\), construct an efficiently implementable map \\(\\Delta:\\R^m\\to\\R^N\\) such that \\[\\Delta(A, y=Ax)=x\\qquad\\text{for all }x\\in\\Sigma_s.\\]\n\n\n\n\n\n\nUniformity: the same \\(A\\) must work for all \\(s\\)-sparse signals.\nThe “true” dimension of \\(x\\in\\Sigma_s\\) is \\(s\\): ideally \\(m\\sim s\\), plus a price for not knowing the support.\nExtension to noisy measurements \\(y=Ax+\\xi\\) and approximatively sparse signals (see the LASSO in linear regression)."
+  },
+  {
+    "objectID": "compressed_sensing.html#example-the-single-pixel-camera",
+    "href": "compressed_sensing.html#example-the-single-pixel-camera",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Example: the single-pixel camera",
+    "text": "Example: the single-pixel camera\n\n\n\nInstead of one value per pixel, record a weighted sum of all pixel intensities: \\[y_i=\\inr{x,X_i}.\\]\nClassical camera: \\(X_i\\) = indicator of one pixel, so \\(m=N\\) (RAW files).\nCS camera: a few “global” measurements, each one a single real number.\n\n\n\n\n\nScene \\(x\\) (left) and measurement vector \\(X_i\\) (right).\n\n\n\n\n\n\n\n\\(m\\) measurements of the same scene.\n\n\n\n\n\nIs there a better way to choose the measurement vectors than all the indicators of all pixels?"
+  },
+  {
+    "objectID": "compressed_sensing.html#single-pixel-camera-measurement-protocol",
+    "href": "compressed_sensing.html#single-pixel-camera-measurement-protocol",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Single-pixel camera: measurement protocol",
+    "text": "Single-pixel camera: measurement protocol\n\n\n\n\n\nRice University single-pixel camera.\n\n\n\n\n\n\nClose-up of the micromirrors.\n\n\n\n\nA digital micromirror device (DMD) builds \\(X_i\\); a single photon detector collects \\(y_i\\).\nMirror orientations are drawn at random: randomness is the key to good measurements."
+  },
+  {
+    "objectID": "compressed_sensing.html#single-pixel-camera-reconstruction",
+    "href": "compressed_sensing.html#single-pixel-camera-reconstruction",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Single-pixel camera: reconstruction",
+    "text": "Single-pixel camera: reconstruction\n\n\n\nReconstruction from single-pixel camera measurements.\n\n\n\nPhotographs are approximately sparse in wavelet bases.\nA stable and robust algorithm therefore reconstructs the scene from few noisy measurements."
+  },
+  {
+    "objectID": "compressed_sensing.html#other-applications-face-recognition-finance",
+    "href": "compressed_sensing.html#other-applications-face-recognition-finance",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Other applications: face recognition, finance",
+    "text": "Other applications: face recognition, finance\n\n\nFace recognition (SRC)\n\n\\(y=\\Phi x+\\xi\\), \\(\\Phi=[\\Phi_1|\\cdots|\\Phi_C]\\) built from the database.\n\\(x\\) is supported on one block: the support identifies the person.\n\n\n\nFinance\n\nPortfolio values \\(y\\), price matrix \\(A=(a_{i,j})\\).\nFew assets in the portfolio: \\(x\\) is sparse.\nRecover composition by solving \\(y=Ax\\).\n\n\n\n\n\n\n\nIn many applications the measurements are imposed by the physics or the data, not designed."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-ell_0-minimization-procedure",
+    "href": "compressed_sensing.html#the-ell_0-minimization-procedure",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The \\(\\ell_0\\) minimization procedure",
+    "text": "The \\(\\ell_0\\) minimization procedure\n\nThe solution set of \\(At=y\\) is the affine space \\(x+\\kerA\\) of dimension \\(\\geq N-m\\).\nIdea: The target signal is sparse, hence, pick the sparsest element of this space.\nDef.: \\(\\norm{t}_0= |\\{j\\in[N]: t_j\\neq0\\}|\\) is the size of the support of \\(t\\in\\mathbb{R}^N\\)\n\n\n\n\n\nDefinition (\\(\\ell_0\\) minimization)\n\n\n\\[\\hat x_0\\in\\argmin_{t\\in\\R^N:\\,At=y}\\norm{t}_0\\tag{$P_0$}\\]\n\n\n\n\n\n\n\nHope: \\(\\kerA\\) is “well positioned”, so that \\(x+\\kerA\\) meets \\(\\Sigma_s\\) only at \\(x\\).\nGeometrically: \\(\\kerA\\) should be far from sparse vectors, close to “diagonal” directions."
+  },
+  {
+    "objectID": "compressed_sensing.html#when-is-x-the-unique-ell_0-solution",
+    "href": "compressed_sensing.html#when-is-x-the-unique-ell_0-solution",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "When is \\(x\\) the unique \\(\\ell_0\\) solution?",
+    "text": "When is \\(x\\) the unique \\(\\ell_0\\) solution?\n\n\n\n\n\n\n\nProposition\n\n\nLet \\(x\\in\\R^N\\) with \\(s=\\norm{x}_0\\). The following are equivalent:\n\n\\(x\\) is the unique solution of \\((P_0)\\), i.e. \\(\\hat x_0=x\\);\n\\(\\big(x+\\kerA\\big)\\cap\\Sigma_s=\\{x\\}\\).\n\n\n\n\n\nProof idea. Both statements say that every \\(t\\neq x\\) with \\(At=Ax\\) has \\(\\norm{t}_0&gt;s\\).\n\n\n\n\n\n\n\n\n\n\nWarning\n\n\nThis Proposition concerns only a single vector \\(x\\). CS asks for properties of \\(A\\) that work uniformly over all \\(x\\in\\Sigma_s\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#mgeq-2s-necessary-measurements",
+    "href": "compressed_sensing.html#mgeq-2s-necessary-measurements",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "\\(m\\geq 2s\\) necessary measurements",
+    "text": "\\(m\\geq 2s\\) necessary measurements\n\n\n\n\n\n\n\nProposition\n\n\nThe following are equivalent:\n\nfor all \\(x\\neq z\\in\\Sigma_s\\), \\(Ax\\neq Az\\) (necessary for exact reconstruction over \\(\\Sigma_s\\));\n\\(\\kerA\\cap\\Sigma_{2s}=\\{0\\}\\);\nevery \\(m\\times 2s\\) submatrix of \\(A\\) is injective (hence \\(m\\geq 2s\\)).\n\n\n\n\n\n\n\n\n\n\nKey steps.\n\n\\(\\Sigma_s-\\Sigma_s=\\Sigma_{2s}\\), which gives 1 \\(\\Leftrightarrow\\) 2.\nA \\(2s\\)-sparse \\(x\\) supported on \\(J\\) gives \\(Ax=A_{\\cdot J}x_J\\), which gives 2 \\(\\Leftrightarrow\\) 3."
+  },
+  {
+    "objectID": "compressed_sensing.html#uniform-reconstruction-of-ell_0-minimization-over-sigma_s",
+    "href": "compressed_sensing.html#uniform-reconstruction-of-ell_0-minimization-over-sigma_s",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Uniform reconstruction of \\(\\ell_0\\) minimization over \\(\\Sigma_s\\)",
+    "text": "Uniform reconstruction of \\(\\ell_0\\) minimization over \\(\\Sigma_s\\)\n\n\n\n\n\n\n\nProposition\n\n\n\\(\\kerA\\cap\\Sigma_{2s}=\\{0\\}\\) \\(\\iff\\) \\(\\displaystyle\\argmin_{At=Ax}\\norm{t}_0=\\{x\\}\\) for all \\(x\\in\\Sigma_s\\).\n\n\n\n\n\n\n\nKey steps.\n\n(\\(\\Rightarrow\\)) If \\(At=Ax\\) and \\(t\\neq x\\), then \\(x-t\\in\\kerA\\) has \\(\\norm{x-t}_0&gt;2s\\), so \\(\\norm{t}_0&gt;s\\geq\\norm{x}_0\\).\n(\\(\\Leftarrow\\)) Let \\(t\\in\\kerA\\cap\\Sigma_{2s}\\) and write \\(t=x-z\\) with \\(\\norm{x}_0=\\norm{z}_0\\leq s\\). Then \\(z\\) is solution of \\(\\displaystyle\\min_{At=Ax}\\norm{t}_0\\) and so \\(z=x\\).\n\n\n\n\n\nExact reconstruction of all \\(s\\)-sparse vectors via \\(\\ell_0\\)-minimization requires at least \\(2s\\) measurements. Can we find \\(A\\in\\mathbb{R}^{m\\times N}\\) with \\(m=2s\\) satisfying \\(\\kerA\\cap\\Sigma_{2s}=\\{0\\}\\)?"
+  },
+  {
+    "objectID": "compressed_sensing.html#m-2s-measurements-suffice",
+    "href": "compressed_sensing.html#m-2s-measurements-suffice",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "\\(m = 2s\\) measurements suffice",
+    "text": "\\(m = 2s\\) measurements suffice\n\n\n\n\n\n\n\n\nProposition (Vandermonde matrices)\n\n\nFor every \\(N\\geq 2s\\) there is \\(A\\in\\R^{\\red{2}\\red{s}\\times N}\\) with \\(\\kerA\\cap\\Sigma_{2s}=\\{0\\}\\): \\[A=\\begin{pmatrix}1&\\cdots&1\\\\ t_1&\\cdots&t_N\\\\ \\vdots&&\\vdots\\\\ t_1^{2s-1}&\\cdots&t_N^{2s-1}\\end{pmatrix},\\quad 0&lt;t_1&lt;\\cdots&lt;t_N.\\]\n\n\n\n\n\nProof: Every \\(2s\\times2s\\) minor is a Vandermonde determinant \\(\\prod_{k&lt;l}(t_{j_l}-t_{j_k})\\neq0\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#conclusion",
+    "href": "compressed_sensing.html#conclusion",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Conclusion",
+    "text": "Conclusion\n\n\n\n\n\n\\(m=2s\\) is a necessary and sufficient number of measurements for the reconstruction of any \\(s\\)-sparse signal\nAny \\((2s)\\times N\\) Vandermonde matrix can be used as a measurement matrix\n\\(\\ell_0\\) minimization is a procedure that reconstruct any \\(s\\)-sparse signal given \\(2s\\) (Vandermonde) measurements.\n\n\n\n\n\n\n\n\n\n\n\n\nQuestion\n\n\nCan we compute the solution of a \\(\\ell_0\\)-minimization problem?"
+  },
+  {
+    "objectID": "compressed_sensing.html#procedures-vs.-algorithms",
+    "href": "compressed_sensing.html#procedures-vs.-algorithms",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Procedures vs. algorithms",
+    "text": "Procedures vs. algorithms\n\nProcedure: a statistic, i.e. a measurable function of the data. No computational content.\nAlgorithm: a concrete routine implementing a procedure.\n\n\n\nBrute-force algorithm for \\((P_0)\\):\nFor \\(s = 1, 2, \\ldots, N\\) do\n  For each \\(J \\subset [N]\\) with \\(|J| = s\\) do\n   Try to solve \\(A_{\\cdot J} x_J = y\\)\n   If solvable, stop at the first solution and return it.\n\n\n\n\nNumber of systems to solve: \\(\\sum_{j\\leq s}\\binom{N}{j}\\sim (N/s)^s\\), which is exponential in \\(s\\).\nExample \\(N=1000\\), \\(s=10\\): \\(\\binom{N}{s}\\geq10^{20}\\) linear systems to solve. At \\(10^{-10}\\) second each, that is about 300 years.\n\n\n\n\nIs there a faster algorithm to solve our \\(\\ell_0\\)-minimization problems?"
+  },
+  {
+    "objectID": "compressed_sensing.html#complexity-classes-p-np-np-complete-np-hard",
+    "href": "compressed_sensing.html#complexity-classes-p-np-np-complete-np-hard",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Complexity classes: P, NP, NP-complete, NP-hard",
+    "text": "Complexity classes: P, NP, NP-complete, NP-hard\n\n\n\n\\(P\\): solvable in polynomial time (e.g. matrix product, \\(\\cO(n^3)\\)).\n\\(NP\\): a candidate solution can be certified in polynomial time (e.g. \\(k\\)-clique).\n\\(NP\\)-hard: at least as hard as any \\(NP\\) problem.\n\\(NP\\)-complete: \\(NP\\,\\cap\\,NP\\)-hard.\nExamples: traveling salesman, max clique, knapsack, graph coloring.\n\n\n\n\n\n\n\nClasses of problems in decision theory.\n\n\n\n\n\n\n\n\n\nOne of the 5 out of 7 remaining Clay institute’s million dollar prize: \\(NP\\neq P\\)?"
+  },
+  {
+    "objectID": "compressed_sensing.html#advances-from-openai-610-released",
+    "href": "compressed_sensing.html#advances-from-openai-610-released",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Advances from OpenAI 6/10 released",
+    "text": "Advances from OpenAI 6/10 released\nHere are some major algorithmic and complexity advances from the \\(722\\) manuscripts released:\n\n\n\n1. Matrix Multiplication (The 2.25 Bound)\nThe most heavily discussed algorithmic result is a massive asymptotic reduction in matrix multiplication time. The AI established a new upper bound exponent of \\(\\omega \\leq 2.25\\) over complex numbers.\n\nContext: Schoolbook matrix multiplication requires \\(O(n^3)\\) operations. Successive human improvements over decades had slowly chipped the exponent down to roughly \\(2.37\\). Dropping it to \\(2.25\\) in a single leap is an unprecedented reduction.\nCaveat: This is an asymptotic theoretical bound. Because the threshold constants in the construction are extremely large, it is not yet practically faster for real-world GPU compute.\n\n\n\n\n2. Integer Multiplication\nThe AI produced a manuscript demonstrating an integer multiplication algorithm that operates below \\(O(n \\log n)\\) time. This breaks a strict barrier that very few researchers predicted could be surpassed even slightly."
+  },
+  {
+    "objectID": "compressed_sensing.html#ell_0-minimization-is-np-hard",
+    "href": "compressed_sensing.html#ell_0-minimization-is-np-hard",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "\\(\\ell_0\\) minimization is NP-hard",
+    "text": "\\(\\ell_0\\) minimization is NP-hard\n\n\nIdea: we believe that \\(\\ell_0\\)-minimization is a difficult optimization problem (i.e. NP-hard) because it searches the support \\(S\\subset\\{1, \\cdots,N\\}\\) of the signal – it is ‘combinatorial in nature’.\nStrategy: reduce, in polynomial time, an \\(NP\\)-complete problem to the \\((P_0)\\) problem.\n\n\n\n\n\n\n\n\n\n\n\n\nTheorem\n\n\nThe \\(\\ell_0\\) minimization procedure \\((P_0)\\) is \\(NP\\)-hard in general.\n\n\n\n\n\n\n\nOur baseline \\(NP\\)-complete problem : Partition by 3-element sets: given subsets \\(\\cC_1,\\ldots,\\cC_N\\) of \\(\\{1,\\ldots,m\\}\\) with \\(|\\cC_j|=3\\), is there a sub-collection forming a partition of \\(\\{1,\\ldots,m\\}\\)? (Ex. with \\(m=6\\) and \\(N=5\\))"
+  },
+  {
+    "objectID": "compressed_sensing.html#proof-reduction-from-partitioning-by-3-element-sets",
+    "href": "compressed_sensing.html#proof-reduction-from-partitioning-by-3-element-sets",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Proof: reduction from partitioning by 3-element sets",
+    "text": "Proof: reduction from partitioning by 3-element sets\nGiven a ‘partitioning by 3-element sets’ problem, we necessarily have \\(3N\\geq m\\) and \\(m\\) is a multiple of \\(3\\) (otherwise there is no partition).\n\n\nEncode. Columns \\(a_j=\\mathbb{1}_{\\cC_j}\\in\\R^m\\), \\(A=[a_1|\\cdots|a_N]\\), \\(y=(1,\\ldots,1)^\\top\\). This takes polynomial time, since \\(N\\leq\\binom m3\\).\n\n\n\n\nLower bound. Each \\(a_j\\) has 3 nonzeros, so \\(Ax=y\\) implies \\(\\norm{x}_0\\geq m/3\\).\n\n\n\n\nIf \\(\\norm{\\hat x_0}_0=m/3\\): the \\(m/3\\) sets \\(\\{\\cC_j: j\\in{\\rm supp}(\\hat x_0)\\}\\) cover all \\(m\\) coordinates, hence are disjoint, hence form a partition.\n\n\n\n\nIf \\(\\norm{\\hat x_0}_0&gt;m/3\\): no partition exists, since the indicator vector \\(z\\) of such a partition would satisfy \\(Az=y\\) with \\(\\norm{z}_0=m/3\\).\n\n\n\nAs a consequence, if we could solve any \\(\\ell_0\\)-minimization problem then we could solve the ‘Partition by 3-element sets’ problem. However, this problem is NP-complete, in particular, it is NP-hard and so we could solve any NP problem. Hence, the \\(\\ell_0\\)-minimization problem is NP-hard.\n\n\n\n\n\n\nConclusion: \\(\\ell_0\\) minimization is optimal in theory (\\(m=2s\\)) but unusable in practice.\n\n\n\n\n\n\n\n“In general” matters: for the first \\(2s\\) Fourier coefficients, Prony’s algorithm solves \\((P_0)\\) in linear time, but it is neither robust nor stable (a 1795 algorithm used in DVD players). We will see other example of measurement matrices for which an efficient algorithm can be used to solve \\((P_0)\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#convex-relaxation-the-convex-envelope",
+    "href": "compressed_sensing.html#convex-relaxation-the-convex-envelope",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Convex relaxation: the convex envelope",
+    "text": "Convex relaxation: the convex envelope\n\nThe objective \\(\\norm{\\cdot}_0\\) is not convex, which is the root of the difficulty.\nIdea: replace the \\(\\norm{\\cdot}_0\\) function by the ‘closest’ convex function below it.\n\n\n\n\n\n\n\n\nDefinition (convex envelope)\n\n\nLet \\(f:C\\to\\R\\) on a convex set \\(C\\subset\\R^N\\). The convex envelope of \\(f\\) over \\(C\\) is the largest convex function \\(g\\) with \\(g\\leq f\\) on \\(C\\). It is denoted by \\({\\rm conv}(f)\\).\n\n\n\n\n\n\n\n\nWell defined: a supremum of convex functions is convex.\nOn all of \\(\\R^N\\), the envelope of \\(\\ell_0\\) is \\(0\\), which is uninformative. So we restrict \\(C\\) to a ball."
+  },
+  {
+    "objectID": "compressed_sensing.html#convex-envelope",
+    "href": "compressed_sensing.html#convex-envelope",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Convex envelope",
+    "text": "Convex envelope\n\n\n\n\n\n\n\n\n\n\n\n\nExercise: What is the convex envelope over \\([-1, 1]\\) of the \\(\\ell_0\\) function over \\(\\mathbb{R}\\)?\nWhat is the convex envelope over \\([-1, 1]^N\\) of the \\(\\ell_0\\) function (over \\(\\mathbb{R}^N\\))?"
+  },
+  {
+    "objectID": "compressed_sensing.html#ell_1-is-the-convex-envelope-of-ell_0",
+    "href": "compressed_sensing.html#ell_1-is-the-convex-envelope-of-ell_0",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "\\(\\ell_1\\) is the convex envelope of \\(\\ell_0\\)",
+    "text": "\\(\\ell_1\\) is the convex envelope of \\(\\ell_0\\)\n\n\n\n\n\n\n\nTheorem\n\n\nThe \\(\\ell_1\\) norm is the convex envelope of the \\(\\ell_0\\) function on \\(B_\\infty^N\\).\n\n\n\n\n\nProof sketch on \\(B_1^N\\). Let \\(F={\\rm conv}(\\ell_0)\\).\n\n\n\\(\\norm{x}_1\\leq\\norm{x}_0\\) on \\(B_1^N\\) and \\(\\ell_1\\) is convex, so \\(\\norm{\\cdot}_1\\leq F\\).\n\n\n\n\nSqueeze: \\(F(\\pm e_i)=1\\) and \\(F(0)=0\\).\n\n\n\n\nWrite \\(x=\\sum_j|x_j|\\,{\\rm sign}(x_j)e_j+(1-\\norm{x}_1)\\,0\\) and use convexity: \\[F(x)\\leq\\sum_j|x_j|F({\\rm sign}(x_j)e_j)+(1-\\norm{x}_1)F(0)=\\norm{x}_1.\\]"
+  },
+  {
+    "objectID": "compressed_sensing.html#convex-envelope-of-the-ell_0-function",
+    "href": "compressed_sensing.html#convex-envelope-of-the-ell_0-function",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Convex envelope of the \\(\\ell_0\\) function",
+    "text": "Convex envelope of the \\(\\ell_0\\) function\n\n\n\n\n\n\n\n\n\n\nConvex relaxation= Replace the (non-convex) objective \\(\\ell_0\\) function in \\((P_0)\\) by its convex envelope to get a convex optimization problem."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-basis-pursuit-procedure",
+    "href": "compressed_sensing.html#the-basis-pursuit-procedure",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The Basis Pursuit procedure",
+    "text": "The Basis Pursuit procedure\n\n\n\n\nDefinition (Basis Pursuit)\n\n\n\\[\\hat x\\in\\argmin_{t\\in\\R^N:\\,At=y}\\norm{t}_1\\tag{BP}\\]\n\n\n\n\n\n(BP) is the convex relaxation of \\((P_0)\\).\n\\(\\ell_1\\) methods are everywhere: geophysics, radio astronomy, spectroscopy, medical imaging, LASSO, Dantzig selector, Matching Pursuit.\n\n\n\n\n\n\n\n\n\n\n\nTake-away\n\n\nConvex relaxation turns combinatorial searches into problems solvable with convex optimization. It is a reflex worth having."
+  },
+  {
+    "objectID": "compressed_sensing.html#basis-pursuit-as-a-linear-program",
+    "href": "compressed_sensing.html#basis-pursuit-as-a-linear-program",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Basis Pursuit as a linear program",
+    "text": "Basis Pursuit as a linear program\n\n\n\\[\\min_{(z^+,z^-)\\in\\R^{2N}}\\ \\sum_{j=1}^N z_j^++z_j^-\\] \\[\\text{s.t. } [A\\,|\\,-A]\\begin{bmatrix}z^+\\\\ z^-\\end{bmatrix}=y,\\quad \\begin{bmatrix}z^+\\\\ z^-\\end{bmatrix}\\geq0\\tag{LP}\\]\n\n\nLinear objective,\nlinear constraints.\n\n\n\n\n\n\n\n\n\n\n\n\nProposition: (BP) and (LP) are equivalent\n\n\n\\(\\hat x\\in\\bR^N\\mapsto(\\hat x^+,\\hat x^-)\\in\\bR^{2N}\\) and \\((\\widehat{z^+},\\widehat{z^-})\\in\\bR^{2N}\\mapsto\\widehat{z^+}-\\widehat{z^-}\\in\\bR^N\\) map solutions to solutions.\nWhere for all \\(x\\in\\bR^N\\), \\(x^+=(x_j^+)_{j=1}^N\\) and \\(x^-=(x_j^-)_{j=1}^N\\) with \\(x^\\pm_j=\\max(0,\\pm x_j)\\).\n\n\n\n\n\nKey inequality: \\(\\norm{z^+-z^-}_1\\leq\\sum_j z_j^++z_j^-\\), with equality for \\((x^+,x^-)\\).\n\nFrom an \\(NP\\)-hard problem to a linear program: the algorithmic complexity gain is big!\n\\(\\Rightarrow\\) What is the price to pay?"
+  },
+  {
+    "objectID": "compressed_sensing.html#exact-reconstruction-property-res",
+    "href": "compressed_sensing.html#exact-reconstruction-property-res",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Exact reconstruction property \\(RE(s)\\)",
+    "text": "Exact reconstruction property \\(RE(s)\\)\n\n\n\n\nDefinition (\\(RE(s)\\))\n\n\nA measurement matrix \\(A\\in\\R^{m\\times N}\\) satisfies the exact reconstruction property of order \\(s\\) when, for every \\(x\\in\\Sigma_s\\), \\[\\argmin_{t\\in\\R^N}\\big(\\norm{t}_1:At=Ax\\big)=\\{x\\}.\\]\n\n\n\n\n\n\n\n\n\\(RE(s)\\) characterizes the matrices for which Basis Pursuit solves the CS problem on \\(\\Sigma_s\\).\nFirst question: how many measurements does \\(RE(s)\\) require?\nSecond question: how can we construct \\(A\\) satisfying \\(RE(s)\\) with the minimal number \\(m\\) of rows?"
+  },
+  {
+    "objectID": "compressed_sensing.html#lower-bound-on-the-number-of-measurements-for-exact-reconstruction-over-sigma_s-of-basis-pursuit",
+    "href": "compressed_sensing.html#lower-bound-on-the-number-of-measurements-for-exact-reconstruction-over-sigma_s-of-basis-pursuit",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Lower bound on the number of measurements for exact reconstruction over \\(\\Sigma_s\\) of Basis Pursuit",
+    "text": "Lower bound on the number of measurements for exact reconstruction over \\(\\Sigma_s\\) of Basis Pursuit\n\n\n\n\n\n\n\nProposition\n\n\nIf \\(A\\in\\R^{m\\times N}\\) satisfies \\(RE(2s)\\), then necessarily the number of measurements must satisfy \\[\nm\\geq\\frac{1}{\\log5}\\Big\\lfloor\\frac s2\\Big\\rfloor\\log\\Big(\\Big\\lfloor\\frac{N}{8es}\\Big\\rfloor\\Big)\\ \\gtrsim\\ s\\log\\Big(\\frac{eN}{s}\\Big).\n\\]\n\n\n\n\n\nProof sketch.\n\nQuotient map \\(Q:\\ell_1^N\\to\\ell_1^N/\\kerA\\), with \\(\\norm{Qx}_1=\\min_{h\\in\\kerA}\\norm{x+h}_1\\) and \\(\\dim\\leq m\\).\n\n\n\n\n\\(RE(2s)\\) makes \\(Q\\) an isometry on \\(\\Sigma_s\\): \\(\\norm{Qx-Qy}_1=\\norm{x-y}_1\\).\n\n\n\n\nVarshamov–Gilbert gives many well-separated points \\(x(S)=s^{-1}\\sum_{i\\in S}e_i\\) in the unit ball.\n\n\n\n\nVolumetric argument: at most \\(5^m\\) such points in an \\(m\\)-dimensional ball. Compare."
+  },
+  {
+    "objectID": "compressed_sensing.html#proof-tools-varshamovgilbert-and-volumetric-arguments",
+    "href": "compressed_sensing.html#proof-tools-varshamovgilbert-and-volumetric-arguments",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Proof tools: Varshamov–Gilbert and volumetric arguments",
+    "text": "Proof tools: Varshamov–Gilbert and volumetric arguments\n\n\n\n\n\n\n\n\n\n\nLemma (Varshamov–Gilbert)\n\n\nFor \\(s\\leq N/2\\) there is a family \\(\\cS\\) of \\(s\\)-subsets of \\([N]\\) with \\(|S_1\\cap S_2|\\leq\\lfloor s/2\\rfloor\\) for \\(S_1\\neq S_2\\), and \\[\\log|\\cS|\\geq\\Big\\lfloor\\frac s2\\Big\\rfloor\\log\\Big(\\Big\\lfloor\\frac{N}{8es}\\Big\\rfloor\\Big).\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nLemma (volumetric argument)\n\n\nIf \\(B\\) is the unit ball of a norm on \\(\\R^n\\) and \\(\\Lambda\\subset B\\) is \\(\\eps\\)-separated (w.r.t. \\(B\\)), then \\(|\\Lambda|\\leq(1+2/\\eps)^n\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#a-first-identified-price-for-convex-relaxation",
+    "href": "compressed_sensing.html#a-first-identified-price-for-convex-relaxation",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "A first identified price for convex relaxation",
+    "text": "A first identified price for convex relaxation\n\n\n\n\n\n\n\n\n\n\nConclusion\n\n\nBasis Pursuit needs \\(m\\gtrsim s\\log(eN/s)\\) measurements, versus \\(2s\\) measurements for \\(\\ell_0\\). The huge computational gain costs only a logarithmic factor on the number necessary measurements.\n\n\n\n\n\n\n\n\n\nCan we construct matrices satisfying \\(RE(2s)\\) with \\(m\\sim s\\log(eN/s)\\)?\nAre they much more difficult to construct than, for instance, Vandermonde matrices?"
+  },
+  {
+    "objectID": "compressed_sensing.html#from-res-to-conditions-that-can-be-checked",
+    "href": "compressed_sensing.html#from-res-to-conditions-that-can-be-checked",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "From \\(RE(s)\\) to conditions that can be checked",
+    "text": "From \\(RE(s)\\) to conditions that can be checked\n\nPart 1 introduced ‘Basis Pursuit’: \\(\\hat x\\in\\argmin_{At=y}\\norm{t}_1\\) is a linear program (huge algorithmic gain compare with a NP-hard algorithm)\nPart 2 showed that \\(RE(s)\\) forces \\(m\\gtrsim s\\log(eN/s)\\).\n\n\nGoal of Part 3: conditions on \\(A\\) that imply \\(RE(s)\\), and matrices that satisfy them with the optimal number of measurements \\(m\\sim s\\log(eN/s).\\)\n\n\n\n\n\n\n\n\n\nRoadmap\n\n\n\\[RIP(65s)\\ \\Longrightarrow\\ Gelfand(s)\\ \\Longrightarrow\\ NSP(s)\\ \\Longleftrightarrow\\ RE(s)\\]\nGaussian matrices satisfy RIP(\\(s\\)) with high probability when \\(m\\sim s \\log(eN/s)\\).\n\n\n\n\n\nRandomness comes into the game!"
+  },
+  {
+    "objectID": "compressed_sensing.html#the-null-space-property-nsps",
+    "href": "compressed_sensing.html#the-null-space-property-nsps",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The Null Space Property \\(NSP(s)\\)",
+    "text": "The Null Space Property \\(NSP(s)\\)\n\n\n\n\n\n\n\nIdea\n\n\n\nFor \\(\\ell_0\\): we needed \\(\\kerA\\cap\\Sigma_{2s}=\\{0\\}\\).\nFor \\(\\ell_1\\): \\(\\kerA\\) must be far from sparse vectors.\n\n\n\n\n\n\n\n\n\nDefinition (\\(NSP(s)\\))\n\n\nWe say that \\(A\\in\\mathbb{R}^{m\\times N}\\) satisfies the Null Space Property of order \\(s\\) when, for every \\(|J|=s\\) and every \\(v\\in\\kerA\\setminus\\{0\\}\\), \\[\\norm{v_J}_1&lt;\\norm{v_{J^c}}_1.\\]\nNotation: \\(v_J\\) coincides with \\(v\\) on \\(J\\) and is zero outside \\(J\\).\n\n\n\n\n\nEquivalently, \\(v_1^*+\\cdots+v_s^*&lt;\\norm{v}_1/2\\): no \\(s\\) coordinates carry half of the \\(\\ell_1\\) mass. Kernel vectors are well spread.\n\n\n\n\n\n\\(NSP(s)\\Rightarrow\\kerA\\cap\\Sigma_{2s}=\\{0\\}\\), and even “almost sparse” vectors are excluded from \\(\\kerA\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#nsps-is-equivalent-to-exact-reconstruction",
+    "href": "compressed_sensing.html#nsps-is-equivalent-to-exact-reconstruction",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "\\(NSP(s)\\) is equivalent to exact reconstruction",
+    "text": "\\(NSP(s)\\) is equivalent to exact reconstruction\n\n\n\n\n\n\n\nTheorem\n\n\n\\(A\\) satisfies \\(RE(s)\\) \\(\\iff\\) \\(A\\) satisfies \\(NSP(s)\\).\n\n\n\n\n\n\\(RE\\Rightarrow NSP\\). For \\(v\\in\\kerA\\setminus\\{0\\}\\) and \\(|J|=s\\), take \\(x=-v_J\\in\\Sigma_s\\). Then \\[\\norm{v_J}_1=\\norm{x}_1&lt;\\norm{x+v}_1=\\norm{v_{J^c}}_1.\\]\n\n\n\\(NSP\\Rightarrow RE\\). For \\(x\\in\\Sigma_s\\) with \\({\\rm supp}(x)\\subset J\\) and \\(v\\in\\kerA\\setminus\\{0\\}\\): \\[\\norm{x+v}_1=\\norm{v_{J^c}}_1+\\norm{x+v_J}_1\\geq\\norm{x}_1+\\norm{v_{J^c}}_1-\\norm{v_J}_1&gt;\\norm{x}_1.\\]\n\n\n\n\n\n\n\\(NSP\\) is necessary and sufficient, but we do not know how to check it directly on a given matrix. We need an easier way to characterize this property."
+  },
+  {
+    "objectID": "compressed_sensing.html#geometric-picture-of-nsp",
+    "href": "compressed_sensing.html#geometric-picture-of-nsp",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Geometric picture of \\(NSP\\)",
+    "text": "Geometric picture of \\(NSP\\)\n\n\n\n\\(\\frac{1}{\\sqrt N}B_2^N\\subset B_1^N\\subset B_2^N\\), so \\({\\rm diam}(B_1^N,\\ell_2^N)=1\\).\nThe diameter is attained on the canonical axes, the sparsest vectors.\n\\(\\kerA\\) should avoid them and follow diagonal directions, where \\(\\norm{v}_2\\ll\\norm{v}_1\\).\nSo \\(B_1^N\\cap\\kerA\\) should have a small Euclidean diameter.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIf \\({\\rm diam}(B_1^N\\cap{\\rm Ker}(A),\\ell_2^N)\\) is small enough, then \\(NSP(s)\\) should be true.\n\n\n\n\n\nRemark: \\(B_1^N\\) is the unit ball of the \\(\\ell_1^N\\) norm in \\(\\bR^N\\), it is therefore a convex set. However, the representation of \\(B_1^N\\) above highlights the fact that \\(B_1^N\\) is mostly the \\(\\frac{1}{\\sqrt N}B_2^N\\) ball with picks at \\(\\pm e_j\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-gelfand-property",
+    "href": "compressed_sensing.html#the-gelfand-property",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The Gelfand property",
+    "text": "The Gelfand property\n\n\n\n\nDefinition (\\(Gelfand(s)\\))\n\n\n\\(A\\) satisfies the Gelfand property of order \\(s\\) when \\[{\\rm diam}\\big(B_1^N\\cap\\kerA,\\ \\ell_2^N\\big)&lt;\\frac{1}{2\\sqrt s}.\\]\n\n\n\n\n\n\\(\\dim\\kerA\\geq N-m\\) is huge, yet its section of \\(B_1^N\\) must have diameter \\(\\ll1\\).\nConnected to Euclidean sections of \\(B_1^N\\) in the asymptotic theory of Banach spaces.\n\n\n\n\n\n\n\n\n\n\n\nKey Idea in CS\n\n\nThe Gelfand property is a very restrictive condition: we don’t know (so far) how to construct in a deterministic way matrices having this property for the optimal number \\(m\\sim s \\log(eN/s)\\). However, we will show that random matrices nevertheless satisfy it."
+  },
+  {
+    "objectID": "compressed_sensing.html#gelfands-rightarrow-nsps",
+    "href": "compressed_sensing.html#gelfands-rightarrow-nsps",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "\\(Gelfand(s) \\Rightarrow NSP(s)\\)",
+    "text": "\\(Gelfand(s) \\Rightarrow NSP(s)\\)\n\n\n\n\n\n\n\nTheorem\n\n\nIf \\(A\\) satisfies \\(Gelfand(s)\\), then \\(A\\) satisfies \\(NSP(s)\\).\n\n\n\n\n\n\nProof.\n\nFor \\(v\\in\\kerA\\setminus\\{0\\}\\), \\(v/\\norm{v}_1\\in B_1^N\\cap\\kerA\\), hence \\(\\norm{v}_2&lt;\\norm{v}_1/(2\\sqrt s)\\).\nFor \\(|J|=s\\), Cauchy–Schwarz on \\(s\\) coordinates gives \\[\\norm{v_J}_1\\leq\\sqrt s\\norm{v_J}_2\\leq\\sqrt s\\norm{v}_2&lt;\\frac{\\norm{v}_1}{2}.\\]\n\n\n\n\n\nGelfand is still a property of the kernel. It is easier to study the action of \\(A\\) on sparse vectors directly. We therefore introduce now our last property: the RIP."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-restricted-isometry-property-rips",
+    "href": "compressed_sensing.html#the-restricted-isometry-property-rips",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The Restricted Isometry Property \\(RIP(s)\\)",
+    "text": "The Restricted Isometry Property \\(RIP(s)\\)\n\n\n\n\nDefinition (\\(RIP(s)\\))\n\n\n\\(A\\in\\R^{m\\times N}\\) satisfies the Restricted Isometry Property of order \\(s\\) when, for every \\(x\\in\\Sigma_s\\), \\[\\frac12\\norm{x}_2\\leq\\frac{\\norm{Ax}_2}{\\sqrt m}\\leq\\frac32\\norm{x}_2.\\]\n\n\n\n\n\n\n\\(A\\) cannot be an isometry on \\(\\R^N\\) (huge kernel), only restricted to \\(\\Sigma_s\\).\n\\(A\\) is almost an isometry on \\(\\Sigma_s\\), so \\(\\kerA\\) stays away from sparse vectors.\nNormalization matters: \\(RE\\), \\(NSP\\) and \\(Gelfand\\) only depend on \\(\\kerA\\), but RIP depends on \\(A\\) itself. With \\(\\Gamma=A/\\sqrt m\\): \\(\\frac12\\norm{x}_2\\leq\\norm{\\Gamma x}_2\\leq\\frac32\\norm{x}_2\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#rips-rightarrow-gelfands65",
+    "href": "compressed_sensing.html#rips-rightarrow-gelfands65",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "\\(RIP(s) \\Rightarrow Gelfand(s/65)\\)",
+    "text": "\\(RIP(s) \\Rightarrow Gelfand(s/65)\\)\n\n\n\n\n\n\n\nTheorem\n\n\nIf \\(A\\) satisfies \\(RIP(s)\\), then \\(A\\) satisfies \\(Gelfand(s/65)\\). (Constant \\(65\\) is not optimal; \\(s/2\\) is possible.)\n\n\n\n\n\n\n\n\n\nProof sketch. Let \\(v\\in\\kerA\\setminus\\{0\\}\\). Split its indices into blocks \\(I_1,I_2,\\ldots\\) of size \\(s\\), sorted by decreasing \\(|v_j|\\).\n\n\nBlock comparison: \\(\\norm{v_{I_j}}_2\\leq\\sqrt s\\norm{v_{I_j}}_\\infty\\leq\\norm{v_{I_{j-1}}}_1/\\sqrt s\\).\nFirst block, with \\(Av=0\\) and RIP: \\[\\norm{v_{I_1}}_2\\leq\\tfrac{2}{\\sqrt m}\\Big\\|A\\sum_{j\\geq2}v_{I_j}\\Big\\|_2\\leq3\\sum_{j\\geq2}\\norm{v_{I_j}}_2\\leq\\tfrac{3}{\\sqrt s}\\norm{v}_1.\\]\nThe tail gives \\(\\norm{\\sum_{j\\geq2}v_{I_j}}_2\\leq\\norm{v}_1/\\sqrt s\\), so \\[\\norm{v}_2\\leq\\tfrac{4}{\\sqrt s}\\norm{v}_1&lt;\\tfrac{1}{2\\sqrt{s/65}}\\norm{v}_1.\\]\n\n\n\n\n\n\n\n\nDecreasing rearrangement of \\(|v_j|\\), cut into blocks of size \\(s\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-chain-of-implications",
+    "href": "compressed_sensing.html#the-chain-of-implications",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The chain of implications",
+    "text": "The chain of implications\n\n\n\n\n\n\n\nConclusion\n\n\n\\[RIP(65s)\\ \\Longrightarrow\\ Gelfand(s)\\ \\Longrightarrow\\ NSP(s)\\ \\Longleftrightarrow\\ RE(s)\\] To reconstruct every \\(s\\)-sparse vector by Basis Pursuit, it suffices to build a matrix satisfying \\(RIP(65s)\\).\n\n\n\n\n\n\nCan we construct \\(A\\in\\mathbb{R}^{m\\times N}\\) satisfying \\(RIP(65s)\\) with \\(m\\sim s \\log(ep/s)\\)?\n\n\n\nThe only known constructions of RIP matrices with \\(m\\sim s\\log(eN/s)\\) rows are random.\nDeterministic constructions reach only \\(m\\sim s^2\\). Reaching \\(s\\log(eN/s)\\) deterministically is a major open problem (still unsolved by OpenAI even though they have results on ‘derandomization’)."
+  },
+  {
+    "objectID": "compressed_sensing.html#standard-gaussian-random-matrices",
+    "href": "compressed_sensing.html#standard-gaussian-random-matrices",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Standard Gaussian random matrices",
+    "text": "Standard Gaussian random matrices\n\n\n\n\nDefinition\n\n\nA standard Gaussian matrix \\(G\\in\\R^{m\\times N}\\) has \\(mN\\) i.i.d. \\(\\cN(0,1)\\) entries. Its rows are standard Gaussian vectors \\(\\cN_N(0,I_N)\\).\n\n\n\n\n\nConcentration: for \\(g\\sim\\cN(\\mu,\\sigma^2)\\), \\(\\bP\\big[|g-\\mu|\\geq t\\sigma\\big]\\leq2e^{-t^2/2}, \\forall t&gt;0\\).\nNot every variable concentrates: Cauchy variables have no mean for instance.\nExponential variables concentrate “like \\(e^{-t}\\)” only.\n\n\n\nDeviation: only the tail \\(t\\mapsto\\bP[|X|\\geq t]\\) for large \\(t\\) matters.\n\nSub-Gaussian (\\(\\psi_2\\)): \\(\\bP[|X|\\geq t]\\leq2e^{-c_1t^2}\\).\nSub-exponential (\\(\\psi_1\\)): \\(\\bP[|X|\\geq t]\\leq2e^{-c_1t}\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#sub-gaussian-and-sub-exponential-variables",
+    "href": "compressed_sensing.html#sub-gaussian-and-sub-exponential-variables",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Sub-Gaussian and sub-exponential variables",
+    "text": "Sub-Gaussian and sub-exponential variables\n\n\n\n\n\n\n\nProposition (moments vs. tails)\n\n\nFor \\(\\alpha\\geq1\\), the following are equivalent:\n\n\\(\\norm{X}_{L_p}\\leq c_0\\,p^{1/\\alpha}\\) for every \\(p\\geq\\alpha\\);\n\\(\\bP[|X|\\geq t]\\leq\\exp(-t^\\alpha/c_2^\\alpha)\\) for every \\(t\\geq c_1\\).\n\n\n\n\n\n\nSub-Gaussian: moments grow like \\(\\sqrt p\\). Sub-exponential: moments grow like \\(p\\).\nProof idea: Markov with an optimized \\(p=[t/(ec_0)]^\\alpha\\) gives one direction; bounding \\(\\E\\exp\\big((|X|/c)^\\alpha\\big)\\leq e\\) gives the other. (See the Proposition 3.3 in the lecture notes for a detailed proof).\n\n\n\n\n\n\n\n\n\nProposition\n\n\nIf \\(X\\) is sub-Gaussian, then \\(X^2\\) is sub-exponential: \\(\\norm{X^2}_{L_q}=\\norm{X}_{L_{2q}}^2\\leq2c_0^2q\\).\n\n\n\n\n\nWhy it matters: \\(\\frac1m\\norm{Ax}_2^2\\) is an average of squares."
+  },
+  {
+    "objectID": "compressed_sensing.html#bernsteins-inequality",
+    "href": "compressed_sensing.html#bernsteins-inequality",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Bernstein’s inequality",
+    "text": "Bernstein’s inequality\n\n\n\n\n\n\n\nProposition (Bernstein, sub-exponential case)\n\n\nLet \\(Z_1,\\ldots,Z_m\\) be i.i.d. copies of \\(Z\\) with \\(\\norm{Z}_{L_p}\\leq C_0p\\) for all \\(p\\geq1\\). Then for every \\(t&gt;0\\), \\[\\bP\\Big[\\Big|\\frac1m\\sum_{i=1}^mZ_i-\\E Z\\Big|\\geq tC_0\\Big]\\leq2\\exp\\big(-c_1m\\min(t^2,t)\\big)\\] where \\(c_1&gt;0\\) is some absolute constant.\n\n\n\n\n\nA non-asymptotic CLT-type statement (with a Gaussian and exponential regimes), valid for every fixed \\(m\\).\n\n\nProof sketch (Laplace transform).\n\nChernoff bound: \\(\\bP[\\bar Z_m\\geq t]\\leq\\inf_{\\lambda&gt;0}e^{-\\lambda t}\\prod_i\\E e^{\\lambda Z_i/m}\\).\nTaylor expansion and \\(k!\\geq(k/e)^k\\): \\(\\ \\E e^{\\mu Z}\\leq\\exp\\big((e\\mu C_0)^2/(1-e\\mu C_0)\\big)\\).\nOptimize \\(\\lambda\\): a Gaussian regime \\(e^{-cmt^2}\\) for small \\(t\\), an exponential regime \\(e^{-cmt}\\) for large \\(t\\).\n\n(See Proposition 3.5 in the lecture notes for a detailed proof)"
+  },
+  {
+    "objectID": "compressed_sensing.html#gaussian-matrices-satisfy-rip",
+    "href": "compressed_sensing.html#gaussian-matrices-satisfy-rip",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Gaussian matrices satisfy RIP",
+    "text": "Gaussian matrices satisfy RIP\n\n\n\n\n\n\n\nTheorem\n\n\nLet \\(G\\in\\R^{m\\times N}\\) be a standard Gaussian matrix. If \\(m\\geq c_1s\\log(eN/s)\\), then with probability at least \\(1-2\\exp(-c_0m)\\), for every \\(x\\in\\Sigma_s\\), \\[\\frac12\\norm{x}_2\\leq\\frac{\\norm{Gx}_2}{\\sqrt m}\\leq\\frac32\\norm{x}_2.\\]\n\n\n\n\n\n\nMore generally, \\(\\Gamma=\\frac{1}{\\sqrt m}A\\), where the rows of \\(A\\) are i.i.d. copies of \\(X\\) that is\n\nisotropic: \\(\\E\\inr{X,x}^2=\\norm{x}_2^2, \\forall x\\in\\bR^N\\);\nsub-Gaussian: \\(\\norm{\\inr{X,x}}_{L_p}\\leq C_0\\norm{x}_2\\sqrt p, \\forall x\\in\\bR^N, p\\in\\bN^*\\).\n\n\n\nExo. 1: Show that \\(X\\sim\\cN_N(0, I_N)\\) is an isotropic and sub-Gaussian vector.\nExo. 2: Show that \\(RIP(s)\\) is implied by \\(\\sup_{x\\in \\Sigma_s\\cap S_2^{N-1}}\\big| \\frac{\\norm{Gx}_2^2}{m} - 1 \\big|\\leq \\frac{1}{4}\\), where \\(S_2^{N-1}=\\{x\\in\\bR^N: \\norm{x}_2=1\\}\\).\nExo. 3: Show that \\(\\Sigma_s\\cap S_2^{N-1} = \\cup_{J:|J|=s} S_2^J\\) where \\(S_2^J = \\{x\\in\\bR^N: \\norm{x}_2=1, {\\rm supp x}\\subset J\\}\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#proof-tools-varepsilon-nets-and-operator-norm",
+    "href": "compressed_sensing.html#proof-tools-varepsilon-nets-and-operator-norm",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Proof tools: \\(\\varepsilon\\)-nets and operator norm",
+    "text": "Proof tools: \\(\\varepsilon\\)-nets and operator norm\n\n\n\n\n\n\n\nLemma (Size of an \\(\\varepsilon\\)-net of \\(S_2^{s-1}\\))\n\n\nFor \\(0&lt;\\eps&lt;1\\), there is \\(\\Lambda_\\eps\\subset S_2^{s-1}\\) with \\(|\\Lambda_\\eps|\\leq(5/\\eps)^s\\) such that every \\(x\\in S_2^{s-1}\\) is within \\(\\eps\\) of \\(\\Lambda_\\eps\\).\n\n\n\n\n\nProof: take a maximal \\(\\eps\\)-separated set. The disjoint balls \\(x+\\frac\\eps2B_2^s\\) fit inside \\((1+\\frac\\eps2)B_2^s\\); compare volumes.\n\n\n\n\n\n\n\n\n\n\n\n\nLemma\n\n\nFor \\(B\\in\\R^{s\\times s}\\) symmetric, \\(0&lt;\\eps&lt;1/2\\) and \\(\\Lambda_\\eps\\) an \\(\\eps\\)-net of \\(S_2^{s-1}\\), we have \\[\\norm{B}_{op}=\\sup_{x\\in S_2^{s-1}}|\\inr{Bx,x}|\\leq(1-2\\eps)^{-1}\\max_{y\\in\\Lambda_\\eps}|\\inr{By,y}|\\] where \\(\\norm{B}_{op}:= \\sup_{\\norm{x}_2=1}\\norm{Bx}_2\\).\n\n\n\n\n\nProof: diagonalize \\(B\\) for the first equality; then approximate \\(x\\in S_2^{s-1}\\) by \\(y\\in\\Lambda_\\eps\\) and show \\(|\\inr{Bx,x}|\\leq |\\inr{By,y}|+2\\norm{x-y}_2\\norm{B}\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#proof-sketch-union-bound-over-supports",
+    "href": "compressed_sensing.html#proof-sketch-union-bound-over-supports",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Proof sketch: union bound over supports",
+    "text": "Proof sketch: union bound over supports\nGoal: Prove that \\(\\displaystyle\\sup_{x\\in\\Sigma_s\\cap S_2^{N-1}}\\big|\\norm{\\Gamma x}_2^2-1\\big|\\leq\\frac14\\) holds w.h.p. for \\(\\Gamma=A/\\sqrt{m}\\).\n\n\n\nOne point. \\(\\norm{\\Gamma x}_2^2=\\frac1m\\sum_i\\inr{X_i,x}^2\\) is an average of sub-exponential variables with mean \\(1\\). Bernstein gives \\(\\big|\\norm{\\Gamma x}_2^2-1\\big|\\leq\\frac18\\) with probability \\(\\geq1-2e^{-c_0m}\\).\n\n\n\nReduce to finitely many points. \\(\\Sigma_s\\cap S_2^{N-1}=\\bigcup_{|J|=s}S^J\\). Apply the operator-norm lemma to \\(B=\\Gamma_J^\\top\\Gamma_J-I_s\\) on each support: \\[\\sup_{x\\in\\Sigma_s\\cap S_2^{N-1}}\\big|\\norm{\\Gamma x}_2^2-1\\big|\\leq(1-2\\eps)^{-1}\\max_{x\\in\\Lambda_\\eps}\\big|\\norm{\\Gamma x}_2^2-1\\big|.\\]\nCount. \\(|\\Lambda_\\eps|\\leq\\binom Ns(5/\\eps)^s\\leq\\big(5eN/(s\\eps)\\big)^s\\).\nUnion bound. If \\(\\frac{c_0}{2}m\\geq s\\log\\big(5eN/(s\\eps)\\big)\\), all points of \\(\\Lambda_\\eps\\) succeed with probability \\(\\geq1-2e^{-c_0m/2}\\). Take \\(\\eps=1/4\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#conclusion-m-sim-slogens-random-measurements-for-bp-are-enough",
+    "href": "compressed_sensing.html#conclusion-m-sim-slogens-random-measurements-for-bp-are-enough",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Conclusion: \\(m \\sim s\\log(eN/s)\\) random measurements for BP are enough",
+    "text": "Conclusion: \\(m \\sim s\\log(eN/s)\\) random measurements for BP are enough\n\n\nWith high probability, Gaussian matrices satisfy \\(RIP(s)\\) with the optimal number of rows \\(m\\sim s\\log(eN/s)\\).\nTaking \\(m\\sim s\\log(eN/s)\\) i.i.d. Gaussian measurement vectors, every \\(s\\)-sparse signal is recovered exactly by Basis Pursuit, i.e. by linear programming.\n\n\n\n\n\n\n\n\n\nProcedure\nMeasurements needed\nComputation\n\n\n\n\n\\(\\ell_0\\) minimization\n\\(m=2s\\) deterministic\n\\(NP\\)-hard\n\n\nBasis Pursuit\n\\(m\\sim s\\log(eN/s)\\) random\nlinear program\n\n\n\n\n\n\n\nThe cost of convex relaxation is pretty low compare to the algorithmic gain!"
+  },
+  {
+    "objectID": "compressed_sensing.html#lab-session-on-the-phase-transition-diagram",
+    "href": "compressed_sensing.html#lab-session-on-the-phase-transition-diagram",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Lab session on the phase transition diagram",
+    "text": "Lab session on the phase transition diagram\n\n\nOpen the notebook 0_lab_phase_transition_cvx.ipynb"
+  },
+  {
+    "objectID": "compressed_sensing.html#the-linear-model-with-deterministic-design",
+    "href": "compressed_sensing.html#the-linear-model-with-deterministic-design",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The linear model with deterministic design",
+    "text": "The linear model with deterministic design\n\nInput/output data \\((X_i,Y_i)\\), \\(X_i\\in\\R^p\\), \\(Y_i\\in\\R\\). Statistical modeling turns a real problem into a mathematical one.\nDeterministic design (\\(n\\) noisy linear deterministic measurements with signals in \\(\\mathbb{R}^p\\)): the \\(X_i\\in\\mathbb{R}^p\\) are fixed and \\[\nY_i=\\inr{X_i,\\beta^*}+\\varepsilon_i,\\qquad\\E\\varepsilon_i=0,\\quad i=1,\\ldots,n.\n\\]\n\nnotation: \\(m\\to n\\) number of measurements = number of data and \\(N \\to p\\): dimensional of the signal \\(\\beta^*\\). . . .\n\nMatrix form: \\(y=x\\beta^*+\\varepsilon\\), with design matrix \\(x\\in\\R^{n\\times p}\\) whose rows are \\(X_i^\\top\\)\nNormalization: \\(x^\\top x/n\\) has ones on the diagonal, and the columns of \\(x\\) are centered.\nEmpirical risk: \\(\\ r(\\beta)=\\frac1n\\sum_{i=1}^n(Y_i-\\inr{X_i,\\beta})^2\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#prediction-risk-and-estimation-risk",
+    "href": "compressed_sensing.html#prediction-risk-and-estimation-risk",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Prediction risk and estimation risk",
+    "text": "Prediction risk and estimation risk\n\nPrediction (denoising) risk: \\[R(\\beta)=\\frac1n\\sum_{i=1}^n\\big(\\inr{X_i,\\beta}-\\inr{X_i,\\beta^*}\\big)^2=\\frac1n\\norm{x(\\beta-\\beta^*)}_2^2.\\]\nEstimation risk: \\(\\norm{\\hat\\beta-\\beta^*}_q\\) for some \\(q\\geq1\\).\nResults are stated with high probability or in expectation.\n\n\n\n\n\n\n\n\n\nOther models\n\n\nRandom design (“statistical” model \\(Y=\\inr{X,\\beta^*}+\\varepsilon\\), or learning theory with no model) uses the same estimators but harder tools: concentration and complexity. Here we stick to the deterministic design."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-least-squares-estimator-ols",
+    "href": "compressed_sensing.html#the-least-squares-estimator-ols",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The least-squares estimator (OLS)",
+    "text": "The least-squares estimator (OLS)\n\n\n\n\nDefinition (OLS)\n\n\n\\[\\hat\\beta_{OLS}\\in\\argmin_{\\beta\\in\\R^p}\\norm{y-x\\beta}_2^2.\\] It is unique iff \\({\\rm rank}(x)=p\\), i.e. \\(x^\\top x\\) is invertible, and then \\[\\hat\\beta_{OLS}=(x^\\top x)^{-1}x^\\top y.\\]\n\n\n\n\n\n\\(F(\\beta)=\\norm{y-x\\beta}_2^2\\) is convex, and \\(\\nabla F(\\hat\\beta)=-2x^\\top(y-x\\hat\\beta)=0\\).\n\\({\\rm rank}(x)=p\\) requires \\(p\\leq n\\): more observations than parameters."
+  },
+  {
+    "objectID": "compressed_sensing.html#ols-risk-psigma2n",
+    "href": "compressed_sensing.html#ols-risk-psigma2n",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "OLS risk: \\(p\\sigma^2/n\\)",
+    "text": "OLS risk: \\(p\\sigma^2/n\\)\n\n\n\n\n\n\n\nTheorem\n\n\nIf the \\(\\varepsilon_i\\) are independent, centered, with variance \\(\\sigma^2\\), then \\[\\E\\norm{x(\\hat\\beta_{OLS}-\\beta^*)}_2^2=p\\sigma^2,\\qquad\\text{i.e.}\\qquad\\E\\,R(\\hat\\beta_{OLS})=\\frac{p\\sigma^2}{n}.\\]\n\n\n\n\n\nProof.\n\n\\(x(\\hat\\beta_{OLS}-\\beta^*)=x(x^\\top x)^{-1}x^\\top\\varepsilon=P\\varepsilon\\), with \\(P\\) the projection onto \\({\\rm Im}(x)\\).\n\\(\\norm{P\\varepsilon}_2^2={\\rm Tr}\\big[(x^\\top x)^{-1}x^\\top\\varepsilon\\varepsilon^\\top x\\big]\\).\nTake expectations with \\(\\E\\varepsilon\\varepsilon^\\top=\\sigma^2I_n\\): the result is \\(\\sigma^2{\\rm Tr}(I_p)=p\\sigma^2\\).\n\n\n\n\nRate \\(=\\dfrac{(\\#\\text{parameters})\\times(\\text{noise variance})}{\\#\\text{observations}}\\): each parameter costs \\(\\sigma^2/n\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#high-dimensional-problems-p-gg-n",
+    "href": "compressed_sensing.html#high-dimensional-problems-p-gg-n",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "High-dimensional problems: \\(p \\gg n\\)",
+    "text": "High-dimensional problems: \\(p \\gg n\\)\n\nOLS needs \\(p\\leq n\\), and its risk grows linearly with \\(p\\).\nGenomics example: \\(n\\approx30\\) patients, \\(p\\approx30\\,000\\) genes.\nWithout extra assumptions, \\(\\beta^*\\) cannot be estimated.\n\n\n\n\n\n\n\n\n\nSparsity assumption\n\n\nOnly a few genes are responsible for the disease: \\(\\beta^*\\) is sparse, \\(\\ |{\\rm supp}(\\beta^*)|\\leq n\\ll p\\), but its support is unknown."
+  },
+  {
+    "objectID": "compressed_sensing.html#sparsity-and-the-oracle-that-knows-the-support",
+    "href": "compressed_sensing.html#sparsity-and-the-oracle-that-knows-the-support",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Sparsity and the oracle that knows the support",
+    "text": "Sparsity and the oracle that knows the support\n\nIf an oracle revealed \\(S^*={\\rm supp}(\\beta^*)\\), we would run OLS on the coordinates in \\(S^*\\): \\[\\hat\\beta^{(S^*)}=\\argmin\\big\\{r(\\beta):\\beta_j=0\\ \\text{for } j\\notin S^*\\big\\}.\\]\n\n\n\nThe OLS theorem then gives \\[\\E\\norm{x(\\hat\\beta^{(S^*)}-\\beta^*)}_2^2=\\sigma^2|S^*|\\ \\ll\\ \\sigma^2p.\\]\n\n\n\n\n\n\n\n\n\nWarning\n\n\n\\(S^*\\) is unknown. The question is how much we pay for not knowing it."
+  },
+  {
+    "objectID": "compressed_sensing.html#ell_0-penalization-aic-and-bic",
+    "href": "compressed_sensing.html#ell_0-penalization-aic-and-bic",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "\\(\\ell_0\\) penalization: AIC and BIC",
+    "text": "\\(\\ell_0\\) penalization: AIC and BIC\n\n\n\n\nDefinition (\\(\\ell_0\\)-penalized least squares)\n\n\n\\[\\hat\\beta_\\lambda\\in\\argmin_{\\beta\\in\\R^p}\\Big\\{\\norm{y-x\\beta}_2^2+\\lambda\\norm{\\beta}_0\\Big\\}\\] More generally, \\(\\hat\\beta_f\\in\\argmin_\\beta\\big\\{\\norm{y-x\\beta}_2^2+f(\\norm{\\beta}_0)\\big\\}\\) with \\(f\\) increasing.\n\n\n\n\n\nPenalize vectors that are not sparse enough.\nAIC: \\(\\lambda=2\\sigma^2\\) (Akaike, after Mallows’ \\(C_p\\)).\nBIC: \\(\\lambda=\\sigma^2\\log n\\) (Schwarz).\nBoth require knowing \\(\\sigma^2\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#optimal-rate-for-ell_0-penalization-slogeps",
+    "href": "compressed_sensing.html#optimal-rate-for-ell_0-penalization-slogeps",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Optimal rate for \\(\\ell_0\\) penalization: \\(s\\log(ep/s)\\)",
+    "text": "Optimal rate for \\(\\ell_0\\) penalization: \\(s\\log(ep/s)\\)\n\n\n\n\n\n\n\nTheorem [BTW07]\n\n\nDeterministic design, \\(\\varepsilon_i\\) i.i.d. \\(\\cN(0,\\sigma^2)\\). With \\[f(k)=\\frac{2\\sigma^2k}{n}\\Big(1+\\tfrac{3}{\\sqrt2}\\sqrt{2\\log\\tfrac{ep}{k\\vee1}}+4\\log\\tfrac{ep}{k\\vee1}\\Big),\\] \\[\\E\\norm{x(\\hat\\beta_f-\\beta^*)}_2^2\\leq5\\norm{\\beta^*}_0\\,\\sigma^2\\Big(1+\\log\\frac{ep}{\\norm{\\beta^*}_0\\vee1}\\Big)+7\\sigma^2.\\]\n\n\n\n\n\nThe order \\(\\norm{\\beta^*}_0\\log(p/\\norm{\\beta^*}_0)\\) is optimal, up to constants.\nCompared with the oracle: the price for not knowing the support is only a \\(\\log(p/s)\\) factor."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-implementation-problem-2p-subsets",
+    "href": "compressed_sensing.html#the-implementation-problem-2p-subsets",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The implementation problem: \\(2^p\\) subsets",
+    "text": "The implementation problem: \\(2^p\\) subsets\n\nNo known algorithm is really faster than exhaustive search: for each \\(J\\subset\\{1,\\ldots,p\\}\\), compute \\(\\hat\\beta^{(J)}\\) and compare \\[\\norm{y-x\\hat\\beta^{(J)}}_2^2+\\lambda\\norm{\\hat\\beta^{(J)}}_0.\\]\nThis means \\(2^p\\) least-squares problems.\n\n\n\n\\(p=10\\): fine. Genomics, \\(p=30\\,000\\): \\(2^{30000}&gt;10^{9030}\\) subsets.\n\n\n\n\n\n\n\nWarning\n\n\nThe same obstruction as in Part 2: the \\(\\ell_0\\) “norm” is optimal in theory, unusable in practice."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-lasso-ell_1-penalization",
+    "href": "compressed_sensing.html#the-lasso-ell_1-penalization",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The LASSO: \\(\\ell_1\\) penalization",
+    "text": "The LASSO: \\(\\ell_1\\) penalization\n\n\n\n\nDefinition (LASSO, Tibshirani 1996)\n\n\n\\[\\tilde\\beta_\\lambda\\in\\argmin_{\\beta\\in\\R^p}\\Big\\{\\norm{y-x\\beta}_2^2+\\lambda\\norm{\\beta}_1\\Big\\},\\qquad\\lambda&gt;0.\\]\n\n\n\n\n\nReplace \\(\\norm{\\beta}_0\\) by the convex \\(\\norm{\\beta}_1\\), giving a convex optimization problem.\nComputable very fast, even for very large \\(p\\).\nTheoretical guarantees close to those of \\(\\ell_0\\) penalization, at the price of an assumption on the design \\(x\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#ell_1-as-the-convex-envelope-of-ell_0-again",
+    "href": "compressed_sensing.html#ell_1-as-the-convex-envelope-of-ell_0-again",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "\\(\\ell_1\\) as the convex envelope of \\(\\ell_0\\) (again)",
+    "text": "\\(\\ell_1\\) as the convex envelope of \\(\\ell_0\\) (again)\n\n\n\n\n\n\n\nTheorem\n\n\nThe \\(\\ell_1\\) norm is the convex envelope of \\(\\ell_0\\) on \\(B_\\infty^p\\).\n\n\n\n\n\nSame argument as in Part 2: \\(\\norm{\\cdot}_1\\leq{\\rm conv}(\\ell_0)\\) by convexity, and the squeeze \\(F(\\pm e_i)=1\\), \\(F(0)=0\\) gives the reverse inequality.\n\n\n\n\nCompressed sensing (Part 2) \\[\\min_{At=y}\\norm{t}_0\\ \\leadsto\\ \\min_{At=y}\\norm{t}_1\\]\n\nRegression (Part 4) \\[\\norm{y-x\\beta}_2^2+\\lambda\\norm{\\beta}_0\\ \\leadsto\\ \\norm{y-x\\beta}_2^2+\\lambda\\norm{\\beta}_1\\]"
+  },
+  {
+    "objectID": "compressed_sensing.html#conditions-on-the-design-rip-and-compatibility-phils",
+    "href": "compressed_sensing.html#conditions-on-the-design-rip-and-compatibility-phils",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Conditions on the design: RIP and compatibility \\(\\Phi(L,S)\\)",
+    "text": "Conditions on the design: RIP and compatibility \\(\\Phi(L,S)\\)\n\nAll conditions in the literature resemble RIP: \\((1-\\delta)\\norm{\\beta}_2\\leq\\norm{A\\beta}_2\\leq(1+\\delta)\\norm{\\beta}_2\\) for \\(\\beta\\in\\Sigma_s\\).\nUnlike CS, we estimate a single \\(\\beta^*\\), so conditions may depend on \\(S^*={\\rm supp}(\\beta^*)\\) only.\nThe lower bound (a restricted smallest singular value) is the hard part.\n\n\n\n\n\n\nDefinition (compatibility constant)\n\n\nFor \\(L&gt;0\\) and \\(S\\subset\\{1,\\ldots,p\\}\\), \\[\\Phi(L,S)=\\min\\Big\\{\\frac{|S|}{n}\\norm{x\\beta}_2^2:\\ \\norm{\\beta_S}_1=1,\\ \\norm{\\beta_{S^c}}_1\\leq L\\Big\\}.\\]\n\n\n\n\n\n\\(\\Phi(L,S^*)&gt;0\\) asks \\(x\\) to be injective on a cone of vectors concentrated on \\(S^*\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#oracle-inequality-under-the-compatibility-condition",
+    "href": "compressed_sensing.html#oracle-inequality-under-the-compatibility-condition",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Oracle inequality under the compatibility condition",
+    "text": "Oracle inequality under the compatibility condition\n\n\n\n\n\n\n\nTheorem\n\n\nLet \\(\\Omega_0=\\{2\\norm{x^\\top\\varepsilon}_\\infty\\leq\\lambda_0\\}\\), \\(\\lambda&gt;\\lambda_0\\), \\(L=\\frac{\\lambda+\\lambda_0}{\\lambda-\\lambda_0}\\), and assume \\(\\Phi(L,S^*)&gt;0\\). On \\(\\Omega_0\\):\n\n\\(\\displaystyle\\norm{x\\tilde\\beta_\\lambda-x\\beta^*}_2^2\\leq\\frac{4\\lambda^2|S^*|}{n\\,\\Phi(L,S^*)}\\);\n\\(\\displaystyle\\norm{\\tilde\\beta_\\lambda-\\beta^*}_1\\leq\\frac{4\\lambda^2|S^*|}{n(\\lambda-\\lambda_0)\\Phi(L,S^*)}\\).\n\n\n\n\n\n\nProof sketch.\n\nDual bound: \\(|\\inr{\\varepsilon,x(\\tilde\\beta-\\beta^*)}|\\leq\\norm{x^\\top\\varepsilon}_\\infty\\norm{\\tilde\\beta-\\beta^*}_1\\).\nBasic inequality from the definition of \\(\\tilde\\beta_\\lambda\\), split on \\(S^*\\) and \\((S^*)^c\\): \\(\\norm{x(\\tilde\\beta-\\beta^*)}_2^2\\leq2\\lambda\\norm{(\\tilde\\beta-\\beta^*)_{S^*}}_1\\) and \\(\\norm{\\tilde\\beta_{(S^*)^c}}_1\\leq L\\norm{(\\tilde\\beta-\\beta^*)_{S^*}}_1\\).\nThe error lies in the cone, so \\(\\Phi(L,S^*)\\) turns the \\(\\ell_1\\) bound into a prediction bound."
+  },
+  {
+    "objectID": "compressed_sensing.html#controlling-the-noise-the-event-omega_0",
+    "href": "compressed_sensing.html#controlling-the-noise-the-event-omega_0",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Controlling the noise: the event \\(\\Omega_0\\)",
+    "text": "Controlling the noise: the event \\(\\Omega_0\\)\n\nWe need \\(2\\norm{x^\\top\\varepsilon}_\\infty\\leq\\lambda_0\\) with high probability.\n\n\n\nChernoff and a union bound over the \\(p\\) columns \\(C_j\\) of \\(x\\): \\[\\bP\\big[\\norm{x^\\top\\varepsilon}_\\infty\\geq t\\big]\\leq e^{-\\lambda t}\\sum_{j=1}^p\\E e^{\\lambda\\inr{C_j,\\varepsilon}}.\\]\nGaussian Laplace transform (\\(\\E e^{\\mu g}=e^{\\mu^2\\sigma^2/2}\\)) with \\(\\norm{C_j}_2^2=n\\) gives \\(\\bP[\\cdot]\\leq p\\,e^{-t^2/(2n\\sigma^2)}\\).\nWith probability \\(\\geq1-\\eta\\): \\(\\ \\norm{x^\\top\\varepsilon}_\\infty\\leq\\sigma\\sqrt{2n\\log(p/\\eta)}\\).\n\n\n\n\n\n\n\n\n\n\nConsequence\n\n\nTaking \\(\\lambda_0=2\\sigma\\sqrt{2n\\log(p/\\eta)}\\) and \\(\\lambda=2\\lambda_0\\) (so \\(L=3\\)), with probability \\(\\geq1-\\eta\\), \\[\\norm{x(\\tilde\\beta_\\lambda-\\beta^*)}_2^2\\leq\\frac{128\\,\\sigma^2|S^*|\\log(p/\\eta)}{\\Phi(3,S^*)}.\\] This is the oracle rate \\(\\sigma^2|S^*|\\), up to a \\(\\log p\\) factor. Bounded noise also works (Hoeffding)."
+  },
+  {
+    "objectID": "compressed_sensing.html#oracle-inequality-under-the-restricted-eigenvalue-condition",
+    "href": "compressed_sensing.html#oracle-inequality-under-the-restricted-eigenvalue-condition",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Oracle inequality under the restricted eigenvalue condition",
+    "text": "Oracle inequality under the restricted eigenvalue condition\n\n\n\n\n\n\n\nTheorem ([Lasso3])\n\n\nDeterministic design, \\(\\varepsilon_i\\) i.i.d. \\(\\cN(0,\\sigma^2)\\). Assume that for some \\(c&gt;0\\), \\[\\frac1c\\leq\\inf\\Big\\{\\frac{v^\\top(x^\\top x/n)v}{\\sum_{j\\in J}v_j^2}:\\ \\sum_{j\\notin J}|v_j|\\leq3\\sum_{j\\in J}|v_j|,\\ |J|\\leq\\norm{\\beta^*}_0\\Big\\}.\\] With \\(\\lambda=4\\sigma\\sqrt{2n\\log(p/\\eta)}\\), with probability \\(\\geq1-\\eta\\), \\[\\norm{x(\\tilde\\beta_\\lambda-\\beta^*)}_2^2\\leq128\\,c\\,\\sigma^2\\norm{\\beta^*}_0\\log\\frac p\\eta.\\]\n\n\n\n\n\nWithout the cone constraint, this is the smallest eigenvalue of \\(x^\\top x/n\\), which is \\(0\\) when \\(p&gt;n\\).\nRestricted to the cone \\(\\{\\norm{v_{J^c}}_1\\leq3\\norm{v_J}_1\\}\\), it can stay positive."
+  },
+  {
+    "objectID": "compressed_sensing.html#proof-sketch-for-the-lasso-bound",
+    "href": "compressed_sensing.html#proof-sketch-for-the-lasso-bound",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Proof sketch for the LASSO bound",
+    "text": "Proof sketch for the LASSO bound\n\nNoise event (lemma): \\(\\norm{x^\\top\\varepsilon}_\\infty\\leq\\sigma\\sqrt{2n\\log(p/\\eta)}=\\lambda/4\\) with probability \\(\\geq1-\\eta\\).\n\n\n\nBasic inequality with \\(v=\\tilde\\beta_\\lambda-\\beta^*\\) and \\(J={\\rm supp}(\\beta^*)\\): \\[\\norm{xv}_2^2+\\frac\\lambda2\\norm{v}_1\\leq2\\lambda\\sum_{j\\in J}|v_j|.\\]\n\n\n\n\nCone: this gives \\(\\sum_{j\\notin J}|v_j|\\leq3\\sum_{j\\in J}|v_j|\\), so the restricted eigenvalue condition applies: \\[\\sum_{j\\in J}v_j^2\\leq\\frac cn\\norm{xv}_2^2.\\]\n\n\n\n\nClose: Cauchy–Schwarz gives \\(\\norm{xv}_2^2\\leq2\\lambda\\sqrt{\\norm{\\beta^*}_0\\frac cn}\\norm{xv}_2\\), hence \\(\\norm{xv}_2^2\\leq\\frac{4\\lambda^2c}{n}\\norm{\\beta^*}_0\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#computing-the-lasso-constrained-form-and-duality",
+    "href": "compressed_sensing.html#computing-the-lasso-constrained-form-and-duality",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Computing the LASSO: constrained form and duality",
+    "text": "Computing the LASSO: constrained form and duality\n\nThe penalized problem and the constrained problem \\[\\min_{b\\in\\R^p}\\norm{y-xb}_2^2\\quad\\text{subject to}\\quad\\norm{b}_1\\leq t\\] have the same solution sets as \\(\\lambda\\) ranges over \\(\\R_+\\) and \\(t\\) over \\(\\R_+^*\\).\nReason: a convex objective with a convex constraint under constraint qualification, so Lagrangian duality applies.\n\n\nForward stagewise heuristic: start at \\(\\beta(0)=0\\). At each step, find the column most correlated with the residual, \\[j(k)=\\argmax_j|x_j^\\top(y-x\\beta(k))|,\\] and move by a small step: \\(\\beta(k+1)=\\beta(k)+\\zeta\\,{\\rm sgn}(c_{j(k)})e_{j(k)}\\)."
+  },
+  {
+    "objectID": "compressed_sensing.html#the-lars-algorithm-and-the-regularization-path",
+    "href": "compressed_sensing.html#the-lars-algorithm-and-the-regularization-path",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "The LARS algorithm and the regularization path",
+    "text": "The LARS algorithm and the regularization path\n\nLARS (Efron, Hastie, Johnstone, Tibshirani): an exact, refined version that detects when a new variable enters.\nActive set \\(\\cA(k)\\), with \\(\\norm{\\beta(k)}_0=k\\) up to \\(k=n\\): \\[\\cA(k+1)=\\cA(k)\\cup\\argmax_j|x_j^\\top(y-x\\beta(k))|.\\]\nUpdate along an equiangular direction: \\(\\beta(k+1)=\\beta(k)+\\gamma_{k+1}w_{k+1}\\), where \\(w_{k+1}\\) solves \\(x_{\\cA}^\\top x_{\\cA}u=\\mathbf 1\\).\n\n\n\n\n\n\n\n\nProposition\n\n\nThe set of LASSO solutions, as \\(t\\) varies, is a piecewise linear path whose nodes are \\(\\beta(0),\\beta(1),\\ldots\\)\n\n\n\n\n\nIn practice: lars(y, x) in R computes the whole path, and plot(lars(y, x)) draws the regularization path."
+  },
+  {
+    "objectID": "compressed_sensing.html#link-with-compressed-sensing",
+    "href": "compressed_sensing.html#link-with-compressed-sensing",
+    "title": "Compressed sensing, high-dimensional statistics and the \\(\\ell_1\\) norm",
+    "section": "Link with compressed sensing",
+    "text": "Link with compressed sensing\n\n\nNoiseless regression = CS. We observe \\(y=x\\beta\\) with \\(p&gt;n\\), so the system has infinitely many solutions.\n\nSparsest solution: \\(\\beta^*=\\argmin_b\\{\\norm{b}_0:y=xb\\}\\) is \\(NP\\)-hard.\nConvex relaxation: \\(\\tilde\\beta=\\argmin_b\\{\\norm{b}_1:y=xb\\}\\) is LP.\n\n\n\n\n\n\n\n\n\nAnswer\n\n\nUnder design conditions very similar to the restricted eigenvalue condition (NSP, RIP), \\(\\tilde\\beta=\\beta^*\\).\n\n\n\n\n\nLASSO is the noisy version of Basis Pursuit: the same \\(\\ell_1\\) relaxation, the same cone geometry, and the same RIP-type conditions."
+  },
+  {
+    "objectID": "index.html#slide-decks",
+    "href": "index.html#slide-decks",
+    "title": "Advanced applied Statistics",
+    "section": "Slide decks",
+    "text": "Slide decks\n\nCourse presentation\nCompressed Sensing\nMatrix completion and recommendation systems\nCommunity detection"
+  },
+  {
+    "objectID": "community_detection.html#the-community-detection-problem-12",
+    "href": "community_detection.html#the-community-detection-problem-12",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "The community detection problem (1/2)",
+    "text": "The community detection problem (1/2)\n\nNodes are people; an edge is a connection (messages, friendship, collaboration).\nGoal: find groups of nodes that are more densely connected to one another than to the rest of the graph.\nThese groups may be groups of friends, or people who share interests.\nOnce the communities are found, we may:\n\n\nLook for influencers and send them advertisements, or approach them directly.\nUnderstand the common features of the nodes inside this community to understand how the community was created and what share the people inside of it."
+  },
+  {
+    "objectID": "community_detection.html#the-community-detection-problem-22",
+    "href": "community_detection.html#the-community-detection-problem-22",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "The community detection problem (2/2)",
+    "text": "The community detection problem (2/2)\n\n\n\n\n\n\n\n\n\nIdea: density, not just connectivity\n\n\nA community is not a connected component. It is a set of nodes with a higher density of internal edges than of edges leaving the set."
+  },
+  {
+    "objectID": "community_detection.html#what-is-a-graph",
+    "href": "community_detection.html#what-is-a-graph",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "What is a graph?",
+    "text": "What is a graph?\n\n\n\n\nDefinition (graph)\n\n\nA graph is a pair \\((V,E)\\): \\(V\\) is the set of nodes, and \\(E\\subset V\\times V\\) is the set of edges.\nA weighted graph is a triple \\((V,E,W)\\) with \\(W\\in\\R^{|V|\\times|V|}\\). The entries of \\(W\\) are the weights.\n\n\n\n\n\nUndirected graph: \\((i,j)\\in E\\) implies \\((j,i)\\in E\\).\nUndirected weighted graph: the graph is undirected and \\(W=W^\\top\\).\nFour classical types: directed or not, weighted or not."
+  },
+  {
+    "objectID": "community_detection.html#four-types-of-graphs",
+    "href": "community_detection.html#four-types-of-graphs",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Four types of graphs",
+    "text": "Four types of graphs\n\n\n\n\n\nUndirected/directed and unweighted/weighted graphs."
+  },
+  {
+    "objectID": "community_detection.html#complete-graphs-and-a-ring-graph",
+    "href": "community_detection.html#complete-graphs-and-a-ring-graph",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Complete graphs and a ring graph",
+    "text": "Complete graphs and a ring graph\n\n\n\n\n\n\n\nComplete graphs \\(K_4\\), \\(K_5\\) and \\(K_6\\).\n\n\n\n\n\n\n\n\n\n\nA directed ring graph."
+  },
+  {
+    "objectID": "community_detection.html#adjacency-matrix",
+    "href": "community_detection.html#adjacency-matrix",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Adjacency matrix",
+    "text": "Adjacency matrix\n\n\n\n\nDefinition (adjacency matrix)\n\n\nLet \\(G=(V,E)\\). The adjacency matrix \\(A\\in\\{0,1\\}^{|V|\\times|V|}\\) is \\[A_{ij}=1\\quad\\text{if }(i,j)\\in E,\\qquad A_{ij}=0\\quad\\text{otherwise.}\\] For a weighted graph, \\(A_{ij}=W_{ij}\\) when \\((i,j)\\in E\\) and \\(A_{ij}=0\\) otherwise.\n\n\n\n\n\nIf \\(G\\) is undirected, then \\(A\\) is symmetric.\nCommunity detection is about the connectivity of \\(G\\), which is encoded in \\(A\\).\nEverything is inside \\(A\\) (all graphs problems are matrix problems): Adjacency matrix is the central mathematical object in graph theory."
+  },
+  {
+    "objectID": "community_detection.html#connectivity-and-connected-components",
+    "href": "community_detection.html#connectivity-and-connected-components",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Connectivity and connected components",
+    "text": "Connectivity and connected components\n\n\n\n\nDefinition (connected graph)\n\n\n\\(G=(V,E)\\) is connected if a path of edges links all the nodes. A connected component is a connected subgraph with no edge to its complement. A connected partition is a partition of \\(V\\) into connected components.\n\n\n\n\n\nWeighted version: the edges of the path must have nonzero weight. Unweighted graphs correspond to \\(W=(1)_{i,j}\\).\n\n\n\n\n\nRemark\n\n\nA nontrivial connected partition is an ideal setting: the communities do not interact. Rare in practice, but a good guide for algorithms."
+  },
+  {
+    "objectID": "community_detection.html#definition-of-the-laplacian",
+    "href": "community_detection.html#definition-of-the-laplacian",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Definition of the Laplacian",
+    "text": "Definition of the Laplacian\n\n\n\n\nDefinition (Laplacian)\n\n\nLet \\(A\\) be the adjacency matrix of \\(G\\). The Laplacian is \\[L=D-A,\\qquad D={\\rm diag}(d),\\qquad d_i=\\sum_{j\\in V}A_{ij}\\] where \\(d_i\\) is the degree of node \\(i\\).\n\n\n\n\n\nOther definitions exist; we use this one throughout.\nIf \\(G\\) is undirected, then \\(L\\) is symmetric: the spectral theorem applies, and \\(L=PDP^\\top\\) with \\(P\\) orthogonal.\nThe spectrum of \\(L\\) is the key object of spectral community detection."
+  },
+  {
+    "objectID": "community_detection.html#quadratic-form-and-first-properties",
+    "href": "community_detection.html#quadratic-form-and-first-properties",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Quadratic form and first properties",
+    "text": "Quadratic form and first properties\n\n\n\n\nProposition\n\n\nLet \\(G=(V,E,W)\\) be undirected with \\(W_{ij}\\geq 0\\). Then:\n\n\\(f^\\top Lf=\\frac12\\sum_{(i,j)\\in E}W_{ij}(f_i-f_j)^2\\) for every \\(f\\in\\R^{|V|}\\);\n\\(L\\) is symmetric positive semidefinite;\n\\(0\\) is an eigenvalue and \\(L\\mathbf{1}=0\\).\n\n\n\n\n\nProof.\n\n\n\\(f^\\top(D-A)f=\\sum_i d_if_i^2-\\sum_{(i,j)\\in E}f_iW_{ij}f_j=\\frac12\\sum_{(i,j)\\in E}W_{ij}(f_i-f_j)^2\\).\nThe right-hand side is \\(\\geq 0\\), so \\(L\\succeq 0\\).\n\\((L\\mathbf{1})_i=d_i-\\sum_j A_{ij}=0\\). \\(\\square\\)"
+  },
+  {
+    "objectID": "community_detection.html#multiplicity-of-0-and-connected-components",
+    "href": "community_detection.html#multiplicity-of-0-and-connected-components",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Multiplicity of \\(0\\) and connected components",
+    "text": "Multiplicity of \\(0\\) and connected components\n\n\n\n\nProposition\n\n\nFor an undirected weighted graph with nonnegative weights, the multiplicity of the eigenvalue \\(0\\) of \\(L\\) equals the number of connected components.\nMoreover \\({\\rm Ker}(L)\\) is spanned by \\(\\mathbf{1}_{V_1},\\ldots,\\mathbf{1}_{V_k}\\), where \\(V_1\\sqcup\\cdots\\sqcup V_k\\) is the partition of \\(V\\) into connected components.\n\n\n\n\n\n\n\n\nIdea: the kernel of \\(L\\) sees the communities\n\n\nIn the ideal case, the indicators of the communities are eigenvectors for \\(\\lambda=0\\). Spectral methods start from this fact."
+  },
+  {
+    "objectID": "community_detection.html#proof-sketch-one-connected-component",
+    "href": "community_detection.html#proof-sketch-one-connected-component",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Proof sketch: one connected component",
+    "text": "Proof sketch: one connected component\nAssume \\(G\\) is connected and \\(Lf=0\\). Then \\(f^\\top Lf=0\\), so \\[\\sum_{(i,j)\\in E}W_{ij}(f_i-f_j)^2=0.\\]\n\n\nWeights are nonnegative, so \\(W_{ij}(f_i-f_j)^2=0\\) on every edge: \\(W_{ij}=0\\) or \\(f_i=f_j\\).\nConnectivity: any \\(i,j\\) are joined by a path of positive weights, so \\(f\\) is constant along the path.\nHence \\(f\\) is constant: \\({\\rm Ker}(L)={\\rm span}(\\mathbf{1})\\)."
+  },
+  {
+    "objectID": "community_detection.html#proof-sketch-several-components",
+    "href": "community_detection.html#proof-sketch-several-components",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Proof sketch: several components",
+    "text": "Proof sketch: several components\nUp to reordering the nodes, \\[L=\\begin{pmatrix}L_1&&\\\\&\\ddots&\\\\&&L_k\\end{pmatrix},\\] where \\(L_i\\) is the Laplacian of the \\(i\\)-th connected component.\n\n\nEach \\(L_i\\) has kernel spanned by the constant vector on \\(V_i\\), so \\(\\mathbf{1}_{V_i}\\in{\\rm Ker}(L)\\).\nConversely \\(Lf=0\\) if and only if \\(L_if=0\\) on each block, so \\(f\\) is constant on each \\(V_i\\).\nTherefore \\({\\rm Ker}(L)={\\rm span}(\\mathbf{1}_{V_1},\\ldots,\\mathbf{1}_{V_k})\\).\n\n\n\n\n\nRemark\n\n\nThe same statement holds for unweighted undirected graphs, by taking \\(W=(1)_{i,j}\\)."
+  },
+  {
+    "objectID": "community_detection.html#example-the-complete-graph-k_n",
+    "href": "community_detection.html#example-the-complete-graph-k_n",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Example: the complete graph \\(K_n\\)",
+    "text": "Example: the complete graph \\(K_n\\)\nThe Laplacian of \\(K_n\\) is \\[L=nI_n-\\mathbf{1}\\mathbf{1}^\\top=\\begin{pmatrix}n-1&-1&\\cdots&-1\\\\-1&n-1&\\cdots&-1\\\\\\vdots&&\\ddots&\\vdots\\\\-1&-1&\\cdots&n-1\\end{pmatrix}.\\]\n\nIf \\(Lf=0\\), then \\(nf=\\inr{f,\\mathbf{1}}\\mathbf{1}\\), so \\(f\\in{\\rm span}(\\mathbf{1})\\).\nThe multiplicity of \\(0\\) is \\(1\\), as expected: \\(K_n\\) is connected."
+  },
+  {
+    "objectID": "community_detection.html#why-is-l-called-a-laplacian-newtons-law-of-cooling",
+    "href": "community_detection.html#why-is-l-called-a-laplacian-newtons-law-of-cooling",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Why is \\(L\\) called a Laplacian? Newton’s law of cooling",
+    "text": "Why is \\(L\\) called a Laplacian? Newton’s law of cooling\n\n\nImagine temperatures \\(T_i\\) on the nodes. Heat flows in proportion to the temperature difference: \\[\\frac{dT_i}{dt}=-\\kappa\\sum_{j\\in V}A_{ij}(T_i-T_j).\\]\n\nNode \\(i\\) exchanges heat only with its neighbours.\nIn vector form: \\(\\dfrac{dT}{dt}=-\\kappa(D-A)T=-\\kappa LT\\).\nCompare with the heat equation \\(\\partial_t u=\\alpha\\Delta u\\): one identifies \\(L\\) with \\(-\\Delta\\).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIdea: a discrete Laplacian\n\n\nThe graph Laplacian is the discrete analog of the Laplacian of the heat equation."
+  },
+  {
+    "objectID": "community_detection.html#ideal-setting-disjoint-communities",
+    "href": "community_detection.html#ideal-setting-disjoint-communities",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Ideal setting: disjoint communities",
+    "text": "Ideal setting: disjoint communities\n\nIdeal case: the communities are the connected components. They do not interact.\nAlmost never true in practice (a few inter-community edges always exist), but a good guide.\nThen \\({\\rm Ker}(L)={\\rm span}(\\mathbf{1}_{V_1},\\ldots,\\mathbf{1}_{V_k})\\).\nThe indicators \\(\\mathbf{1}_{V_i}\\) are hard to read off \\(L\\). An orthonormal basis \\(u_1,\\ldots,u_k\\) of \\({\\rm Ker}(L)\\) is easy."
+  },
+  {
+    "objectID": "community_detection.html#the-spectral-method-in-two-steps",
+    "href": "community_detection.html#the-spectral-method-in-two-steps",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "The spectral method in two steps",
+    "text": "The spectral method in two steps\n\nCluster the \\(|V|\\) row vectors \\(y_i\\in\\R^k\\) of the matrix \\([u_1|\\cdots|u_k]\\) into \\(k\\) clusters \\(C_1,\\ldots,C_k\\).\nReturn \\(V_p=\\{i\\in V:y_i\\in C_p\\}\\). These are the detected communities.\n\n\n\n\n\n\nIdea: cluster the rows, not the nodes\n\n\nEach node \\(i\\) is represented by the \\(i\\)-th row of the eigenbasis matrix. Clustering these rows clusters the nodes."
+  },
+  {
+    "objectID": "community_detection.html#why-the-rotation-does-not-destroy-the-clusters",
+    "href": "community_detection.html#why-the-rotation-does-not-destroy-the-clusters",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Why the rotation does not destroy the clusters",
+    "text": "Why the rotation does not destroy the clusters\n\n\\(\\{\\mathbf{1}_{V_p}/\\sqrt{|V_p|}\\}_p\\) is an orthonormal basis of \\({\\rm Ker}(L)\\).\nSo is \\(\\{u_1,\\ldots,u_k\\}\\): there is \\(R\\in{\\rm O}(k)\\) with \\[[u_1|\\cdots|u_k]=\\big[\\mathbf{1}_{V_1}/\\sqrt{|V_1|}|\\cdots|\\mathbf{1}_{V_k}/\\sqrt{|V_k|}\\big]R.\\]\nThe rows of the indicator matrix take only \\(k\\) distinct values. A \\(k\\)-means on these rows recovers the components exactly.\nA rotation of \\(\\R^k\\) preserves this clustering.\n\n\nIn practice \\(G\\) is not a disjoint union: look at the eigenspace of the \\(k\\) smallest eigenvalues, not only the kernel. Choose \\(k\\) by an elbow in the spectrum, or by a modularity function."
+  },
+  {
+    "objectID": "community_detection.html#graph-cuts-and-modularity",
+    "href": "community_detection.html#graph-cuts-and-modularity",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Graph cuts and modularity",
+    "text": "Graph cuts and modularity\nDetecting communities \\(\\iff\\) finding a partition that minimizes the inter-community weight while keeping the communities large enough.\n\nA cut is a partition of \\(V\\).\nA modularity quantifies intra- versus inter-community mass.\n\nFor \\(A,B\\subset V\\), \\[W(A,B)=\\sum_{\\substack{(i,j)\\in E\\\\(i,j)\\in A\\times B}}(W_{ij}+W_{ji})=2\\sum_{\\substack{(i,j)\\in E\\\\(i,j)\\in A\\times B}}W_{ij}.\\]\nThe cut of a partition \\(V_1\\sqcup\\cdots\\sqcup V_k\\) is \\[{\\rm cut}(V_1,\\ldots,V_k)=\\frac12\\sum_{i=1}^k W(V_i,V_i^c).\\]"
+  },
+  {
+    "objectID": "community_detection.html#the-mincut-problem",
+    "href": "community_detection.html#the-mincut-problem",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "The mincut problem",
+    "text": "The mincut problem\nFor two communities, encode \\(V_1\\) by \\(x\\in\\{0,1\\}^{|V|}\\): \\[{\\rm cut}(V_1,V_1^c)=2\\sum_{(i,j)\\in E}x_i W_{ij}(1-x_j).\\]\n\\[\\min_{x\\in\\{0,1\\}^{|V|}}\\sum_{(i,j)\\in E}x_i W_{ij}(1-x_j).\\]\n\nSolvable by the Stoer–Wagner algorithm.\nIn practice it often returns a singleton: the node of smallest degree.\n\n\n\n\n\n\nRemark\n\n\nA singleton is not a community. One must force the parts to have sufficient size."
+  },
+  {
+    "objectID": "community_detection.html#ratiocut",
+    "href": "community_detection.html#ratiocut",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "RatioCut",
+    "text": "RatioCut\n\n\n\n\nDefinition (RatioCut)\n\n\n\\[{\\rm RatioCut}(V_1,\\ldots,V_k)=\\frac12\\sum_{i=1}^k\\frac{W(V_i,V_i^c)}{|V_i|}.\\]\n\n\n\n\n\nThe factor \\(1/|V_i|\\) penalizes small communities.\nMinimizing RatioCut over \\(\\cP_k(V)\\) is NP-hard in general.\nWe rewrite it as a vector (then matrix) problem and convexify the constraint. The relaxation is the spectral method."
+  },
+  {
+    "objectID": "community_detection.html#membership-vector-for-two-communities",
+    "href": "community_detection.html#membership-vector-for-two-communities",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Membership vector for two communities",
+    "text": "Membership vector for two communities\nFor \\(V_1\\subset V\\), set \\[f_i^{V_1}=\\begin{cases}\\sqrt{|V_1^c|/|V_1|}& \\text{if }i\\in V_1,\\\\[4pt]-\\sqrt{|V_1|/|V_1^c|}& \\text{if }i\\notin V_1.\\end{cases}\\]\n\n\n\n\nProposition\n\n\nLet \\(L\\) be the Laplacian of an undirected weighted graph, and \\(n=|V|\\). Then\n\n\\(\\inr{f^{V_1},\\mathbf{1}}=0\\) and \\(\\norm{f^{V_1}}_2^2=n\\);\n\\((f^{V_1})^\\top L f^{V_1}=n\\,{\\rm RatioCut}(V_1,V_1^c)\\).\n\n\n\n\n\n\nSo minimizing RatioCut \\(\\iff\\) minimizing \\(f^\\top Lf\\) over these discrete vectors \\(f^{V_1}\\)."
+  },
+  {
+    "objectID": "community_detection.html#proof-sketch-of-the-ratiocut-identity",
+    "href": "community_detection.html#proof-sketch-of-the-ratiocut-identity",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Proof sketch of the RatioCut identity",
+    "text": "Proof sketch of the RatioCut identity\nFrom the quadratic form, \\[(f^{V_1})^\\top Lf^{V_1}=\\frac12\\sum_{(i,j)\\in E}W_{ij}(f_i^{V_1}-f_j^{V_1})^2.\\]\n\nThe difference \\(f_i^{V_1}-f_j^{V_1}\\) is nonzero only across the cut.\nOn a cut edge, \\[\\Big(\\sqrt{\\tfrac{|V_1^c|}{|V_1|}}+\\sqrt{\\tfrac{|V_1|}{|V_1^c|}}\\Big)^2=\\frac{n}{|V_1|}+\\frac{n}{|V_1^c|}.\\]\nSumming both orientations of the cut gives \\(n\\,{\\rm RatioCut}(V_1,V_1^c)\\).\nThe two constraints: \\(\\norm{f^{V_1}}_2^2=|V_1|+|V_1^c|=n\\) and \\(\\inr{f^{V_1},\\mathbf{1}}=0\\). \\(\\square\\)"
+  },
+  {
+    "objectID": "community_detection.html#convex-relaxation-for-k2",
+    "href": "community_detection.html#convex-relaxation-for-k2",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Convex relaxation for \\(k=2\\)",
+    "text": "Convex relaxation for \\(k=2\\)\nThree equivalent discrete problems: \\[\\min_{V_1\\subset V}(f^{V_1})^\\top Lf^{V_1},\\qquad\\min_{V_1\\subset V}\\big((f^{V_1})^\\top Lf^{V_1}:\\norm{f^{V_1}}_2^2=n,\\,\\inr{f^{V_1},\\mathbf{1}}=0\\big),\\] and \\(\\min_{V_1}{\\rm RatioCut}(V_1,V_1^c)\\). All are NP-hard.\n\nThe map \\(f\\mapsto f^\\top Lf\\) is convex (\\({\\rm Hess}=2L\\succeq 0\\)).\nThe difficulty is the discrete constraint \\(f=f^{V_1}\\).\nRelax it to \\(f\\in\\R^{|V|}\\): \\[\\min_{f\\in\\R^{|V|}}\\big(f^\\top Lf:\\norm{f}_2^2=1,\\,\\inr{f,\\mathbf{1}}=0\\big).\\]"
+  },
+  {
+    "objectID": "community_detection.html#the-fiedler-vector",
+    "href": "community_detection.html#the-fiedler-vector",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "The Fiedler vector",
+    "text": "The Fiedler vector\n\n\n\n\nDefinition (Fiedler vector)\n\n\nA Fiedler vector of \\(L\\) is an eigenvector for the second smallest eigenvalue. That eigenvalue is the algebraic connectivity.\n\n\n\n\n\n\n\n\nProposition\n\n\nThe Fiedler vectors are exactly the solutions of the relaxed problem.\n\n\n\n\nProof. Write \\(0=\\lambda_1\\leq\\lambda_2\\leq\\cdots\\leq\\lambda_n\\) and \\(u_1=\\mathbf{1}\\). If \\(\\norm{f}_2=1\\) and \\(\\inr{f,\\mathbf{1}}=0\\), \\[f^\\top Lf=\\sum_{i=2}^n\\lambda_i\\inr{u_i,f}^2\\geq\\lambda_2,\\] with equality at \\(f=u_2\\). \\(\\square\\)"
+  },
+  {
+    "objectID": "community_detection.html#from-a-fiedler-vector-to-two-communities",
+    "href": "community_detection.html#from-a-fiedler-vector-to-two-communities",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "From a Fiedler vector to two communities",
+    "text": "From a Fiedler vector to two communities\n\nA Fiedler vector \\(u_2\\) approximates the two-valued membership vector \\(f^{V_1^*}\\).\nIts coordinates should concentrate around two values.\nCluster the coordinates of \\(u_2\\) into two classes \\(C_1,C_2\\) on \\(\\R\\).\nThe communities are \\(\\{i:u_{2i}\\in C_1\\}\\) and \\(\\{i:u_{2i}\\in C_2\\}\\).\n\n\nThis is the spectral method for \\(k=2\\), with first eigenvector \\(u_1=\\mathbf{1}\\) (clustering the rows of \\([u_1|u_2]\\) is the same as clustering the coordinates of \\(u_2\\))."
+  },
+  {
+    "objectID": "community_detection.html#membership-matrix-for-k-communities",
+    "href": "community_detection.html#membership-matrix-for-k-communities",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Membership matrix for \\(k\\) communities",
+    "text": "Membership matrix for \\(k\\) communities\nTo a partition \\(V_1\\sqcup\\cdots\\sqcup V_k\\) associate \\(H\\in\\R^{|V|\\times k}\\) with columns \\(h_j=\\mathbf{1}_{V_j}/\\sqrt{|V_j|}\\): \\[H_{ij}=\\begin{cases}1/\\sqrt{|V_j|}& \\text{if }i\\in V_j,\\\\0& \\text{otherwise.}\\end{cases}\\]\n\n\n\n\nProposition\n\n\n\\(H^\\top H=I_k\\) and \\({\\rm RatioCut}(V_1,\\ldots,V_k)={\\rm Tr}(H^\\top LH)\\).\n\n\n\n\n\n\\(H^\\top H=I_k\\): the \\(V_j\\) are disjoint, and \\(\\sum_{i\\in V_j}1/|V_j|=1\\).\n\\({\\rm Tr}(H^\\top LH)=\\sum_p h_p^\\top Lh_p=\\sum_p W(V_p,V_p^c)/(2|V_p|)\\)."
+  },
+  {
+    "objectID": "community_detection.html#relaxation-for-k-communities",
+    "href": "community_detection.html#relaxation-for-k-communities",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Relaxation for \\(k\\) communities",
+    "text": "Relaxation for \\(k\\) communities\nThe discrete problems \\(\\min{\\rm Tr}(H^\\top LH)\\) over membership matrices \\(H\\) are NP-hard. The objective \\(H\\mapsto{\\rm Tr}(H^\\top LH)\\) is convex. Relax the combinatorial constraint: \\[\\min_{\\substack{H\\in\\R^{|V|\\times k}\\\\H^\\top H=I_k}}{\\rm Tr}(H^\\top LH).\\]\nWrite \\(L=UDU^\\top\\) with \\(0=\\lambda_1\\leq\\cdots\\leq\\lambda_n\\). Then \\[{\\rm Tr}(H^\\top LH)=\\sum_i\\lambda_i\\norm{a_i}_2^2,\\qquad\\sum_i\\norm{a_i}_2^2=k,\\] where \\(a_i\\) is the \\(i\\)-th row of \\(U^\\top H\\). The minimum is \\(\\sum_{i=1}^k\\lambda_i\\), attained when \\[{\\rm span}(h_1,\\ldots,h_k)={\\rm span}(u_1,\\ldots,u_k).\\]\n\nThe solutions are orthonormal bases of the eigenspace of the \\(k\\) smallest eigenvalues.\nCluster the \\(n\\) rows of \\(H\\) into \\(k\\) groups: this is again the spectral method."
+  },
+  {
+    "objectID": "community_detection.html#algorithm-of-the-spectral-method",
+    "href": "community_detection.html#algorithm-of-the-spectral-method",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Algorithm of the spectral method",
+    "text": "Algorithm of the spectral method\n\n\n\n\nAlgorithm (spectral method)\n\n\nInput: Laplacian \\(L\\) of \\(G\\), and \\(k\\).\n\nCompute an orthonormal basis of \\(k\\) eigenvectors for the \\(k\\) smallest eigenvalues of \\(L\\).\nForm the \\(n\\times k\\) matrix \\(H\\) with these columns.\nCluster the \\(n\\) rows \\(y_1,\\ldots,y_n\\in\\R^k\\) into \\(k\\) clusters \\(C_1,\\ldots,C_k\\).\nOutput: communities \\(\\{i:y_i\\in C_p\\}\\), \\(p=1,\\ldots,k\\).\n\n\n\n\n\n\nJustified by the RatioCut relaxation, or by the ideal connected-component picture.\nChoose \\(k\\) by an elbow in the spectrum of \\(L\\), or by evaluating a modularity (e.g. RatioCut) as a function of \\(k\\)."
+  },
+  {
+    "objectID": "community_detection.html#why-a-random-graph",
+    "href": "community_detection.html#why-a-random-graph",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Why a random graph?",
+    "text": "Why a random graph?\n\nUntil now every edge was observed.\nIn applications (genes, companies, ) some links are missing or uncertain.\nOne then assumes a probabilistic model under the observations, and still wants the communities.\nThe same spectral method will be applied to the Laplacian of the observed adjacency matrix."
+  },
+  {
+    "objectID": "community_detection.html#the-erdősrényi-model",
+    "href": "community_detection.html#the-erdősrényi-model",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "The Erdős–Rényi model",
+    "text": "The Erdős–Rényi model\n\n\n\n\nDefinition (Erdős–Rényi)\n\n\n\\(G\\sim G(n,p)\\) is an undirected unweighted graph on \\(n\\) nodes with \\[A_{ij}=A_{ji},\\qquad A_{ii}=1,\\qquad (A_{ij})_{j&gt;i}\\ \\text{i.i.d. }{\\rm Bern}(p).\\]\n\n\n\n\n\nEvery pair of distinct nodes is connected independently with probability \\(p\\).\nNo community structure: a null model."
+  },
+  {
+    "objectID": "community_detection.html#the-stochastic-block-model",
+    "href": "community_detection.html#the-stochastic-block-model",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "The stochastic block model",
+    "text": "The stochastic block model\n\n\n\n\nDefinition (SBM)\n\n\n\\(G\\sim G(n,p,q)\\) with \\(0\\leq q&lt;p\\leq 1\\) if there is a partition \\(V=V_1\\sqcup V_1^c\\) such that, for \\(i&lt;j\\), \\[A_{ij}\\sim\\begin{cases}{\\rm Bern}(p)&\\text{if }i,j\\text{ are in the same community},\\\\{\\rm Bern}(q)&\\text{otherwise,}\\end{cases}\\] and \\(A_{ji}=A_{ij}\\), \\(A_{ii}=1\\).\n\n\n\n\n\nIntra-community edges are more likely than inter-community edges (\\(p&gt;q\\)).\nProblem: given one draw of \\(G\\), recover \\(V_1\\) and \\(V_1^c\\)."
+  },
+  {
+    "objectID": "community_detection.html#likelihood-in-the-two-community-sbm",
+    "href": "community_detection.html#likelihood-in-the-two-community-sbm",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Likelihood in the two-community SBM",
+    "text": "Likelihood in the two-community SBM\nGiven \\(A\\), the likelihood at \\((V_1,p,q)\\) is \\[\\cL(V_1,p,q)=\\prod_{(i,j)\\in\\cC}p^{A_{ij}}(1-p)^{1-A_{ij}}\\prod_{(i,j)\\in\\cC^c}q^{A_{ij}}(1-q)^{1-A_{ij}},\\] where \\(\\cC\\) is the set of intra-community pairs \\(i&lt;j\\) and \\(\\cC^c\\) the inter-community pairs.\n\nWrite \\(N_{\\cC}=\\sum_{(i,j)\\in\\cC}A_{ij}\\) and \\(P_{\\cC}=N_{\\cC}/|\\cC|\\) (and likewise for \\(\\cC^c\\)).\nThe MLE maximizes \\(\\log\\cL\\) in \\((V_1,p,q)\\) under \\(p\\geq q\\).\nFor equal-size communities, \\(|\\cC|=|\\cC^c|=(n^2-n)/4\\)."
+  },
+  {
+    "objectID": "community_detection.html#maximum-likelihood-equals-ratiocut",
+    "href": "community_detection.html#maximum-likelihood-equals-ratiocut",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Maximum likelihood equals RatioCut",
+    "text": "Maximum likelihood equals RatioCut\nFor \\(|V_1|=n/2\\), maximizing in \\((p,q)\\) first (KKT) yields:\n\nif \\(P_{\\cC}&gt;P_{\\cC^c}\\), then \\(\\hat p=P_{\\cC}\\), \\(\\hat q=P_{\\cC^c}\\);\notherwise \\(\\hat p=\\hat q=(P_{\\cC}+P_{\\cC^c})/2\\), and the value does not depend on \\(V_1\\).\n\nThe remaining problem in \\(V_1\\) is to maximize an entropy under \\(P_{\\cC}\\geq P_{\\cC^c}\\). Since \\(P_{\\cC}+P_{\\cC^c}\\) is constant, this is equivalent to minimizing \\(P_{\\cC^c}\\).\n\n\\[P_{\\cC^c}={\\rm RatioCut}(V_1,V_1^c).\\]\n\n\n\n\nIdea: MLE is RatioCut\n\n\nFor two equal-size communities, the MLE in the SBM is the RatioCut problem."
+  },
+  {
+    "objectID": "community_detection.html#an-equivalent-discrete-program",
+    "href": "community_detection.html#an-equivalent-discrete-program",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "An equivalent discrete program",
+    "text": "An equivalent discrete program\n\n\n\n\nRemark\n\n\nFor \\(|V_1|=n/2\\) one has \\(f^{V_1}\\in\\{-1,1\\}^n\\), so the MLE / RatioCut problem is \\[\\min\\big(x^\\top Lx:\\inr{x,\\mathbf{1}}=0,\\,x\\in\\{-1,1\\}^n\\big).\\] Since \\(x^\\top Lx=-x^\\top Ax+\\sum_{i,j}A_{ij}\\) and the second term is constant, this is also \\[\\max\\big(x^\\top Ax:\\inr{x,\\mathbf{1}}=0,\\,x\\in\\{-1,1\\}^n\\big).\\]\n\n\n\n\nThis last form is the one we shall lift to an SDP."
+  },
+  {
+    "objectID": "community_detection.html#detectability-isolated-nodes",
+    "href": "community_detection.html#detectability-isolated-nodes",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Detectability: isolated nodes",
+    "text": "Detectability: isolated nodes\nIf a node of \\(V_1\\) has no edge inside \\(V_1\\), there is no reason to assign it to \\(V_1\\). Exact recovery then fails.\n\n\n\n\nProposition\n\n\nIf \\(p\\leq\\log(n/2)\\,/\\,(n/2-2)\\), then \\(\\PP[\\text{some node of }V_1\\text{ is isolated in }V_1]\\geq 1/2\\).\n\n\n\n\nProof idea. Let \\(A_i\\) be the event that \\(i\\in V_1\\) is isolated in \\(V_1\\), and \\(N=|V_1|-1\\). Then \\(\\PP[A_i]=(1-p)^N\\). A Bonferroni bound \\[\\PP[\\cup_i A_i]\\geq(N+1)(1-p)^N-(N+1)N(1-p)^{2N-1}\\] is at least \\(1/2\\) as soon as \\(p\\leq(\\log N)/(N-1)\\). \\(\\square\\)\n\nExact recovery therefore requires \\(p\\gtrsim\\alpha\\log n\\,/\\,n\\). The hard regime is \\(q=\\beta\\log n\\,/\\,n\\) with \\(\\beta&lt;\\alpha\\)."
+  },
+  {
+    "objectID": "community_detection.html#information-theoretic-phase-transition",
+    "href": "community_detection.html#information-theoretic-phase-transition",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Information-theoretic phase transition",
+    "text": "Information-theoretic phase transition\n\n\n\n\nTheorem (phase transition in the equal-size SBM)\n\n\nLet \\(\\hat V_1\\) be the MLE (minimal RatioCut). If \\(p=\\alpha\\log n\\,/\\,n\\) and \\(q=\\beta\\log n\\,/\\,n\\), then:\n\nif \\(\\sqrt{\\alpha}-\\sqrt{\\beta}&gt;\\sqrt{2}\\), then \\(\\hat V_1,\\hat V_1^c\\) recover \\(V_1,V_1^c\\) with high probability;\nif \\(\\sqrt{\\alpha}-\\sqrt{\\beta}&lt;\\sqrt{2}\\), no algorithm succeeds with probability \\(\\geq 1/2\\).\n\n\n\n\n\n\nA sharp threshold, but the MLE is not computable.\nThe practical question: can a spectral or SDP method attain (or approach) this threshold?"
+  },
+  {
+    "objectID": "community_detection.html#spectral-method-for-the-equal-size-sbm",
+    "href": "community_detection.html#spectral-method-for-the-equal-size-sbm",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Spectral method for the equal-size SBM",
+    "text": "Spectral method for the equal-size SBM\n\n\n\n\nLemma\n\n\nIf \\(|V_1|=|V_1^c|=n/2\\), the following are equivalent:\n\n\\(u_2\\) is a Fiedler vector of \\(\\E L=\\E(D-A)\\);\n\\(u_2\\) is a leading eigenvector of \\[\\E A-\\Big[n\\tfrac{p+q}{2}+(1-p)\\Big]\\Big(\\tfrac{\\mathbf{1}}{\\sqrt n}\\Big)\\Big(\\tfrac{\\mathbf{1}}{\\sqrt n}\\Big)^\\top.\\]\n\n\n\n\n\nWhy. All mean degrees are equal, so \\(\\E D\\) is a multiple of \\(I_n\\). Eigenvectors of \\(\\E L\\) and \\(\\E A\\) coincide (eigenvalues reversed). The leading eigenspace of \\(\\E A\\) is \\({\\rm span}(\\mathbf{1})\\); removing it leaves the Fiedler direction."
+  },
+  {
+    "objectID": "community_detection.html#a-practical-spectral-problem",
+    "href": "community_detection.html#a-practical-spectral-problem",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "A practical spectral problem",
+    "text": "A practical spectral problem\nWe do not know \\(\\E A\\), \\(p\\) or \\(q\\). Estimate:\n\n\\(\\E A\\) by \\(A\\);\n\\((p+q)/2\\) by the edge density \\[\\lambda=\\frac{2}{n(n-1)}\\sum_{i&lt;j}A_{ij},\\qquad \\E\\lambda=\\frac{p+q}{2}-\\frac{p-q}{n-1}.\\]\n\nThe spectral method becomes \\[\\max_{\\norm{x}_2\\leq 1}\\inr{x,(A-\\lambda J_n)x},\\qquad J_n=\\mathbf{1}\\mathbf{1}^\\top.\\]"
+  },
+  {
+    "objectID": "community_detection.html#matrix-lifting",
+    "href": "community_detection.html#matrix-lifting",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Matrix lifting",
+    "text": "Matrix lifting\nUnder equal sizes, \\(f^{V_1}\\in\\{-1,1\\}^n\\), and the discrete problem is \\[\\max_{x\\in\\{-1,1\\}^n}x^\\top(A-\\lambda J_n)x=\\max_{x\\in\\{-1,1\\}^n}\\inr{A-\\lambda J_n,xx^\\top}.\\]\nPassing from a quadratic function of \\(x\\) to a linear function of \\(Z=xx^\\top\\) is matrix lifting.\nThe matrix \\(Z=xx^\\top\\) satisfies: \\(Z=Z^\\top\\), \\(Z\\succeq 0\\), \\({\\rm diag}(Z)=I_n\\), and \\({\\rm rank}(Z)=1\\).\n\n\n\n\n\nIdea: drop the rank\n\n\nThe only nonconvex constraint is \\({\\rm rank}(Z)=1\\). Removing it yields an SDP."
+  },
+  {
+    "objectID": "community_detection.html#sdp-relaxation",
+    "href": "community_detection.html#sdp-relaxation",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "SDP relaxation",
+    "text": "SDP relaxation\n\\[\\max_{\\substack{Z\\succeq 0\\\\{\\rm diag}(Z)\\preceq I_n}}\\inr{A-\\lambda J_n,Z}.\\]\n\nIf \\(\\hat Z\\) is a solution, take a leading eigenvector \\(\\hat x\\) and its sign.\n\\(\\{i:{\\rm sign}(\\hat x_i)=1\\}\\) and its complement are the estimated communities.\n\n\n\n\n\nProposition\n\n\nThe oracle problem \\(\\max\\inr{\\E A-\\alpha u_1\\otimes u_1,Z}\\) (same constraints) has the unique solution \\(\\bar x\\otimes\\bar x\\), where \\(\\bar x_i=\\pm 1\\) is the true membership vector and \\(\\alpha=n(p+q)/2+(1-p)\\)."
+  },
+  {
+    "objectID": "community_detection.html#algorithm-of-the-sdp-method",
+    "href": "community_detection.html#algorithm-of-the-sdp-method",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Algorithm of the SDP method",
+    "text": "Algorithm of the SDP method\n\n\n\n\nAlgorithm (SDP relaxation)\n\n\nInput: adjacency matrix \\(A\\) of a two-community equal-size SBM.\n\nCompute \\(\\lambda=\\frac{2}{n(n-1)}\\sum_{i&lt;j}A_{ij}\\).\nSolve the SDP \\(\\max\\inr{A-\\lambda J_n,Z}\\) over \\(Z\\succeq 0\\), \\({\\rm diag}(Z)\\preceq I_n\\).\nTake a leading eigenvector \\(\\hat x\\) of the solution \\(\\hat Z\\).\nOutput: \\(\\hat V_1=\\{i:{\\rm sign}(\\hat x_i)=1\\}\\) and \\(\\hat V_1^c\\)."
+  },
+  {
+    "objectID": "community_detection.html#what-we-want-to-prove",
+    "href": "community_detection.html#what-we-want-to-prove",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "What we want to prove",
+    "text": "What we want to prove\nObserve \\(A\\sim{\\rm SBM}(n,p,q)\\) with equal-size communities. Let \\(\\hat Z\\) be the SDP solution and \\(\\hat x\\) a leading eigenvector. We want \\(\\hat x\\) close to the membership \\(\\bar x\\in\\{\\pm 1\\}^n\\).\n\n\n\n\nTheorem (estimation of \\(\\bar x\\bar x^\\top\\))\n\n\nAssume \\(n\\geq 10^4\\eps\\), \\(\\max(p(1-p),q(1-q))\\geq 20/n\\), \\(p\\geq a/n\\), \\(q\\geq b/n\\) and \\((a-b)^2\\geq 10^4\\eps^{-2}(a+b)\\). Then, with probability at least \\(1-e^3 5^{-n}\\), \\[\\norm{\\hat Z-\\bar x\\bar x^\\top}_2^2\\leq \\eps n^2=\\eps\\norm{\\bar x\\bar x^\\top}_2^2.\\]"
+  },
+  {
+    "objectID": "community_detection.html#from-matrices-to-vectors-daviskahan",
+    "href": "community_detection.html#from-matrices-to-vectors-daviskahan",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "From matrices to vectors: Davis–Kahan",
+    "text": "From matrices to vectors: Davis–Kahan\n\n\n\n\nCorollary\n\n\nUnder the same assumptions, if \\(\\norm{\\hat x}_2=\\sqrt n\\), then \\[\\min_{\\alpha\\in\\{\\pm 1\\}}\\norm{\\alpha\\hat x-\\bar x}_2^2\\leq 8\\eps n=8\\eps\\norm{\\bar x}_2^2.\\]\n\n\n\n\n\n\n\n\nTheorem (Davis–Kahan)\n\n\nIf \\(A,B\\) are symmetric and \\(\\lambda_i(A)\\) has gap \\(\\delta&gt;0\\) from the rest of the spectrum, then \\[\\min_{\\alpha\\in\\{\\pm 1\\}}\\norm{u_i(A)-\\alpha u_i(B)}_2\\leq 2^{3/2}\\frac{\\norm{A-B}_2}{\\delta}.\\]\n\n\n\n\nApply it to \\(A=\\bar x\\bar x^\\top\\) (gap \\(\\delta=n\\)) and \\(B=\\hat Z\\)."
+  },
+  {
+    "objectID": "community_detection.html#outline-of-the-proof",
+    "href": "community_detection.html#outline-of-the-proof",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Outline of the proof",
+    "text": "Outline of the proof\nWrite \\(\\cM_{\\rm opt}=\\{Z:Z\\succeq 0,\\,{\\rm diag}(Z)\\preceq I_n\\}\\). Three steps:\n\nOracle: \\(\\bar Z=\\bar x\\bar x^\\top\\) maximizes \\(Z\\mapsto\\inr{\\E(A-\\lambda J_n),Z}\\) over \\(\\cM_{\\rm opt}\\) (as in the oracle proposition).\nUniform concentration: with high probability, \\[\\sup_{Z\\in\\cM_{\\rm opt}}\\big|\\inr{(A-\\lambda J_n)-\\E(A-\\lambda J_n),Z}\\big|\\] is small. This is the probabilistic step.\nCurvature at the optimum: \\(\\inr{\\E(A-\\lambda J_n),\\bar Z-Z}\\gtrsim\\norm{Z-\\bar Z}_1\\)."
+  },
+  {
+    "objectID": "community_detection.html#grothendiecks-inequality",
+    "href": "community_detection.html#grothendiecks-inequality",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Grothendieck’s inequality",
+    "text": "Grothendieck’s inequality\n\n\n\n\nTheorem (Grothendieck)\n\n\nIf \\(\\big|\\sum_{i,j}b_{ij}s_it_j\\big|\\leq 1\\) for all \\(s_i,t_j\\in\\{\\pm 1\\}\\), then for every Hilbert space \\(H\\) and unit vectors \\(u_i,v_j\\), \\(\\big|\\sum_{i,j}b_{ij}\\inr{u_i,v_j}\\big|\\leq K_G\\), with \\(K_G\\leq 1.783\\).\n\n\n\n\nWrite \\(\\cM_1=\\{st^\\top:s,t\\in\\{\\pm 1\\}^n\\}\\) and \\(\\cM_G=\\{XY^\\top:\\text{rows of }X,Y\\text{ in }B_2^n\\}\\).\n\n\n\n\nCorollary\n\n\n\\(\\displaystyle\\sup_{Z\\in\\cM_G}\\inr{B,Z}\\leq K_G\\sup_{Z\\in\\cM_1}\\inr{B,Z}=K_G\\norm{B}_{\\infty\\to 1}\\)."
+  },
+  {
+    "objectID": "community_detection.html#why-grothendieck-applies-here",
+    "href": "community_detection.html#why-grothendieck-applies-here",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Why Grothendieck applies here",
+    "text": "Why Grothendieck applies here\n\n\n\n\nProposition\n\n\n\\(\\cM_{\\rm opt}\\subset\\cM_G\\).\n\n\n\n\nIf \\(Z\\succeq 0\\) then \\(Z=XX^\\top\\), and \\({\\rm diag}(Z)\\preceq I_n\\) means \\(\\norm{X_{i\\bullet}}_2\\leq 1\\).\n\nTherefore \\[\\sup_{Z\\in\\cM_{\\rm opt}}\\big|\\inr{(A-\\lambda J_n)-\\E(\\cdots),Z}\\big|\\leq K_G\\norm{A-\\E A}_{\\infty\\to 1}+K_G|\\lambda-\\E\\lambda|\\,\\norm{J_n}_{\\infty\\to 1}.\\]\n\nBound \\(\\norm{A-\\E A}_{\\infty\\to 1}\\) and \\(|\\lambda-\\E\\lambda|\\) by Bernstein and a union bound.\nIf \\(\\bar p=\\frac{2}{n(n-1)}\\sum_{i&lt;j}{\\rm Var}(A_{ij})&gt;9/n\\), then with probability \\(1-e^3 5^{-n}\\), \\[\\norm{A-\\E A}_{\\infty\\to 1}\\leq 6n(n-1)\\sqrt{\\bar p/n}.\\]"
+  },
+  {
+    "objectID": "community_detection.html#weak-duality-for-sdp-problems",
+    "href": "community_detection.html#weak-duality-for-sdp-problems",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Weak duality for SDP problems",
+    "text": "Weak duality for SDP problems\nA standard SDP and its dual: \\[\\min\\big(\\inr{C,X}:X\\succeq 0,\\,\\cA(X)=b\\big),\\qquad\\max\\big(\\inr{\\lambda,b}:C-\\cA^\\top(\\lambda)\\succeq 0\\big).\\]\n\nWeak duality: \\(\\inr{C,X}\\geq\\inr{\\lambda,b}\\) for every feasible pair.\nIf a feasible pair saturates the inequality, both are optimal: this is a dual certificate.\n\n\n\n\n\nTheorem (strong duality for SDP)\n\n\nIf there exist \\(X_0\\succ 0\\) with \\(\\cA(X_0)=b\\) and \\(\\lambda_0\\) with \\(C-\\cA^\\top(\\lambda_0)\\succ 0\\) (Slater), then both problems attain their optima and there is no duality gap."
+  },
+  {
+    "objectID": "community_detection.html#the-dual-certificate-method",
+    "href": "community_detection.html#the-dual-certificate-method",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "The dual-certificate method",
+    "text": "The dual-certificate method\n\n\n\n\nProposition\n\n\nIf \\(X^*\\) is primal-feasible, \\(\\lambda^*\\) is dual-feasible, and \\(\\inr{C,X^*}=\\inr{b,\\lambda^*}\\), then both are optimal.\n\n\n\n\nStrategy.\n\nStart from an NP-hard problem \\((P_0)\\) (here, recover \\(g=f^{V_1}\\)).\nConvexify it into an SDP \\((P)\\).\nTake the candidate \\(X_0=gg^\\top\\) and build a dual-feasible \\(\\lambda_0\\) with equal objective values.\nThen \\(X_0\\) solves \\((P)\\): one has solved \\((P_0)\\) by solving \\((P)\\)."
+  },
+  {
+    "objectID": "community_detection.html#another-sdp-designed-for-exact-recovery",
+    "href": "community_detection.html#another-sdp-designed-for-exact-recovery",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Another SDP, designed for exact recovery",
+    "text": "Another SDP, designed for exact recovery\nThe theoretical problem with \\(\\E L\\) has unique solutions \\(f^{V_1}\\) and \\(f^{V_1^c}\\). We observe only \\(L\\), so we solve the empirical version \\[\\max\\big(x^\\top Ax:\\inr{x,\\mathbf{1}}=0,\\,x\\in\\{-1,1\\}^n\\big).\\]\n\nDropping \\(\\inr{x,\\mathbf{1}}=0\\) makes \\(\\mathbf{1}\\) optimal: the trivial cut.\nPenalize: replace the objective by \\(x^\\top Ax-\\lambda\\inr{x,\\mathbf{1}}^2\\), and add the constant \\(\\lambda\\norm{x}_2^2\\).\nFor \\(\\lambda=1/2\\) this is \\(x^\\top Bx\\) with \\[B=2A-\\mathbf{1}\\mathbf{1}^\\top-I_n,\\qquad B_{ij}=\\begin{cases}0&i=j,\\\\1&(i,j)\\in E,\\\\-1&(i,j)\\notin E.\\end{cases}\\]"
+  },
+  {
+    "objectID": "community_detection.html#lifted-sdp",
+    "href": "community_detection.html#lifted-sdp",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Lifted SDP",
+    "text": "Lifted SDP\n\\[\\max\\big(x^\\top Bx:x\\in\\{-1,1\\}^n\\big)\\quad\\rightsquigarrow\\quad\\max\\big(\\inr{B,Z}:Z\\succeq 0,\\,Z_{ii}=1\\big).\\]\n\nThe rank constraint has been dropped: this is an SDP.\nFrom a solution \\(\\hat Z\\): take a leading eigenvector and its sign, or round \\(G\\sim\\cN(0,\\hat Z)\\) and take \\({\\rm sign}(G)\\).\nGoal: prove that \\(gg^\\top\\) is the unique solution, by a strict dual certificate."
+  },
+  {
+    "objectID": "community_detection.html#dual-of-the-community-detection-sdp",
+    "href": "community_detection.html#dual-of-the-community-detection-sdp",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Dual of the community-detection SDP",
+    "text": "Dual of the community-detection SDP\nThe dual can be written \\[\\min\\big({\\rm Tr}(Y):Y-B\\succeq 0,\\,Y\\text{ diagonal}\\big).\\]\nWeak duality: for primal-feasible \\(Z\\) and dual-feasible \\(Y\\), \\[\\inr{B,Z}\\leq{\\rm Tr}(Y).\\]\n\\(Y\\) certifies a feasible \\(Z\\) when \\(\\inr{B,Z}={\\rm Tr}(Y)\\), i.e. \\(\\inr{B-Y,Z}=0\\).\n\nFor uniqueness one needs a strict certificate: \\({\\rm Ker}(B-Y)\\) of dimension \\(1\\).\n\n\n\n\nLemma\n\n\nIf \\(Y\\) certifies \\(gg^\\top\\) and \\(\\dim{\\rm Ker}(B-Y)=1\\), then \\(gg^\\top\\) is the unique primal solution."
+  },
+  {
+    "objectID": "community_detection.html#construction-of-the-certificate",
+    "href": "community_detection.html#construction-of-the-certificate",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Construction of the certificate",
+    "text": "Construction of the certificate\nConditions on \\(Y\\): diagonal, \\(Y\\succeq B\\), \\((B-Y)g=0\\), and \\(\\lambda_2(Y-B)&gt;0\\).\nThe first three force \\[Y_{ii}=\\frac{(Bg)_i}{g_i}=\\frac{2(Ag)_i}{g_i}-1,\\qquad Y_{ij}=0\\text{ for }i\\neq j.\\]\n\n\n\n\nProposition\n\n\nIf \\(\\lambda_2(Y-B)&gt;0\\), then \\(gg^\\top\\) is the unique solution of the SDP.\n\n\n\n\nIt remains to prove \\(\\lambda_2(Y-B)&gt;0\\) with high probability in the SBM."
+  },
+  {
+    "objectID": "community_detection.html#deterministic-plus-concentration",
+    "href": "community_detection.html#deterministic-plus-concentration",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Deterministic plus concentration",
+    "text": "Deterministic plus concentration\nWrite \\(\\square=(\\alpha-\\beta)\\log n\\) when \\(p=\\alpha\\log n\\,/\\,n\\) and \\(q=\\beta\\log n\\,/\\,n\\). Enough to show:\n\n\\(\\lambda_2(\\E(Y-B))=\\square\\);\n\\(\\norm{(Y-B)-\\E(Y-B)}_{\\rm op}&lt;\\square\\) with high probability.\n\nWeyl / Courant–Fischer then gives \\[\\lambda_2(Y-B)\\geq\\lambda_2(\\E(Y-B))-\\norm{(Y-B)-\\E(Y-B)}_{\\rm op}&gt;0.\\]"
+  },
+  {
+    "objectID": "community_detection.html#spectrum-of-the-mean-certificate",
+    "href": "community_detection.html#spectrum-of-the-mean-certificate",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Spectrum of the mean certificate",
+    "text": "Spectrum of the mean certificate\nA computation with \\(g\\in\\{\\pm 1\\}^n\\) and \\(\\inr{g,\\mathbf{1}}=0\\) yields \\[\\E(Y-B)=n(p-q)I_n-(p-q)gg^\\top+(1-p-q)\\mathbf{1}\\mathbf{1}^\\top.\\]\n\n\\(g\\) is an eigenvector for the eigenvalue \\(0\\).\nOn \\(g^\\perp\\), if \\(p+q\\leq 1\\) then \\(v^\\top\\E(Y-B)v\\geq n(p-q)\\), with equality for \\(v\\perp\\mathbf{1}\\).\nHence \\(\\lambda_2(\\E(Y-B))=n(p-q)=(\\alpha-\\beta)\\log n\\)."
+  },
+  {
+    "objectID": "community_detection.html#decomposing-intra--and-inter-community-edges",
+    "href": "community_detection.html#decomposing-intra--and-inter-community-edges",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Decomposing intra- and inter-community edges",
+    "text": "Decomposing intra- and inter-community edges\n\n\n\n\n\n\n\n\nFigure 1: Adjacency matrix \\(A=A^{\\sim}+A^{\\not\\sim}\\): intra-community blocks (blue) and inter-community blocks (red).\n\n\n\n\n\n\n\\(Y-B=2\\big[(D^{\\sim}-A^{\\sim})-(D^{\\not\\sim}-A^{\\not\\sim})\\big]+\\mathbf{1}\\mathbf{1}^\\top\\): difference of the two Laplacians.\nEach Laplacian is a sum of independent matrices \\(\\Delta_{ij}=E_{ii}+E_{jj}-E_{ij}-E_{ji}\\)."
+  },
+  {
+    "objectID": "community_detection.html#matrix-bernstein",
+    "href": "community_detection.html#matrix-bernstein",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Matrix Bernstein",
+    "text": "Matrix Bernstein\n\n\n\n\nTheorem (matrix Bernstein)\n\n\nLet \\(X_k\\) be independent centered symmetric \\(d\\times d\\) matrices with \\(\\lambda_{\\max}(X_k)\\leq R\\) a.s. Then, with probability at least \\(1-d\\exp(-t)\\), \\[\\lambda_{\\max}\\Big(\\frac1n\\sum_k X_k\\Big)\\leq\\sigma\\sqrt{\\frac{2t}{n}}+\\frac{2Rt}{3n},\\qquad\\sigma^2=\\Big\\|\\frac1n\\sum_k\\E X_k^2\\Big\\|_{\\rm op}.\\]\n\n\n\n\n\nThe dimension \\(d\\) appears in the probability. Here \\(t\\sim\\log n\\), so it only costs constants.\nApplied to the sum over intra- and inter-edges: \\(R=2\\) and \\(\\sigma^2\\leq n(p+q)\\)."
+  },
+  {
+    "objectID": "community_detection.html#exact-recovery-by-sdp",
+    "href": "community_detection.html#exact-recovery-by-sdp",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Exact recovery by SDP",
+    "text": "Exact recovery by SDP\n\n\n\n\nTheorem\n\n\nLet \\(p=\\alpha\\log n\\,/\\,n\\), \\(q=\\beta\\log n\\,/\\,n\\) with \\(0&lt;\\beta&lt;\\alpha\\) and \\(p+q&lt;1\\), and \\(|V_1|=n/2\\). Then \\[\\{gg^\\top\\}=\\argmax\\big(\\inr{B,Z}:Z\\succeq 0,\\,Z_{ii}=1\\big)\\] with probability at least \\(1-2/n^\\eps\\), as soon as \\[\\sqrt{2(1+\\eps)(\\alpha+\\beta)}+\\frac{4(1+\\eps)}{3}&lt;\\alpha-\\beta.\\]\n\n\n\n\n\nAn NP-hard problem is solved, for most SBM graphs, by an SDP.\nThe threshold is more restrictive than \\(\\sqrt{\\alpha}-\\sqrt{\\beta}&gt;\\sqrt{2}\\)."
+  },
+  {
+    "objectID": "community_detection.html#no-computational-gap",
+    "href": "community_detection.html#no-computational-gap",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "No computational gap",
+    "text": "No computational gap\n\n\n\n\nTheorem (improved analysis)\n\n\nUnder the same SBM assumptions, \\(gg^\\top\\) is the unique SDP solution with high probability as soon as \\[\\sqrt{\\alpha}-\\sqrt{\\beta}&gt;\\sqrt{2}.\\]\n\n\n\n\n\n\n\nThe SDP attains the information-theoretic threshold.\nThere is no computational gap for two equal-size communities in the SBM.\n\n\n\n\n\n\nIdea: randomness does things well\n\n\nNP-hard problems can become easy under a natural random model. Convex relaxation — of the objective, of the constraint, or by matrix lifting — is the right device."
+  },
+  {
+    "objectID": "community_detection.html#dual-certificate-for-basis-pursuit",
+    "href": "community_detection.html#dual-certificate-for-basis-pursuit",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Dual certificate for basis pursuit",
+    "text": "Dual certificate for basis pursuit\nThe same idea applies to \\[\\min\\big(\\norm{t}_1:At=y\\big).\\]\n\nSubdifferential: \\(0\\in\\partial^-\\norm{\\cdot}_1(x^*)+\\mathrm{Im}(A^\\top)\\) iff there is \\(\\beta^*\\) with \\[\\norm{A^\\top\\beta^*}_\\infty\\leq 1,\\qquad (A^\\top\\beta^*)_I={\\rm sgn}(x^*_I),\\quad I={\\rm supp}(x^*).\\]\nLagrangian dual: \\(\\max\\big(\\inr{\\beta,y}:\\norm{A^\\top\\beta}_\\infty\\leq 1\\big)\\).\nWeak duality: \\(\\norm{t}_1\\geq\\inr{\\beta,y}\\). Equality plus dual feasibility certifies \\(t^*\\).\n\nA strict certificate rules out every other feasible \\(t\\): that is uniqueness.\n\n\n\n\nProposition\n\n\nUnder strong duality, if \\(\\lambda^*\\) solves the dual then \\(x^*\\) solves the primal if and only if \\(\\varphi(x^*)=\\psi(\\lambda^*)\\)."
+  },
+  {
+    "objectID": "community_detection.html#the-lifting-device",
+    "href": "community_detection.html#the-lifting-device",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "The lifting device",
+    "text": "The lifting device\n\nIn compressed sensing and matrix completion one convexified the objective (\\(\\ell_0\\), rank).\nHere one convexifies a combinatorial constraint, after rewriting a quadratic \\(x\\mapsto x^\\top Mx\\) as the linear map \\(Z\\mapsto\\inr{M,Z}\\) on \\(Z=xx^\\top\\).\nDropping \\({\\rm rank}(Z)=1\\) is the SDP relaxation.\nTwo further examples: a leading eigenvector, and MAX-CUT."
+  },
+  {
+    "objectID": "community_detection.html#lifting-a-leading-eigenvector",
+    "href": "community_detection.html#lifting-a-leading-eigenvector",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Lifting a leading eigenvector",
+    "text": "Lifting a leading eigenvector\n\\[u_1\\in\\argmax_{\\norm{x}_2=1}\\norm{Ax}_2\\qquad\\Longleftrightarrow\\qquad\\max_{\\substack{Z\\succeq 0\\\\{\\rm rank}(Z)=1\\\\{\\rm Tr}(Z)=1}}\\inr{A^2,Z}.\\]\n\n\\(\\norm{Ax}_2^2=\\inr{A^2,xx^\\top}\\) and \\(\\norm{x}_2=1\\iff{\\rm Tr}(xx^\\top)=1\\).\nDrop the rank: \\(\\max\\{\\inr{A^2,Z}:Z\\succeq 0,\\,{\\rm Tr}(Z)=1\\}\\).\n\n\n\n\n\n\nRemark\n\n\nThis relaxation is exact: \\(\\inr{A^2,Z}\\leq\\lambda_1(A)^2\\), with equality at \\(u_1u_1^\\top\\). If \\(\\lambda_1\\) is simple, the SDP has the unique solution \\(u_1u_1^\\top\\)."
+  },
+  {
+    "objectID": "community_detection.html#the-max-cut-problem",
+    "href": "community_detection.html#the-max-cut-problem",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "The MAX-CUT problem",
+    "text": "The MAX-CUT problem\nA cut is a partition \\(S\\sqcup S^c=V\\). MAX-CUT maximizes the number of edges across the cut: \\[\\max_{S\\subset V}\\sum_{(i,j)\\in E}\\mathbf{1}_{i\\in S,\\,j\\in S^c}=\\max_{x\\in\\{\\pm 1\\}^n}\\frac12\\sum_{i,j}A_{ij}(1-x_ix_j).\\]\nEquivalent form: \\[\\min\\big(x^\\top Ax:x_i^2=1\\big).\\]\n\nThe constraints \\(x_i^2=1\\) make the problem combinatorial.\nLift: \\(x^\\top Ax=\\inr{A,xx^\\top}\\) and \\(x_i^2=1\\iff Z_{ii}=1\\)."
+  },
+  {
+    "objectID": "community_detection.html#the-goemanswilliamson-relaxation",
+    "href": "community_detection.html#the-goemanswilliamson-relaxation",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "The Goemans–Williamson relaxation",
+    "text": "The Goemans–Williamson relaxation\n\\[\\min\\big(\\inr{A,Z}:Z\\succeq 0,\\,Z_{ii}=1\\big).\\]\nRounding: draw \\(G\\sim\\cN(0,Z_1)\\) and set \\(\\hat u={\\rm sign}(G)\\). Then \\[\\E\\Big[\\frac12\\sum_{i,j}A_{ij}(1-\\hat u_i\\hat u_j)\\Big]\\geq 0.868\\cdot{\\rm OPT}.\\]\n\nThe same Gaussian rounding appears in the proof of Grothendieck’s inequality.\n\n\n\n\n\nIdea: bidual = SDP\n\n\nA first Lagrangian dual of MAX-CUT, then a second dual of that dual, is the Goemans–Williamson SDP: \\[\\max_u\\big(\\inr{\\mathbf{1},u}:A-{\\rm Diag}(u)\\succeq 0\\big)\\leq\\min_{Z\\succeq 0,\\,Z_{ii}=1}\\inr{A,Z}\\leq\\min_{x_i^2=1}x^\\top Ax.\\]"
+  },
+  {
+    "objectID": "community_detection.html#lifting-linear-and-quadratic-constraints",
+    "href": "community_detection.html#lifting-linear-and-quadratic-constraints",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Lifting linear and quadratic constraints",
+    "text": "Lifting linear and quadratic constraints\nThe constraint \\(\\inr{x,\\mathbf{1}}=0\\) is linear in \\(x\\), hence not a linear function of \\(xx^\\top\\). One can still lift it by adding one coordinate: \\[\\begin{pmatrix}1\\\\x\\end{pmatrix}\\rightsquigarrow Z=\\begin{pmatrix}1&x^\\top\\\\x&xx^\\top\\end{pmatrix}.\\]\nThe equal-size community problem becomes the SDP \\[\\min\\big(\\inr{L,Z}:Z\\succeq 0,\\,Z_{00}=1,\\,Z_{ii}=1,\\,\\inr{Z,A}=0\\big),\\] after dropping the rank. Linear terms live in the first row and column of \\(Z\\).\n\n\n\n\n\nIdea: one extra dimension\n\n\nQuadratic terms live in \\(xx^\\top\\). Linear terms appear as soon as one lifts \\((1,x)\\) instead of \\(x\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#reconstructing-a-matrix-from-few-linear-measurements",
+    "href": "recommendation_systems.html#reconstructing-a-matrix-from-few-linear-measurements",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Reconstructing a matrix from few linear measurements",
+    "text": "Reconstructing a matrix from few linear measurements\n\nUnknown matrix \\(A^*\\in\\R^{u\\times v}\\), observed through \\(m\\) linear measurements \\[y_i=\\inr{A^*,X_i},\\qquad i=1,\\ldots,m,\\qquad\\text{where }\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}.\\]\n\n\n\\(uv\\) unknowns parameters but only \\(m\\ll uv\\) equations: a highly underdetermined problem, as in compressed sensing.\nIt becomes solvable when the ‘true dimension’ of \\(A^*\\) is much smaller than \\(uv\\), and in particular smaller than \\(m\\).\nThe natural structure here is low rank: \\({\\rm rank}(A^*)=r\\ll u\\wedge v\\).\n\n\n\n\n\n\nKey Idea: low rank is the low-dimensional structure of the ‘signal’\\(A^*\\)\n\n\nTo reconstruct a matrix from a small number of linear measurements, the low-rank assumption plays the role that sparsity played for vectors."
+  },
+  {
+    "objectID": "recommendation_systems.html#recommender-systems-by-completion-of-the-usersitems-matrix",
+    "href": "recommendation_systems.html#recommender-systems-by-completion-of-the-usersitems-matrix",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Recommender systems by completion of the users/items matrix",
+    "text": "Recommender systems by completion of the users/items matrix\n\nThe users/items matrix has entry \\((i,j)\\) equal to the rating of user \\(i\\) for item \\(j\\) when it exists, and is empty otherwise.\nA matrix completion algorithm fills in the empty entries.\nOn each row (that is, for each user), recommend the items with the highest predicted ratings.\n\n\n\n\n\n \\[\\Longrightarrow\\]\n\nMatrix completion\n\n\n\n\nAfter matrix completion, we recommend:\n\nitem 14 to user 6,\nitem 16 to user 4, etc."
+  },
+  {
+    "objectID": "recommendation_systems.html#the-netflix-prize",
+    "href": "recommendation_systems.html#the-netflix-prize",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The Netflix Prize",
+    "text": "The Netflix Prize\n\nThe matrix-completion viewpoint became very popular after the Netflix Prize.\n\\(u=480\\,189\\) users and \\(v=17\\,770\\) items (movies).\nRatings range from \\(1\\) (“did not like it”) to \\(5\\) (“liked it very much”).\nOnly \\(100\\,480\\,507\\) ratings were observed, about \\(1.2\\%\\) of the \\(uv\\) possible entries.\n\n\n\n\n\n\nIdea: recommendation = completion of the users/items matrix\n\n\nOne can build a recommender system by completing the users/items matrix."
+  },
+  {
+    "objectID": "recommendation_systems.html#matrix-completion-as-linear-measurements",
+    "href": "recommendation_systems.html#matrix-completion-as-linear-measurements",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Matrix completion as linear measurements",
+    "text": "Matrix completion as linear measurements\n\nLet \\(E_{p,q}\\) be the matrix with a \\(1\\) at entry \\((p,q)\\) and \\(0\\) elsewhere: \\((E_{p,q})_{p,q}\\) is the canonical basis of \\(\\mathbb{R}^{u\\times v}\\).\nIf user \\(p\\) rated item \\(q\\) with \\(y_{p,q}\\), then \\[y_{p,q}=A^*_{p,q}=\\inr{A^*,E_{p,q}}.\\]\nWith \\(\\Omega=\\{(p,q):\\text{user }p\\text{ rated item }q\\}\\), we observe \\((A^*_{p,q})_{(p,q)\\in\\Omega}\\).\n\n\n\nCompleting the matrix is therefore reconstructing \\(A^*\\) from \\(m=|\\Omega|\\) linear measurements, with \\(X_i\\in\\{E_{p,q}:1\\leq p\\leq u,\\ 1\\leq q\\leq v\\}\\).\nThe solution set \\(\\{A:\\inr{A,X_i}=y_i,\\ i=1,\\ldots,m\\}\\) is an affine space, so without extra structure the problem has no unique solution."
+  },
+  {
+    "objectID": "recommendation_systems.html#the-low-rank-assumption",
+    "href": "recommendation_systems.html#the-low-rank-assumption",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The low-rank assumption",
+    "text": "The low-rank assumption\n\n\n\nUsers fall into a small number of profiles: fans of science fiction, of crime films, of adventure films, and so on.\nMovies fall into a small number of themes.\nHomogeneous groups give (more or less) the same ratings to movies of the same category.\nSo \\(A^*\\) is close to a block matrix, whose rank is of the order of the number of groups.\nWe assume \\(A^*\\) is exactly low rank. The approximately low-rank and noisy cases need no new ideas.\n\n\n\n\n\n\n\nA block-constant users/items matrix with 3 user groups and 3 item groups has rank at most 3.\n\n\n\n\n\n\n\n\n\nIdea: exploit the low rank structure of the users/items matrix\n\n\nThe users/items matrix is approximately low rank. Completion algorithms, and hence recommender systems, are designed to exploit this property."
+  },
+  {
+    "objectID": "recommendation_systems.html#notation-spectrum-schatten-norms-symmetric-and-orthogonal-matrices",
+    "href": "recommendation_systems.html#notation-spectrum-schatten-norms-symmetric-and-orthogonal-matrices",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Notation: spectrum, Schatten norms, symmetric and orthogonal matrices",
+    "text": "Notation: spectrum, Schatten norms, symmetric and orthogonal matrices\n\nInner product on \\(\\R^{u\\times v}\\): \\(\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}\\).\nSpectrum \\(\\sigma_A=(\\sigma_j(A))_{j=1}^{u\\wedge v}\\): the singular values (square roots of the eigenvalues of \\(A^\\top A\\)), with \\(\\sigma_1(A)\\geq\\cdots\\geq\\sigma_{u\\wedge v}(A)\\geq0\\).\nSchatten norms: \\(\\norm{A}_{S_p}=\\norm{\\sigma_A}_{\\ell_p}=\\Big(\\sum_j\\sigma_j(A)^p\\Big)^{1/p}\\), \\(p\\geq1\\).\nRank = number of nonzero singular values: \\({\\rm rank}(A)=\\norm{\\sigma_A}_{\\ell_0}\\).\n\n\n\n\n\n\n\n\n\n\nNorm\nName\nVector analog\n\n\n\n\n\\(\\norm{\\cdot}_{S_1}\\)\nnuclear norm (trace norm)\n\\(\\ell_1\\)\n\n\n\\(\\norm{\\cdot}_{S_2}\\)\nFrobenius norm (Hilbert norm of \\(\\inr{\\cdot,\\cdot}\\))\n\\(\\ell_2\\)\n\n\n\\(\\norm{\\cdot}_{S_\\infty}\\)\noperator norm \\(\\sup_{\\norm{x}_2=1}\\norm{Ax}_2\\)\n\\(\\ell_\\infty\\)\n\n\n\n\nDuality: \\(\\norm{A}_{S_q}=\\sup\\big(\\inr{A,B}:\\norm{B}_{S_p}\\leq1\\big)\\) when \\(p^{-1}+q^{-1}=1\\).\n\\(\\cS^p\\): symmetric matrices; \\(\\cS^p_+\\): positive semidefinite (\\(A\\succeq0\\)); \\(\\cS^p_{++}\\): positive definite (\\(A\\succ0\\)); \\(\\cO(p)=\\{A:A^\\top A=AA^\\top=I_p\\}\\): orthogonal matrices."
+  },
+  {
+    "objectID": "recommendation_systems.html#rank-minimization-procedure",
+    "href": "recommendation_systems.html#rank-minimization-procedure",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Rank minimization procedure",
+    "text": "Rank minimization procedure\n\nQuestions. Given \\(y_i=\\inr{A^*,X_i}\\) with \\(A^*\\) of low rank:\n\nHow can \\(A^*\\) be reconstructed exactly?\nHow many measurements \\(m\\) are needed, and how should \\(X_1,\\ldots,X_m\\) be chosen?\nFor matrix completion: what happens when the \\(X_i\\) must be taken in \\(\\{E_{p,q}\\}\\)?\n\n\n\n\n\n\n\n\n\n\nDefinition (rank minimization)\n\n\n\\[\\min\\Big({\\rm rank}(A):\\inr{A,X_i}=y_i,\\ i=1,\\ldots,m\\Big)\\]\n\n\n\n\n\n\n\n\nThe analog of \\(\\ell_0\\) minimization (the rank is the \\(\\ell_0\\) norm of the spectrum): look for the solution of smallest rank among all matrices with the same measurements.\nWe could study it as we studied \\(\\ell_0\\) minimization, but it fails for the same algorithmic reason."
+  },
+  {
+    "objectID": "recommendation_systems.html#rank-minimization-is-np-hard",
+    "href": "recommendation_systems.html#rank-minimization-is-np-hard",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Rank minimization is NP-hard",
+    "text": "Rank minimization is NP-hard\n\n\n\n\nProposition\n\n\nFinding a solution to rank minimization over an affine space, \\(\\min_{\\cA(A)=y}{\\rm rank}(A)\\), is NP-hard in general.\n\n\n\n\n\n\nReduction from \\(\\ell_0\\). Start from any problem \\(\\min_{Bt=b}\\norm{t}_0\\) with \\(B\\in\\R^{m_0\\times N}\\). Take \\(u=v=N\\) and \\(m=m_0+N^2\\).\nDefine \\(\\cA(A)=\\begin{pmatrix}B\\,{\\rm diag}(A)\\\\ A-{\\rm diag}(A)\\end{pmatrix}\\) and \\(y=\\begin{pmatrix}b\\\\0\\end{pmatrix}\\), where \\({\\rm diag}(A)=(a_{ii})_{i=1}^N\\).\nThen \\(\\{A:\\cA(A)=y\\}\\) is the set of diagonal matrices whose diagonal \\(t\\) satisfies \\(Bt=b\\), and the rank of a diagonal matrix is the \\(\\ell_0\\) “norm” of its diagonal.\nSo a rank-minimization solver also solves \\(\\ell_0\\) minimization, through a polynomial-time construction. Since \\(\\ell_0\\) minimization is NP-hard, so is rank minimization.\n\n\n\n\n\n\n\nThe affine constraint is easy; the nonconvex objective \\(A\\mapsto{\\rm rank}(A)\\) is the difficulty. Convex relaxation replaces it by the “closest convex function”.\nCan you guess what is the convex relaxation of the rank function (on some set)?"
+  },
+  {
+    "objectID": "recommendation_systems.html#convex-envelope",
+    "href": "recommendation_systems.html#convex-envelope",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Convex envelope",
+    "text": "Convex envelope\n\n\n\n\nDefinition (convex envelope)\n\n\nLet \\(C\\) be a convex subset of a vector space and \\(f:C\\to\\R\\). The convex envelope \\({\\rm conv}(f)\\) is the largest convex function below \\(f\\) on \\(C\\): for all \\(x\\in C\\), \\[{\\rm conv}(f)(x)=\\sup\\big(g(x):g\\text{ convex},\\ g\\leq f\\text{ on }C\\big).\\]\n\n\n\n\n\n\nIn a Hilbert space \\(H\\), it suffices to take affine minorants:\n\\[{\\rm conv}(f)(x)=\\sup_{a\\in H,\\,b\\in\\R}\\big(\\inr{a,x}+b:\\ \\inr{a,y}+b\\leq f(y),\\ \\forall y\\in C\\big).\\]\n\n\n\n\n\n\nAny convex function is a maximal function of affine functions"
+  },
+  {
+    "objectID": "recommendation_systems.html#fenchel-transform",
+    "href": "recommendation_systems.html#fenchel-transform",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Fenchel transform",
+    "text": "Fenchel transform\n\n\n\n\nDefinition (Fenchel transform)\n\n\nFor \\(f:C\\to\\R\\) with \\(C\\subset H\\) a convex set, the Fenchel transform of \\(f\\) is \\[f^*: x\\in H \\to \\sup_{y\\in C}\\big(\\inr{x,y}-f(y)\\big).\\]\n\n\n\n\nNote: \\(f^*\\) is defined over the entire space \\(H\\) even though \\(f\\) may only be defined over \\(C\\).\n\nExercise: Show that \\(f^*\\) is convex even when \\(f\\) is not.\n\n\n\n\n\nDefinition (biconjugate)\n\n\nThe biconjugate of \\(f\\) is the function \\[f^{**}:y\\in H\\to\\sup_{x\\in H}\\big(\\inr{x,y}-f^*(x)\\big).\\]"
+  },
+  {
+    "objectID": "recommendation_systems.html#convex-envelope-biconjugate",
+    "href": "recommendation_systems.html#convex-envelope-biconjugate",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Convex envelope = biconjugate",
+    "text": "Convex envelope = biconjugate\n\n\n\n\nTheorem\n\n\nLet \\(H\\) be a Hilbert space, \\(C\\subset H\\) convex and \\(f:C\\to\\R\\). Then, for every \\(x\\in C\\), \\(f^{**}(x)={\\rm conv}(f)(x)\\).\n\n\n\n\n\nProof.\n\nFor a fixed slope \\(a\\), the affine function \\(\\inr{a,\\cdot}+b\\) is below \\(f\\) on \\(C\\) iff \\(b\\leq f(y)-\\inr{a,y}\\) for all \\(y\\in C\\).\n\n\n\n\nThe best intercept is \\(b=\\inf_{y\\in C}\\big(f(y)-\\inr{a,y}\\big)=-f^*(a)\\).\n\n\n\n\nHence \\({\\rm conv}(f)(x)=\\sup_{a\\in H}\\big(\\inr{a,x}-f^*(a)\\big)=f^{**}(x)\\).\n\n\n\n\n\n\n\n\n\n\nIdea: compute the biconjugate\n\n\nTo find the convex envelope of the rank, it suffices to compute its biconjugate."
+  },
+  {
+    "objectID": "recommendation_systems.html#the-nuclear-norm-is-the-convex-envelope-of-the-rank",
+    "href": "recommendation_systems.html#the-nuclear-norm-is-the-convex-envelope-of-the-rank",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The nuclear norm is the convex envelope of the rank",
+    "text": "The nuclear norm is the convex envelope of the rank\n\n\n\n\nTheorem\n\n\nThe convex envelope of the rank function on \\(B_{S_\\infty}=\\{A\\in\\R^{u\\times v}:\\norm{A}_{S_\\infty}\\leq1\\}\\) is the nuclear norm \\(\\norm{\\cdot}_{S_1}\\).\n\n\n\n\n\nThe matrix analogue of “\\(\\ell_1\\) is the convex envelope of \\(\\ell_0\\) on \\(B_\\infty^N\\)”.\nThe ‘dictionary’ between ‘vectors’ and ‘matrix’ goes through the spectrum: \\[{\\rm rank}(A)=\\norm{\\sigma_A}_{\\ell_0},\\qquad\\norm{A}_{S_1}=\\norm{\\sigma_A}_{\\ell_1},\\qquad\\norm{A}_{S_\\infty}=\\norm{\\sigma_A}_{\\ell_\\infty}.\\]\nThe key tool for reducing matrix problems to problems on spectra is von Neumann’s inequality."
+  },
+  {
+    "objectID": "recommendation_systems.html#von-neumanns-inequality",
+    "href": "recommendation_systems.html#von-neumanns-inequality",
+    "title": "Matrix completion and recommendation systems",
+    "section": "von Neumann’s inequality",
+    "text": "von Neumann’s inequality\n\n\n\n\nProposition (von Neumann’s inequality)\n\n\nFor \\(A,B\\in\\R^{u\\times v}\\), \\[|\\inr{A,B}|\\leq\\sum_i\\sigma_i(A)\\sigma_i(B).\\] Equality \\(\\inr{A,B}=\\sum_i\\sigma_i(A)\\sigma_i(B)\\) holds iff, for an SVD \\(A=U_AD_AV_A^\\top\\), one has \\(U_A^\\top BV_A=D_B\\).\nLikewise, \\(\\norm{A-B}_{S_2}\\geq\\norm{\\sigma_A-\\sigma_B}_2\\), with equality when \\(B=U_AD_BV_A^\\top\\).\n\n\n\n\n\nRank, Schatten norms and \\(B_{S_\\infty}\\) are invariant under \\(A\\mapsto UAV\\) with \\(U\\in\\cO(u)\\), \\(V\\in\\cO(v)\\).\nIn a supremum over such sets, one can align the singular vectors of \\(B\\) with those of \\(A\\), which reduces the problem to vectors via matrices’ spectra."
+  },
+  {
+    "objectID": "recommendation_systems.html#proof-sketch-biconjugate-of-the-rank",
+    "href": "recommendation_systems.html#proof-sketch-biconjugate-of-the-rank",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Proof sketch: biconjugate of the rank",
+    "text": "Proof sketch: biconjugate of the rank\nLet \\(f={\\rm rank}\\) on \\(B_{S_\\infty}\\) and \\(q=u\\wedge v\\).\n\n\nFenchel transform. By von Neumann’s inequality and orthogonal invariance, splitting \\(B_{S_\\infty}\\) according to the rank \\(r\\) of \\(B\\): \\[f^*(A)=\\max_{0\\leq r\\leq q}\\ \\sup_{B\\in B_{S_\\infty},\\,{\\rm rank}(B)=r}\\Big(\\sum_{i=1}^r\\sigma_i(A)\\sigma_i(B)-r\\Big)=\\max_{0\\leq r\\leq q}\\sum_{i=1}^r\\big(\\sigma_i(A)-1\\big)=\\sum_{i=1}^q\\big(\\sigma_i(A)-1\\big)_+.\\]\n\n\n\n\nBiconjugate, \\(\\norm{A}_{S_\\infty}\\leq1\\). Then \\(f^*(A)=0\\), and for \\(B\\in B_{S_\\infty}\\), \\[\\sup_{\\norm{A}_{S_\\infty}\\leq1}\\sum_i\\sigma_i(A)\\sigma_i(B)=\\sum_i\\sigma_i(B)=\\norm{B}_{S_1}.\\]\n\n\n\n\nBiconjugate, \\(\\norm{A}_{S_\\infty}&gt;1\\). Since \\(\\sigma_i(B)\\leq1\\), both sums below are nonpositive: \\[\\sum_i\\sigma_i(A)\\sigma_i(B)-f^*(A)=\\norm{B}_{S_1}+\\underbrace{\\sum_{\\sigma_i(A)\\leq1}\\big(\\sigma_i(A)-1\\big)\\sigma_i(B)}_{\\leq0}+\\underbrace{\\sum_{\\sigma_i(A)&gt;1}\\big(\\sigma_i(A)-1\\big)\\big(\\sigma_i(B)-1\\big)}_{\\leq0}\\leq\\norm{B}_{S_1}.\\]\n\n\n\nSo \\(f^{**}=\\norm{\\cdot}_{S_1}\\) on \\(B_{S_\\infty}\\). \\(\\square\\)"
+  },
+  {
+    "objectID": "recommendation_systems.html#nuclear-norm-minimization-procedure",
+    "href": "recommendation_systems.html#nuclear-norm-minimization-procedure",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Nuclear norm minimization procedure",
+    "text": "Nuclear norm minimization procedure\n\n\n\n\nDefinition (nuclear norm minimization)\n\n\nWith \\(\\cA(A)=(\\inr{A,X_i})_{i=1}^m\\) and \\(y=(y_i)_{i=1}^m\\), \\[\\hat A\\in\\argmin_{A\\in\\R^{u\\times v}}\\big(\\norm{A}_{S_1}:\\cA(A)=y\\big).\\tag{NM}\\]\n\n\n\n\n\nThe convex relaxation of rank minimization: the matrix analogue of Basis Pursuit.\n(NM) is a convex problem.\nBasis Pursuit was rewritten as a linear program. (NM) can likewise be rewritten as a semidefinite program (SDP).\n\n\n\n\n\n\nKey Idea: convex relaxation\n\n\nThe nuclear norm is the convex envelope of the rank on \\(B_{S_\\infty}\\), so it is natural to replace the (non convex) rank function by the (convex) nuclear norm in the NP-hard rank minimization problem."
+  },
+  {
+    "objectID": "recommendation_systems.html#nuclear-norm-minimization-as-an-sdp-problem",
+    "href": "recommendation_systems.html#nuclear-norm-minimization-as-an-sdp-problem",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Nuclear norm minimization as an SDP problem",
+    "text": "Nuclear norm minimization as an SDP problem\n\\[\\min_{X\\in\\R^{u\\times v},\\,Y\\in\\cS^u,\\,Z\\in\\cS^v}{\\rm Tr}(Y)+{\\rm Tr}(Z)\\quad\\text{such that}\\quad\\cA(X)=y,\\quad\\begin{bmatrix}Y&X\\\\X^\\top&Z\\end{bmatrix}\\succeq0.\\tag{SDP}\\]\n\n\n\n\nTheorem\n\n\n(NM) and (SDP) are equivalent:\n\nif \\(\\hat A\\) solves (NM), then \\((\\hat A,\\hat Y,\\hat Z)\\) solves (SDP) for some \\(\\hat Y,\\hat Z\\) depending only on \\(\\hat A\\);\nif \\((\\hat X,\\hat Y,\\hat Z)\\) solves (SDP), then \\(\\hat X\\) solves (NM).\n\n\n\n\n\n\n\n\n\n\nLemma\n\n\nLet \\(A\\in\\R^{u\\times v}\\) and \\(t\\geq0\\). Then \\(\\norm{A}_{S_1}\\leq t\\) iff there exist \\(Y\\in\\cS^u\\) and \\(Z\\in\\cS^v\\) such that \\[{\\rm Tr}(Y)+{\\rm Tr}(Z)\\leq2t\\qquad\\text{and}\\qquad\\begin{bmatrix}Y&A\\\\A^\\top&Z\\end{bmatrix}\\succeq0.\\]"
+  },
+  {
+    "objectID": "recommendation_systems.html#proof-sketch-the-sdp-lemma",
+    "href": "recommendation_systems.html#proof-sketch-the-sdp-lemma",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Proof sketch: the SDP lemma",
+    "text": "Proof sketch: the SDP lemma\nThe lemma gives \\(\\min_{Y,Z}\\frac12\\big({\\rm Tr}(Y)+{\\rm Tr}(Z)\\big)=\\norm{X}_{S_1}\\) for every feasible \\(X\\), hence the theorem.\n(\\(\\Leftarrow\\)) Take an SVD \\(A=UDV^\\top\\) and \\(I_{u,v}={\\rm diag}(1,\\ldots,1)\\in\\R^{u\\times v}\\).\n\n\nThe matrix \\(M=\\begin{bmatrix}I_u&-UI_{u,v}V^\\top\\\\-VI_{u,v}^\\top U^\\top&I_v\\end{bmatrix}\\) is positive semidefinite, since \\[(x^\\top,y^\\top)\\,M\\begin{pmatrix}x\\\\y\\end{pmatrix}=\\norm{x}_2^2+\\norm{y}_2^2-2\\inr{U^\\top x,I_{u,v}V^\\top y}\\geq0.\\]\nThe trace of a product of two positive semidefinite matrices is nonnegative, so \\[0\\leq{\\rm Tr}\\Big(M\\begin{bmatrix}Y&A\\\\A^\\top&Z\\end{bmatrix}\\Big)={\\rm Tr}(Y)+{\\rm Tr}(Z)-2{\\rm Tr}(D),\\quad\\text{hence}\\quad2t\\geq2\\norm{A}_{S_1}.\\]\n\n\n\n(\\(\\Rightarrow\\)) Take a compact SVD \\(A=U_rD_rV_r^\\top\\), with \\(r={\\rm rank}(A)\\).\n\nSet \\(Y=U_rD_rU_r^\\top+\\gamma I_u\\) and \\(Z=V_rD_rV_r^\\top+\\gamma I_v\\), with \\(\\gamma=2(t-\\norm{A}_{S_1})/(u+v)\\), so that \\({\\rm Tr}(Y)+{\\rm Tr}(Z)=2t\\).\nThen \\[\\begin{bmatrix}Y&A\\\\A^\\top&Z\\end{bmatrix}=\\begin{bmatrix}U_r\\\\V_r\\end{bmatrix}D_r\\begin{bmatrix}U_r^\\top&V_r^\\top\\end{bmatrix}+\\gamma I_{u+v}\\succeq0.\\qquad\\square\\]"
+  },
+  {
+    "objectID": "recommendation_systems.html#semidefinite-programs-in-standard-form",
+    "href": "recommendation_systems.html#semidefinite-programs-in-standard-form",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Semidefinite programs in standard form",
+    "text": "Semidefinite programs in standard form\n\n\n\n\nDefinition (SDP)\n\n\nAn optimization problem is a semidefinite program if it can be written as \\[\\min_{X\\in\\cS^p}\\Big(\\inr{C,X}:\\tilde\\cA(X)=b,\\ X\\succeq0\\Big),\\] where \\(C\\in\\cS^p\\), \\(\\tilde\\cA:\\cS^p\\to\\R^m\\) is linear and \\(b\\in\\R^m\\).\n\n\n\n\n\n(SDP) has this form, with variable \\(M=\\begin{bmatrix}Y&X\\\\X^\\top&Z\\end{bmatrix}\\in\\cS^{u+v}\\), \\(C=I_{u+v}\\) (so \\(\\inr{C,M}={\\rm Tr}(Y)+{\\rm Tr}(Z)\\)), \\(\\tilde\\cA(M)=\\cA(X)\\) and \\(b=y\\).\nLike linear programs, SDPs are solved approximately by primal–dual barrier methods (e.g. cvxopt.solvers.conelp).\n\n\n\n\n\n\nRemark\n\n\nSDP solvers are expensive in high dimension: this motivates the gradient methods of the next part."
+  },
+  {
+    "objectID": "recommendation_systems.html#sparse-vectors-vs.-low-rank-matrices",
+    "href": "recommendation_systems.html#sparse-vectors-vs.-low-rank-matrices",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Sparse vectors vs. low-rank matrices",
+    "text": "Sparse vectors vs. low-rank matrices\n\n\n\n\n\n\n\n\n\nSparse vectors (CS)\nLow-rank matrices\n\n\n\n\nUnknown\n\\(x^*\\in\\R^N\\)\n\\(A^*\\in\\R^{u\\times v}\\)\n\n\nStructure\n\\(\\norm{x^*}_0\\leq s\\)\n\\({\\rm rank}(A^*)=\\norm{\\sigma_{A^*}}_0\\leq r\\)\n\n\nNonconvex procedure\n\\(\\ell_0\\) minimization (NP-hard)\nrank minimization (NP-hard)\n\n\nConvex envelope\n\\(\\norm{\\cdot}_1\\) on \\(B_\\infty^N\\)\n\\(\\norm{\\cdot}_{S_1}\\) on \\(B_{S_\\infty}\\)\n\n\nConvex procedure\nBasis Pursuit\nNuclear norm minimization\n\n\nImplementation\nlinear program\nsemidefinite program\n\n\nGaussian measurements\n\\(m\\gtrsim s\\log(eN/s)\\)\n\\(m\\gtrsim r(u+v)\\)"
+  },
+  {
+    "objectID": "recommendation_systems.html#the-mask-operator-p_omega",
+    "href": "recommendation_systems.html#the-mask-operator-p_omega",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The mask operator \\(P_\\Omega\\)",
+    "text": "The mask operator \\(P_\\Omega\\)\n\nEach observation reveals one entry of the matrix: a mask \\[P_\\Omega:\\R^{u\\times v}\\to\\R^{u\\times v},\\qquad\\big(P_\\Omega(A)\\big)_{ij}=\\begin{cases}A_{ij}&\\text{if }(i,j)\\in\\Omega,\\\\0&\\text{otherwise,}\\end{cases}\\] where \\(\\Omega\\subset\\{1,\\ldots,u\\}\\times\\{1,\\ldots,v\\}\\) is the set of revealed entries.\n\\(P_\\Omega\\) is a projection (\\(P_\\Omega^2=P_\\Omega\\)) and is self-adjoint (\\(P_\\Omega^\\top=P_\\Omega\\)).\nWe observe \\(P_\\Omega(A^*)\\) and assume that \\(A^*\\) has low rank.\n\n\n\n\n\n\nKey Idea: avoid the SDP\n\n\nThe SDP reformulation is hard to solve in high dimension. We now build gradient-type algorithms that work directly on the matrix."
+  },
+  {
+    "objectID": "recommendation_systems.html#two-procedures-rank-constraint-and-nuclear-norm-penalty",
+    "href": "recommendation_systems.html#two-procedures-rank-constraint-and-nuclear-norm-penalty",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Two procedures: rank constraint and nuclear norm penalty",
+    "text": "Two procedures: rank constraint and nuclear norm penalty\n\nRank-constrained least squares: \\[\\tilde A\\in\\argmin_{{\\rm rank}(A)\\leq r}\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\\]\nNuclear-norm-penalized least squares: \\[\\bar A\\in\\argmin_{A}\\Big(\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2+\\lambda\\norm{A}_{S_1}\\Big)\\]\n\n\n\nBoth combine a data-fidelity term \\(A\\mapsto\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\\) with a rank constraint or a nuclear norm regularization.\nThey are implemented with matrix versions of hard and soft thresholding, which act on the spectrum."
+  },
+  {
+    "objectID": "recommendation_systems.html#projected-gradient-for-the-rank-constraint",
+    "href": "recommendation_systems.html#projected-gradient-for-the-rank-constraint",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Projected gradient for the rank constraint",
+    "text": "Projected gradient for the rank constraint\n\n\\(F(A)=\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2\\) is convex and differentiable, with \\[\\nabla F(A)=-P_\\Omega^\\top\\big(P_\\Omega(A^*)-P_\\Omega(A)\\big)=P_\\Omega(A)-P_\\Omega(A^*).\\]\nThe constraint \\(\\{{\\rm rank}(A)\\leq r\\}\\) is not convex, but we can still project onto it (next slide).\n\n\n\n\n\n\n\n\nAlgorithm (projected gradient descent)\n\n\nWith step sizes \\((\\gamma_k)_k\\), \\[A^{k+1}=S_r^{hard}\\Big(A^k+\\gamma_k\\big(P_\\Omega(A^*)-P_\\Omega(A^k)\\big)\\Big),\\] where \\(S_r^{hard}\\) keeps the \\(r\\) largest singular values and sets the others to \\(0\\).\n\n\n\n\n\n\n\n\n\nRemark\n\n\nWith \\(\\gamma_k=1\\): \\(A^{k+1}=S_r^{hard}\\big(P_\\Omega(A^*)+P_{\\Omega^c}(A^k)\\big)\\), i.e. iterative rank-\\(r\\) PCA for missing data (missMDA)."
+  },
+  {
+    "objectID": "recommendation_systems.html#projection-onto-matrices-of-rank-at-most-r",
+    "href": "recommendation_systems.html#projection-onto-matrices-of-rank-at-most-r",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Projection onto matrices of rank at most \\(r\\)",
+    "text": "Projection onto matrices of rank at most \\(r\\)\n\n\n\n\nProposition\n\n\nLet \\(A=PDQ^\\top\\) be an SVD of \\(A\\), with \\(D={\\rm diag}(\\sigma_1,\\ldots,\\sigma_{u\\wedge v})\\). A projection of \\(A\\) onto \\(\\{B:{\\rm rank}(B)\\leq r\\}\\) in \\(\\norm{\\cdot}_{S_2}\\) is \\[S_r^{hard}(A)=PD_rQ^\\top,\\qquad D_r={\\rm diag}(\\sigma_1,\\ldots,\\sigma_r,0,\\ldots,0).\\] It is the unique projection when \\(\\sigma_r&gt;\\sigma_{r+1}\\).\n\n\n\n\nProof.\n\n\nvon Neumann: \\(\\norm{A-B}_{S_2}\\geq\\norm{\\sigma_A-\\sigma_B}_2\\), with equality for \\(B=P\\,{\\rm diag}(\\sigma_B)Q^\\top\\).\nIf \\({\\rm rank}(B)\\leq r\\), then \\(\\norm{\\sigma_A-\\sigma_B}_2^2\\geq\\sum_{j&gt;r}\\sigma_j(A)^2\\), with equality for \\(\\sigma_B=(\\sigma_1,\\ldots,\\sigma_r,0,\\ldots,0)\\). \\(\\square\\)\n\n\n\n\nCost: one SVD per iteration, and only the \\(r\\) leading singular triplets are needed."
+  },
+  {
+    "objectID": "recommendation_systems.html#subdifferentials-and-proximal-operators",
+    "href": "recommendation_systems.html#subdifferentials-and-proximal-operators",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Subdifferentials and proximal operators",
+    "text": "Subdifferentials and proximal operators\n\n\n\nSubdifferential of a convex \\(f:U\\to\\R\\), with \\(U\\subset\\R^n\\) convex: \\[\\partial^-f(x)=\\big\\{g\\in\\R^n:f(y)\\geq f(x)+\\inr{g,y-x},\\ \\forall y\\in U\\big\\}.\\] Its elements are the subgradients.\n\n\n\n\n\n\nDefinition (proximal operator)\n\n\nFor a convex function \\(g:\\R^n\\to\\R\\), \\[{\\rm prox}_g(x)=\\argmin_{u\\in\\R^n}\\Big(\\frac12\\norm{u-x}_2^2+g(u)\\Big).\\]\n\n\n\n\n\n\n\nIt generalizes projections. If \\(i_K\\) is the indicator of \\(K\\) (\\(0\\) on \\(K\\), \\(+\\infty\\) outside), then \\[\\argmin_{y\\in K}\\norm{x-y}_2=\\argmin_{y\\in\\R^n}\\Big(\\frac12\\norm{x-y}_2^2+i_K(y)\\Big)={\\rm prox}_{i_K}(x).\\]"
+  },
+  {
+    "objectID": "recommendation_systems.html#proximal-maps-of-ell_1-and-ell_0",
+    "href": "recommendation_systems.html#proximal-maps-of-ell_1-and-ell_0",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Proximal maps of \\(\\ell_1\\) and \\(\\ell_0\\)",
+    "text": "Proximal maps of \\(\\ell_1\\) and \\(\\ell_0\\)\n\n\n\nThe problem is separable: \\(\\ \\frac12\\norm{u-z}_2^2+\\gamma\\norm{u}_1=\\sum_j\\Big(\\frac12(u_j-z_j)^2+\\gamma|u_j|\\Big)\\).\nScalar problem: study \\(\\varphi(t)=\\frac12(s-t)^2+\\gamma|t|\\) on \\(t&lt;0\\), \\(t=0\\) and \\(t&gt;0\\): \\[\\argmin_{t\\in\\R}\\varphi(t)=\\begin{cases}s-\\gamma&\\text{if }s\\geq\\gamma\\\\0&\\text{if }|s|\\leq\\gamma\\\\s+\\gamma&\\text{if }s\\leq-\\gamma\\end{cases}={\\rm sgn}(s)\\big(|s|-\\gamma\\big)_+.\\]\n\n\n\n\n\nProposition (proximal maps of \\(\\ell_1\\) and \\(\\ell_0\\))\n\n\nFor \\(z\\in\\R^N\\):\n\nsoft thresholding: \\({\\rm prox}_{\\gamma\\norm{\\cdot}_1}(z)=\\big({\\rm sgn}(z_j)(|z_j|-\\gamma)_+\\big)_{j=1}^N\\);\nhard thresholding: \\({\\rm prox}_{(\\gamma^2/2)\\norm{\\cdot}_0}(z)=\\big(z_j\\,I(|z_j|\\geq\\gamma)\\big)_{j=1}^N\\).\n\n\n\n\n\n\n\n\n\n\n\nSoft thresholding (left) and hard thresholding (right) at level \\(\\gamma\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#fixed-point-characterization-of-proximal-gradient-descent",
+    "href": "recommendation_systems.html#fixed-point-characterization-of-proximal-gradient-descent",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Fixed-point characterization of proximal gradient descent",
+    "text": "Fixed-point characterization of proximal gradient descent\n\n\n\n\nProposition\n\n\nLet \\(f:\\R^n\\to\\R\\) be convex and differentiable, \\(g:\\R^n\\to\\R\\) convex, and \\(\\gamma&gt;0\\). Then \\[x^*\\in\\argmin_{x\\in\\R^n}\\big(f(x)+g(x)\\big)\\iff x^*={\\rm prox}_{\\gamma g}\\big(x^*-\\gamma\\nabla f(x^*)\\big).\\]\n\n\n\n\nProof.\n\n\nReplacing \\((f,g)\\) by \\((\\gamma f,\\gamma g)\\), we may take \\(\\gamma=1\\).\nBy the optimality condition for the prox: \\(\\ u^*={\\rm prox}_g(z)\\iff z-u^*\\in\\partial^-g(u^*)\\).\nSo \\(x^*={\\rm prox}_g\\big(x^*-\\nabla f(x^*)\\big)\\iff-\\nabla f(x^*)\\in\\partial^-g(x^*)\\iff0\\in\\nabla f(x^*)+\\partial^-g(x^*)\\). \\(\\square\\)\n\n\n\n\nLook for a fixed point of \\(G:x\\mapsto{\\rm prox}_{\\gamma g}\\big(x-\\gamma\\nabla f(x)\\big)\\) by iterating \\(x_{k+1}=G(x_k)\\), possibly with varying steps \\(\\gamma_k\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#prox-of-the-nuclear-norm-soft-spectral-thresholding",
+    "href": "recommendation_systems.html#prox-of-the-nuclear-norm-soft-spectral-thresholding",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Prox of the nuclear norm: soft spectral thresholding",
+    "text": "Prox of the nuclear norm: soft spectral thresholding\n\n\n\n\nProposition\n\n\nLet \\(\\gamma&gt;0\\) and let \\(A=UDV^\\top\\) be an SVD of \\(A\\). Then \\[{\\rm prox}_{\\gamma\\norm{\\cdot}_{S_1}}(A)=S_\\gamma^{soft}(A)=UD_\\gamma V^\\top,\\qquad D_\\gamma={\\rm diag}\\big((\\sigma_1-\\gamma)_+,\\ldots,(\\sigma_{u\\wedge v}-\\gamma)_+\\big).\\]\n\n\n\n\nProof.\n\n\nvon Neumann: \\(\\norm{A-B}_{S_2}^2=\\norm{A}_{S_2}^2+\\norm{B}_{S_2}^2-2\\inr{A,B}\\geq\\norm{\\sigma_A-\\sigma_B}_2^2\\), with equality for \\(B=U\\,{\\rm diag}(\\sigma_B)V^\\top\\).\nSo the prox has the form \\(U{\\rm diag}(\\hat d)V^\\top\\), with \\(\\hat d={\\rm prox}_{\\gamma\\norm{\\cdot}_1}(\\sigma_A)\\).\nSince \\(\\sigma_A\\geq0\\), soft thresholding gives \\(\\hat d=\\big((\\sigma_i-\\gamma)_+\\big)_i\\). \\(\\square\\)"
+  },
+  {
+    "objectID": "recommendation_systems.html#proximal-gradient-descent-for-matrix-completion-1",
+    "href": "recommendation_systems.html#proximal-gradient-descent-for-matrix-completion-1",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Proximal gradient descent for matrix completion",
+    "text": "Proximal gradient descent for matrix completion\n\n\n\n\nAlgorithm (proximal gradient descent)\n\n\nFor \\(\\min_A\\big(F(A)+\\lambda\\norm{A}_{S_1}\\big)\\), with step sizes \\((\\gamma_k)_k\\): \\[A_{k+1}=S_{\\lambda\\gamma_k}^{soft}\\Big(A_k+\\gamma_k\\big(P_\\Omega(A^*)-P_\\Omega(A_k)\\big)\\Big).\\]\n\n\n\n\n\nSame cost for both methods: no SDP, but one SVD (or a truncated SVD) per iteration, which can still be expensive.\n\n\n\n\n\n\n\n\n\n\n\nProblem\nMethod\nSpectral step\n\n\n\n\n\\({\\rm rank}(A)\\leq r\\)\nprojected gradient\nhard: keep \\(\\sigma_1,\\ldots,\\sigma_r\\)\n\n\n\\(+\\lambda\\norm{A}_{S_1}\\)\nproximal gradient\nsoft: \\(\\sigma_i\\mapsto(\\sigma_i-\\lambda\\gamma_k)_+\\)\n\n\n\n\n\n\n\n\nKey Idea: thresholding the spectrum\n\n\nProjecting onto low-rank matrices and computing the prox of the nuclear norm give matrix completion algorithms by projected or proximal gradient descent."
+  },
+  {
+    "objectID": "recommendation_systems.html#a-latent-space-for-users-and-items",
+    "href": "recommendation_systems.html#a-latent-space-for-users-and-items",
+    "title": "Matrix completion and recommendation systems",
+    "section": "A latent space for users and items",
+    "text": "A latent space for users and items\n\n\n\nRepresent users and items in the same latent space \\(\\R^d\\):\n\n\\(p_i\\in\\R^d\\) represents user \\(i\\);\n\\(q_j\\in\\R^d\\) represents item \\(j\\).\n\nThe inner product \\({\\color{red}{\\inr{p_i,q_j}}}\\) measures the affinity between user \\(i\\) and item \\(j\\).\nUsers close to an item in the latent space are likely to appreciate it.\n\n\n\n\n\nLatent space \\(\\R^2\\) for the Netflix data: users and movies are represented in the same place."
+  },
+  {
+    "objectID": "recommendation_systems.html#factorization-of-the-usersitems-matrix",
+    "href": "recommendation_systems.html#factorization-of-the-usersitems-matrix",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Factorization of the users/items matrix",
+    "text": "Factorization of the users/items matrix\n\nData: \\(\\{(user_i,item_j,grade_{ij}):(i,j)\\in\\Omega\\}\\).\nBuild \\((p_i)_{i\\leq u}\\) and \\((q_j)_{j\\leq v}\\) so that \\({\\color{red}{\\inr{p_i,q_j}\\approx grade_{ij}}}\\) for every \\((i,j)\\in\\Omega\\).\nThe values \\(\\inr{p_i,q_j}\\) for \\((i,j)\\notin\\Omega\\) complete the matrix.\n\n\n\n\n\n\n\n\nFactorizing \\(A^*\\approx PQ\\), with \\(P\\in\\mathbb{R}^{u\\times d}\\) (rows \\(p_i^\\top\\)) and \\(Q\\in\\mathbb{R}^{d\\times v}\\) (columns \\(q_j\\)).\n\n\n\n\n\n\n\n\n\n\nKey Idea: low rank made explicit\n\n\n\\({\\rm rank}(PQ)\\leq d\\). Approximating \\(A^*\\) by \\(PQ\\) approximates it by a low-rank matrix, which only works if \\(A^*\\) is approximately low rank."
+  },
+  {
+    "objectID": "recommendation_systems.html#regularized-least-squares-objective",
+    "href": "recommendation_systems.html#regularized-least-squares-objective",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Regularized least-squares objective",
+    "text": "Regularized least-squares objective\n\nFit the observed entries: \\[\\sum_{(i,j)\\in\\Omega}\\big(grade_{ij}-\\inr{p_i,q_j}\\big)^2=\\norm{P_\\Omega(A^*-PQ)}_2^2,\\qquad P=(p_i^\\top)_{i\\leq u},\\ Q=(q_j)_{j\\leq v}.\\]\n\\(PQ\\) is invariant under \\((P,Q)\\mapsto(\\alpha P,Q/\\alpha)\\), so we also penalize the norms: \\[f(P,Q)=\\frac12\\norm{P_\\Omega(A^*-PQ)}_2^2+\\lambda\\big(\\norm{P}_2^2+\\norm{Q}_2^2\\big),\\qquad\\lambda&gt;0.\\]\n\n\n\n\\(f\\) is not jointly convex in \\((P,Q)\\), but it is convex in each block: \\[\\partial_1f(P,Q)=-P_\\Omega(A^*-PQ)\\,Q^\\top+2\\lambda P,\\qquad\\partial_2f(P,Q)=-P^\\top P_\\Omega(A^*-PQ)+2\\lambda Q.\\]"
+  },
+  {
+    "objectID": "recommendation_systems.html#alternating-gradient-descent",
+    "href": "recommendation_systems.html#alternating-gradient-descent",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Alternating gradient descent",
+    "text": "Alternating gradient descent\n\n\n\n\nAlgorithm (alternating gradient descent, ARLS)\n\n\nData: \\(\\{A^*_{ij}:(i,j)\\in\\Omega\\}\\). Init: \\(P_0\\in\\R^{u\\times d}\\), \\(Q_0\\in\\R^{d\\times v}\\), step sizes \\((\\eta_k)_k\\) and \\((\\mu_k)_k\\).\nWhile the stopping criterion is not met:\n\n\\(P_{k+1}=P_k-\\eta_k\\,\\partial_1f(P_k,Q_k)\\)\n\\(Q_{k+1}=Q_k-\\mu_k\\,\\partial_2f(P_{k+1},Q_k)\\)\n\nOutput: \\(P\\in\\R^{u\\times d}\\) and \\(Q\\in\\R^{d\\times v}\\) such that \\(A^*\\approx PQ\\).\n\n\n\n\n\nARLS stands for Alternating Ridge Least Squares: each block update is a ridge-regularized least-squares step.\nTo recommend, compute \\(PQ\\) and pick the largest entries on each row."
+  },
+  {
+    "objectID": "recommendation_systems.html#clustering-users-and-items-in-the-latent-space",
+    "href": "recommendation_systems.html#clustering-users-and-items-in-the-latent-space",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Clustering users and items in the latent space",
+    "text": "Clustering users and items in the latent space\n\n\n\nThe rows of \\(P\\) represent the users and the columns of \\(Q\\) the items.\nClustering the rows of \\(P\\) gives groups of users with the same tastes.\nClustering the columns of \\(Q\\) gives groups of similar items.\nThe latent space is useful beyond recommendation.\n\n\n\n\n\n\n\nUsers (blue triangles) and items (red squares) in the latent space form clusters."
+  },
+  {
+    "objectID": "recommendation_systems.html#non-negative-matrix-factorization-nmf",
+    "href": "recommendation_systems.html#non-negative-matrix-factorization-nmf",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Non-Negative Matrix Factorization (NMF)",
+    "text": "Non-Negative Matrix Factorization (NMF)\n\nIn plain factorization, \\(\\inr{p_i,q_j}\\) can be negative. One option is to map negative values to the lowest rating (\\(1\\) for Netflix).\nAnother is to impose nonnegative latent coordinates: \\[\\min_{P\\in\\R^{u\\times d},\\,Q\\in\\R^{d\\times v}}\\Big(\\norm{P_\\Omega(A^*-PQ)}_2:\\ P\\geq0,\\ Q\\geq0\\Big)\\qquad(P\\geq0\\text{ means }P_{ij}\\geq0\\ \\forall i,j).\\]\n\n\n\nStill convex in each block. Respect the constraints by projected gradient (or conditional gradient, i.e. Frank–Wolfe). The projection is easy: \\({\\rm proj}(P)=(\\max(P_{ij},0))_{i,j}\\).\n\n\n\n\n\nAlgorithm (alternating projected gradient descent)\n\n\nWhile the stopping criterion is not met:\n\n\\(P_{k+1}={\\rm proj}\\big(P_k-\\eta_k\\,\\partial_1f(P_k,Q_k)\\big)\\)\n\\(Q_{k+1}={\\rm proj}\\big(Q_k-\\mu_k\\,\\partial_2f(P_{k+1},Q_k)\\big)\\)\n\n\n\n\n\n\nOther NMF algorithms: Lee and Seung, NIPS 2001."
+  },
+  {
+    "objectID": "recommendation_systems.html#adding-metadata-to-matrix-factorization",
+    "href": "recommendation_systems.html#adding-metadata-to-matrix-factorization",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Adding metadata to matrix factorization",
+    "text": "Adding metadata to matrix factorization\nMetadata are additional data beyond the ratings:\n\n\\(x_i\\): feature vector of user \\(i\\) (age, sex, socio-professional category; via one-hot encoding, embedding or autoencoding);\n\\(z_j\\): feature vector of item \\(j\\) (price, categories, and so on);\n\\(U\\in\\R^{u\\times u}\\): users/users matrix of influences (likes, positive messages, retweets);\n\\(I\\in\\R^{v\\times v}\\): items/items matrix of affinities (cast, producer, release year, genre).\n\n\nLinear model: for \\((i,j)\\in\\Omega\\), \\[A^*_{ij}\\approx\\inr{p_i,q_j}+\\underbrace{(a_i+\\inr{b_i,x_i})}_{\\text{user features}}+\\underbrace{(c_j+\\inr{d_j,z_j})}_{\\text{item features}}+\\underbrace{\\alpha\\sum_{r=1}^uU_{ir}\\inr{p_r,q_j}}_{\\text{influence of other users}}+\\underbrace{\\beta\\sum_{s=1}^vI_{js}\\inr{p_i,q_s}}_{\\text{similar items}}.\\]\n\nIf user \\(r\\) influences \\(i\\) (\\(U_{ir}\\gg0\\)) and \\(r\\) likes \\(j\\) (\\(\\inr{p_r,q_j}\\gg0\\)), the predicted rating of \\(j\\) by \\(i\\) increases.\nWe take \\(U_{ii}=0\\) and \\(I_{jj}=0\\), so that \\(\\inr{p_i,q_j}\\) is not counted twice."
+  },
+  {
+    "objectID": "recommendation_systems.html#learning-the-metadata-model",
+    "href": "recommendation_systems.html#learning-the-metadata-model",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Learning the metadata model",
+    "text": "Learning the metadata model\n\nParameters: the latent vectors \\((p_i)_i\\), \\((q_j)_j\\) and the coefficients \\(a_i,b_i,c_j,d_j\\).\nMinimize the regularized squared error \\[F=\\sum_{(i,j)\\in\\Omega}\\Big[A^*_{ij}-\\Big(\\inr{p_i,q_j}+(a_i+\\inr{b_i,x_i})+(c_j+\\inr{d_j,z_j})+\\alpha\\sum_rU_{ir}\\inr{p_r,q_j}+\\beta\\sum_sI_{js}\\inr{p_i,q_s}\\Big)\\Big]^2+\\lambda\\Big(\\sum_i\\norm{p_i}_2^2+\\sum_j\\norm{q_j}_2^2\\Big).\\]\n\n\n\nAlternate minimizations in \\((p_i)_i\\) and in \\((q_j)_j\\), as in ARLS, and update \\(a_i,b_i,c_j,d_j\\) at each iteration.\nFor fixed \\((p_i)\\) and \\((q_j)\\), minimizing in \\((a_i,b_i,c_j,d_j)\\) is an explicit least-squares problem.\nInstead of the \\(\\ell_2\\) penalty, one can impose positivity of the \\(p_i\\) and \\(q_j\\), as in NMF."
+  },
+  {
+    "objectID": "recommendation_systems.html#two-benchmark-families",
+    "href": "recommendation_systems.html#two-benchmark-families",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Two benchmark families",
+    "text": "Two benchmark families\n\n\n\nThe previous approaches encode the low-rank structure of \\(A^*\\).\nOlder and more natural algorithms rely directly on similarities. Any new recommender system must be compared with these benchmarks.\nThey are the simplest to understand and implement, and the fastest to run.\n\n\nCollaborative filtering: similarity between users.\nContent-based filtering: similarity between items.\n\n\n\n\n\nCollaborative filtering uses similarities between users; content-based filtering uses similarities between items."
+  },
+  {
+    "objectID": "recommendation_systems.html#similarity-weighted-completion",
+    "href": "recommendation_systems.html#similarity-weighted-completion",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Similarity-weighted completion",
+    "text": "Similarity-weighted completion\n\nEverything rests on a similarity measure \\({\\rm sim}(i,i')\\) between users \\(i,i'\\in[u]\\), or \\({\\rm sim}(j,j')\\) between items \\(j,j'\\in[v]\\).\n\n\n\n\n\nDefinition (benchmark predictors)\n\n\n\n\nCollaborative filtering: \\[\\hat A_{ij}=\\frac{\\sum_{i'\\in[u]}{\\rm sim}(i,i')\\,\\hat A_{i'j}}{\\sum_{i'\\in[u]}{\\rm sim}(i,i')}\\]\n\nContent-based filtering: \\[\\hat A_{ij}=\\frac{\\sum_{j'\\in[v]}{\\rm sim}(j,j')\\,\\hat A_{ij'}}{\\sum_{j'\\in[v]}{\\rm sim}(j,j')}\\]\n\n\n\n\n\n\nThese formulas are implicit and suggest an iterative algorithm. Usually a single step is performed, summing only over observed entries \\(A^*_{i'j}\\) (resp. \\(A^*_{ij'}\\)) with indices in \\(\\Omega\\).\nMetadata (on users, items, user/user or item/item relations) enter naturally through the similarity."
+  },
+  {
+    "objectID": "recommendation_systems.html#cosine-similarity",
+    "href": "recommendation_systems.html#cosine-similarity",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Cosine similarity",
+    "text": "Cosine similarity\n\nFor two users \\(i,i'\\in[u]\\), let \\(N(i,i')=\\{j\\in[v]:(i,j)\\in\\Omega\\text{ and }(i',j)\\in\\Omega\\}\\) be the items rated by both.\n\n\n\n\n\nDefinition (cosine similarity)\n\n\n\\[{\\rm sim}(i,i')=\\frac{\\sum_{j\\in N(i,i')}A^*_{ij}A^*_{i'j}}{\\sqrt{\\sum_{j\\in N(i,i')}(A^*_{ij})^2}\\ \\sqrt{\\sum_{j\\in N(i,i')}(A^*_{i'j})^2}}\\]\n\n\n\n\n\nThe cosine of the angle between the masked rating rows \\((P_\\Omega A^*)_{i\\bullet}\\) and \\((P_\\Omega A^*)_{i'\\bullet}\\), restricted to their common items.\nA cosine similarity between items is defined in the same way, on the columns."
+  },
+  {
+    "objectID": "recommendation_systems.html#users-and-items-embeddings",
+    "href": "recommendation_systems.html#users-and-items-embeddings",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Users and items embeddings",
+    "text": "Users and items embeddings\n\n\n\nNeural Collaborative Filtering (NCF) elaborates on matrix factorization: users and items are embedded, possibly in two different latent spaces, and the rating is predicted by a function more complex than an inner product.\nAn embedding layer is a linear map from the one-hot vector \\(e_i\\in\\R^u\\) of user \\(i\\) to \\(\\R^d\\): it has \\(u\\times d\\) weights to learn.\nEmbeddings can be designed by hand (“featuring”), given by a kernel, or learned from the data, as \\(p_i\\) and \\(q_j\\) in matrix factorization.\n\n\n\n\n\nUsers embedding: one-hot encoding in \\(\\mathbb{R}^u\\) mapped to the latent space \\(\\mathbb{R}^d\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#fully-connected-layers",
+    "href": "recommendation_systems.html#fully-connected-layers",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Fully connected layers",
+    "text": "Fully connected layers\n\n\n\nA fully connected (dense) layer with \\(m\\) inputs and \\(p\\) outputs has a weight matrix \\(W=(w_{ij})_{i\\leq p,\\,j\\leq m}\\) and maps \\(x\\in\\R^m\\) to \\(y\\in\\R^p\\): \\[y_i=\\sigma\\big(w_{i1}x_1+\\cdots+w_{im}x_m\\big),\\qquad i\\in[p].\\]\nActivation \\(\\sigma\\): sigmoid \\(t\\mapsto(1+e^{-t})^{-1}\\), or ReLU \\(t\\mapsto\\max(0,t)\\).\nStructure agnostic: the layer of choice when nothing is known about the structure of the problem.\nIt has the maximal number of weights, so training is expensive, and it is usually less efficient than layers designed for a structured problem.\n\n\n\n\n\nA fully connected layer with \\(9\\) inputs and \\(5\\) outputs: \\(45\\) weights."
+  },
+  {
+    "objectID": "recommendation_systems.html#stacking-fully-connected-layers",
+    "href": "recommendation_systems.html#stacking-fully-connected-layers",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Stacking fully connected layers",
+    "text": "Stacking fully connected layers\n\nStacking fully connected layers lets the network learn complicated dependencies between inputs and outputs.\n\n\n\n\nA network of \\(4\\) fully connected layers: \\(8\\) inputs, three hidden layers of \\(9\\) neurons, \\(4\\) outputs.\n\n\n\nNumber of weights (without biases): \\(8\\times9+9\\times9+9\\times9+9\\times4=270\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#neural-collaborative-filtering-ncf",
+    "href": "recommendation_systems.html#neural-collaborative-filtering-ncf",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Neural Collaborative Filtering (NCF)",
+    "text": "Neural Collaborative Filtering (NCF)\n\n\n\nInput: a (user, item) pair.\nEmbedding layer for the user and for the item, followed by a fully connected network.\nOutput: the probabilities of the two classes “interaction” (\\(1\\)) and “no interaction” (\\(0\\)).\nThe predicted class is the most probable one: here class \\(1\\), since \\(0.8&gt;0.2\\).\n\n\n\n\n\nNCF architecture: an embedding layer followed by a fully connected network."
+  },
+  {
+    "objectID": "recommendation_systems.html#binary-cross-entropy-loss",
+    "href": "recommendation_systems.html#binary-cross-entropy-loss",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Binary cross-entropy loss",
+    "text": "Binary cross-entropy loss\n\nTraining data: a batch \\((user_i,item_i,y_i)_{i=1}^N\\), with \\(y_i\\in\\{0,1\\}\\).\n\n\n\n\n\nDefinition (binary cross-entropy)\n\n\n\\[BCE(\\hat y,y)=-\\sum_{i=1}^N\\Big(y_i\\log\\hat y_i+(1-y_i)\\log(1-\\hat y_i)\\Big),\\] where \\(\\hat y_i\\) is the network’s prediction for the input \\((user_i,item_i)\\).\n\n\n\n\n\nThe loss depends on all the network weights \\(w\\): \\(\\ BCE(\\hat y,y)=f\\big(w,(user_i,item_i)_{i=1}^N\\big)=f(w)\\).\nLearn \\(\\hat w\\) by minimizing \\(w\\mapsto f(w)\\) with a gradient-type method.\nThen complete the matrix by querying \\(f\\big(\\hat w,(user_i,item_j)\\big)\\) for every \\((i,j)\\notin\\Omega\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#adam-and-backpropagation",
+    "href": "recommendation_systems.html#adam-and-backpropagation",
+    "title": "Matrix completion and recommendation systems",
+    "section": "ADAM and backpropagation",
+    "text": "ADAM and backpropagation\n\n\n\n\nAlgorithm (ADAM, adaptive moment estimation)\n\n\nSet \\(m_0=v_0=0\\) and choose \\(\\beta_1,\\beta_2,\\eta,\\varepsilon\\in(0,1)\\). At step \\(k\\):\n\nMoments: \\(\\ m_k=\\beta_1m_{k-1}+(1-\\beta_1)\\nabla f(w^{(k)})\\) and \\(v_k=\\beta_2v_{k-1}+(1-\\beta_2)\\big(\\nabla f(w^{(k)})\\big)^2\\) (coordinatewise).\nBias correction: \\(\\ \\hat m_k=m_k/(1-\\beta_1^k)\\) and \\(\\hat v_k=v_k/(1-\\beta_2^k)\\).\nUpdate: \\(\\ w^{(k+1)}=w^{(k)}-\\dfrac{\\eta}{\\sqrt{\\hat v_k}+\\varepsilon}\\,\\hat m_k\\).\n\n\n\n\n\n\nADAM is a first-order method: everything rests on computing \\(\\nabla f\\) efficiently, for a function of many weights.\nBackpropagation, from automatic differentiation, computes these gradients mainly through the chain rule. It is used by every solver, including ADAM."
+  },
+  {
+    "objectID": "recommendation_systems.html#hyperparameters-and-best-practices",
+    "href": "recommendation_systems.html#hyperparameters-and-best-practices",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Hyperparameters and best practices",
+    "text": "Hyperparameters and best practices\n\nMany hyperparameters must be chosen:\n\nnumber of layers and number of neurons;\ndimensions of the embedding spaces;\nnumber of epochs (full passes over the database, split into batches);\nbatch size;\nlearning rate \\(\\eta\\).\n\nCross-validation would be the logical choice, but training a single network is already too costly.\n\n\n\n\n\n\nRemark\n\n\nIn practice one follows best practices from experts. For example: batch size \\(512\\), \\(5\\) epochs, and a dense network with \\(16\\) input neurons, \\(64\\) intermediate neurons and \\(32\\) outputs."
+  },
+  {
+    "objectID": "recommendation_systems.html#negative-samples",
+    "href": "recommendation_systems.html#negative-samples",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Negative samples",
+    "text": "Negative samples\n\nThe data are (user, item) interactions only: there is no rating and no example of a deliberately avoided item.\nAn absence of interaction is ambiguous: the user may not know the item, or may not want it.\nWithout negative samples, the network learns to answer \\(1\\) for every (user, item) pair.\n\n\n\nSimplest strategy (debatable): add, as negatives, random items among those the user has not interacted with.\nFor example, take \\(4\\) times as many negative samples as positive ones per user, to compensate for their poor quality.\nAlternatives: the least popular items of each batch, or more collaborative strategies."
+  },
+  {
+    "objectID": "recommendation_systems.html#dropout",
+    "href": "recommendation_systems.html#dropout",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Dropout",
+    "text": "Dropout\n\n\n\nOverfitting in neural networks is still poorly understood: networks with zero training error can still generalize well.\nDropout: at each gradient step, a random proportion \\(p\\) of the units is dropped. These units are ignored and their weights are not updated at that step.\nThis adds one hyperparameter, \\(p\\), to be chosen in advance.\n\n\n\n\n\nDropout (Srivastava et al., JMLR 2014)."
+  },
+  {
+    "objectID": "recommendation_systems.html#traintest-split",
+    "href": "recommendation_systems.html#traintest-split",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Train/test split",
+    "text": "Train/test split\n\n\n\nFrom the observed ratings \\((A^*_{ij}:(i,j)\\in\\Omega)\\), set aside a percentage as the test set. The remaining ratings form the training set.\nThe recommender system is built on the training set only, and evaluated on the test set.\nThe test entries are not drawn completely at random over the matrix: each row (each user) must keep about fifty ratings in the test set.\n\n\n\n\n\n\n\nObserved entries of the users/items matrix split into training (blue) and test (red) entries; every row has test entries."
+  },
+  {
+    "objectID": "recommendation_systems.html#precision-recall-and-f1-score",
+    "href": "recommendation_systems.html#precision-recall-and-f1-score",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Precision, recall and F1 score",
+    "text": "Precision, recall and F1 score\nFor each user \\(i\\), let \\(R_i\\) be the set of items recommended to \\(i\\) and \\(T_i\\) the set of items that \\(i\\) did appreciate in the test set.\n\n\n\n\nDefinition (precision, recall, F1 score)\n\n\n\\[{\\rm recall}_i=\\frac{|R_i\\cap T_i|}{|T_i|},\\qquad{\\rm precision}_i=\\frac{|R_i\\cap T_i|}{|R_i|},\\qquad F1_i=\\frac{2\\times{\\rm recall}_i\\times{\\rm precision}_i}{{\\rm recall}_i+{\\rm precision}_i}.\\]\n\n\n\n\n\nRecall: the proportion of the appreciated items that we recommended.\nPrecision: the proportion of the recommended items that were appreciated.\nThe F1 score is the harmonic mean of the two: it is high only when both are.\nThese quantities are computed per user. Aggregate them by their mean and quantiles, or plot the distribution of the F1 scores over the users."
+  },
+  {
+    "objectID": "recommendation_systems.html#mae-rmse-and-overfitting",
+    "href": "recommendation_systems.html#mae-rmse-and-overfitting",
+    "title": "Matrix completion and recommendation systems",
+    "section": "MAE, RMSE and overfitting",
+    "text": "MAE, RMSE and overfitting\n\nCompare the predicted ratings \\(\\hat A_{ij}\\) with the test ratings, on the test indices \\(\\Omega_{test}\\): \\[{\\rm MAE}=\\frac{1}{|\\Omega_{test}|}\\sum_{(i,j)\\in\\Omega_{test}}\\big|\\hat A_{ij}-A^*_{ij}\\big|,\\qquad{\\rm RMSE}=\\Big(\\frac{1}{|\\Omega_{test}|}\\sum_{(i,j)\\in\\Omega_{test}}\\big(\\hat A_{ij}-A^*_{ij}\\big)^2\\Big)^{1/2}.\\]\nMAE is an \\(\\ell_1\\) distance and RMSE an \\(\\ell_2\\) distance. Any distance between estimated and observed test ratings can serve as a criterion.\n\n\n\nCompute these criteria on both the training and the test sets. A training error much smaller than the test error signals overfitting.\n\n\n\n\n\nRemark\n\n\nThis diagnosis has recently been called into question: deep networks can make zero error on the training sample and still generalize well, with a reasonable error on the test sample."
+  },
+  {
+    "objectID": "recommendation_systems.html#the-exact-recovery-property-rer",
+    "href": "recommendation_systems.html#the-exact-recovery-property-rer",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The exact recovery property \\(RE(r)\\)",
+    "text": "The exact recovery property \\(RE(r)\\)\n\nGoal: for which measurements \\(X_1,\\ldots,X_m\\) and which \\(m\\) does (NM) recover every matrix of rank \\(r\\)?\nWrite \\(\\Sigma_r=\\{A\\in\\R^{u\\times v}:{\\rm rank}(A)=r\\}\\).\n\n\n\n\n\nDefinition (\\(RE(r)\\))\n\n\n\\(\\cA\\) satisfies the exact recovery property of order \\(r\\) when, for every \\(A\\in\\Sigma_r\\), \\[\\argmin_X\\big(\\norm{X}_{S_1}:\\cA(X)=\\cA(A)\\big)=\\{A\\}.\\]\n\n\n\n\n\nTwo routes:\n\nRIP approach: matrix versions of NSP and RIP, with the same arguments as for Basis Pursuit.\nGeneral approach: highlights the role of the nondifferentiability of the objective function in inducing sparsity."
+  },
+  {
+    "objectID": "recommendation_systems.html#the-rank-null-space-property",
+    "href": "recommendation_systems.html#the-rank-null-space-property",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The rank Null Space Property",
+    "text": "The rank Null Space Property\n\n\n\n\nDefinition (rank-NSP)\n\n\n\\(\\cA:\\R^{u\\times v}\\to\\R^m\\) satisfies the rank Null Space Property of degree \\(r\\) when, for every \\(A\\in{\\rm Ker}(\\cA)\\setminus\\{0\\}\\), \\[\\sum_{i=1}^r\\sigma_i(A)&lt;\\sum_{i\\geq r+1}\\sigma_i(A).\\]\n\n\n\n\n\nVector analogue: \\(\\norm{v_J}_1&lt;\\norm{v_{J^c}}_1\\) for every \\(v\\in{\\rm Ker}(A)\\setminus\\{0\\}\\) and \\(|J|\\leq s\\).\nThe \\(r\\) largest singular values play the role of the \\(s\\) largest coordinates.\nThe kernel must contain no matrix whose spectrum is concentrated on a few singular values."
+  },
+  {
+    "objectID": "recommendation_systems.html#rank-nsp-is-equivalent-to-exact-recovery",
+    "href": "recommendation_systems.html#rank-nsp-is-equivalent-to-exact-recovery",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Rank-NSP is equivalent to exact recovery",
+    "text": "Rank-NSP is equivalent to exact recovery\n\n\n\n\nProposition\n\n\nFor a linear operator \\(\\cA:\\R^{u\\times v}\\to\\R^m\\), \\[\\cA\\text{ satisfies }RE(r)\\iff\\cA\\text{ satisfies rank-NSP}(r).\\]\n\n\n\n\n\nThe arguments are the same as in the vector case, with singular values in place of the absolute values of the coordinates.\n\n\n\n\n\n\nRemark\n\n\nAs in the vector case, the rank-NSP is a necessary and sufficient condition, but it is hard to check directly. We therefore introduce a matrix version of RIP."
+  },
+  {
+    "objectID": "recommendation_systems.html#the-rank-restricted-isometry-property",
+    "href": "recommendation_systems.html#the-rank-restricted-isometry-property",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The rank Restricted Isometry Property",
+    "text": "The rank Restricted Isometry Property\n\n\n\n\nDefinition (rank-RIP)\n\n\n\\(\\cA\\) satisfies the rank Restricted Isometry Property of degree \\(r\\), with isometry constant \\(\\delta_r\\), when for every matrix \\(A\\) of rank \\(r\\), \\[(1-\\delta_r)\\norm{A}_{S_2}^2\\leq\\frac{\\norm{\\cA(A)}_{\\ell_2^m}^2}{m}\\leq(1+\\delta_r)\\norm{A}_{S_2}^2.\\]\n\n\n\n\n\n\\(\\cA\\) has a huge kernel, so it cannot be an isometry on all of \\(\\R^{u\\times v}\\), only on low-rank matrices.\nThe Frobenius norm \\(\\norm{\\cdot}_{S_2}\\) plays the role of \\(\\ell_2\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#rank-rip-implies-rank-nsp",
+    "href": "recommendation_systems.html#rank-rip-implies-rank-nsp",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Rank-RIP implies rank-NSP",
+    "text": "Rank-RIP implies rank-NSP\n\n\n\n\nProposition\n\n\nThere exist absolute constants \\(c_0&gt;0\\) and \\(0&lt;c_1&lt;1\\) such that, if \\(\\cA\\) satisfies rank-RIP\\((c_0r)\\) with \\(\\delta&lt;c_1\\), then \\(\\cA\\) satisfies rank-NSP\\((r)\\).\n\n\n\n\n\n\n\n\n\nKey Idea: the same chain as for Basis Pursuit\n\n\n\\[\\text{rank-RIP}(c_0r)\\ \\Longrightarrow\\ \\text{rank-NSP}(r)\\ \\Longleftrightarrow\\ RE(r)\\] To recover every rank-\\(r\\) matrix by nuclear norm minimization, it suffices to build an operator satisfying rank-RIP."
+  },
+  {
+    "objectID": "recommendation_systems.html#gaussian-measurement-operators-satisfy-rank-rip",
+    "href": "recommendation_systems.html#gaussian-measurement-operators-satisfy-rank-rip",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Gaussian measurement operators satisfy rank-RIP",
+    "text": "Gaussian measurement operators satisfy rank-RIP\n\nGaussian measurement operator: \\(\\cA(A)=(\\inr{X_i,A})_{i=1}^m\\), where the \\(X_i\\) are independent matrices with i.i.d. \\(\\cN(0,1)\\) entries.\n\n\n\n\n\nTheorem\n\n\nLet \\(\\cA\\) be a Gaussian measurement operator and \\(0&lt;\\delta&lt;1\\). There exist \\(c_0,c_1,c_2\\) depending only on \\(\\delta\\) such that, if \\(m\\geq c_2\\,r(u+v)\\), then with probability at least \\(1-c_0\\exp(-c_1m)\\), \\(\\cA\\) satisfies rank-RIP\\((r)\\) with constant \\(\\delta\\).\n\n\n\n\n\n\\(c_3\\,r(u+v)\\) measurements are also necessary: compare with the \\(uv\\) entries.\n\n\n\n\n\n\nRemark\n\n\nCompletion measurements \\(E_{p,q}\\) are not Gaussian. They cannot satisfy RE\\((1)\\): if \\((p,q)\\notin\\Omega\\), the rank-one matrix \\(E_{p,q}\\) lies in \\({\\rm Ker}(\\cA)\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#a-general-proof-the-nondifferentiability-of-the-objective-function",
+    "href": "recommendation_systems.html#a-general-proof-the-nondifferentiability-of-the-objective-function",
+    "title": "Matrix completion and recommendation systems",
+    "section": "A general proof: the nondifferentiability of the objective function",
+    "text": "A general proof: the nondifferentiability of the objective function\nSetting. \\(H\\) is a Hilbert space, \\(E\\subset H\\) a subspace and \\(\\norm{\\cdot}\\) a norm on \\(E\\). We observe \\(y_i=\\inr{X_i,x^*}\\), \\(i=1,\\ldots,m\\), and consider \\[\\hat x\\in\\argmin\\big(\\norm{x}:\\cA(x)=y\\big),\\qquad\\cA(x)=(\\inr{X_i,x})_{i=1}^m.\\] This covers both Basis Pursuit (\\(\\ell_1\\) on \\(\\R^N\\)) and (NM) (\\(S_1\\) on \\(\\R^{u\\times v}\\)).\n\nNotation.\n\nDual norm: \\(\\norm{x}_*=\\sup\\big(\\inr{x,y}:\\norm{y}\\leq1\\big)\\).\nUnit balls and spheres: \\(B,S\\) for \\(\\norm{\\cdot}\\); \\(B_*,S_*\\) for \\(\\norm{\\cdot}_*\\); \\(B_2,S_2\\) for \\(\\norm{\\cdot}_2\\).\nSubdifferential: \\[\\partial\\norm{\\cdot}(x)=\\{g\\in E:\\norm{x+h}\\geq\\norm{x}+\\inr{g,h},\\ \\forall h\\in E\\}=\\begin{cases}\\{g\\in S_*:\\inr{g,x}=\\norm{x}\\}&\\text{if }x\\neq0,\\\\ B_*&\\text{if }x=0.\\end{cases}\\]\n\n\n\nTwo ingredients: a condition on the measurements \\(X_1,\\ldots,X_m\\), and a condition on the size of the subdifferential at \\(x^*\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#the-restricted-singular-value-condition-vsrr",
+    "href": "recommendation_systems.html#the-restricted-singular-value-condition-vsrr",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The restricted singular value condition \\(VSR(r^*)\\)",
+    "text": "The restricted singular value condition \\(VSR(r^*)\\)\n\n\n\n\nDefinition (\\(VSR(r^*)\\))\n\n\nFor \\(r^*&gt;0\\), let \\(\\cC_{r^*}=\\{x\\in E:\\norm{x}_2\\geq r^*\\norm{x}\\}\\). The operator \\(\\cA\\) satisfies the restricted singular value condition of radius \\(r^*\\) when, for every \\(x\\in\\cC_{r^*}\\), \\[\\frac1m\\sum_{i=1}^m\\inr{x,X_i}^2\\geq\\frac{\\norm{x}_2^2}{2}.\\]\n\n\n\n\n\nThe cone \\(\\cC_{r^*}\\) contains the “sparse” directions, where \\(\\norm{x}_2\\) is large compared with \\(\\norm{x}\\).\nFor \\(\\ell_1\\) on \\(\\R^N\\), \\(VSR(r^*)\\) is implied by \\(RIP(s)\\) with \\(r^*\\sim1/\\sqrt s\\).\nFor sub-Gaussian measurements, with probability at least \\(1-2\\exp(-c_0m)\\), \\(VSR(r^*)\\) holds for \\[r^*=\\inf\\big(r&gt;0:\\ell^*(B\\cap rB_2)\\leq c_1r\\sqrt m\\big).\\]"
+  },
+  {
+    "objectID": "recommendation_systems.html#gaussian-mean-width",
+    "href": "recommendation_systems.html#gaussian-mean-width",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Gaussian mean width",
+    "text": "Gaussian mean width\n\n\n\n\nDefinition (Gaussian mean width)\n\n\nLet \\(T\\subset H\\) and let \\((G_t)_{t\\in T}\\) be the canonical Gaussian process indexed by \\(T\\). The Gaussian mean width of \\(T\\) is \\[\\ell^*(T)=\\E\\sup_{t\\in T}G_t.\\]\n\n\n\n\n\nIn finite dimension, \\(G_t=\\inr{G,t}\\) with \\(G\\) a standard Gaussian vector. In \\(\\R^N\\), \\[\\ell^*(T)=\\E\\sup_{t\\in T}\\sum_{j=1}^Ng_jt_j,\\qquad g_1,\\ldots,g_N\\ \\text{i.i.d. }\\cN(0,1).\\]\n\\(\\ell^*\\) measures the complexity of \\(T\\). The radius \\(r^*\\) is the point where the complexity of \\(B\\cap rB_2\\) is balanced by \\(r\\sqrt m\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#the-sparsity-parameter-delta_rx",
+    "href": "recommendation_systems.html#the-sparsity-parameter-delta_rx",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The sparsity parameter \\(\\Delta_{r^*}(x^*)\\)",
+    "text": "The sparsity parameter \\(\\Delta_{r^*}(x^*)\\)\n\n\n\n\n\n\nDefinition (sparsity parameter)\n\n\nFor \\(x^*\\in E\\) and \\(r^*&gt;0\\), \\[\\Delta_{r^*}(x^*)=\\inf_{h\\in S\\cap r^*B_2}\\ \\sup_{z\\in\\partial\\norm{\\cdot}(x^*)}\\inr{z,h}.\\]\n\n\n\n\n\nFor \\(x^*\\neq0\\), \\(\\partial\\norm{\\cdot}(x^*)\\subset S_*\\), so \\(\\Delta_{r^*}(x^*)\\leq1\\).\nCondition of interest: \\(\\Delta_{r^*}(x^*)&gt;0\\). Every direction \\(h\\in S\\cap r^*B_2\\) must be “seen” by some subgradient at \\(x^*\\).\nThe larger the subdifferential, the more likely \\(\\Delta_{r^*}(x^*)&gt;0\\).\n\n\n\n\n\n\n\nA poor subdifferential (left) versus a rich one (right). The richness at sparse points, or near them in the noisy case, plays a central role in high-dimensional statistics."
+  },
+  {
+    "objectID": "recommendation_systems.html#exact-recovery-theorem",
+    "href": "recommendation_systems.html#exact-recovery-theorem",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Exact recovery theorem",
+    "text": "Exact recovery theorem\n\n\n\n\nTheorem\n\n\nAssume that \\(\\cA\\) satisfies \\(VSR(r^*)\\) for some \\(r^*&gt;0\\). Then, for every \\(x^*\\) such that \\(\\Delta_{r^*}(x^*)&gt;0\\), \\[\\argmin_{x:\\,\\cA(x)=\\cA(x^*)}\\norm{x}=\\{x^*\\}.\\]\n\n\n\n\nProof. Let \\(x\\neq x^*\\) with \\(\\cA(x)=\\cA(x^*)\\), and set \\(h=x-x^*\\).\n\n\nIf \\(h\\in\\cC_{r^*}\\), then \\(VSR(r^*)\\) gives \\(\\norm{\\cA(h)}_2^2\\geq m\\norm{h}_2^2/2&gt;0\\), a contradiction. So \\(h\\notin\\cC_{r^*}\\), i.e. \\(h/\\norm{h}\\in S\\cap r^*B_2\\).\n\n\n\n\nFor every \\(g\\in\\partial\\norm{\\cdot}(x^*)\\): \\(\\ \\norm{x}-\\norm{x^*}\\geq\\inr{g,h}=\\inr{g,h/\\norm{h}}\\,\\norm{h}\\).\n\n\n\n\nTaking the supremum over \\(g\\), then the infimum over directions: \\(\\ \\norm{x}-\\norm{x^*}\\geq\\Delta_{r^*}(x^*)\\norm{h}&gt;0\\). \\(\\square\\)"
+  },
+  {
+    "objectID": "recommendation_systems.html#subdifferential-of-the-ell_1-norm",
+    "href": "recommendation_systems.html#subdifferential-of-the-ell_1-norm",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Subdifferential of the \\(\\ell_1\\) norm",
+    "text": "Subdifferential of the \\(\\ell_1\\) norm\n\n\n\nAbsolute value: \\(\\ \\partial|\\cdot|(t)=\\{1\\}\\) if \\(t&gt;0\\), \\(\\{-1\\}\\) if \\(t&lt;0\\), \\([-1,1]\\) if \\(t=0\\).\nIn \\(\\R^2\\): \\(\\ \\partial\\norm{\\cdot}_1\\big((\\tfrac12,\\tfrac12)\\big)=\\{(1,1)\\}\\) and \\(\\partial\\norm{\\cdot}_1\\big((1,0)\\big)=\\{(1,g):|g|\\leq1\\}\\).\n\n\n\n\n\nLemma\n\n\nLet \\(x^*\\in\\R^N\\setminus\\{0\\}\\) be \\(s\\)-sparse, with \\(I={\\rm supp}(x^*)\\). Then \\(\\partial\\norm{\\cdot}_1(x^*)\\) is the set of \\(z\\in\\R^N\\) such that \\[z_i={\\rm sign}(x^*_i)\\ \\text{ for } i\\in I\\qquad\\text{and}\\qquad|z_i|\\leq1\\ \\text{ for } i\\notin I.\\] If \\(x^*=0\\), then \\(\\partial\\norm{\\cdot}_1(0)=B_\\infty^N\\).\n\n\n\n\n\nProof: \\(g\\in S_\\infty\\) is norming for \\(x^*\\), i.e. \\(\\inr{g,x^*}=\\norm{x^*}_1\\), iff \\(g_i={\\rm sign}(x^*_i)\\) on \\(I\\). The coordinates on \\(I^c\\) are free in \\([-1,1]\\).\n\\(\\partial\\norm{\\cdot}_1(x^*)\\) is a copy of \\(B_\\infty^{N-s}\\): the sparser \\(x^*\\), the richer the subdifferential.\nExtremes: \\(\\partial\\norm{\\cdot}_1(e_1)=\\{1\\}\\times B_\\infty^{N-1}\\), whereas \\(\\partial\\norm{\\cdot}_1\\big((1,\\ldots,1)\\big)=\\{(1,\\ldots,1)\\}\\), a point where \\(\\norm{\\cdot}_1\\) is differentiable.\n\n\n\n\n\n\n\nSubdifferential of \\(\\|\\cdot\\|_1\\) in dimension \\(2\\) at \\((1/2,1/2)^\\top\\) (a single direction) and at \\((1,0)^\\top\\) (a whole cone)."
+  },
+  {
+    "objectID": "recommendation_systems.html#subdifferential-of-the-nuclear-norm",
+    "href": "recommendation_systems.html#subdifferential-of-the-nuclear-norm",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Subdifferential of the nuclear norm",
+    "text": "Subdifferential of the nuclear norm\n\n\n\n\nTheorem\n\n\nLet \\(A\\in\\R^{u\\times v}\\) (\\(u\\geq v\\)) have rank \\(r\\), with SVD \\(A=UDV^\\top\\) and blocks \\[U=\\big[U^{(1)}\\ U^{(2)}\\big]\\in\\cO(u),\\qquad V=\\big[V^{(1)}\\ V^{(2)}\\big]\\in\\cO(v),\\qquad U^{(1)}\\in\\R^{u\\times r},\\ V^{(1)}\\in\\R^{v\\times r}.\\] Then \\[\\partial\\norm{\\cdot}_{S_1}(A)=\\Big\\{U^{(1)}{V^{(1)}}^\\top+U^{(2)}W{V^{(2)}}^\\top:\\ W\\in\\R^{(u-r)\\times(v-r)},\\ \\norm{W}_{S_\\infty}\\leq1\\Big\\}.\\]\n\n\n\n\n\n\n\\(U^{(1)}{V^{(1)}}^\\top=\\sum_{i=1}^ru_iv_i^\\top\\) plays the role of the sign of \\(A=\\sum_i\\sigma_iu_iv_i^\\top\\).\n\\(U^{(2)}W{V^{(2)}}^\\top\\) lives off the “support” of \\(A\\): \\(\\inr{A,U^{(2)}W{V^{(2)}}^\\top}=0\\) for every \\(W\\). It plays the role of the free coordinates \\(|z_i|\\leq1\\), \\(i\\notin I\\).\nThe smaller the rank \\(r\\), the larger the free block \\(W\\), and the richer the subdifferential."
+  },
+  {
+    "objectID": "recommendation_systems.html#orthogonally-invariant-norms",
+    "href": "recommendation_systems.html#orthogonally-invariant-norms",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Orthogonally invariant norms",
+    "text": "Orthogonally invariant norms\n\nA norm on \\(\\R^{u\\times v}\\) is orthogonally invariant when \\(\\norm{UAV}=\\norm{A}\\) for all \\(U\\in\\cO(u)\\), \\(V\\in\\cO(v)\\).\nThen \\(\\norm{A}=\\phi(\\sigma_A)\\) for an unconditional norm \\(\\phi\\) on \\(\\R^{u\\wedge v}\\): \\(\\ \\phi(\\eps_1x_1,\\ldots,\\eps_{u\\wedge v}x_{u\\wedge v})=\\phi(x)\\) for all signs \\(\\eps_i\\in\\{\\pm1\\}\\). Example: Schatten norms, with \\(\\phi=\\ell_p\\).\n\n\n\n\n\nLemma\n\n\nFor an orthogonally invariant norm \\(\\norm{\\cdot}=\\phi(\\sigma_\\cdot)\\) and \\(A\\in\\R^{u\\times v}\\), \\[\\partial\\norm{\\cdot}(A)={\\rm conv}\\big\\{U\\Sigma V^\\top:\\ A=UDV^\\top,\\ \\Sigma={\\rm diag}(\\sigma),\\ \\sigma\\in\\partial\\phi(\\sigma_A)\\big\\},\\] where all SVDs of \\(A\\) are considered.\n\n\n\n\n\n\n\\(\\supseteq\\): for \\(G\\) in the convex hull, \\(\\inr{G,A}=\\phi(\\sigma_A)=\\norm{A}\\), and von Neumann’s inequality gives \\(\\inr{G,R}\\leq1\\) whenever \\(\\norm{R}\\leq1\\).\n\\(\\subseteq\\): by separation of convex sets, comparing two formulas for the directional derivative: \\[\\lim_{\\eps\\to0^+}\\frac{\\norm{A+\\eps R}-\\norm{A}}{\\eps}=\\max_{G\\in\\partial\\norm{\\cdot}(A)}\\inr{R,G}=\\max_{d\\in\\partial\\phi(\\sigma_A)}\\sum_id_i\\,u_i^\\top Rv_i.\\]"
+  },
+  {
+    "objectID": "recommendation_systems.html#proof-sketch-subdifferential-of-the-nuclear-norm",
+    "href": "recommendation_systems.html#proof-sketch-subdifferential-of-the-nuclear-norm",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Proof sketch: subdifferential of the nuclear norm",
+    "text": "Proof sketch: subdifferential of the nuclear norm\nApply the lemma with \\(\\phi=\\norm{\\cdot}_1\\).\n\n\n\\(\\partial\\norm{\\cdot}_1(\\sigma_A)=\\{g:g_i=1\\text{ for }i\\leq r,\\ |g_i|\\leq1\\text{ for }i&gt;r\\}\\), so every subgradient is \\[G=\\sum_k\\lambda_kU_k\\Sigma_kV_k^\\top=U^{(1)}{V^{(1)}}^\\top+\\sum_k\\lambda_kU_k^{(2)}W_k{V_k^{(2)}}^\\top,\\] with \\(W_k\\) diagonal with entries in \\([-1,1]\\).\n\n\n\n\nEach SVD satisfies \\(U_k^{(2)}=U^{(2)}Y_k\\) and \\(V_k^{(2)}=V^{(2)}Z_k\\), with \\(Y_k\\in\\cO(u-r)\\) and \\(Z_k\\in\\cO(v-r)\\). Hence \\(G=U^{(1)}{V^{(1)}}^\\top+U^{(2)}W{V^{(2)}}^\\top\\) with \\(W=\\sum_k\\lambda_kY_kW_kZ_k^\\top\\).\n\n\n\n\nFinally, \\(\\sigma_1(W)\\leq\\sum_k\\lambda_k\\sigma_1(W_k)\\leq1\\). \\(\\square\\)\n\n\n\n\n\n\n\nKey Idea: sparsity comes from singularities\n\n\nA norm’s subdifferential is largest where the norm is not differentiable: at sparse vectors for \\(\\norm{\\cdot}_1\\), and at low-rank matrices for \\(\\norm{\\cdot}_{S_1}\\). Sparsity-inducing norms are built by creating singularities at the sparsest objects."
+  }
+]
