@@ -1,0 +1,100 @@
+.reveal .callout {
+  font-size: 1.25em !important;
+}
+
+.reveal .callout .callout-title {
+  font-size: 1.1em !important;
+}
+
+/* Change background for ALL callout blocks */
+.reveal .callout {
+  background-color: #f0f4f8 !important; /* Light grayish-blue */
+}
+
+/* Or style individual callout types separately */
+.reveal .callout-note {
+  background-color: #eef6fc !important; /* Soft blue */
+}
+
+.reveal .callout-tip {
+  background-color: #f0fdf4 !important; /* Soft green */
+}
+
+.reveal .callout-warning {
+  background-color: #fffbe6 !important; /* Soft yellow */
+}
+
+.reveal .callout-important {
+  background-color: #fef2f2 !important; /* Soft red */
+}
+
+/* Ensure ordered lists have enough clearance from the left edge */
+.reveal ol {
+  padding-left: 2em !important;
+  margin-left: 0 !important;
+}
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
+}
+
+.green {
+  color: green;
+}
+
+figcaption {
+  text-align: center;
+}
+
+.box-blue {
+  background-color: #e6f7ff;
+  border: 1px solid #91d5ff;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+}
+
+.box-red {
+  background-color: #fff1f0;
+  border: 1px solid #ffa39e;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+}
+
+.box-green {
+  background-color: #f6ffed;
+  border: 1px solid #b7eb8f;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+}
+
+.box-yellow {
+  background-color: #fffbe6;
+  border: 1px solid #ffe58f;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+}
+
+.spread-out {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; /* or space-between */
+  height: 100%;
+}
+
+/* Increase spacing between ordered list items on marked slides */
+.reveal .spaced-list ol li {
+  margin-bottom: 1.4em !important; /* Adjust spacing as needed (e.g., 1em to 2em) */
+}
+
+/* Optional: remove extra space under the final item */
+.reveal .spaced-list ol li:last-child {
+  margin-bottom: 0 !important;
+}

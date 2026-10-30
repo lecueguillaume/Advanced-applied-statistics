@@ -1,0 +1,137 @@
+<script>
+window.QUARTO_TEX_MACROS = {
+  inr: ["{\\bigl< #1 \\bigr>}", 1],
+  norm: ["{\\left\\| #1 \\right\\|}", 1],
+  set: ["\\{#1,\\dots,#2\\}", 2],
+  und: ["\\underset{#2}{#1}\\;", 2],
+  undc: ["{#1}_{#2}\\;", 2],
+  ove: ["\\overset{#2}{#1}\\;", 2],
+  ovec: ["{#1}^{#2}\\;", 2],
+  undn: "\\underset{n\\rightarrow +\\infty}{\\longrightarrow}",
+  limn: "\\underset{n\\rightarrow +\\infty}{\\lim}",
+  limnps: "\\overset{\\mathrm{p.s.}}{\\longrightarrow}",
+  pa: ["\\left(#1\\right)", 1],
+  cro: ["\\left\\{#1\\right\\}", 1],
+  Bi: ["\\Big(#1\\Big)", 1],
+  bi: ["\\big(#1\\big)", 1],
+  qqua: "\\hspace*{1cm}",
+  eps: "\\epsilon",
+  barr: "{\\mathrm{bar}}",
+  ra: "\\rightarrow",
+  Ra: "\\Rightarrow",
+  Lra: "\\Leftrightarrow",
+  lra: "\\longrightarrow",
+  argmax: "\\operatorname*{argmax}",
+  argmin: "\\operatorname*{argmin}",
+  supp: "\\operatorname*{Supp}",
+  limInf: "\\operatorname{liminf}",
+  limSup: "\\operatorname{limsup}",
+  pen: "\\operatorname{pen}",
+  diag: "\\operatorname{diag}",
+  Span: "\\operatorname{span}",
+  conv: "\\operatorname{conv}",
+  limSupn: "\\underset{n\\rightarrow +\\infty}{\\operatorname{limsup}}",
+  limInfn: "\\underset{n\\rightarrow +\\infty}{\\operatorname{liminf}}",
+  coF: "{\\mathrm{conv}}(F)",
+  ERM: "\\hat f_n^{ERM}",
+  kerA: "{\\mathrm{Ker}}(A)",
+  E: "{\\mathbb{E}}",
+  R: "{\\mathbb{R}}",
+  N: "{\\mathbb{N}}",
+  C: "{\\mathbb{C}}",
+  Q: "{\\mathbb{Q}}",
+  PP: "{\\mathbb{P}}",
+  Pro: "{\\mathbb{P}}",
+  p: "{\\mathbb{P}}",
+  V: "{\\mathbb{V}}",
+  D: "{\\mathbb{D}}",
+  M: "{\\mathbb{M}}",
+  dsone: "{\\mathbf{1}}",
+  var: "\\mathrm{Var}",
+  blue: ["{\\color{blue} #1}", 1],
+  green: ["{\\color{green} #1}", 1],
+  red: ["{\\color{red} #1}", 1],
+  cA: "{\\mathcal{A}}", cB: "{\\mathcal{B}}", cC: "{\\mathcal{C}}", cD: "{\\mathcal{D}}",
+  cE: "{\\mathcal{E}}", cF: "{\\mathcal{F}}", cG: "{\\mathcal{G}}", cH: "{\\mathcal{H}}",
+  cI: "{\\mathcal{I}}", cJ: "{\\mathcal{J}}", cK: "{\\mathcal{K}}", cL: "{\\mathcal{L}}",
+  cM: "{\\mathcal{M}}", cN: "{\\mathcal{N}}", cO: "{\\mathcal{O}}", cP: "{\\mathcal{P}}",
+  cQ: "{\\mathcal{Q}}", cR: "{\\mathcal{R}}", cS: "{\\mathcal{S}}", cT: "{\\mathcal{T}}",
+  cU: "{\\mathcal{U}}", cV: "{\\mathcal{V}}", cW: "{\\mathcal{W}}", cX: "{\\mathcal{X}}",
+  cY: "{\\mathcal{Y}}", cZ: "{\\mathcal{Z}}",
+  bA: "{\\mathbb{A}}", bB: "{\\mathbb{B}}", bC: "{\\mathbb{C}}", bD: "{\\mathbb{D}}",
+  bE: "{\\mathbb{E}}", bF: "{\\mathbb{F}}", bG: "{\\mathbb{G}}", bH: "{\\mathbb{H}}",
+  bI: "{\\mathbb{I}}", bJ: "{\\mathbb{J}}", bK: "{\\mathbb{K}}", bL: "{\\mathbb{L}}",
+  bM: "{\\mathbb{M}}", bN: "{\\mathbb{N}}", bO: "{\\mathbb{O}}", bP: "{\\mathbb{P}}",
+  bQ: "{\\mathbb{Q}}", bR: "{\\mathbb{R}}", bS: "{\\mathbb{S}}", bT: "{\\mathbb{T}}",
+  bU: "{\\mathbb{U}}", bV: "{\\mathbb{V}}", bW: "{\\mathbb{W}}", bX: "{\\mathbb{X}}",
+  bY: "{\\mathbb{Y}}", bZ: "{\\mathbb{Z}}",
+  fA: "{\\mathfrak{A}}", fB: "{\\mathfrak{B}}", fC: "{\\mathfrak{C}}", fD: "{\\mathfrak{D}}",
+  fE: "{\\mathfrak{E}}", fF: "{\\mathfrak{F}}", fG: "{\\mathfrak{G}}", fH: "{\\mathfrak{H}}",
+  fI: "{\\mathfrak{I}}", fJ: "{\\mathfrak{J}}", fK: "{\\mathfrak{K}}", fL: "{\\mathfrak{L}}",
+  fM: "{\\mathfrak{M}}", fN: "{\\mathfrak{N}}", fO: "{\\mathfrak{O}}", fP: "{\\mathfrak{P}}",
+  fQ: "{\\mathfrak{Q}}", fR: "{\\mathfrak{R}}", fS: "{\\mathfrak{S}}", fT: "{\\mathfrak{T}}",
+  fU: "{\\mathfrak{U}}", fV: "{\\mathfrak{V}}", fW: "{\\mathfrak{W}}", fX: "{\\mathfrak{X}}",
+  fY: "{\\mathfrak{Y}}", fZ: "{\\mathfrak{Z}}"
+};
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  "HTML-CSS": {
+    availableFonts: ["TeX"],
+    preferredFont: "TeX",
+    webFont: "TeX"
+  },
+  TeX: { Macros: window.QUARTO_TEX_MACROS }
+});
+MathJax.Hub.Register.StartupHook("TeX Jax Ready", function () {
+  var TEX = MathJax.InputJax.TeX;
+  var macros = window.QUARTO_TEX_MACROS;
+  Object.keys(macros).forEach(function (name) {
+    var def = macros[name];
+    if (Array.isArray(def)) {
+      TEX.Macro(name, def[0], def[1]);
+    } else {
+      TEX.Macro(name, def);
+    }
+  });
+});
+</script>
+<script>
+(function () {
+  function applyMacros() {
+    if (!(window.MathJax && MathJax.Hub && window.QUARTO_TEX_MACROS)) {
+      return false;
+    }
+    MathJax.Hub.Config({
+      "HTML-CSS": {
+        availableFonts: ["TeX"],
+        preferredFont: "TeX",
+        webFont: "TeX"
+      },
+      TeX: { Macros: window.QUARTO_TEX_MACROS }
+    });
+    if (MathJax.InputJax && MathJax.InputJax.TeX && MathJax.InputJax.TeX.Macro) {
+      var TEX = MathJax.InputJax.TeX;
+      var macros = window.QUARTO_TEX_MACROS;
+      Object.keys(macros).forEach(function (name) {
+        var def = macros[name];
+        if (Array.isArray(def)) {
+          TEX.Macro(name, def[0], def[1]);
+        } else {
+          TEX.Macro(name, def);
+        }
+      });
+    }
+    return true;
+  }
+  if (!applyMacros()) {
+    var n = 0;
+    var id = setInterval(function () {
+      n += 1;
+      if (applyMacros() || n > 80) {
+        clearInterval(id);
+      }
+    }, 50);
+  }
+})();
+</script>

@@ -1,0 +1,6 @@
+# Ignore all PDF files
+*.pdf
+
+# Ignore Quarto execution cache and hidden internal state
+/.quarto/
+*_cache/

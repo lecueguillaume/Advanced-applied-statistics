@@ -1,0 +1,14 @@
+---
+title: "Advanced applied Statistics"
+subtitle: "BSc AIDAMS -- S7"
+author: "Guillaume Lecué"
+institute: |
+  ![](Logo-essec.jpg){width=200px}
+---
+
+##  Slide decks
+
+- [Course presentation](course_presentation.html)
+- [Compressed Sensing](compressed_sensing.html)
+- [Matrix completion and recommendation systems](recommendation_systems.html)
+- [Community detection](community_detection.html)

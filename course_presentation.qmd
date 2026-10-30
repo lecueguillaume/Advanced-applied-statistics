@@ -1,0 +1,80 @@
+---
+title: "Advanced applied Statistics"
+subtitle: "AIDAMS - S7"
+author: "Guillaume Lecué"
+institute: |
+  ![](Logo-essec.jpg){width=200px} 
+engine: knitr
+format:
+  revealjs:
+    theme: serif
+    slide-number: c/t
+    width: 1600
+    height: 900
+    margin: 0.08
+    scrollable: true
+    transition: fade
+    auto-stretch: false
+    css: custom.css
+
+knitr:
+  opts_chunk:
+    dev: "svg"
+    fig.ext: "svg"
+    engine.opts:
+      template: "tikz-template.tex"
+      dvisvgm.opts:
+        - "-n"
+        - "--libgs=/opt/homebrew/lib/libgs.dylib"
+---
+
+
+
+### Aim of the course
+
+1. Understand [low-dimensional]{.red} structures in high-dimensional spaces
+2. Reveal these structures via appropriate [measurements]{.red}
+3. Construct [efficient algorithms]{.red} leveraging this structure
+4. **Idea:** Mathematics are not siloed: algebra, approximation theory, statistics, probability, geometry and convex optimization all interact in this course.
+
+::: {style="height: 100px;"}
+::: 
+
+
+### Aim of the evaluation
+
+1. Develop a habit of [scientific monitoring]{.blue} and research
+2. Report [technical content to a large audience]{.blue}
+
+## Course evaluation -- 1/3
+
+Beyond the technical skills acquired in this course, the objective is to develop a habit of [scientific monitoring]{.red} and research that students can leverage in their future roles. The evaluation project is designed to put this aptitude into practice. 
+
+Students will be graded on their ability to:
+
+1. Grasp a topic and its innovative solutions at the forefront of research.
+2. Imagine a concrete application for this paradigm.
+3. Present the findings in a way that is understandable to both management and technical audiences.
+
+## Course evaluation -- 2/3
+
+1. With this in mind, students should step into the shoes of a [data science consultant]{.blue} working for a company in any industry. The problem this company wants to solve has no "off-the-shelf" solution and requires an [innovative approach]{.blue}. Students must apply the knowledge acquired in the "Advanced Applied Statistics" course and may also draw on their own background to propose an alternative approach, ultimately comparing methods.
+
+2. There will be [one or two one-hour in-class sessions during which students will build their project and final deliverable]{.red}. The specific [project topic will be provided at the beginning of the session]{.blue}. 
+
+3. The format of the **final deliverable is open**: it can be a commented notebook, a PDF with simulations sections, a .md file, a .qmd file, etc. All code must be reproducible and written in Python. A link to Database should be provided (not the Database itself). Upload your .zip file project in the assignment folder on Edunao dedicated to the project. Use [lastname_firstname.zip]{.red} to name your submission.
+
+## Course evaluation -- 3/3
+
+1. The [final grade]{.blue} will be based solely on these project submissions. 
+
+2. Students are allowed to [prepare materials at home]{.blue} and search for relevant datasets beforehand, even though the **exact topic is only revealed at the start of the session**. It can be: Compressed sensing, Matrix completion, Community detection, convex relaxation,  etc..
+
+ 
+I want you to think (not AI) about these topics and how they can be used to solved technical/business problems.
+
+
+The [use of AI is permitted and recommended]{.blue}, but it must be clearly disclosed in a dedicated section detailing how it was used for specific parts of the work. The student's *modus operandi* regarding AI usage must be carefully described, as an AI detector will be utilized during grading. If any doubts arise regarding a student's understanding of or contribution to the material during the evaluation, the professor reserves the right to organize an oral defense to question the student on their project and assess their actual level of comprehension.
+
+
+

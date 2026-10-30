@@ -1,0 +1,17 @@
+% Shared TikZ template for the slides.
+% \ifpdf is false only when the output is DVI, which is the dvisvgm route.
+\RequirePackage{iftex}
+\ifpdf
+\else
+  \def\pgfsysdriver{pgfsys-dvisvgm.def}
+\fi
+\documentclass[border=2pt]{standalone}
+\input{"/Users/guillaumelecue/Library/CloudStorage/GoogleDrive-lecueguillaume@gmail.com/My Drive/monitorat/ESSEC/AIDAMS_stat_S7/1_convex_relaxation_and_high_dimensional_statistics/manuscript_english/0_introduction/packages_guillaume.tex"}
+\input{"/Users/guillaumelecue/Library/CloudStorage/GoogleDrive-lecueguillaume@gmail.com/My Drive/monitorat/ESSEC/AIDAMS_stat_S7/1_convex_relaxation_and_high_dimensional_statistics/manuscript_english/1_ell_0_bp/commandes_guillaume.tex"}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{tkz-berge}
+\usetikzlibrary{arrows, automata}
+\begin{document}
+%% TIKZ_CODE %%
+\end{document}

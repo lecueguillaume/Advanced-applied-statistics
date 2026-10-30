@@ -1,0 +1,8 @@
+engine: knitr
+
+format:
+  # HTML cannot \input commandes_guillaume.tex: the math shortcuts
+  # are defined for MathJax instead.
+  revealjs:
+    include-in-header:
+      - math-macros-reveal.html
