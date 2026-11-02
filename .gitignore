@@ -4,3 +4,4 @@
 # Ignore Quarto execution cache and hidden internal state
 /.quarto/
 *_cache/
+**/*.quarto_ipynb
