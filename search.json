@@ -1446,6 +1446,20 @@
     "href": "index.html#lecture-notes",
     "title": "Advanced applied Statistics",
     "section": "Lecture notes",
-    "text": "Lecture notes\n\nIntroduction to compressed sensing 1/3\nIntroduction to compressed sensing 2/3\nIntroduction to compressed sensing 1/3\nIntroduction to the LASSO\nMatrix completion and recommendation systems\nCommunities detection\n\nLab sessions\n\nImages are sparse\nPhase transition in compressed sensing\nLab on matrix completion\nLab on community detection\n\nExercises\n\nExercises on compressed sensing"
+    "text": "Lecture notes\n\nIntroduction to compressed sensing 1/3\nIntroduction to compressed sensing 2/3\nIntroduction to compressed sensing 1/3\nIntroduction to the LASSO\nMatrix completion and recommendation systems\nCommunities detection"
+  },
+  {
+    "objectID": "index.html#lab-sessions",
+    "href": "index.html#lab-sessions",
+    "title": "Advanced applied Statistics",
+    "section": "Lab sessions",
+    "text": "Lab sessions\n\nImages are sparse\nPhase transition in compressed sensing\nLab on matrix completion\nLab on community detection"
+  },
+  {
+    "objectID": "index.html#exercises",
+    "href": "index.html#exercises",
+    "title": "Advanced applied Statistics",
+    "section": "Exercises",
+    "text": "Exercises\n\nExercises on compressed sensing"
   }
 ]
