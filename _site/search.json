@@ -4,21 +4,21 @@
     "href": "course_presentation.html#course-evaluation-13",
     "title": "Advanced applied Statistics",
     "section": "Course evaluation – 1/3",
-    "text": "Course evaluation – 1/3\nBeyond the technical skills acquired in this course, the objective is to develop a habit of scientific monitoring and research that students can leverage in their future roles. The evaluation project is designed to put this aptitude into practice.\nStudents will be graded on their ability to:\n\nGrasp a topic and its innovative solutions at the forefront of research.\nImagine a concrete application for this paradigm.\nPresent the findings in a way that is understandable to both management and technical audiences."
+    "text": "Course evaluation – 1/3\nBeyond the technical skills acquired in this course, the objective is to develop a habit of scientific monitoring and research that students can leverage in their future roles. The evaluation project is designed to put this aptitude into practice.\nStudents will be graded on their ability to:\n\nGrasp a topic and its innovative solutions at the forefront of research.\nImagine a concrete application for this paradigm.\nPresent the findings in a way that is understandable to both management and technical audiences.\n\nUpload your .zip file project in the assignment folder on Edunao dedicated to the project. Use lastname_firstname.zip to name your submission.\n\nDeadline of the submission is a week after the last lesson."
   },
   {
     "objectID": "course_presentation.html#course-evaluation-23",
     "href": "course_presentation.html#course-evaluation-23",
     "title": "Advanced applied Statistics",
     "section": "Course evaluation – 2/3",
-    "text": "Course evaluation – 2/3\n\nWith this in mind, students should step into the shoes of a data science consultant working for a company in any industry. The problem this company wants to solve has no “off-the-shelf” solution and requires an innovative approach. Students must apply the knowledge acquired in the “Advanced Applied Statistics” course and may also draw on their own background to propose an alternative approach, ultimately comparing methods.\nThere will be one or two one-hour in-class sessions during which students will build their project and final deliverable. The specific project topic will be provided at the beginning of the session.\nThe format of the final deliverable is open: it can be a commented notebook, a PDF with simulations sections, a .md file, a .qmd file, etc. All code must be reproducible and written in Python. A link to Database should be provided (not the Database itself). Upload your .zip file project in the assignment folder on Edunao dedicated to the project. Use lastname_firstname.zip to name your submission."
+    "text": "Course evaluation – 2/3\n\nWith this in mind, students should step into the shoes of a data science consultant working for a company in any industry. The problem this company wants to solve has no “off-the-shelf” solution and requires an innovative approach. Students must apply the knowledge acquired in the “Advanced Applied Statistics” course and may also draw on their own background to propose an alternative approach, ultimately comparing methods.\nThere will be a one-hour in-class sessions at the end of the last lesson where students tell me how they realize their project (the topic, their workflow, etc.) as well as finish building their project and final deliverable. The specific project topic must be related to convex relaxation.\nThe format of the final deliverable is open: it can be a commented notebook, a PDF with simulations sections, a .md file, a .qmd file, etc. All code must be reproducible and written in Python. A link to Database should be provided (not the Database itself)."
   },
   {
     "objectID": "course_presentation.html#course-evaluation-33",
     "href": "course_presentation.html#course-evaluation-33",
     "title": "Advanced applied Statistics",
     "section": "Course evaluation – 3/3",
-    "text": "Course evaluation – 3/3\n\nThe final grade will be based solely on these project submissions.\nStudents are allowed to prepare materials at home and search for relevant datasets beforehand, even though the exact topic is only revealed at the start of the session. It can be: Compressed sensing, Matrix completion, Community detection, convex relaxation, etc..\n\nI want you to think (not AI) about these topics and how they can be used to solved technical/business problems.\nThe use of AI is permitted and recommended, but it must be clearly disclosed in a dedicated section detailing how it was used for specific parts of the work. The student’s modus operandi regarding AI usage must be carefully described, as an AI detector will be utilized during grading. If any doubts arise regarding a student’s understanding of or contribution to the material during the evaluation, the professor reserves the right to organize an oral defense to question the student on their project and assess their actual level of comprehension."
+    "text": "Course evaluation – 3/3\n\nThe final grade will be based solely on this project submission.\nStudents should prepare their project at home.\n\nI want you to think (not AI) about these topics and how they can be used to solved technical/business problems.\nThe use of AI is permitted and recommended, but it must be clearly disclosed in a dedicated section detailing how it was used for specific parts of the work. The student’s modus operandi regarding AI usage must be carefully described, as an AI detector will be utilized during grading. If any doubts arise regarding a student’s understanding of or contribution to the material during the evaluation, the professor reserves the right to organize an oral defense to question the student on their project and assess their actual level of comprehension."
   },
   {
     "objectID": "compressed_sensing.html#why-compressed-sensing",
@@ -1426,5 +1426,26 @@
     "title": "Matrix completion and recommendation systems",
     "section": "Proof sketch: subdifferential of the nuclear norm",
     "text": "Proof sketch: subdifferential of the nuclear norm\nApply the lemma with \\(\\phi=\\norm{\\cdot}_1\\).\n\n\n\\(\\partial\\norm{\\cdot}_1(\\sigma_A)=\\{g:g_i=1\\text{ for }i\\leq r,\\ |g_i|\\leq1\\text{ for }i&gt;r\\}\\), so every subgradient is \\[G=\\sum_k\\lambda_kU_k\\Sigma_kV_k^\\top=U^{(1)}{V^{(1)}}^\\top+\\sum_k\\lambda_kU_k^{(2)}W_k{V_k^{(2)}}^\\top,\\] with \\(W_k\\) diagonal with entries in \\([-1,1]\\).\n\n\n\n\nEach SVD satisfies \\(U_k^{(2)}=U^{(2)}Y_k\\) and \\(V_k^{(2)}=V^{(2)}Z_k\\), with \\(Y_k\\in\\cO(u-r)\\) and \\(Z_k\\in\\cO(v-r)\\). Hence \\(G=U^{(1)}{V^{(1)}}^\\top+U^{(2)}W{V^{(2)}}^\\top\\) with \\(W=\\sum_k\\lambda_kY_kW_kZ_k^\\top\\).\n\n\n\n\nFinally, \\(\\sigma_1(W)\\leq\\sum_k\\lambda_k\\sigma_1(W_k)\\leq1\\). \\(\\square\\)\n\n\n\n\n\n\n\nKey Idea: sparsity comes from singularities\n\n\nA norm’s subdifferential is largest where the norm is not differentiable: at sparse vectors for \\(\\norm{\\cdot}_1\\), and at low-rank matrices for \\(\\norm{\\cdot}_{S_1}\\). Sparsity-inducing norms are built by creating singularities at the sparsest objects."
+  },
+  {
+    "objectID": "course_presentation.html#examples-of-topics-related-to-convex-relaxation",
+    "href": "course_presentation.html#examples-of-topics-related-to-convex-relaxation",
+    "title": "Advanced applied Statistics",
+    "section": "Examples of topics related to convex relaxation",
+    "text": "Examples of topics related to convex relaxation\nStudents may choose their own topics. The following list of topics is for guidance only.\n\nRobust principal component analysis\nData separation\nApplication of Compressed sensing in MRI\nface recognition\nrecommendation systems\ncommunity detection\none-bit compressed sensing\nportfolio optimization via compressed sensing\nnon-negative matrix factorization\nquantized compressed sensing\nCoding schemes in Hilbert spaces\nDictionary learning in visual cortex\nblind deconvolution\ncoclustering via bipartite graphs\nSDP relaxation in the single index model\nsparse PCA\nAffinity matrix under low rank constraint\ngraph matching\nSDP for adversarial robustness\ncommunity detection in biparite network\nconvex relaxation of convulational networks\nLASSO zero\nThe netflix prize"
+  },
+  {
+    "objectID": "course_presentation.html#examples-of-topics-related-to-convex-relaxation-12",
+    "href": "course_presentation.html#examples-of-topics-related-to-convex-relaxation-12",
+    "title": "Advanced applied Statistics",
+    "section": "Examples of topics related to convex relaxation (1/2)",
+    "text": "Examples of topics related to convex relaxation (1/2)\nStudents may choose their own topics. The following list of topics is for guidance only.\n\nRobust principal component analysis\nData separation\nApplication of Compressed sensing in MRI\nface recognition\nrecommendation systems\ncommunity detection\none-bit compressed sensing\nportfolio optimization via compressed sensing\nnon-negative matrix factorization\nquantized compressed sensing\ninpainting\nmolecule reconstruction\nAnomaly detection\nRobust PCA for video reconstruction"
+  },
+  {
+    "objectID": "course_presentation.html#examples-of-topics-related-to-convex-relaxation-22",
+    "href": "course_presentation.html#examples-of-topics-related-to-convex-relaxation-22",
+    "title": "Advanced applied Statistics",
+    "section": "Examples of topics related to convex relaxation (2/2)",
+    "text": "Examples of topics related to convex relaxation (2/2)\n\nCoding schemes in Hilbert spaces\nDictionary learning in visual cortex\nblind deconvolution\ncoclustering via bipartite graphs\nSDP relaxation in the single index model\nsparse PCA\nAffinity matrix under low rank constraint\ngraph matching\nSDP for adversarial robustness\ncommunity detection in biparite network\nconvex relaxation of convulational networks\nLASSO zero\nThe netflix prize"
   }
 ]

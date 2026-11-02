@@ -12,3 +12,23 @@ institute: |
 - [Compressed Sensing](compressed_sensing.html)
 - [Matrix completion and recommendation systems](recommendation_systems.html)
 - [Community detection](community_detection.html)
+
+## Lecture notes
+
+- [Introduction to compressed sensing 1/3](materials/manuscript/0_introduction/introduction_cs.pdf)
+- [Introduction to compressed sensing 2/3](materials/manuscript/1_ell_0_bp/lecture_ell_0_cs.pdf)
+- [Introduction to compressed sensing 1/3](materials/manuscript/2_nsp_rip/lecture_nsp_rip_cs.pdf)
+- [Introduction to the LASSO](materials/manuscript/3_lasso/lasso_ridge_aggregation.pdf)
+- [Matrix completion and recommendation systems](materials/manuscript/4_matrice_completion/10_matrice_completion.pdf)
+- [Communities detection](materials/manuscript/5_detection_communautes/detection_communautes.pdf)
+
+### Lab sessions
+
+- [Images are sparse](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/0_lab_wavelets_transform)
+- [Phase transition in compressed sensing](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/1_lab_phase_transition_CS_cvx)
+- [Lab on matrix completion](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/2_lab_matrix_completion)
+- [Lab on community detection](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/3_lab_community_detection)
+
+#### Exercises
+
+- [Exercises on compressed sensing](materials/exercises/exos_cs.pdf)
