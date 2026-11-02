@@ -1,5 +1,7 @@
 project:
   type: website
+  resources:
+    - materials
 
 website:
   title: "Adavanced applied statistics"

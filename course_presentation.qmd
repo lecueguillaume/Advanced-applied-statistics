@@ -60,15 +60,15 @@ Students will be graded on their ability to:
 
 1. With this in mind, students should step into the shoes of a [data science consultant]{.blue} working for a company in any industry. The problem this company wants to solve has no "off-the-shelf" solution and requires an [innovative approach]{.blue}. Students must apply the knowledge acquired in the "Advanced Applied Statistics" course and may also draw on their own background to propose an alternative approach, ultimately comparing methods.
 
-2. There will be [one or two one-hour in-class sessions during which students will build their project and final deliverable]{.red}. The specific [project topic will be provided at the beginning of the session]{.blue}. 
+2. There will be [a one-hour in-class sessions at the end of the last course where students tell me how they realize their project (the topic, their workflow, etc.) as well as finish building their project and final deliverable]{.red}. The specific [project topic must be related to convex relaxation]{.blue}. 
 
 3. The format of the **final deliverable is open**: it can be a commented notebook, a PDF with simulations sections, a .md file, a .qmd file, etc. All code must be reproducible and written in Python. A link to Database should be provided (not the Database itself). Upload your .zip file project in the assignment folder on Edunao dedicated to the project. Use [lastname_firstname.zip]{.red} to name your submission.
 
 ## Course evaluation -- 3/3
 
-1. The [final grade]{.blue} will be based solely on these project submissions. 
+1. The [final grade]{.blue} will be based solely on this project submission. 
 
-2. Students are allowed to [prepare materials at home]{.blue} and search for relevant datasets beforehand, even though the **exact topic is only revealed at the start of the session**. It can be: Compressed sensing, Matrix completion, Community detection, convex relaxation,  etc..
+2. Students should [prepare their project at home]{.blue}.
 
  
 I want you to think (not AI) about these topics and how they can be used to solved technical/business problems.
@@ -76,5 +76,7 @@ I want you to think (not AI) about these topics and how they can be used to solv
 
 The [use of AI is permitted and recommended]{.blue}, but it must be clearly disclosed in a dedicated section detailing how it was used for specific parts of the work. The student's *modus operandi* regarding AI usage must be carefully described, as an AI detector will be utilized during grading. If any doubts arise regarding a student's understanding of or contribution to the material during the evaluation, the professor reserves the right to organize an oral defense to question the student on their project and assess their actual level of comprehension.
 
+
+## Examples of topics related to convex relaxation
 
 
