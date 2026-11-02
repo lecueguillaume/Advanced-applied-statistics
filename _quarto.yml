@@ -2,6 +2,10 @@ project:
   type: website
   resources:
     - materials
+  # Notebooks in materials/ are downloadable files, not site pages.
+  render:
+    - "*.qmd"
+    - "!materials/"
 
 website:
   title: "Adavanced applied statistics"

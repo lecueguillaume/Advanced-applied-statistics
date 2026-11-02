@@ -4,6 +4,9 @@ subtitle: "BSc AIDAMS -- S7"
 author: "Guillaume Lecué"
 institute: |
   ![](Logo-essec.jpg){width=200px}
+format:
+  revealjs:
+    scrollable: true
 ---
 
 ##  Slide decks
@@ -12,6 +15,7 @@ institute: |
 - [Compressed Sensing](compressed_sensing.html)
 - [Matrix completion and recommendation systems](recommendation_systems.html)
 - [Community detection](community_detection.html)
+
 
 ## Lecture notes
 
@@ -22,13 +26,14 @@ institute: |
 - [Matrix completion and recommendation systems](materials/manuscript/4_matrice_completion/10_matrice_completion.pdf)
 - [Communities detection](materials/manuscript/5_detection_communautes/detection_communautes.pdf)
 
-### Lab sessions
+
+## Lab sessions
 
 - [Images are sparse](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/0_lab_wavelets_transform)
 - [Phase transition in compressed sensing](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/1_lab_phase_transition_CS_cvx)
 - [Lab on matrix completion](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/2_lab_matrix_completion)
 - [Lab on community detection](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/3_lab_community_detection)
 
-#### Exercises
+## Exercises
 
 - [Exercises on compressed sensing](materials/exercises/exos_cs.pdf)

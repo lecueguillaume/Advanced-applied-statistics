@@ -28,8 +28,6 @@ knitr:
         - "--libgs=/opt/homebrew/lib/libgs.dylib"
 ---
 
-
-
 ### Aim of the course
 
 1. Understand [low-dimensional]{.red} structures in high-dimensional spaces
