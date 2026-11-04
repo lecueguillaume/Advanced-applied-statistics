@@ -32,19 +32,11 @@ knitr:
 
 # Introduction
 
-<!-- ======================================================== -->
-<!-- TODO: Matrix completion and recommendation systems               -->
-<!--                                                          -->
-<!-- Source folders: manuscript_english/4_matrice_completion                                           
-<!--                                                          -->
-<!-- Scope:                                                   -->
-<!--   Follow the same architecture of the slide deck as in the file 10_matrice_completion.tex                                          -->
-<!-- ======================================================== -->
 <!-- Source: manuscript_english/4_matrice_completion/10_matrice_completion.tex -->
 
 ## Reconstructing a matrix from few linear measurements {.smaller}
 
-:::{.box-red}
+:::{.box-red style="font-size: 1.15em;"}
 Unknown matrix $A^*\in\R^{u\times v}$, observed through $m$ linear measurements
 $$y_i=\inr{A^*,X_i},\qquad i=1,\ldots,m,\qquad\text{where }\inr{A,B}=\sum_{i,j}A_{ij}B_{ij}.$$
 :::
@@ -56,7 +48,7 @@ $$y_i=\inr{A^*,X_i},\qquad i=1,\ldots,m,\qquad\text{where }\inr{A,B}=\sum_{i,j}A
 
 . . .
 
-::: {.callout-tip title="Key Idea: low rank is the low-dimensional structure of the 'signal'$A^*$" icon=false}
+::: {.callout-tip title="Idea: low rank is the low-dimensional structure of the 'signal'$A^*$" icon=false}
 To reconstruct a matrix from a small number of linear measurements, the low-rank assumption plays the role that sparsity played for vectors.
 :::
 
@@ -96,14 +88,17 @@ After matrix completion, we recommend:
 
 . . .
 
-::: {.callout-tip title="Idea: recommendation = completion of the users/items matrix" icon=false}
-One can build a recommender system by completing the users/items matrix.
+::: {style="height: 90px;"}
+:::
+
+::: {.box-green}
+**Idea:** One can build a recommender system by completing the users/items matrix.
 :::
 
 ## Matrix completion as linear measurements {.spread-out}
 
 - Let $E_{p,q}$ be the matrix with a $1$ at entry $(p,q)$ and $0$ elsewhere: $(E_{p,q})_{p,q}$ is the canonical basis of $\mathbb{R}^{u\times v}$. 
-- If user $p$ rated item $q$ with $y_{p,q}$, then
+- If user $p$ rated item $q$ with grade $y_{p,q}$, then
 $$y_{p,q}=A^*_{p,q}=\inr{A^*,E_{p,q}}.$$
 - With $\Omega=\{(p,q):\text{user }p\text{ rated item }q\}$, we observe $(A^*_{p,q})_{(p,q)\in\Omega}$.
 
@@ -292,12 +287,12 @@ $$f^*: x\in H \to \sup_{y\in C}\big(\inr{x,y}-f(y)\big).$$
 *Note:* $f^*$ is defined over the entire space $H$ even though $f$ may only be defined over $C$.
 
 :::{.box-green}
-*Exercise:* Show that $f^*$ is convex even when $f$ is not. 
+*Exercise:* Show that $f^*$ is convex (even when $f$ is not). 
 :::
 
 ::: {.callout-note title="Definition (biconjugate)" icon=false}
 The **biconjugate** of $f$ is the function
-$$f^{**}:y\in H\to\sup_{x\in H}\big(\inr{x,y}-f^*(x)\big).$$
+$f^{**}:y\in H\to\sup_{x\in H}\big(\inr{x,y}-f^*(x)\big).$
 :::
 
 
@@ -306,7 +301,8 @@ $$f^{**}:y\in H\to\sup_{x\in H}\big(\inr{x,y}-f^*(x)\big).$$
 
 
 ::: {.callout-important title="Theorem" icon=false}
-Let $H$ be a Hilbert space, $C\subset H$ convex and $f:C\to\R$.  Then, for every $x\in C$, $f^{**}(x)={\rm conv}(f)(x)$.
+Let $H$ be a Hilbert space, $C\subset H$ convex and $f:C\to\R$.  Then, 
+$$\forall x\in C, f^{**}(x)={\rm conv}(f)(x).$$
 :::
 
 . . .
@@ -327,8 +323,8 @@ Let $H$ be a Hilbert space, $C\subset H$ convex and $f:C\to\R$.  Then, for every
 
 <div style="height: 1cm;"></div>
 
-::: {.callout-tip title="Idea: compute the biconjugate" icon=false}
-To find the convex envelope of the rank, it suffices to compute its biconjugate.
+::: {.box-green}
+**Idea:** To find the convex envelope of the rank, it suffices to compute its biconjugate.
 :::
 
 ## The nuclear norm is the convex envelope of the rank {.spread-out}
@@ -477,21 +473,32 @@ where $\Omega\subset\{1,\ldots,u\}\times\{1,\ldots,v\}$ is the set of revealed e
 . . .
 
 ::: {.callout-tip title="Key Idea: avoid the SDP" icon=false}
-The SDP reformulation is hard to solve in high dimension. We now build gradient-type algorithms that work directly on the matrix.
+The SDP reformulation is hard to solve in high dimension. We now build a first order algorithms that work directly on the matrix.
 :::
 
 ## Two procedures: rank constraint and nuclear norm penalty {.smaller}
 
-1. **Rank-constrained least squares:**
-$$\tilde A\in\argmin_{{\rm rank}(A)\leq r}\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}$$
+:::{.box-yellow} 
+**Rank-constrained least squares:**
+$$
+\tilde A\in\argmin_{{\rm rank}(A)\leq r}\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}
+$$
+:::
 
-2. **Nuclear-norm-penalized least squares:**
+:::{.box-yellow} 
+**Nuclear-norm-penalized least squares:**
 $$\bar A\in\argmin_{A}\Big(\frac12\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}^2+\lambda\norm{A}_{S_1}\Big)$$
+:::
+
+
+- Both combine a **data-fidelity term** $A\mapsto\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}$ with a rank constraint or a nuclear norm regularization.
+
 
 . . .
 
-- Both combine a **data-fidelity term** $A\mapsto\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}$ with a rank constraint or a nuclear norm regularization.
-- They are implemented with matrix versions of **hard** and **soft thresholding**, which act on the spectrum.
+:::{.box-red style="text-align: center;"}
+Let us now construct first order algorithms to approximate their solutions based on matrix versions of **hard** and **soft thresholding** acting on the spectrum.
+:::
 
 ## Projected gradient for the rank constraint {.smaller}
 
@@ -525,38 +532,57 @@ $$S_r^{hard}(A)=PD_rQ^\top,\qquad D_r={\rm diag}(\sigma_1,\ldots,\sigma_r,0,\ldo
 It is the unique projection when $\sigma_r>\sigma_{r+1}$.
 :::
 
-**Proof.**
+
 
 . . .
+
+**Proof.**
 
 1. von Neumann: $\norm{A-B}_{S_2}\geq\norm{\sigma_A-\sigma_B}_2$, with equality for $B=P\,{\rm diag}(\sigma_B)Q^\top$.
 2. If ${\rm rank}(B)\leq r$, then $\norm{\sigma_A-\sigma_B}_2^2\geq\sum_{j>r}\sigma_j(A)^2$, with equality for $\sigma_B=(\sigma_1,\ldots,\sigma_r,0,\ldots,0)$. $\square$
 
 . . .
 
+
+:::{.box-green}
 - Cost: one SVD per iteration, and only the $r$ leading singular triplets are needed.
-
-## Subdifferentials and proximal operators {.smaller}
-
-:::: {.columns}
-::: {.column width="50%"}
-- **Subdifferential** of a convex $f:U\to\R$, with $U\subset\R^n$ convex:
-$$\partial^-f(x)=\big\{g\in\R^n:f(y)\geq f(x)+\inr{g,y-x},\ \forall y\in U\big\}.$$
-Its elements are the **subgradients**.
+- It is a very special case where one can solve efficiently a non-convex optimization problem.
 :::
 
-::: {.column width="50%"}
+
+
+## The subdifferential of a convex function  {.smaller}
+
+::: {.callout-note title="Definition (Subdifferential)" icon=false}
+ Let $f:C\to\R$ be a convex function (on a convex set $C\subset\R^n$). Let $x\in C$. The **Subdifferential of $f$ in $x$** is the set
+$$\partial^-f(x)=\big\{g\in\R^n:f(y)\geq f(x)+\inr{g,y-x},\ \forall y\in C\big\}.$$
+Its elements are called the **subgradients**.
+:::
+
+::: {style="height: 40px;"}
+:::
+
+:::{.box-green}
+- **Exercise 1:** Show that if $f$ is a convex function that is differentiable at $x$ then $\partial^-f(x)=\{\nabla f(x)\}$.
+- **Exercise 2:** Compute the gradient of the absolute function $t\to|t|$ at all points of $\bR$.
+- **Exercise 3:** Let $f$ be a convex function: show that $x^*$ is solution to $\min_{x\in C}f(x)$ iff $0\in \partial^-f(x^*)$.
+- **Exercise 4:** Compute the subdifferential of the Euclidean norm over $\mathbb{R}^p$.
+:::
+
+## Proximal operators {.smaller}
+
 ::: {.callout-note title="Definition (proximal operator)" icon=false}
 For a convex function $g:\R^n\to\R$,
 $${\rm prox}_g(x)=\argmin_{u\in\R^n}\Big(\frac12\norm{u-x}_2^2+g(u)\Big).$$
 :::
-:::
-::::
-
-. . .
 
 - **It generalizes projections.** If $i_K$ is the indicator of $K$ ($0$ on $K$, $+\infty$ outside), then
 $$\argmin_{y\in K}\norm{x-y}_2=\argmin_{y\in\R^n}\Big(\frac12\norm{x-y}_2^2+i_K(y)\Big)={\rm prox}_{i_K}(x).$$
+
+:::{.box-green}
+- **Exercise 1:** Let $K$ be a non-empty closed and convex set and denote by $i_K$ its indicator. Then for all $\gamma>0$, ${\rm prox}_{\gamma i_C}(x) = P_C(x)$, where $P_K$ is the projection operator over $K$. 
+- **Exercise 2:** Let $f(u)=|u|$ and let $\gamma > 0$. Show that ${\rm prox}_{\gamma f}(x) = {\rm sign}(x) \max(|x| - \gamma, 0).$
+:::
 
 ## Proximal maps of $\ell_1$ and $\ell_0$ {.smaller}
 
@@ -565,14 +591,8 @@ $$\argmin_{y\in K}\norm{x-y}_2=\argmin_{y\in\R^n}\Big(\frac12\norm{x-y}_2^2+i_K(
 - The problem is **separable**: $\ \frac12\norm{u-z}_2^2+\gamma\norm{u}_1=\sum_j\Big(\frac12(u_j-z_j)^2+\gamma|u_j|\Big)$.
 - Scalar problem: study $\varphi(t)=\frac12(s-t)^2+\gamma|t|$ on $t<0$, $t=0$ and $t>0$:
 $$\argmin_{t\in\R}\varphi(t)=\begin{cases}s-\gamma&\text{if }s\geq\gamma\\0&\text{if }|s|\leq\gamma\\s+\gamma&\text{if }s\leq-\gamma\end{cases}={\rm sgn}(s)\big(|s|-\gamma\big)_+.$$
-
-::: {.callout-note title="Proposition (proximal maps of $\ell_1$ and $\ell_0$)" icon=false}
-For $z\in\R^N$:
-
-- **soft thresholding:** ${\rm prox}_{\gamma\norm{\cdot}_1}(z)=\big({\rm sgn}(z_j)(|z_j|-\gamma)_+\big)_{j=1}^N$;
-- **hard thresholding:** ${\rm prox}_{(\gamma^2/2)\norm{\cdot}_0}(z)=\big(z_j\,I(|z_j|\geq\gamma)\big)_{j=1}^N$.
 :::
-:::
+
 
 ::: {.column width="42%"}
 ```{tikz}
@@ -607,6 +627,22 @@ For $z\in\R^N$:
 :::
 ::::
 
+::: {.callout-note title="Proposition (proximal maps of $\ell_1$ and $\ell_0$)" icon=false}
+For $z\in\R^N$:
+
+:::: {.columns style="align-items: center;"}
+
+::: {.column width="50%"}
+- **soft thresholding:** ${\rm prox}_{\gamma\norm{\cdot}_1}(z)=\big({\rm sgn}(z_j)(|z_j|-\gamma)_+\big)_{j=1}^N$;
+:::
+
+::: {.column width="50%"}
+- **hard thresholding:** ${\rm prox}_{(\gamma^2/2)\norm{\cdot}_0}(z)=\big(z_j\,I(|z_j|\geq\gamma)\big)_{j=1}^N$.
+:::
+
+::::
+:::
+
 ## Fixed-point characterization of proximal gradient descent {.smaller}
 
 ::: {.callout-note title="Proposition" icon=false}
@@ -614,9 +650,11 @@ Let $f:\R^n\to\R$ be convex and differentiable, $g:\R^n\to\R$ convex, and $\gamm
 $$x^*\in\argmin_{x\in\R^n}\big(f(x)+g(x)\big)\iff x^*={\rm prox}_{\gamma g}\big(x^*-\gamma\nabla f(x^*)\big).$$
 :::
 
-**Proof.**
+
 
 . . .
+
+**Proof.**
 
 1. Replacing $(f,g)$ by $(\gamma f,\gamma g)$, we may take $\gamma=1$.
 2. By the optimality condition for the prox: $\ u^*={\rm prox}_g(z)\iff z-u^*\in\partial^-g(u^*)$.
@@ -633,9 +671,11 @@ Let $\gamma>0$ and let $A=UDV^\top$ be an SVD of $A$. Then
 $${\rm prox}_{\gamma\norm{\cdot}_{S_1}}(A)=S_\gamma^{soft}(A)=UD_\gamma V^\top,\qquad D_\gamma={\rm diag}\big((\sigma_1-\gamma)_+,\ldots,(\sigma_{u\wedge v}-\gamma)_+\big).$$
 :::
 
-**Proof.**
+
 
 . . .
+
+**Proof.**
 
 1. von Neumann: $\norm{A-B}_{S_2}^2=\norm{A}_{S_2}^2+\norm{B}_{S_2}^2-2\inr{A,B}\geq\norm{\sigma_A-\sigma_B}_2^2$, with equality for $B=U\,{\rm diag}(\sigma_B)V^\top$.
 2. So the prox has the form $U{\rm diag}(\hat d)V^\top$, with $\hat d={\rm prox}_{\gamma\norm{\cdot}_1}(\sigma_A)$.
@@ -650,20 +690,26 @@ $$A_{k+1}=S_{\lambda\gamma_k}^{soft}\Big(A_k+\gamma_k\big(P_\Omega(A^*)-P_\Omega
 
 - Same cost for both methods: no SDP, but one SVD (or a truncated SVD) per iteration, which can still be expensive.
 
-:::: {.columns}
-::: {.column width="55%"}
+
+
 | Problem | Method | Spectral step |
 |:--|:--|:--|
 | ${\rm rank}(A)\leq r$ | projected gradient | hard: keep $\sigma_1,\ldots,\sigma_r$ |
 | $+\lambda\norm{A}_{S_1}$ | proximal gradient | soft: $\sigma_i\mapsto(\sigma_i-\lambda\gamma_k)_+$ |
+
+
+
+::: {.box-green}
+**Key Idea: thresholding the spectrum:** Projecting onto low-rank matrices and computing the prox of the nuclear norm give matrix completion algorithms by projected or proximal gradient descent.
 :::
 
-::: {.column width="45%"}
-::: {.callout-tip title="Key Idea: thresholding the spectrum" icon=false}
-Projecting onto low-rank matrices and computing the prox of the nuclear norm give matrix completion algorithms by projected or proximal gradient descent.
+## Matrix completion on pictures via SDP and gradient proximal
+
+::: {style="display: flex; justify-content: center; align-items: center; height: 550px;"}
+::: {.box-green style="text-align: center; max-width: 850px; width: 100%;"}
+Open the notebook `lab_mat_completion.ipynb`
 :::
 :::
-::::
 
 # Matrix Factorization and Metadata for Recommender Systems
 
@@ -1075,8 +1121,22 @@ $${\rm MAE}=\frac{1}{|\Omega_{test}|}\sum_{(i,j)\in\Omega_{test}}\big|\hat A_{ij
 This diagnosis has recently been called into question: deep networks can make zero error on the training sample and still generalize well, with a reasonable error on the test sample.
 :::
 
+##  Gradient proximal VS Neural collaborative filtering
+
+::: {style="display: flex; justify-content: center; align-items: center; height: 550px;"}
+::: {.box-green style="text-align: center; max-width: 850px; width: 100%;"}
+Open the notebook `deep-learning-recommender-systems.ipynb`
+:::
+:::
+
 
 # Study of Exact Recovery by Nuclear Norm Minimization
+
+:::{.box-yellow}
+Extend the RIP approach from the signal-vector case to matrices. <br>
+
+**Key Idea:** So far, random measurements are the best. 
+:::
 
 ## The exact recovery property $RE(r)$ {.smaller}
 

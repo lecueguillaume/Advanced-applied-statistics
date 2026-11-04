@@ -6,3 +6,15 @@
 /.quarto/
 *_cache/
 **/*.quarto_ipynb
+_site/
+
+# Ignore the synchronize .sh
+sync.sh
+
+# OS metadata
+.DS_Store
+
+# Python / Jupyter notebooks
+.ipynb_checkpoints/
+__pycache__/
+*.pyc

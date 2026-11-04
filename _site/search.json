@@ -4,7 +4,7 @@
     "href": "recommendation_systems.html#reconstructing-a-matrix-from-few-linear-measurements",
     "title": "Matrix completion and recommendation systems",
     "section": "Reconstructing a matrix from few linear measurements",
-    "text": "Reconstructing a matrix from few linear measurements\n\nUnknown matrix \\(A^*\\in\\R^{u\\times v}\\), observed through \\(m\\) linear measurements \\[y_i=\\inr{A^*,X_i},\\qquad i=1,\\ldots,m,\\qquad\\text{where }\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}.\\]\n\n\n\\(uv\\) unknowns parameters but only \\(m\\ll uv\\) equations: a highly underdetermined problem, as in compressed sensing.\nIt becomes solvable when the ‘true dimension’ of \\(A^*\\) is much smaller than \\(uv\\), and in particular smaller than \\(m\\).\nThe natural structure here is low rank: \\({\\rm rank}(A^*)=r\\ll u\\wedge v\\).\n\n\n\n\n\n\nKey Idea: low rank is the low-dimensional structure of the ‘signal’\\(A^*\\)\n\n\nTo reconstruct a matrix from a small number of linear measurements, the low-rank assumption plays the role that sparsity played for vectors."
+    "text": "Reconstructing a matrix from few linear measurements\n\nUnknown matrix \\(A^*\\in\\R^{u\\times v}\\), observed through \\(m\\) linear measurements \\[y_i=\\inr{A^*,X_i},\\qquad i=1,\\ldots,m,\\qquad\\text{where }\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}.\\]\n\n\n\\(uv\\) unknowns parameters but only \\(m\\ll uv\\) equations: a highly underdetermined problem, as in compressed sensing.\nIt becomes solvable when the ‘true dimension’ of \\(A^*\\) is much smaller than \\(uv\\), and in particular smaller than \\(m\\).\nThe natural structure here is low rank: \\({\\rm rank}(A^*)=r\\ll u\\wedge v\\).\n\n\n\n\n\n\nIdea: low rank is the low-dimensional structure of the ‘signal’\\(A^*\\)\n\n\nTo reconstruct a matrix from a small number of linear measurements, the low-rank assumption plays the role that sparsity played for vectors."
   },
   {
     "objectID": "recommendation_systems.html#recommender-systems-by-completion-of-the-usersitems-matrix",
@@ -18,14 +18,14 @@
     "href": "recommendation_systems.html#the-netflix-prize",
     "title": "Matrix completion and recommendation systems",
     "section": "The Netflix Prize",
-    "text": "The Netflix Prize\n\nThe matrix-completion viewpoint became very popular after the Netflix Prize.\n\\(u=480\\,189\\) users and \\(v=17\\,770\\) items (movies).\nRatings range from \\(1\\) (“did not like it”) to \\(5\\) (“liked it very much”).\nOnly \\(100\\,480\\,507\\) ratings were observed, about \\(1.2\\%\\) of the \\(uv\\) possible entries.\n\n\n\n\n\n\nIdea: recommendation = completion of the users/items matrix\n\n\nOne can build a recommender system by completing the users/items matrix."
+    "text": "The Netflix Prize\n\nThe matrix-completion viewpoint became very popular after the Netflix Prize.\n\\(u=480\\,189\\) users and \\(v=17\\,770\\) items (movies).\nRatings range from \\(1\\) (“did not like it”) to \\(5\\) (“liked it very much”).\nOnly \\(100\\,480\\,507\\) ratings were observed, about \\(1.2\\%\\) of the \\(uv\\) possible entries.\n\n\n\n\n\n\nIdea: One can build a recommender system by completing the users/items matrix."
   },
   {
     "objectID": "recommendation_systems.html#matrix-completion-as-linear-measurements",
     "href": "recommendation_systems.html#matrix-completion-as-linear-measurements",
     "title": "Matrix completion and recommendation systems",
     "section": "Matrix completion as linear measurements",
-    "text": "Matrix completion as linear measurements\n\nLet \\(E_{p,q}\\) be the matrix with a \\(1\\) at entry \\((p,q)\\) and \\(0\\) elsewhere: \\((E_{p,q})_{p,q}\\) is the canonical basis of \\(\\mathbb{R}^{u\\times v}\\).\nIf user \\(p\\) rated item \\(q\\) with \\(y_{p,q}\\), then \\[y_{p,q}=A^*_{p,q}=\\inr{A^*,E_{p,q}}.\\]\nWith \\(\\Omega=\\{(p,q):\\text{user }p\\text{ rated item }q\\}\\), we observe \\((A^*_{p,q})_{(p,q)\\in\\Omega}\\).\n\n\n\nCompleting the matrix is therefore reconstructing \\(A^*\\) from \\(m=|\\Omega|\\) linear measurements, with \\(X_i\\in\\{E_{p,q}:1\\leq p\\leq u,\\ 1\\leq q\\leq v\\}\\).\nThe solution set \\(\\{A:\\inr{A,X_i}=y_i,\\ i=1,\\ldots,m\\}\\) is an affine space, so without extra structure the problem has no unique solution."
+    "text": "Matrix completion as linear measurements\n\nLet \\(E_{p,q}\\) be the matrix with a \\(1\\) at entry \\((p,q)\\) and \\(0\\) elsewhere: \\((E_{p,q})_{p,q}\\) is the canonical basis of \\(\\mathbb{R}^{u\\times v}\\).\nIf user \\(p\\) rated item \\(q\\) with grade \\(y_{p,q}\\), then \\[y_{p,q}=A^*_{p,q}=\\inr{A^*,E_{p,q}}.\\]\nWith \\(\\Omega=\\{(p,q):\\text{user }p\\text{ rated item }q\\}\\), we observe \\((A^*_{p,q})_{(p,q)\\in\\Omega}\\).\n\n\n\nCompleting the matrix is therefore reconstructing \\(A^*\\) from \\(m=|\\Omega|\\) linear measurements, with \\(X_i\\in\\{E_{p,q}:1\\leq p\\leq u,\\ 1\\leq q\\leq v\\}\\).\nThe solution set \\(\\{A:\\inr{A,X_i}=y_i,\\ i=1,\\ldots,m\\}\\) is an affine space, so without extra structure the problem has no unique solution."
   },
   {
     "objectID": "recommendation_systems.html#the-low-rank-assumption",
@@ -67,14 +67,14 @@
     "href": "recommendation_systems.html#fenchel-transform",
     "title": "Matrix completion and recommendation systems",
     "section": "Fenchel transform",
-    "text": "Fenchel transform\n\n\n\n\nDefinition (Fenchel transform)\n\n\nFor \\(f:C\\to\\R\\) with \\(C\\subset H\\) a convex set, the Fenchel transform of \\(f\\) is \\[f^*: x\\in H \\to \\sup_{y\\in C}\\big(\\inr{x,y}-f(y)\\big).\\]\n\n\n\n\nNote: \\(f^*\\) is defined over the entire space \\(H\\) even though \\(f\\) may only be defined over \\(C\\).\n\nExercise: Show that \\(f^*\\) is convex even when \\(f\\) is not.\n\n\n\n\n\nDefinition (biconjugate)\n\n\nThe biconjugate of \\(f\\) is the function \\[f^{**}:y\\in H\\to\\sup_{x\\in H}\\big(\\inr{x,y}-f^*(x)\\big).\\]"
+    "text": "Fenchel transform\n\n\n\n\nDefinition (Fenchel transform)\n\n\nFor \\(f:C\\to\\R\\) with \\(C\\subset H\\) a convex set, the Fenchel transform of \\(f\\) is \\[f^*: x\\in H \\to \\sup_{y\\in C}\\big(\\inr{x,y}-f(y)\\big).\\]\n\n\n\n\nNote: \\(f^*\\) is defined over the entire space \\(H\\) even though \\(f\\) may only be defined over \\(C\\).\n\nExercise: Show that \\(f^*\\) is convex (even when \\(f\\) is not).\n\n\n\n\n\nDefinition (biconjugate)\n\n\nThe biconjugate of \\(f\\) is the function \\(f^{**}:y\\in H\\to\\sup_{x\\in H}\\big(\\inr{x,y}-f^*(x)\\big).\\)"
   },
   {
     "objectID": "recommendation_systems.html#convex-envelope-biconjugate",
     "href": "recommendation_systems.html#convex-envelope-biconjugate",
     "title": "Matrix completion and recommendation systems",
     "section": "Convex envelope = biconjugate",
-    "text": "Convex envelope = biconjugate\n\n\n\n\nTheorem\n\n\nLet \\(H\\) be a Hilbert space, \\(C\\subset H\\) convex and \\(f:C\\to\\R\\). Then, for every \\(x\\in C\\), \\(f^{**}(x)={\\rm conv}(f)(x)\\).\n\n\n\n\n\nProof.\n\nFor a fixed slope \\(a\\), the affine function \\(\\inr{a,\\cdot}+b\\) is below \\(f\\) on \\(C\\) iff \\(b\\leq f(y)-\\inr{a,y}\\) for all \\(y\\in C\\).\n\n\n\n\nThe best intercept is \\(b=\\inf_{y\\in C}\\big(f(y)-\\inr{a,y}\\big)=-f^*(a)\\).\n\n\n\n\nHence \\({\\rm conv}(f)(x)=\\sup_{a\\in H}\\big(\\inr{a,x}-f^*(a)\\big)=f^{**}(x)\\).\n\n\n\n\n\n\n\n\n\n\nIdea: compute the biconjugate\n\n\nTo find the convex envelope of the rank, it suffices to compute its biconjugate."
+    "text": "Convex envelope = biconjugate\n\n\n\n\nTheorem\n\n\nLet \\(H\\) be a Hilbert space, \\(C\\subset H\\) convex and \\(f:C\\to\\R\\). Then, \\[\\forall x\\in C, f^{**}(x)={\\rm conv}(f)(x).\\]\n\n\n\n\n\nProof.\n\nFor a fixed slope \\(a\\), the affine function \\(\\inr{a,\\cdot}+b\\) is below \\(f\\) on \\(C\\) iff \\(b\\leq f(y)-\\inr{a,y}\\) for all \\(y\\in C\\).\n\n\n\n\nThe best intercept is \\(b=\\inf_{y\\in C}\\big(f(y)-\\inr{a,y}\\big)=-f^*(a)\\).\n\n\n\n\nHence \\({\\rm conv}(f)(x)=\\sup_{a\\in H}\\big(\\inr{a,x}-f^*(a)\\big)=f^{**}(x)\\).\n\n\n\n\n\n\n\nIdea: To find the convex envelope of the rank, it suffices to compute its biconjugate."
   },
   {
     "objectID": "recommendation_systems.html#the-nuclear-norm-is-the-convex-envelope-of-the-rank",
@@ -137,14 +137,14 @@
     "href": "recommendation_systems.html#the-mask-operator-p_omega",
     "title": "Matrix completion and recommendation systems",
     "section": "The mask operator \\(P_\\Omega\\)",
-    "text": "The mask operator \\(P_\\Omega\\)\n\nEach observation reveals one entry of the matrix: a mask \\[P_\\Omega:\\R^{u\\times v}\\to\\R^{u\\times v},\\qquad\\big(P_\\Omega(A)\\big)_{ij}=\\begin{cases}A_{ij}&\\text{if }(i,j)\\in\\Omega,\\\\0&\\text{otherwise,}\\end{cases}\\] where \\(\\Omega\\subset\\{1,\\ldots,u\\}\\times\\{1,\\ldots,v\\}\\) is the set of revealed entries.\n\\(P_\\Omega\\) is a projection (\\(P_\\Omega^2=P_\\Omega\\)) and is self-adjoint (\\(P_\\Omega^\\top=P_\\Omega\\)).\nWe observe \\(P_\\Omega(A^*)\\) and assume that \\(A^*\\) has low rank.\n\n\n\n\n\n\nKey Idea: avoid the SDP\n\n\nThe SDP reformulation is hard to solve in high dimension. We now build gradient-type algorithms that work directly on the matrix."
+    "text": "The mask operator \\(P_\\Omega\\)\n\nEach observation reveals one entry of the matrix: a mask \\[P_\\Omega:\\R^{u\\times v}\\to\\R^{u\\times v},\\qquad\\big(P_\\Omega(A)\\big)_{ij}=\\begin{cases}A_{ij}&\\text{if }(i,j)\\in\\Omega,\\\\0&\\text{otherwise,}\\end{cases}\\] where \\(\\Omega\\subset\\{1,\\ldots,u\\}\\times\\{1,\\ldots,v\\}\\) is the set of revealed entries.\n\\(P_\\Omega\\) is a projection (\\(P_\\Omega^2=P_\\Omega\\)) and is self-adjoint (\\(P_\\Omega^\\top=P_\\Omega\\)).\nWe observe \\(P_\\Omega(A^*)\\) and assume that \\(A^*\\) has low rank.\n\n\n\n\n\n\nKey Idea: avoid the SDP\n\n\nThe SDP reformulation is hard to solve in high dimension. We now build a first order algorithms that work directly on the matrix."
   },
   {
     "objectID": "recommendation_systems.html#two-procedures-rank-constraint-and-nuclear-norm-penalty",
     "href": "recommendation_systems.html#two-procedures-rank-constraint-and-nuclear-norm-penalty",
     "title": "Matrix completion and recommendation systems",
     "section": "Two procedures: rank constraint and nuclear norm penalty",
-    "text": "Two procedures: rank constraint and nuclear norm penalty\n\nRank-constrained least squares: \\[\\tilde A\\in\\argmin_{{\\rm rank}(A)\\leq r}\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\\]\nNuclear-norm-penalized least squares: \\[\\bar A\\in\\argmin_{A}\\Big(\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2+\\lambda\\norm{A}_{S_1}\\Big)\\]\n\n\n\nBoth combine a data-fidelity term \\(A\\mapsto\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\\) with a rank constraint or a nuclear norm regularization.\nThey are implemented with matrix versions of hard and soft thresholding, which act on the spectrum."
+    "text": "Two procedures: rank constraint and nuclear norm penalty\n\nRank-constrained least squares: \\[\n\\tilde A\\in\\argmin_{{\\rm rank}(A)\\leq r}\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\n\\]\n\n\nNuclear-norm-penalized least squares: \\[\\bar A\\in\\argmin_{A}\\Big(\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2+\\lambda\\norm{A}_{S_1}\\Big)\\]\n\n\nBoth combine a data-fidelity term \\(A\\mapsto\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\\) with a rank constraint or a nuclear norm regularization.\n\n\n\nLet us now construct first order algorithms to approximate their solutions based on matrix versions of hard and soft thresholding acting on the spectrum."
   },
   {
     "objectID": "recommendation_systems.html#projected-gradient-for-the-rank-constraint",
@@ -158,7 +158,7 @@
     "href": "recommendation_systems.html#projection-onto-matrices-of-rank-at-most-r",
     "title": "Matrix completion and recommendation systems",
     "section": "Projection onto matrices of rank at most \\(r\\)",
-    "text": "Projection onto matrices of rank at most \\(r\\)\n\n\n\n\nProposition\n\n\nLet \\(A=PDQ^\\top\\) be an SVD of \\(A\\), with \\(D={\\rm diag}(\\sigma_1,\\ldots,\\sigma_{u\\wedge v})\\). A projection of \\(A\\) onto \\(\\{B:{\\rm rank}(B)\\leq r\\}\\) in \\(\\norm{\\cdot}_{S_2}\\) is \\[S_r^{hard}(A)=PD_rQ^\\top,\\qquad D_r={\\rm diag}(\\sigma_1,\\ldots,\\sigma_r,0,\\ldots,0).\\] It is the unique projection when \\(\\sigma_r&gt;\\sigma_{r+1}\\).\n\n\n\n\nProof.\n\n\nvon Neumann: \\(\\norm{A-B}_{S_2}\\geq\\norm{\\sigma_A-\\sigma_B}_2\\), with equality for \\(B=P\\,{\\rm diag}(\\sigma_B)Q^\\top\\).\nIf \\({\\rm rank}(B)\\leq r\\), then \\(\\norm{\\sigma_A-\\sigma_B}_2^2\\geq\\sum_{j&gt;r}\\sigma_j(A)^2\\), with equality for \\(\\sigma_B=(\\sigma_1,\\ldots,\\sigma_r,0,\\ldots,0)\\). \\(\\square\\)\n\n\n\n\nCost: one SVD per iteration, and only the \\(r\\) leading singular triplets are needed."
+    "text": "Projection onto matrices of rank at most \\(r\\)\n\n\n\n\nProposition\n\n\nLet \\(A=PDQ^\\top\\) be an SVD of \\(A\\), with \\(D={\\rm diag}(\\sigma_1,\\ldots,\\sigma_{u\\wedge v})\\). A projection of \\(A\\) onto \\(\\{B:{\\rm rank}(B)\\leq r\\}\\) in \\(\\norm{\\cdot}_{S_2}\\) is \\[S_r^{hard}(A)=PD_rQ^\\top,\\qquad D_r={\\rm diag}(\\sigma_1,\\ldots,\\sigma_r,0,\\ldots,0).\\] It is the unique projection when \\(\\sigma_r&gt;\\sigma_{r+1}\\).\n\n\n\n\n\nProof.\n\nvon Neumann: \\(\\norm{A-B}_{S_2}\\geq\\norm{\\sigma_A-\\sigma_B}_2\\), with equality for \\(B=P\\,{\\rm diag}(\\sigma_B)Q^\\top\\).\nIf \\({\\rm rank}(B)\\leq r\\), then \\(\\norm{\\sigma_A-\\sigma_B}_2^2\\geq\\sum_{j&gt;r}\\sigma_j(A)^2\\), with equality for \\(\\sigma_B=(\\sigma_1,\\ldots,\\sigma_r,0,\\ldots,0)\\). \\(\\square\\)\n\n\n\n\n\nCost: one SVD per iteration, and only the \\(r\\) leading singular triplets are needed.\nIt is a very special case where one can solve efficiently a non-convex optimization problem."
   },
   {
     "objectID": "recommendation_systems.html#subdifferentials-and-proximal-operators",
@@ -172,28 +172,28 @@
     "href": "recommendation_systems.html#proximal-maps-of-ell_1-and-ell_0",
     "title": "Matrix completion and recommendation systems",
     "section": "Proximal maps of \\(\\ell_1\\) and \\(\\ell_0\\)",
-    "text": "Proximal maps of \\(\\ell_1\\) and \\(\\ell_0\\)\n\n\n\nThe problem is separable: \\(\\ \\frac12\\norm{u-z}_2^2+\\gamma\\norm{u}_1=\\sum_j\\Big(\\frac12(u_j-z_j)^2+\\gamma|u_j|\\Big)\\).\nScalar problem: study \\(\\varphi(t)=\\frac12(s-t)^2+\\gamma|t|\\) on \\(t&lt;0\\), \\(t=0\\) and \\(t&gt;0\\): \\[\\argmin_{t\\in\\R}\\varphi(t)=\\begin{cases}s-\\gamma&\\text{if }s\\geq\\gamma\\\\0&\\text{if }|s|\\leq\\gamma\\\\s+\\gamma&\\text{if }s\\leq-\\gamma\\end{cases}={\\rm sgn}(s)\\big(|s|-\\gamma\\big)_+.\\]\n\n\n\n\n\nProposition (proximal maps of \\(\\ell_1\\) and \\(\\ell_0\\))\n\n\nFor \\(z\\in\\R^N\\):\n\nsoft thresholding: \\({\\rm prox}_{\\gamma\\norm{\\cdot}_1}(z)=\\big({\\rm sgn}(z_j)(|z_j|-\\gamma)_+\\big)_{j=1}^N\\);\nhard thresholding: \\({\\rm prox}_{(\\gamma^2/2)\\norm{\\cdot}_0}(z)=\\big(z_j\\,I(|z_j|\\geq\\gamma)\\big)_{j=1}^N\\).\n\n\n\n\n\n\n\n\n\n\n\nSoft thresholding (left) and hard thresholding (right) at level \\(\\gamma\\)."
+    "text": "Proximal maps of \\(\\ell_1\\) and \\(\\ell_0\\)\n\n\n\nThe problem is separable: \\(\\ \\frac12\\norm{u-z}_2^2+\\gamma\\norm{u}_1=\\sum_j\\Big(\\frac12(u_j-z_j)^2+\\gamma|u_j|\\Big)\\).\nScalar problem: study \\(\\varphi(t)=\\frac12(s-t)^2+\\gamma|t|\\) on \\(t&lt;0\\), \\(t=0\\) and \\(t&gt;0\\): \\[\\argmin_{t\\in\\R}\\varphi(t)=\\begin{cases}s-\\gamma&\\text{if }s\\geq\\gamma\\\\0&\\text{if }|s|\\leq\\gamma\\\\s+\\gamma&\\text{if }s\\leq-\\gamma\\end{cases}={\\rm sgn}(s)\\big(|s|-\\gamma\\big)_+.\\]\n\n\n\n\n\n\n\nSoft thresholding (left) and hard thresholding (right) at level \\(\\gamma\\).\n\n\n\n\n\n\n\n\n\nProposition (proximal maps of \\(\\ell_1\\) and \\(\\ell_0\\))\n\n\nFor \\(z\\in\\R^N\\):\n\n\n\nsoft thresholding: \\({\\rm prox}_{\\gamma\\norm{\\cdot}_1}(z)=\\big({\\rm sgn}(z_j)(|z_j|-\\gamma)_+\\big)_{j=1}^N\\);\n\n\n\nhard thresholding: \\({\\rm prox}_{(\\gamma^2/2)\\norm{\\cdot}_0}(z)=\\big(z_j\\,I(|z_j|\\geq\\gamma)\\big)_{j=1}^N\\)."
   },
   {
     "objectID": "recommendation_systems.html#fixed-point-characterization-of-proximal-gradient-descent",
     "href": "recommendation_systems.html#fixed-point-characterization-of-proximal-gradient-descent",
     "title": "Matrix completion and recommendation systems",
     "section": "Fixed-point characterization of proximal gradient descent",
-    "text": "Fixed-point characterization of proximal gradient descent\n\n\n\n\nProposition\n\n\nLet \\(f:\\R^n\\to\\R\\) be convex and differentiable, \\(g:\\R^n\\to\\R\\) convex, and \\(\\gamma&gt;0\\). Then \\[x^*\\in\\argmin_{x\\in\\R^n}\\big(f(x)+g(x)\\big)\\iff x^*={\\rm prox}_{\\gamma g}\\big(x^*-\\gamma\\nabla f(x^*)\\big).\\]\n\n\n\n\nProof.\n\n\nReplacing \\((f,g)\\) by \\((\\gamma f,\\gamma g)\\), we may take \\(\\gamma=1\\).\nBy the optimality condition for the prox: \\(\\ u^*={\\rm prox}_g(z)\\iff z-u^*\\in\\partial^-g(u^*)\\).\nSo \\(x^*={\\rm prox}_g\\big(x^*-\\nabla f(x^*)\\big)\\iff-\\nabla f(x^*)\\in\\partial^-g(x^*)\\iff0\\in\\nabla f(x^*)+\\partial^-g(x^*)\\). \\(\\square\\)\n\n\n\n\nLook for a fixed point of \\(G:x\\mapsto{\\rm prox}_{\\gamma g}\\big(x-\\gamma\\nabla f(x)\\big)\\) by iterating \\(x_{k+1}=G(x_k)\\), possibly with varying steps \\(\\gamma_k\\)."
+    "text": "Fixed-point characterization of proximal gradient descent\n\n\n\n\nProposition\n\n\nLet \\(f:\\R^n\\to\\R\\) be convex and differentiable, \\(g:\\R^n\\to\\R\\) convex, and \\(\\gamma&gt;0\\). Then \\[x^*\\in\\argmin_{x\\in\\R^n}\\big(f(x)+g(x)\\big)\\iff x^*={\\rm prox}_{\\gamma g}\\big(x^*-\\gamma\\nabla f(x^*)\\big).\\]\n\n\n\n\n\nProof.\n\nReplacing \\((f,g)\\) by \\((\\gamma f,\\gamma g)\\), we may take \\(\\gamma=1\\).\nBy the optimality condition for the prox: \\(\\ u^*={\\rm prox}_g(z)\\iff z-u^*\\in\\partial^-g(u^*)\\).\nSo \\(x^*={\\rm prox}_g\\big(x^*-\\nabla f(x^*)\\big)\\iff-\\nabla f(x^*)\\in\\partial^-g(x^*)\\iff0\\in\\nabla f(x^*)+\\partial^-g(x^*)\\). \\(\\square\\)\n\n\n\n\nLook for a fixed point of \\(G:x\\mapsto{\\rm prox}_{\\gamma g}\\big(x-\\gamma\\nabla f(x)\\big)\\) by iterating \\(x_{k+1}=G(x_k)\\), possibly with varying steps \\(\\gamma_k\\)."
   },
   {
     "objectID": "recommendation_systems.html#prox-of-the-nuclear-norm-soft-spectral-thresholding",
     "href": "recommendation_systems.html#prox-of-the-nuclear-norm-soft-spectral-thresholding",
     "title": "Matrix completion and recommendation systems",
     "section": "Prox of the nuclear norm: soft spectral thresholding",
-    "text": "Prox of the nuclear norm: soft spectral thresholding\n\n\n\n\nProposition\n\n\nLet \\(\\gamma&gt;0\\) and let \\(A=UDV^\\top\\) be an SVD of \\(A\\). Then \\[{\\rm prox}_{\\gamma\\norm{\\cdot}_{S_1}}(A)=S_\\gamma^{soft}(A)=UD_\\gamma V^\\top,\\qquad D_\\gamma={\\rm diag}\\big((\\sigma_1-\\gamma)_+,\\ldots,(\\sigma_{u\\wedge v}-\\gamma)_+\\big).\\]\n\n\n\n\nProof.\n\n\nvon Neumann: \\(\\norm{A-B}_{S_2}^2=\\norm{A}_{S_2}^2+\\norm{B}_{S_2}^2-2\\inr{A,B}\\geq\\norm{\\sigma_A-\\sigma_B}_2^2\\), with equality for \\(B=U\\,{\\rm diag}(\\sigma_B)V^\\top\\).\nSo the prox has the form \\(U{\\rm diag}(\\hat d)V^\\top\\), with \\(\\hat d={\\rm prox}_{\\gamma\\norm{\\cdot}_1}(\\sigma_A)\\).\nSince \\(\\sigma_A\\geq0\\), soft thresholding gives \\(\\hat d=\\big((\\sigma_i-\\gamma)_+\\big)_i\\). \\(\\square\\)"
+    "text": "Prox of the nuclear norm: soft spectral thresholding\n\n\n\n\nProposition\n\n\nLet \\(\\gamma&gt;0\\) and let \\(A=UDV^\\top\\) be an SVD of \\(A\\). Then \\[{\\rm prox}_{\\gamma\\norm{\\cdot}_{S_1}}(A)=S_\\gamma^{soft}(A)=UD_\\gamma V^\\top,\\qquad D_\\gamma={\\rm diag}\\big((\\sigma_1-\\gamma)_+,\\ldots,(\\sigma_{u\\wedge v}-\\gamma)_+\\big).\\]\n\n\n\n\n\nProof.\n\nvon Neumann: \\(\\norm{A-B}_{S_2}^2=\\norm{A}_{S_2}^2+\\norm{B}_{S_2}^2-2\\inr{A,B}\\geq\\norm{\\sigma_A-\\sigma_B}_2^2\\), with equality for \\(B=U\\,{\\rm diag}(\\sigma_B)V^\\top\\).\nSo the prox has the form \\(U{\\rm diag}(\\hat d)V^\\top\\), with \\(\\hat d={\\rm prox}_{\\gamma\\norm{\\cdot}_1}(\\sigma_A)\\).\nSince \\(\\sigma_A\\geq0\\), soft thresholding gives \\(\\hat d=\\big((\\sigma_i-\\gamma)_+\\big)_i\\). \\(\\square\\)"
   },
   {
     "objectID": "recommendation_systems.html#proximal-gradient-descent-for-matrix-completion-1",
     "href": "recommendation_systems.html#proximal-gradient-descent-for-matrix-completion-1",
     "title": "Matrix completion and recommendation systems",
     "section": "Proximal gradient descent for matrix completion",
-    "text": "Proximal gradient descent for matrix completion\n\n\n\n\nAlgorithm (proximal gradient descent)\n\n\nFor \\(\\min_A\\big(F(A)+\\lambda\\norm{A}_{S_1}\\big)\\), with step sizes \\((\\gamma_k)_k\\): \\[A_{k+1}=S_{\\lambda\\gamma_k}^{soft}\\Big(A_k+\\gamma_k\\big(P_\\Omega(A^*)-P_\\Omega(A_k)\\big)\\Big).\\]\n\n\n\n\n\nSame cost for both methods: no SDP, but one SVD (or a truncated SVD) per iteration, which can still be expensive.\n\n\n\n\n\n\n\n\n\n\n\nProblem\nMethod\nSpectral step\n\n\n\n\n\\({\\rm rank}(A)\\leq r\\)\nprojected gradient\nhard: keep \\(\\sigma_1,\\ldots,\\sigma_r\\)\n\n\n\\(+\\lambda\\norm{A}_{S_1}\\)\nproximal gradient\nsoft: \\(\\sigma_i\\mapsto(\\sigma_i-\\lambda\\gamma_k)_+\\)\n\n\n\n\n\n\n\n\nKey Idea: thresholding the spectrum\n\n\nProjecting onto low-rank matrices and computing the prox of the nuclear norm give matrix completion algorithms by projected or proximal gradient descent."
+    "text": "Proximal gradient descent for matrix completion\n\n\n\n\nAlgorithm (proximal gradient descent)\n\n\nFor \\(\\min_A\\big(F(A)+\\lambda\\norm{A}_{S_1}\\big)\\), with step sizes \\((\\gamma_k)_k\\): \\[A_{k+1}=S_{\\lambda\\gamma_k}^{soft}\\Big(A_k+\\gamma_k\\big(P_\\Omega(A^*)-P_\\Omega(A_k)\\big)\\Big).\\]\n\n\n\n\n\nSame cost for both methods: no SDP, but one SVD (or a truncated SVD) per iteration, which can still be expensive.\n\n\n\n\n\n\n\n\n\nProblem\nMethod\nSpectral step\n\n\n\n\n\\({\\rm rank}(A)\\leq r\\)\nprojected gradient\nhard: keep \\(\\sigma_1,\\ldots,\\sigma_r\\)\n\n\n\\(+\\lambda\\norm{A}_{S_1}\\)\nproximal gradient\nsoft: \\(\\sigma_i\\mapsto(\\sigma_i-\\lambda\\gamma_k)_+\\)\n\n\n\n\nKey Idea: thresholding the spectrum: Projecting onto low-rank matrices and computing the prox of the nuclear norm give matrix completion algorithms by projected or proximal gradient descent."
   },
   {
     "objectID": "recommendation_systems.html#a-latent-space-for-users-and-items",
@@ -1446,6 +1446,55 @@
     "href": "index.html#lecture-notes",
     "title": "Advanced applied Statistics",
     "section": "Lecture notes",
-    "text": "Lecture notes\n\nIntroduction to compressed sensing 1/3\nIntroduction to compressed sensing 2/3\nIntroduction to compressed sensing 1/3\nIntroduction to the LASSO\nMatrix completion and recommendation systems\nCommunities detection\n\nLab sessions\n\nImages are sparse\nPhase transition in compressed sensing\nLab on matrix completion\nLab on community detection\n\nExercises\n\nExercises on compressed sensing"
+    "text": "Lecture notes\n\nIntroduction to compressed sensing 1/3\nIntroduction to compressed sensing 2/3\nIntroduction to compressed sensing 1/3\nIntroduction to the LASSO\nMatrix completion and recommendation systems\nCommunities detection"
+  },
+  {
+    "objectID": "index.html#lab-sessions",
+    "href": "index.html#lab-sessions",
+    "title": "Advanced applied Statistics",
+    "section": "Lab sessions",
+    "text": "Lab sessions\n\nImages are sparse\nPhase transition in compressed sensing\nLab on matrix completion\nLab on community detection"
+  },
+  {
+    "objectID": "index.html#exercises",
+    "href": "index.html#exercises",
+    "title": "Advanced applied Statistics",
+    "section": "Exercises",
+    "text": "Exercises\n\nExercises on compressed sensing"
+  },
+  {
+    "objectID": "recommendation_systems.html#the-subdifferential-of-a-convex-function",
+    "href": "recommendation_systems.html#the-subdifferential-of-a-convex-function",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The subdifferential of a convex function",
+    "text": "The subdifferential of a convex function\n\n\n\n\nDefinition (Subdifferential)\n\n\nLet \\(f:C\\to\\R\\) be a convex function (on a convex set \\(C\\subset\\R^n\\)). Let \\(x\\in C\\). The Subdifferential of \\(f\\) in \\(x\\) is the set \\[\\partial^-f(x)=\\big\\{g\\in\\R^n:f(y)\\geq f(x)+\\inr{g,y-x},\\ \\forall y\\in C\\big\\}.\\] Its elements are called the subgradients.\n\n\n\n\n\n\n\n\n\nExercise 1: Show that if \\(f\\) is a convex function that is differentiable at \\(x\\) then \\(\\partial^-f(x)=\\{\\nabla f(x)\\}\\).\nExercise 2: Compute the gradient of the absolute function \\(t\\to|t|\\) at all points of \\(\\bR\\).\nExercise 3: Let \\(f\\) be a convex function: show that \\(x^*\\) is solution to \\(\\min_{x\\in C}f(x)\\) iff \\(0\\in \\partial^-f(x^*)\\).\nExercise 4: Compute the subdifferential of the Euclidean norm over \\(\\mathbb{R}^p\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#proximal-operators",
+    "href": "recommendation_systems.html#proximal-operators",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Proximal operators",
+    "text": "Proximal operators\n\n\n\n\nDefinition (proximal operator)\n\n\nFor a convex function \\(g:\\R^n\\to\\R\\), \\[{\\rm prox}_g(x)=\\argmin_{u\\in\\R^n}\\Big(\\frac12\\norm{u-x}_2^2+g(u)\\Big).\\]\n\n\n\n\n\nIt generalizes projections. If \\(i_K\\) is the indicator of \\(K\\) (\\(0\\) on \\(K\\), \\(+\\infty\\) outside), then \\[\\argmin_{y\\in K}\\norm{x-y}_2=\\argmin_{y\\in\\R^n}\\Big(\\frac12\\norm{x-y}_2^2+i_K(y)\\Big)={\\rm prox}_{i_K}(x).\\]\n\n\n\nExercise 1: Let \\(K\\) be a non-empty closed and convex set and denote by \\(i_K\\) its indicator. Then for all \\(\\gamma&gt;0\\), \\({\\rm prox}_{\\gamma i_C}(x) = P_C(x)\\), where \\(P_K\\) is the projection operator over \\(K\\).\nExercise 2: Let \\(f(u)=|u|\\) and let \\(\\gamma &gt; 0\\). Show that \\({\\rm prox}_{\\gamma f}(x) = {\\rm sign}(x) \\max(|x| - \\gamma, 0).\\)"
+  },
+  {
+    "objectID": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-gradient-proximal",
+    "href": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-gradient-proximal",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Matrix completion on pictures via SDP and gradient proximal",
+    "text": "Matrix completion on pictures via SDP and gradient proximal\n\n\nOpen the notebook lab_mat_completion.ipynb"
+  },
+  {
+    "objectID": "recommendation_systems.html#gradient-proximal-vs-neural-recommendation-systems",
+    "href": "recommendation_systems.html#gradient-proximal-vs-neural-recommendation-systems",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Gradient proximal VS Neural recommendation systems",
+    "text": "Gradient proximal VS Neural recommendation systems\n\n\nOpen the notebook deep-learning-recommender-systems.ipynb"
+  },
+  {
+    "objectID": "recommendation_systems.html#gradient-proximal-vs-neural-collaborative-filtering",
+    "href": "recommendation_systems.html#gradient-proximal-vs-neural-collaborative-filtering",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Gradient proximal VS Neural collaborative filtering",
+    "text": "Gradient proximal VS Neural collaborative filtering\n\n\nOpen the notebook deep-learning-recommender-systems.ipynb"
   }
 ]

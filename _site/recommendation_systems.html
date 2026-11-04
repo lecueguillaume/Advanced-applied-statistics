@@ -290,19 +290,11 @@ Guillaume Lecué
 <section>
 <section id="introduction" class="title-slide slide level1 center">
 <h1>Introduction</h1>
-<!-- ======================================================== -->
-<!-- TODO: Matrix completion and recommendation systems               -->
-<!--                                                          -->
-<!-- Source folders: manuscript_english/4_matrice_completion                                           
-<!--                                                          -->
-<!-- Scope:                                                   -->
-<!--   Follow the same architecture of the slide deck as in the file 10_matrice_completion.tex                                          -->
-<!-- ======================================================== -->
 <!-- Source: manuscript_english/4_matrice_completion/10_matrice_completion.tex -->
 </section>
 <section id="reconstructing-a-matrix-from-few-linear-measurements" class="slide level2 smaller">
 <h2>Reconstructing a matrix from few linear measurements</h2>
-<div class="box-red">
+<div class="box-red" style="font-size: 1.15em;">
 <p>Unknown matrix <span class="math inline">\(A^*\in\R^{u\times v}\)</span>, observed through <span class="math inline">\(m\)</span> linear measurements <span class="math display">\[y_i=\inr{A^*,X_i},\qquad i=1,\ldots,m,\qquad\text{where }\inr{A,B}=\sum_{i,j}A_{ij}B_{ij}.\]</span></p>
 </div>
 <ul>
@@ -311,11 +303,11 @@ Guillaume Lecué
 <li>The natural structure here is <strong>low rank</strong>: <span class="math inline">\({\rm rank}(A^*)=r\ll u\wedge v\)</span>.</li>
 </ul>
 <div class="fragment">
-<div title="Key Idea: low rank is the low-dimensional structure of the 'signal'$A^*$">
+<div title="Idea: low rank is the low-dimensional structure of the 'signal'$A^*$">
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Key Idea: low rank is the low-dimensional structure of the ‘signal’<span class="math inline">\(A^*\)</span></strong></p>
+<p><strong>Idea: low rank is the low-dimensional structure of the ‘signal’<span class="math inline">\(A^*\)</span></strong></p>
 </div>
 <div class="callout-content">
 <p>To reconstruct a matrix from a small number of linear measurements, the low-rank assumption plays the role that sparsity played for vectors.</p>
@@ -358,17 +350,11 @@ Guillaume Lecué
 <li>Only <span class="math inline">\(100\,480\,507\)</span> ratings were observed, about <span class="math inline">\(1.2\%\)</span> of the <span class="math inline">\(uv\)</span> possible entries.</li>
 </ul>
 <div class="fragment">
-<div title="Idea: recommendation = completion of the users/items matrix">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Idea: recommendation = completion of the users/items matrix</strong></p>
+<div style="height: 90px;">
+
 </div>
-<div class="callout-content">
-<p>One can build a recommender system by completing the users/items matrix.</p>
-</div>
-</div>
-</div>
+<div class="box-green">
+<p><strong>Idea:</strong> One can build a recommender system by completing the users/items matrix.</p>
 </div>
 </div>
 </section>
@@ -376,7 +362,7 @@ Guillaume Lecué
 <h2>Matrix completion as linear measurements</h2>
 <ul>
 <li>Let <span class="math inline">\(E_{p,q}\)</span> be the matrix with a <span class="math inline">\(1\)</span> at entry <span class="math inline">\((p,q)\)</span> and <span class="math inline">\(0\)</span> elsewhere: <span class="math inline">\((E_{p,q})_{p,q}\)</span> is the canonical basis of <span class="math inline">\(\mathbb{R}^{u\times v}\)</span>.</li>
-<li>If user <span class="math inline">\(p\)</span> rated item <span class="math inline">\(q\)</span> with <span class="math inline">\(y_{p,q}\)</span>, then <span class="math display">\[y_{p,q}=A^*_{p,q}=\inr{A^*,E_{p,q}}.\]</span></li>
+<li>If user <span class="math inline">\(p\)</span> rated item <span class="math inline">\(q\)</span> with grade <span class="math inline">\(y_{p,q}\)</span>, then <span class="math display">\[y_{p,q}=A^*_{p,q}=\inr{A^*,E_{p,q}}.\]</span></li>
 <li>With <span class="math inline">\(\Omega=\{(p,q):\text{user }p\text{ rated item }q\}\)</span>, we observe <span class="math inline">\((A^*_{p,q})_{(p,q)\in\Omega}\)</span>.</li>
 </ul>
 <div class="fragment">
@@ -587,7 +573,7 @@ Guillaume Lecué
 </div>
 <p><em>Note:</em> <span class="math inline">\(f^*\)</span> is defined over the entire space <span class="math inline">\(H\)</span> even though <span class="math inline">\(f\)</span> may only be defined over <span class="math inline">\(C\)</span>.</p>
 <div class="box-green">
-<p><em>Exercise:</em> Show that <span class="math inline">\(f^*\)</span> is convex even when <span class="math inline">\(f\)</span> is not.</p>
+<p><em>Exercise:</em> Show that <span class="math inline">\(f^*\)</span> is convex (even when <span class="math inline">\(f\)</span> is not).</p>
 </div>
 <div title="Definition (biconjugate)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -596,7 +582,7 @@ Guillaume Lecué
 <p><strong>Definition (biconjugate)</strong></p>
 </div>
 <div class="callout-content">
-<p>The <strong>biconjugate</strong> of <span class="math inline">\(f\)</span> is the function <span class="math display">\[f^{**}:y\in H\to\sup_{x\in H}\big(\inr{x,y}-f^*(x)\big).\]</span></p>
+<p>The <strong>biconjugate</strong> of <span class="math inline">\(f\)</span> is the function <span class="math inline">\(f^{**}:y\in H\to\sup_{x\in H}\big(\inr{x,y}-f^*(x)\big).\)</span></p>
 </div>
 </div>
 </div>
@@ -611,7 +597,7 @@ Guillaume Lecué
 <p><strong>Theorem</strong></p>
 </div>
 <div class="callout-content">
-<p>Let <span class="math inline">\(H\)</span> be a Hilbert space, <span class="math inline">\(C\subset H\)</span> convex and <span class="math inline">\(f:C\to\R\)</span>. Then, for every <span class="math inline">\(x\in C\)</span>, <span class="math inline">\(f^{**}(x)={\rm conv}(f)(x)\)</span>.</p>
+<p>Let <span class="math inline">\(H\)</span> be a Hilbert space, <span class="math inline">\(C\subset H\)</span> convex and <span class="math inline">\(f:C\to\R\)</span>. Then, <span class="math display">\[\forall x\in C, f^{**}(x)={\rm conv}(f)(x).\]</span></p>
 </div>
 </div>
 </div>
@@ -636,17 +622,8 @@ Guillaume Lecué
 <div style="height: 1cm;">
 
 </div>
-<div title="Idea: compute the biconjugate">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Idea: compute the biconjugate</strong></p>
-</div>
-<div class="callout-content">
-<p>To find the convex envelope of the rank, it suffices to compute its biconjugate.</p>
-</div>
-</div>
-</div>
+<div class="box-green">
+<p><strong>Idea:</strong> To find the convex envelope of the rank, it suffices to compute its biconjugate.</p>
 </div>
 </div>
 </section>
@@ -905,24 +882,30 @@ Guillaume Lecué
 <p><strong>Key Idea: avoid the SDP</strong></p>
 </div>
 <div class="callout-content">
-<p>The SDP reformulation is hard to solve in high dimension. We now build gradient-type algorithms that work directly on the matrix.</p>
+<p>The SDP reformulation is hard to solve in high dimension. We now build a first order algorithms that work directly on the matrix.</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="two-procedures-rank-constraint-and-nuclear-norm-penalty" class="slide level2 smaller scrollable">
+<section id="two-procedures-rank-constraint-and-nuclear-norm-penalty" class="slide level2 smaller">
 <h2>Two procedures: rank constraint and nuclear norm penalty</h2>
-<ol type="1">
-<li><p><strong>Rank-constrained least squares:</strong> <span class="math display">\[\tilde A\in\argmin_{{\rm rank}(A)\leq r}\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}\]</span></p></li>
-<li><p><strong>Nuclear-norm-penalized least squares:</strong> <span class="math display">\[\bar A\in\argmin_{A}\Big(\frac12\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}^2+\lambda\norm{A}_{S_1}\Big)\]</span></p></li>
-</ol>
-<div class="fragment">
+<div class="box-yellow">
+<p><strong>Rank-constrained least squares:</strong> <span class="math display">\[
+\tilde A\in\argmin_{{\rm rank}(A)\leq r}\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}
+\]</span></p>
+</div>
+<div class="box-yellow">
+<p><strong>Nuclear-norm-penalized least squares:</strong> <span class="math display">\[\bar A\in\argmin_{A}\Big(\frac12\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}^2+\lambda\norm{A}_{S_1}\Big)\]</span></p>
+</div>
 <ul>
 <li>Both combine a <strong>data-fidelity term</strong> <span class="math inline">\(A\mapsto\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}\)</span> with a rank constraint or a nuclear norm regularization.</li>
-<li>They are implemented with matrix versions of <strong>hard</strong> and <strong>soft thresholding</strong>, which act on the spectrum.</li>
 </ul>
+<div class="fragment">
+<div class="box-red" style="text-align: center;">
+<p>Let us now construct first order algorithms to approximate their solutions based on matrix versions of <strong>hard</strong> and <strong>soft thresholding</strong> acting on the spectrum.</p>
+</div>
 </div>
 </section>
 <section id="projected-gradient-for-the-rank-constraint" class="slide level2 smaller">
@@ -976,27 +959,50 @@ Guillaume Lecué
 </div>
 </div>
 </div>
-<p><strong>Proof.</strong></p>
 <div class="fragment">
+<p><strong>Proof.</strong></p>
 <ol type="1">
 <li>von Neumann: <span class="math inline">\(\norm{A-B}_{S_2}\geq\norm{\sigma_A-\sigma_B}_2\)</span>, with equality for <span class="math inline">\(B=P\,{\rm diag}(\sigma_B)Q^\top\)</span>.</li>
 <li>If <span class="math inline">\({\rm rank}(B)\leq r\)</span>, then <span class="math inline">\(\norm{\sigma_A-\sigma_B}_2^2\geq\sum_{j&gt;r}\sigma_j(A)^2\)</span>, with equality for <span class="math inline">\(\sigma_B=(\sigma_1,\ldots,\sigma_r,0,\ldots,0)\)</span>. <span class="math inline">\(\square\)</span></li>
 </ol>
 </div>
 <div class="fragment">
+<div class="box-green">
 <ul>
 <li>Cost: one SVD per iteration, and only the <span class="math inline">\(r\)</span> leading singular triplets are needed.</li>
+<li>It is a very special case where one can solve efficiently a non-convex optimization problem.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="the-subdifferential-of-a-convex-function" class="slide level2 smaller">
+<h2>The subdifferential of a convex function</h2>
+<div title="Definition (Subdifferential)">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Definition (Subdifferential)</strong></p>
+</div>
+<div class="callout-content">
+<p>Let <span class="math inline">\(f:C\to\R\)</span> be a convex function (on a convex set <span class="math inline">\(C\subset\R^n\)</span>). Let <span class="math inline">\(x\in C\)</span>. The <strong>Subdifferential of <span class="math inline">\(f\)</span> in <span class="math inline">\(x\)</span></strong> is the set <span class="math display">\[\partial^-f(x)=\big\{g\in\R^n:f(y)\geq f(x)+\inr{g,y-x},\ \forall y\in C\big\}.\]</span> Its elements are called the <strong>subgradients</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+<div style="height: 40px;">
+
+</div>
+<div class="box-green">
+<ul>
+<li><strong>Exercise 1:</strong> Show that if <span class="math inline">\(f\)</span> is a convex function that is differentiable at <span class="math inline">\(x\)</span> then <span class="math inline">\(\partial^-f(x)=\{\nabla f(x)\}\)</span>.</li>
+<li><strong>Exercise 2:</strong> Compute the gradient of the absolute function <span class="math inline">\(t\to|t|\)</span> at all points of <span class="math inline">\(\bR\)</span>.</li>
+<li><strong>Exercise 3:</strong> Let <span class="math inline">\(f\)</span> be a convex function: show that <span class="math inline">\(x^*\)</span> is solution to <span class="math inline">\(\min_{x\in C}f(x)\)</span> iff <span class="math inline">\(0\in \partial^-f(x^*)\)</span>.</li>
+<li><strong>Exercise 4:</strong> Compute the subdifferential of the Euclidean norm over <span class="math inline">\(\mathbb{R}^p\)</span>.</li>
 </ul>
 </div>
 </section>
-<section id="subdifferentials-and-proximal-operators" class="slide level2 smaller">
-<h2>Subdifferentials and proximal operators</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<ul>
-<li><strong>Subdifferential</strong> of a convex <span class="math inline">\(f:U\to\R\)</span>, with <span class="math inline">\(U\subset\R^n\)</span> convex: <span class="math display">\[\partial^-f(x)=\big\{g\in\R^n:f(y)\geq f(x)+\inr{g,y-x},\ \forall y\in U\big\}.\]</span> Its elements are the <strong>subgradients</strong>.</li>
-</ul>
-</div><div class="column" style="width:50%;">
+<section id="proximal-operators" class="slide level2 smaller">
+<h2>Proximal operators</h2>
 <div title="Definition (proximal operator)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -1009,10 +1015,13 @@ Guillaume Lecué
 </div>
 </div>
 </div>
-</div></div>
-<div class="fragment">
 <ul>
 <li><strong>It generalizes projections.</strong> If <span class="math inline">\(i_K\)</span> is the indicator of <span class="math inline">\(K\)</span> (<span class="math inline">\(0\)</span> on <span class="math inline">\(K\)</span>, <span class="math inline">\(+\infty\)</span> outside), then <span class="math display">\[\argmin_{y\in K}\norm{x-y}_2=\argmin_{y\in\R^n}\Big(\frac12\norm{x-y}_2^2+i_K(y)\Big)={\rm prox}_{i_K}(x).\]</span></li>
+</ul>
+<div class="box-green">
+<ul>
+<li><strong>Exercise 1:</strong> Let <span class="math inline">\(K\)</span> be a non-empty closed and convex set and denote by <span class="math inline">\(i_K\)</span> its indicator. Then for all <span class="math inline">\(\gamma&gt;0\)</span>, <span class="math inline">\({\rm prox}_{\gamma i_C}(x) = P_C(x)\)</span>, where <span class="math inline">\(P_K\)</span> is the projection operator over <span class="math inline">\(K\)</span>.</li>
+<li><strong>Exercise 2:</strong> Let <span class="math inline">\(f(u)=|u|\)</span> and let <span class="math inline">\(\gamma &gt; 0\)</span>. Show that <span class="math inline">\({\rm prox}_{\gamma f}(x) = {\rm sign}(x) \max(|x| - \gamma, 0).\)</span></li>
 </ul>
 </div>
 </section>
@@ -1024,22 +1033,6 @@ Guillaume Lecué
 <li>The problem is <strong>separable</strong>: <span class="math inline">\(\ \frac12\norm{u-z}_2^2+\gamma\norm{u}_1=\sum_j\Big(\frac12(u_j-z_j)^2+\gamma|u_j|\Big)\)</span>.</li>
 <li>Scalar problem: study <span class="math inline">\(\varphi(t)=\frac12(s-t)^2+\gamma|t|\)</span> on <span class="math inline">\(t&lt;0\)</span>, <span class="math inline">\(t=0\)</span> and <span class="math inline">\(t&gt;0\)</span>: <span class="math display">\[\argmin_{t\in\R}\varphi(t)=\begin{cases}s-\gamma&amp;\text{if }s\geq\gamma\\0&amp;\text{if }|s|\leq\gamma\\s+\gamma&amp;\text{if }s\leq-\gamma\end{cases}={\rm sgn}(s)\big(|s|-\gamma\big)_+.\]</span></li>
 </ul>
-<div title="Proposition (proximal maps of $\ell_1$ and $\ell_0$)">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Proposition (proximal maps of <span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_0\)</span>)</strong></p>
-</div>
-<div class="callout-content">
-<p>For <span class="math inline">\(z\in\R^N\)</span>:</p>
-<ul>
-<li><strong>soft thresholding:</strong> <span class="math inline">\({\rm prox}_{\gamma\norm{\cdot}_1}(z)=\big({\rm sgn}(z_j)(|z_j|-\gamma)_+\big)_{j=1}^N\)</span>;</li>
-<li><strong>hard thresholding:</strong> <span class="math inline">\({\rm prox}_{(\gamma^2/2)\norm{\cdot}_0}(z)=\big(z_j\,I(|z_j|\geq\gamma)\big)_{j=1}^N\)</span>.</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
 </div><div class="column" style="width:42%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1052,6 +1045,28 @@ Guillaume Lecué
 </div>
 </div>
 </div></div>
+<div title="Proposition (proximal maps of $\ell_1$ and $\ell_0$)">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Proposition (proximal maps of <span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_0\)</span>)</strong></p>
+</div>
+<div class="callout-content">
+<p>For <span class="math inline">\(z\in\R^N\)</span>:</p>
+<div class="columns" style="align-items: center;">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>soft thresholding:</strong> <span class="math inline">\({\rm prox}_{\gamma\norm{\cdot}_1}(z)=\big({\rm sgn}(z_j)(|z_j|-\gamma)_+\big)_{j=1}^N\)</span>;</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li><strong>hard thresholding:</strong> <span class="math inline">\({\rm prox}_{(\gamma^2/2)\norm{\cdot}_0}(z)=\big(z_j\,I(|z_j|\geq\gamma)\big)_{j=1}^N\)</span>.</li>
+</ul>
+</div></div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="fixed-point-characterization-of-proximal-gradient-descent" class="slide level2 smaller scrollable">
 <h2>Fixed-point characterization of proximal gradient descent</h2>
@@ -1067,8 +1082,8 @@ Guillaume Lecué
 </div>
 </div>
 </div>
-<p><strong>Proof.</strong></p>
 <div class="fragment">
+<p><strong>Proof.</strong></p>
 <ol type="1">
 <li>Replacing <span class="math inline">\((f,g)\)</span> by <span class="math inline">\((\gamma f,\gamma g)\)</span>, we may take <span class="math inline">\(\gamma=1\)</span>.</li>
 <li>By the optimality condition for the prox: <span class="math inline">\(\ u^*={\rm prox}_g(z)\iff z-u^*\in\partial^-g(u^*)\)</span>.</li>
@@ -1095,8 +1110,8 @@ Guillaume Lecué
 </div>
 </div>
 </div>
-<p><strong>Proof.</strong></p>
 <div class="fragment">
+<p><strong>Proof.</strong></p>
 <ol type="1">
 <li>von Neumann: <span class="math inline">\(\norm{A-B}_{S_2}^2=\norm{A}_{S_2}^2+\norm{B}_{S_2}^2-2\inr{A,B}\geq\norm{\sigma_A-\sigma_B}_2^2\)</span>, with equality for <span class="math inline">\(B=U\,{\rm diag}(\sigma_B)V^\top\)</span>.</li>
 <li>So the prox has the form <span class="math inline">\(U{\rm diag}(\hat d)V^\top\)</span>, with <span class="math inline">\(\hat d={\rm prox}_{\gamma\norm{\cdot}_1}(\sigma_A)\)</span>.</li>
@@ -1121,8 +1136,6 @@ Guillaume Lecué
 <ul>
 <li>Same cost for both methods: no SDP, but one SVD (or a truncated SVD) per iteration, which can still be expensive.</li>
 </ul>
-<div class="columns">
-<div class="column" style="width:55%;">
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -1149,20 +1162,17 @@ Guillaume Lecué
 </tr>
 </tbody>
 </table>
-</div><div class="column" style="width:45%;">
-<div title="Key Idea: thresholding the spectrum">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Key Idea: thresholding the spectrum</strong></p>
+<div class="box-green">
+<p><strong>Key Idea: thresholding the spectrum:</strong> Projecting onto low-rank matrices and computing the prox of the nuclear norm give matrix completion algorithms by projected or proximal gradient descent.</p>
 </div>
-<div class="callout-content">
-<p>Projecting onto low-rank matrices and computing the prox of the nuclear norm give matrix completion algorithms by projected or proximal gradient descent.</p>
-</div>
-</div>
+</section>
+<section id="matrix-completion-on-pictures-via-sdp-and-gradient-proximal" class="slide level2">
+<h2>Matrix completion on pictures via SDP and gradient proximal</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 550px;">
+<div class="box-green" style="text-align: center; max-width: 850px; width: 100%;">
+<p>Open the notebook <code>lab_mat_completion.ipynb</code></p>
 </div>
 </div>
-</div></div>
 </section></section>
 <section>
 <section id="matrix-factorization-and-metadata-for-recommender-systems" class="title-slide slide level1 center">
@@ -1680,11 +1690,22 @@ Guillaume Lecué
 </div>
 </div>
 </div>
+</section>
+<section id="gradient-proximal-vs-neural-collaborative-filtering" class="slide level2">
+<h2>Gradient proximal VS Neural collaborative filtering</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 550px;">
+<div class="box-green" style="text-align: center; max-width: 850px; width: 100%;">
+<p>Open the notebook <code>deep-learning-recommender-systems.ipynb</code></p>
+</div>
+</div>
 </section></section>
 <section>
 <section id="study-of-exact-recovery-by-nuclear-norm-minimization" class="title-slide slide level1 center">
 <h1>Study of Exact Recovery by Nuclear Norm Minimization</h1>
-
+<div class="box-yellow">
+<p>Extend the RIP approach from the signal-vector case to matrices. <br></p>
+<p><strong>Key Idea:</strong> So far, random measurements are the best.</p>
+</div>
 </section>
 <section id="the-exact-recovery-property-rer" class="slide level2 smaller scrollable">
 <h2>The exact recovery property <span class="math inline">\(RE(r)\)</span></h2>
@@ -2409,7 +2430,7 @@ Guillaume Lecué
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/lecueguillaume\.github\.io\/Advanced-applied-statistics\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
