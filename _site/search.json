@@ -4,7 +4,7 @@
     "href": "recommendation_systems.html#reconstructing-a-matrix-from-few-linear-measurements",
     "title": "Matrix completion and recommendation systems",
     "section": "Reconstructing a matrix from few linear measurements",
-    "text": "Reconstructing a matrix from few linear measurements\n\nUnknown matrix \\(A^*\\in\\R^{u\\times v}\\), observed through \\(m\\) linear measurements \\[y_i=\\inr{A^*,X_i},\\qquad i=1,\\ldots,m,\\qquad\\text{where }\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}.\\]\n\n\n\\(uv\\) unknowns parameters but only \\(m\\ll uv\\) equations: a highly underdetermined problem, as in compressed sensing.\nIt becomes solvable when the ‘true dimension’ of \\(A^*\\) is much smaller than \\(uv\\), and in particular smaller than \\(m\\).\nThe natural structure here is low rank: \\({\\rm rank}(A^*)=r\\ll u\\wedge v\\).\n\n\n\n\n\n\nIdea: low rank is the low-dimensional structure of the ‘signal’\\(A^*\\)\n\n\nTo reconstruct a matrix from a small number of linear measurements, the low-rank assumption plays the role that sparsity played for vectors."
+    "text": "Reconstructing a matrix from few linear measurements\n\nUnknown matrix \\(A^*\\in\\R^{u\\times v}\\), observed through \\(m\\) linear measurements \\[y_i=\\inr{A^*,X_i},\\qquad i=1,\\ldots,m,\\qquad\\text{where }\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}.\\]\n\n\n\\(uv\\) unknowns parameters but only \\(m\\ll uv\\) equations: a highly underdetermined problem, as in compressed sensing.\nIt becomes solvable when the true dimension of \\(A^*\\) is much smaller than \\(uv\\), and in particular smaller than \\(m\\).\nThe natural structure here is low rank: \\({\\rm rank}(A^*)=r\\ll u\\wedge v\\).\n\n\n\n\n\n\nIdea: low rank is the low-dimensional structure of the ‘signal’\\(A^*\\)\n\n\nTo reconstruct a matrix from a small number of linear measurements, the low-rank assumption plays the role that sparsity played for vectors."
   },
   {
     "objectID": "recommendation_systems.html#recommender-systems-by-completion-of-the-usersitems-matrix",
@@ -18,14 +18,14 @@
     "href": "recommendation_systems.html#the-netflix-prize",
     "title": "Matrix completion and recommendation systems",
     "section": "The Netflix Prize",
-    "text": "The Netflix Prize\n\nThe matrix-completion viewpoint became very popular after the Netflix Prize.\n\\(u=480\\,189\\) users and \\(v=17\\,770\\) items (movies).\nRatings range from \\(1\\) (“did not like it”) to \\(5\\) (“liked it very much”).\nOnly \\(100\\,480\\,507\\) ratings were observed, about \\(1.2\\%\\) of the \\(uv\\) possible entries.\n\n\n\n\n\n\nIdea: One can build a recommender system by completing the users/items matrix."
+    "text": "The Netflix Prize\n\nThe matrix-completion viewpoint became very popular after the Netflix Prize.\n\\(480\\,189\\) users and \\(17\\,770\\) items (movies).\nRatings range from \\(1\\) (“did not like it”) to \\(5\\) (“liked it very much”).\nOnly \\(100\\,480\\,507\\) ratings were observed, about \\(1.2\\%\\) of all possible entries.\n\n\n\nIdea: One can build a recommender system by completing the users/items matrix.\n\n\n\n\n\nQ1: Write the data in the Netflix Prize as a matrix \\(A^*\\in\\R^{u\\times v}\\) and a set of linear measurements \\(y_i=\\inr{A^*,X_i}\\) (what are the \\(X_i\\)’s, \\(u,v\\) and \\(m\\)?).\nQ2: Imagine that you have a matrix completion algorithm that can complete the matrix \\(A^*\\) from the linear measurements \\(y_i\\). How would you use this algorithm to build a recommender system?"
   },
   {
     "objectID": "recommendation_systems.html#matrix-completion-as-linear-measurements",
     "href": "recommendation_systems.html#matrix-completion-as-linear-measurements",
     "title": "Matrix completion and recommendation systems",
     "section": "Matrix completion as linear measurements",
-    "text": "Matrix completion as linear measurements\n\nLet \\(E_{p,q}\\) be the matrix with a \\(1\\) at entry \\((p,q)\\) and \\(0\\) elsewhere: \\((E_{p,q})_{p,q}\\) is the canonical basis of \\(\\mathbb{R}^{u\\times v}\\).\nIf user \\(p\\) rated item \\(q\\) with grade \\(y_{p,q}\\), then \\[y_{p,q}=A^*_{p,q}=\\inr{A^*,E_{p,q}}.\\]\nWith \\(\\Omega=\\{(p,q):\\text{user }p\\text{ rated item }q\\}\\), we observe \\((A^*_{p,q})_{(p,q)\\in\\Omega}\\).\n\n\n\nCompleting the matrix is therefore reconstructing \\(A^*\\) from \\(m=|\\Omega|\\) linear measurements, with \\(X_i\\in\\{E_{p,q}:1\\leq p\\leq u,\\ 1\\leq q\\leq v\\}\\).\nThe solution set \\(\\{A:\\inr{A,X_i}=y_i,\\ i=1,\\ldots,m\\}\\) is an affine space, so without extra structure the problem has no unique solution."
+    "text": "Matrix completion as linear measurements\n\nLet \\(E_{p,q}\\) be the matrix with a \\(1\\) at entry \\((p,q)\\) and \\(0\\) elsewhere: \\((E_{p,q})_{p,q}\\) is the canonical basis of \\(\\mathbb{R}^{u\\times v}\\).\nIf user \\(p\\) rated item \\(q\\) with grade \\(y_{p,q}\\), then \\(y_{p,q}=A^*_{p,q}=\\inr{A^*,E_{p,q}}.\\)\nWith \\(\\Omega=\\{(p,q):\\text{user }p\\text{ rated item }q\\}\\), we observe \\((A^*_{p,q})_{(p,q)\\in\\Omega}\\).\n\n\n\nCompleting the matrix is therefore reconstructing \\(A^*\\) from \\(m=|\\Omega|\\) linear measurements, with \\(X_i\\in\\{E_{p,q}:1\\leq p\\leq u,\\ 1\\leq q\\leq v\\}\\).\n\n\n\n\nThe solution set \\(\\{A:\\inr{A,X_i}=y_i,\\ i=1,\\ldots,m\\}\\) is an affine space, so without extra structure the problem has no unique solution.\nQ.: Why is the low-rank assumption a natural assumption for the users/items matrix in the Netflix Prize?"
   },
   {
     "objectID": "recommendation_systems.html#the-low-rank-assumption",
@@ -46,14 +46,14 @@
     "href": "recommendation_systems.html#rank-minimization-procedure",
     "title": "Matrix completion and recommendation systems",
     "section": "Rank minimization procedure",
-    "text": "Rank minimization procedure\n\nQuestions. Given \\(y_i=\\inr{A^*,X_i}\\) with \\(A^*\\) of low rank:\n\nHow can \\(A^*\\) be reconstructed exactly?\nHow many measurements \\(m\\) are needed, and how should \\(X_1,\\ldots,X_m\\) be chosen?\nFor matrix completion: what happens when the \\(X_i\\) must be taken in \\(\\{E_{p,q}\\}\\)?\n\n\n\n\n\n\n\n\n\n\nDefinition (rank minimization)\n\n\n\\[\\min\\Big({\\rm rank}(A):\\inr{A,X_i}=y_i,\\ i=1,\\ldots,m\\Big)\\]\n\n\n\n\n\n\n\n\nThe analog of \\(\\ell_0\\) minimization (the rank is the \\(\\ell_0\\) norm of the spectrum): look for the solution of smallest rank among all matrices with the same measurements.\nWe could study it as we studied \\(\\ell_0\\) minimization, but it fails for the same algorithmic reason."
+    "text": "Rank minimization procedure\n\nProblems: Given \\(y_i=\\inr{A^*,X_i}\\) with \\(A^*\\) of low rank:\n\nHow can \\(A^*\\) be reconstructed exactly?\nHow many measurements \\(m\\) are needed, and how should \\(X_1,\\ldots,X_m\\) be chosen?\nFor matrix completion: what happens when the \\(X_i\\)’s must be taken in \\(\\{E_{p,q}\\}\\)?\n\n\n\n\n\n\n\nDefinition (rank minimization)\n\n\n\\[\\min\\Big({\\rm rank}(A):\\inr{A,X_i}=y_i,\\ i=1,\\ldots,m\\Big)\\]\n\n\n\n\n\n\n\n\nThe analog of \\(\\ell_0\\) minimization (the rank is the \\(\\ell_0\\) norm of the spectrum): look for the solution of smallest rank among all matrices with the same measurements.\nWe could study it as we studied \\(\\ell_0\\) minimization, but it fails for the same algorithmic reason."
   },
   {
     "objectID": "recommendation_systems.html#rank-minimization-is-np-hard",
     "href": "recommendation_systems.html#rank-minimization-is-np-hard",
     "title": "Matrix completion and recommendation systems",
     "section": "Rank minimization is NP-hard",
-    "text": "Rank minimization is NP-hard\n\n\n\n\nProposition\n\n\nFinding a solution to rank minimization over an affine space, \\(\\min_{\\cA(A)=y}{\\rm rank}(A)\\), is NP-hard in general.\n\n\n\n\n\n\nReduction from \\(\\ell_0\\). Start from any problem \\(\\min_{Bt=b}\\norm{t}_0\\) with \\(B\\in\\R^{m_0\\times N}\\). Take \\(u=v=N\\) and \\(m=m_0+N^2\\).\nDefine \\(\\cA(A)=\\begin{pmatrix}B\\,{\\rm diag}(A)\\\\ A-{\\rm diag}(A)\\end{pmatrix}\\) and \\(y=\\begin{pmatrix}b\\\\0\\end{pmatrix}\\), where \\({\\rm diag}(A)=(a_{ii})_{i=1}^N\\).\nThen \\(\\{A:\\cA(A)=y\\}\\) is the set of diagonal matrices whose diagonal \\(t\\) satisfies \\(Bt=b\\), and the rank of a diagonal matrix is the \\(\\ell_0\\) “norm” of its diagonal.\nSo a rank-minimization solver also solves \\(\\ell_0\\) minimization, through a polynomial-time construction. Since \\(\\ell_0\\) minimization is NP-hard, so is rank minimization.\n\n\n\n\n\n\n\nThe affine constraint is easy; the nonconvex objective \\(A\\mapsto{\\rm rank}(A)\\) is the difficulty. Convex relaxation replaces it by the “closest convex function”.\nCan you guess what is the convex relaxation of the rank function (on some set)?"
+    "text": "Rank minimization is NP-hard\n\n\n\n\nProposition\n\n\nFinding a solution to rank minimization over an affine space, \\(\\min_{\\cA(A)=y}{\\rm rank}(A)\\), is NP-hard in general.\n\n\n\n\n\n\nReduction from \\(\\ell_0\\). Start from any problem \\(\\min_{Bt=b}\\norm{t}_0\\) with \\(B\\in\\R^{m_0\\times N}\\). Take \\(u=v=N\\) and \\(m=m_0+N^2\\).\nDefine \\(\\cA(A)=\\begin{pmatrix}B\\,{\\rm diag}(A)\\\\ A-{\\rm Diag}(A)\\end{pmatrix}\\) and \\(y=\\begin{pmatrix}b\\\\0\\end{pmatrix}\\), where \\({\\rm diag}(A)=(a_{ii})_{i=1}^N\\) and \\({\\rm Diag}(A) = {\\rm diag}(a_{11}, \\ldots, a_{NN})\\in\\bR^{N\\times N}\\).\nThen \\(\\{A:\\cA(A)=y\\}\\) is the set of diagonal matrices whose diagonal \\(t\\) satisfies \\(Bt=b\\), and the rank of a diagonal matrix is the \\(\\ell_0\\) “norm” of its diagonal.\nSo a rank-minimization solver also solves \\(\\ell_0\\) minimization, through a polynomial-time construction. Since \\(\\ell_0\\) minimization is NP-hard, so is rank minimization.\n\n\n\n\nThe affine constraint is easy; the nonconvex objective \\(A\\mapsto{\\rm rank}(A)\\) is the difficulty. Convex relaxation replaces it by the “closest convex function”.\nCan you guess what is the convex relaxation of the rank function (on some set)?"
   },
   {
     "objectID": "recommendation_systems.html#convex-envelope",
@@ -67,7 +67,7 @@
     "href": "recommendation_systems.html#fenchel-transform",
     "title": "Matrix completion and recommendation systems",
     "section": "Fenchel transform",
-    "text": "Fenchel transform\n\n\n\n\nDefinition (Fenchel transform)\n\n\nFor \\(f:C\\to\\R\\) with \\(C\\subset H\\) a convex set, the Fenchel transform of \\(f\\) is \\[f^*: x\\in H \\to \\sup_{y\\in C}\\big(\\inr{x,y}-f(y)\\big).\\]\n\n\n\n\nNote: \\(f^*\\) is defined over the entire space \\(H\\) even though \\(f\\) may only be defined over \\(C\\).\n\nExercise: Show that \\(f^*\\) is convex (even when \\(f\\) is not).\n\n\n\n\n\nDefinition (biconjugate)\n\n\nThe biconjugate of \\(f\\) is the function \\(f^{**}:y\\in H\\to\\sup_{x\\in H}\\big(\\inr{x,y}-f^*(x)\\big).\\)"
+    "text": "Fenchel transform\n\n\n\n\nDefinition (Fenchel transform)\n\n\nFor \\(f:C\\to\\R\\) with \\(C\\subset H\\) a convex set, the Fenchel transform of \\(f\\) is \\[f^*: y\\in H \\to \\sup_{x\\in C}\\big(\\inr{x,y}-f(x)\\big).\\]\n\n\n\n\nNote: \\(f^*\\) is defined over the entire space \\(H\\) even though \\(f\\) may only be defined over \\(C\\).\n\nExercise: Show that \\(f^*\\) is convex (even when \\(f\\) is not).\n\n\n\nExercise: (Negative entropy): Let \\(f : \\mathbb{R} \\to \\mathbb{R} \\cup \\{+\\infty\\}\\) be the univariate negative entropy function defined by: \\[\n    f(x) = \\begin{cases} x \\ln(x) & \\text{if } x &gt; 0, \\\\ 0 & \\text{if } x = 0, \\\\ +\\infty & \\text{if } x &lt; 0. \\end{cases}\n    \\] Show that \\(f^*(y) = e^{y-1}\\) for all \\(y \\in \\mathbb{R}\\)."
   },
   {
     "objectID": "recommendation_systems.html#convex-envelope-biconjugate",
@@ -161,11 +161,18 @@
     "text": "Projection onto matrices of rank at most \\(r\\)\n\n\n\n\nProposition\n\n\nLet \\(A=PDQ^\\top\\) be an SVD of \\(A\\), with \\(D={\\rm diag}(\\sigma_1,\\ldots,\\sigma_{u\\wedge v})\\). A projection of \\(A\\) onto \\(\\{B:{\\rm rank}(B)\\leq r\\}\\) in \\(\\norm{\\cdot}_{S_2}\\) is \\[S_r^{hard}(A)=PD_rQ^\\top,\\qquad D_r={\\rm diag}(\\sigma_1,\\ldots,\\sigma_r,0,\\ldots,0).\\] It is the unique projection when \\(\\sigma_r&gt;\\sigma_{r+1}\\).\n\n\n\n\n\nProof.\n\nvon Neumann: \\(\\norm{A-B}_{S_2}\\geq\\norm{\\sigma_A-\\sigma_B}_2\\), with equality for \\(B=P\\,{\\rm diag}(\\sigma_B)Q^\\top\\).\nIf \\({\\rm rank}(B)\\leq r\\), then \\(\\norm{\\sigma_A-\\sigma_B}_2^2\\geq\\sum_{j&gt;r}\\sigma_j(A)^2\\), with equality for \\(\\sigma_B=(\\sigma_1,\\ldots,\\sigma_r,0,\\ldots,0)\\). \\(\\square\\)\n\n\n\n\n\nCost: one SVD per iteration, and only the \\(r\\) leading singular triplets are needed.\nIt is a very special case where one can solve efficiently a non-convex optimization problem."
   },
   {
-    "objectID": "recommendation_systems.html#subdifferentials-and-proximal-operators",
-    "href": "recommendation_systems.html#subdifferentials-and-proximal-operators",
+    "objectID": "recommendation_systems.html#the-subdifferential-of-a-convex-function",
+    "href": "recommendation_systems.html#the-subdifferential-of-a-convex-function",
     "title": "Matrix completion and recommendation systems",
-    "section": "Subdifferentials and proximal operators",
-    "text": "Subdifferentials and proximal operators\n\n\n\nSubdifferential of a convex \\(f:U\\to\\R\\), with \\(U\\subset\\R^n\\) convex: \\[\\partial^-f(x)=\\big\\{g\\in\\R^n:f(y)\\geq f(x)+\\inr{g,y-x},\\ \\forall y\\in U\\big\\}.\\] Its elements are the subgradients.\n\n\n\n\n\n\nDefinition (proximal operator)\n\n\nFor a convex function \\(g:\\R^n\\to\\R\\), \\[{\\rm prox}_g(x)=\\argmin_{u\\in\\R^n}\\Big(\\frac12\\norm{u-x}_2^2+g(u)\\Big).\\]\n\n\n\n\n\n\n\nIt generalizes projections. If \\(i_K\\) is the indicator of \\(K\\) (\\(0\\) on \\(K\\), \\(+\\infty\\) outside), then \\[\\argmin_{y\\in K}\\norm{x-y}_2=\\argmin_{y\\in\\R^n}\\Big(\\frac12\\norm{x-y}_2^2+i_K(y)\\Big)={\\rm prox}_{i_K}(x).\\]"
+    "section": "The subdifferential of a convex function",
+    "text": "The subdifferential of a convex function\n\n\n\n\nDefinition (Subdifferential)\n\n\nLet \\(f:C\\to\\R\\) be a convex function (on a convex set \\(C\\subset\\R^n\\)). Let \\(x\\in C\\). The Subdifferential of \\(f\\) in \\(x\\) is the set \\[\\partial^-f(x)=\\big\\{g\\in\\R^n:f(y)\\geq f(x)+\\inr{g,y-x},\\ \\forall y\\in C\\big\\}.\\] Its elements are called the subgradients.\n\n\n\n\n\n\n\n\n\nExercise 1: Show that if \\(f\\) is a convex function that is differentiable at \\(x\\) then \\(\\partial^-f(x)=\\{\\nabla f(x)\\}\\).\nExercise 2: Compute the gradient of the absolute function \\(t\\to|t|\\) at all points of \\(\\bR\\).\nExercise 3: Let \\(f\\) be a convex function: show that \\(x^*\\) is solution to \\(\\min_{x\\in C}f(x)\\) iff \\(0\\in \\partial^-f(x^*)\\).\nExercise 4: Compute the subdifferential of the Euclidean norm over \\(\\mathbb{R}^p\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#proximal-operators",
+    "href": "recommendation_systems.html#proximal-operators",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Proximal operators",
+    "text": "Proximal operators\n\n\n\n\nDefinition (proximal operator)\n\n\nFor a convex function \\(g:\\R^n\\to\\R\\), \\[{\\rm prox}_g(x)=\\argmin_{u\\in\\R^n}\\Big(\\frac12\\norm{u-x}_2^2+g(u)\\Big).\\]\n\n\n\n\n\nIt generalizes projections. If \\(i_K\\) is the indicator of \\(K\\) (\\(0\\) on \\(K\\), \\(+\\infty\\) outside), then \\[\\argmin_{y\\in K}\\norm{x-y}_2=\\argmin_{y\\in\\R^n}\\Big(\\frac12\\norm{x-y}_2^2+i_K(y)\\Big)={\\rm prox}_{i_K}(x).\\]\n\n\n\nExercise 1: Let \\(K\\) be a non-empty closed and convex set and denote by \\(i_K\\) its indicator. Then for all \\(\\gamma&gt;0\\), \\({\\rm prox}_{\\gamma i_C}(x) = P_C(x)\\), where \\(P_K\\) is the projection operator over \\(K\\).\nExercise 2: Let \\(f(u)=|u|\\) and let \\(\\gamma &gt; 0\\). Show that \\({\\rm prox}_{\\gamma f}(x) = {\\rm sign}(x) \\max(|x| - \\gamma, 0).\\)"
   },
   {
     "objectID": "recommendation_systems.html#proximal-maps-of-ell_1-and-ell_0",
@@ -194,6 +201,13 @@
     "title": "Matrix completion and recommendation systems",
     "section": "Proximal gradient descent for matrix completion",
     "text": "Proximal gradient descent for matrix completion\n\n\n\n\nAlgorithm (proximal gradient descent)\n\n\nFor \\(\\min_A\\big(F(A)+\\lambda\\norm{A}_{S_1}\\big)\\), with step sizes \\((\\gamma_k)_k\\): \\[A_{k+1}=S_{\\lambda\\gamma_k}^{soft}\\Big(A_k+\\gamma_k\\big(P_\\Omega(A^*)-P_\\Omega(A_k)\\big)\\Big).\\]\n\n\n\n\n\nSame cost for both methods: no SDP, but one SVD (or a truncated SVD) per iteration, which can still be expensive.\n\n\n\n\n\n\n\n\n\nProblem\nMethod\nSpectral step\n\n\n\n\n\\({\\rm rank}(A)\\leq r\\)\nprojected gradient\nhard: keep \\(\\sigma_1,\\ldots,\\sigma_r\\)\n\n\n\\(+\\lambda\\norm{A}_{S_1}\\)\nproximal gradient\nsoft: \\(\\sigma_i\\mapsto(\\sigma_i-\\lambda\\gamma_k)_+\\)\n\n\n\n\nKey Idea: thresholding the spectrum: Projecting onto low-rank matrices and computing the prox of the nuclear norm give matrix completion algorithms by projected or proximal gradient descent."
+  },
+  {
+    "objectID": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-gradient-proximal",
+    "href": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-gradient-proximal",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Matrix completion on pictures via SDP and gradient proximal",
+    "text": "Matrix completion on pictures via SDP and gradient proximal\n\n\nOpen the notebook lab_mat_completion.ipynb"
   },
   {
     "objectID": "recommendation_systems.html#a-latent-space-for-users-and-items",
@@ -355,6 +369,13 @@
     "title": "Matrix completion and recommendation systems",
     "section": "MAE, RMSE and overfitting",
     "text": "MAE, RMSE and overfitting\n\nCompare the predicted ratings \\(\\hat A_{ij}\\) with the test ratings, on the test indices \\(\\Omega_{test}\\): \\[{\\rm MAE}=\\frac{1}{|\\Omega_{test}|}\\sum_{(i,j)\\in\\Omega_{test}}\\big|\\hat A_{ij}-A^*_{ij}\\big|,\\qquad{\\rm RMSE}=\\Big(\\frac{1}{|\\Omega_{test}|}\\sum_{(i,j)\\in\\Omega_{test}}\\big(\\hat A_{ij}-A^*_{ij}\\big)^2\\Big)^{1/2}.\\]\nMAE is an \\(\\ell_1\\) distance and RMSE an \\(\\ell_2\\) distance. Any distance between estimated and observed test ratings can serve as a criterion.\n\n\n\nCompute these criteria on both the training and the test sets. A training error much smaller than the test error signals overfitting.\n\n\n\n\n\nRemark\n\n\nThis diagnosis has recently been called into question: deep networks can make zero error on the training sample and still generalize well, with a reasonable error on the test sample."
+  },
+  {
+    "objectID": "recommendation_systems.html#gradient-proximal-vs-neural-collaborative-filtering",
+    "href": "recommendation_systems.html#gradient-proximal-vs-neural-collaborative-filtering",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Gradient proximal VS Neural collaborative filtering",
+    "text": "Gradient proximal VS Neural collaborative filtering\n\n\nOpen the notebook deep-learning-recommender-systems.ipynb"
   },
   {
     "objectID": "recommendation_systems.html#the-exact-recovery-property-rer",
@@ -1463,38 +1484,31 @@
     "text": "Exercises\n\nExercises on compressed sensing"
   },
   {
-    "objectID": "recommendation_systems.html#the-subdifferential-of-a-convex-function",
-    "href": "recommendation_systems.html#the-subdifferential-of-a-convex-function",
+    "objectID": "recommendation_systems.html#the-rank-of-a-matrix",
+    "href": "recommendation_systems.html#the-rank-of-a-matrix",
     "title": "Matrix completion and recommendation systems",
-    "section": "The subdifferential of a convex function",
-    "text": "The subdifferential of a convex function\n\n\n\n\nDefinition (Subdifferential)\n\n\nLet \\(f:C\\to\\R\\) be a convex function (on a convex set \\(C\\subset\\R^n\\)). Let \\(x\\in C\\). The Subdifferential of \\(f\\) in \\(x\\) is the set \\[\\partial^-f(x)=\\big\\{g\\in\\R^n:f(y)\\geq f(x)+\\inr{g,y-x},\\ \\forall y\\in C\\big\\}.\\] Its elements are called the subgradients.\n\n\n\n\n\n\n\n\n\nExercise 1: Show that if \\(f\\) is a convex function that is differentiable at \\(x\\) then \\(\\partial^-f(x)=\\{\\nabla f(x)\\}\\).\nExercise 2: Compute the gradient of the absolute function \\(t\\to|t|\\) at all points of \\(\\bR\\).\nExercise 3: Let \\(f\\) be a convex function: show that \\(x^*\\) is solution to \\(\\min_{x\\in C}f(x)\\) iff \\(0\\in \\partial^-f(x^*)\\).\nExercise 4: Compute the subdifferential of the Euclidean norm over \\(\\mathbb{R}^p\\)."
+    "section": "The rank of a matrix",
+    "text": "The rank of a matrix\n\nThe rank of a matrix \\(A\\in\\R^{u\\times v}\\) is the number of non-zero singular values of \\(A\\), i.e. the number of non-zero entries in the spectrum of \\(A\\).\n\nIt is also the number of linearly independent rows or columns of \\(A\\), i.e. the dimension of the row space or column space of \\(A\\), which is the same as the dimension of the image of \\(A\\).\n\nWhat are the rank of the following matrices?\n\nthe identity matrix \\(I\\in\\R^{u\\times u}\\)? The matrix full of zeros?\nthe diagonal matrix \\(D={\\rm diag}(d_1,\\ldots,d_s, 0, \\ldots, 0)\\)?\n\\(A=\\begin{pmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9\\end{pmatrix}\\)?\nthe \\(u\\times v\\) matrix with all entries equal to \\(1\\)?\nThe block matrix \\(B=\\begin{pmatrix}A & 0 \\\\ 0 & A\\end{pmatrix}\\), where \\(A\\) is a \\(u\\times v\\) matrix full of ones?\nthe matrix \\(A= x x^\\top\\), where \\(x\\in\\R^u\\) is a vector?"
   },
   {
-    "objectID": "recommendation_systems.html#proximal-operators",
-    "href": "recommendation_systems.html#proximal-operators",
+    "objectID": "recommendation_systems.html#notation-and-dictionnary-vectormatrix",
+    "href": "recommendation_systems.html#notation-and-dictionnary-vectormatrix",
     "title": "Matrix completion and recommendation systems",
-    "section": "Proximal operators",
-    "text": "Proximal operators\n\n\n\n\nDefinition (proximal operator)\n\n\nFor a convex function \\(g:\\R^n\\to\\R\\), \\[{\\rm prox}_g(x)=\\argmin_{u\\in\\R^n}\\Big(\\frac12\\norm{u-x}_2^2+g(u)\\Big).\\]\n\n\n\n\n\nIt generalizes projections. If \\(i_K\\) is the indicator of \\(K\\) (\\(0\\) on \\(K\\), \\(+\\infty\\) outside), then \\[\\argmin_{y\\in K}\\norm{x-y}_2=\\argmin_{y\\in\\R^n}\\Big(\\frac12\\norm{x-y}_2^2+i_K(y)\\Big)={\\rm prox}_{i_K}(x).\\]\n\n\n\nExercise 1: Let \\(K\\) be a non-empty closed and convex set and denote by \\(i_K\\) its indicator. Then for all \\(\\gamma&gt;0\\), \\({\\rm prox}_{\\gamma i_C}(x) = P_C(x)\\), where \\(P_K\\) is the projection operator over \\(K\\).\nExercise 2: Let \\(f(u)=|u|\\) and let \\(\\gamma &gt; 0\\). Show that \\({\\rm prox}_{\\gamma f}(x) = {\\rm sign}(x) \\max(|x| - \\gamma, 0).\\)"
+    "section": "Notation and dictionnary vector/matrix",
+    "text": "Notation and dictionnary vector/matrix\n\nInner product on \\(\\R^{u\\times v}\\): \\(\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}\\).\nSpectrum \\(\\sigma_A=(\\sigma_j(A))_{j=1}^{u\\wedge v}\\): the singular values (square roots of the eigenvalues of \\(A^\\top A\\)), with \\(\\sigma_1(A)\\geq\\cdots\\geq\\sigma_{u\\wedge v}(A)\\geq0\\).\nSchatten norms: \\(\\norm{A}_{S_p}=\\norm{\\sigma_A}_{\\ell_p}=\\Big(\\sum_j\\sigma_j(A)^p\\Big)^{1/p}\\), \\(p\\geq1\\).\nRank = number of nonzero singular values: \\({\\rm rank}(A)=\\norm{\\sigma_A}_{\\ell_0}\\).\n\n\n\n\n\n\n\n\n\n\nNorm\nName\nVector analog\n\n\n\n\n\\(\\norm{\\cdot}_{S_1}\\)\nnuclear norm (trace norm)\n\\(\\ell_1\\)\n\n\n\\(\\norm{\\cdot}_{S_2}\\)\nFrobenius norm (Hilbert norm of \\(\\inr{\\cdot,\\cdot}\\))\n\\(\\ell_2\\)\n\n\n\\(\\norm{\\cdot}_{S_\\infty}\\)\noperator norm \\(\\sup_{\\norm{x}_2=1}\\norm{Ax}_2\\)\n\\(\\ell_\\infty\\)\n\n\n\n\nDuality: \\(\\norm{A}_{S_q}=\\sup\\big(\\inr{A,B}:\\norm{B}_{S_p}\\leq1\\big)\\) when \\(p^{-1}+q^{-1}=1\\).\n\\(\\cS^p\\): symmetric matrices; \\(\\cS^p_+\\): positive semidefinite (\\(A\\succeq0\\)); \\(\\cS^p_{++}\\): positive definite (\\(A\\succ0\\)); \\(\\cO(p)=\\{A:A^\\top A=AA^\\top=I_p\\}\\): orthogonal matrices."
   },
   {
-    "objectID": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-gradient-proximal",
-    "href": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-gradient-proximal",
+    "objectID": "recommendation_systems.html#notation-and-dictionary-vectormatrix",
+    "href": "recommendation_systems.html#notation-and-dictionary-vectormatrix",
     "title": "Matrix completion and recommendation systems",
-    "section": "Matrix completion on pictures via SDP and gradient proximal",
-    "text": "Matrix completion on pictures via SDP and gradient proximal\n\n\nOpen the notebook lab_mat_completion.ipynb"
+    "section": "Notation and dictionary vector/matrix",
+    "text": "Notation and dictionary vector/matrix\n\nInner product on \\(\\R^{u\\times v}\\): \\(\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}\\).\nSpectrum \\(\\sigma_A=(\\sigma_j(A))_{j=1}^{u\\wedge v}\\): the singular values (square roots of the eigenvalues of \\(A^\\top A\\)), with \\(\\sigma_1(A)\\geq\\cdots\\geq\\sigma_{u\\wedge v}(A)\\geq0\\).\nSchatten norms: \\(\\norm{A}_{S_p}=\\norm{\\sigma_A}_{\\ell_p}=\\Big(\\sum_j\\sigma_j(A)^p\\Big)^{1/p}\\), \\(p\\geq1\\).\nRank = number of nonzero singular values: \\({\\rm rank}(A)=\\norm{\\sigma_A}_{\\ell_0}\\).\n\n\n\n\n\n\n\n\n\n\nNorm\nName\nVector analog\n\n\n\n\n\\(\\norm{\\cdot}_{S_1}\\)\nnuclear norm (trace norm)\n\\(\\ell_1\\)\n\n\n\\(\\norm{\\cdot}_{S_2}\\)\nFrobenius norm (Hilbert norm of \\(\\inr{\\cdot,\\cdot}\\))\n\\(\\ell_2\\)\n\n\n\\(\\norm{\\cdot}_{S_\\infty}\\)\noperator norm \\(\\sup_{\\norm{x}_2=1}\\norm{Ax}_2\\)\n\\(\\ell_\\infty\\)\n\n\n\n\n\n\nDuality: \\(\\norm{A}_{S_q}=\\sup\\big(\\inr{A,B}:\\norm{B}_{S_p}\\leq1\\big)\\) when \\(p^{-1}+q^{-1}=1\\).\n\\(\\cS^p\\): symmetric matrices; \\(\\cS^p_+\\): positive semidefinite (\\(A\\succeq0\\)); \\(\\cS^p_{++}\\): positive definite (\\(A\\succ0\\)); \\(\\cO(p)=\\{A:A^\\top A=AA^\\top=I_p\\}\\): orthogonal matrices."
   },
   {
-    "objectID": "recommendation_systems.html#gradient-proximal-vs-neural-recommendation-systems",
-    "href": "recommendation_systems.html#gradient-proximal-vs-neural-recommendation-systems",
+    "objectID": "recommendation_systems.html#the-biconjugate-function",
+    "href": "recommendation_systems.html#the-biconjugate-function",
     "title": "Matrix completion and recommendation systems",
-    "section": "Gradient proximal VS Neural recommendation systems",
-    "text": "Gradient proximal VS Neural recommendation systems\n\n\nOpen the notebook deep-learning-recommender-systems.ipynb"
-  },
-  {
-    "objectID": "recommendation_systems.html#gradient-proximal-vs-neural-collaborative-filtering",
-    "href": "recommendation_systems.html#gradient-proximal-vs-neural-collaborative-filtering",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Gradient proximal VS Neural collaborative filtering",
-    "text": "Gradient proximal VS Neural collaborative filtering\n\n\nOpen the notebook deep-learning-recommender-systems.ipynb"
+    "section": "The biconjugate function",
+    "text": "The biconjugate function\n\n\n\n\nDefinition (biconjugate)\n\n\nThe biconjugate of \\(f\\) is the function \\(f^{**}:x\\in H\\to\\sup_{y\\in H}\\big(\\inr{x,y}-f^*(y)\\big).\\)\n\n\n\n\n\n\nEx.1: Compute the biconjugate of the negative entropy function.\nEx.2: Let \\(f : x\\in \\mathbb{R} \\to (|x| - 1)^2\\) be the double-well function.\n\nShow that \\(f\\) is not convex.\nShow that the Fenchel conjugate is \\(f^*(y)=|y| + \\frac{y^2}{4}\\) for all \\(y \\in \\mathbb{R}\\).\nShow that the Fenchel biconjugate \\(f^{**}(x) = \\begin{cases} 0 & \\text{if } |x| \\leq 1, \\\\ (|x| - 1)^2 & \\text{if } |x| &gt; 1. \\end{cases}\\) for all \\(x \\in \\mathbb{R}\\).\nShow that \\(f^{**}(x) \\leq f(x)\\) for all \\(x \\in \\mathbb{R}\\), and interpret \\(f^{**}\\) geometrically in terms of the convex envelope \\(\\overline{\\rm conv}(f)\\)."
   }
 ]

@@ -36,4 +36,4 @@ format:
 
 ## Exercises
 
-- [Exercises on compressed sensing](materials/exercises/exos_cs.pdf)
+- [Exercises on compressed sensing](materials/exercises/exos_cs_english.pdf)

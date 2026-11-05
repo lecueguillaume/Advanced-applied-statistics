@@ -43,13 +43,31 @@ $$y_i=\inr{A^*,X_i},\qquad i=1,\ldots,m,\qquad\text{where }\inr{A,B}=\sum_{i,j}A
 
 
 - $uv$ unknowns parameters but only $m\ll uv$ equations: a **highly underdetermined** problem, as in compressed sensing.
-- It becomes solvable when the 'true dimension' of $A^*$ is much smaller than $uv$, and in particular smaller than $m$.
+- It becomes solvable when the [true dimension]{.red} of $A^*$ is much smaller than $uv$, and in particular smaller than $m$.
 - The natural structure here is **low rank**: ${\rm rank}(A^*)=r\ll u\wedge v$.
 
 . . .
 
 ::: {.callout-tip title="Idea: low rank is the low-dimensional structure of the 'signal'$A^*$" icon=false}
 To reconstruct a matrix from a small number of linear measurements, the low-rank assumption plays the role that sparsity played for vectors.
+:::
+
+## The rank of a matrix {.smaller}
+::: {.box-blue}
+The [rank]{.red} of a matrix $A\in\R^{u\times v}$ is the number of non-zero singular values of $A$, i.e. the number of non-zero entries in the spectrum of $A$.
+:::
+
+It is also the number of linearly independent rows or columns of $A$, i.e. the dimension of the row space or column space of $A$, which is the same as the dimension of the image of $A$.
+
+:::{.box-green}
+What are the rank of the following matrices?
+
+-  the identity matrix $I\in\R^{u\times u}$? The matrix full of zeros? 
+-  the diagonal matrix $D={\rm diag}(d_1,\ldots,d_s, 0, \ldots, 0)$?
+-  $A=\begin{pmatrix}1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9\end{pmatrix}$?
+-  the $u\times v$ matrix with all entries equal to $1$?
+-  The block matrix $B=\begin{pmatrix}A & 0 \\ 0 & A\end{pmatrix}$, where $A$ is a $u\times v$ matrix full of ones?
+- the matrix $A= x x^\top$, where $x\in\R^u$ is a vector?
 :::
 
 ## Recommender systems by completion of the users/items matrix {.smaller}
@@ -82,30 +100,40 @@ After matrix completion, we recommend:
 ## The Netflix Prize {.spread-out}
 
 - The matrix-completion viewpoint became very popular after the **Netflix Prize**.
-- $u=480\,189$ users and $v=17\,770$ items (movies).
+- $480\,189$ users and $17\,770$ items (movies).
 - Ratings range from $1$ ("did not like it") to $5$ ("liked it very much").
-- Only $100\,480\,507$ ratings were observed, about $1.2\%$ of the $uv$ possible entries.
+- Only $100\,480\,507$ ratings were observed, about $1.2\%$ of all possible entries.
 
 . . .
-
-::: {style="height: 90px;"}
-:::
 
 ::: {.box-green}
 **Idea:** One can build a recommender system by completing the users/items matrix.
 :::
 
+. . .
+
+::: {.box-yellow}
+- **Q1:** Write the data in the Netflix Prize as a matrix $A^*\in\R^{u\times v}$ and a set of linear measurements $y_i=\inr{A^*,X_i}$ (what are the $X_i$'s, $u,v$ and $m$?).
+- **Q2:** Imagine that you have a matrix completion algorithm that can complete the matrix $A^*$ from the linear measurements $y_i$. How would you use this algorithm to build a recommender system?
+:::
+
 ## Matrix completion as linear measurements {.spread-out}
 
 - Let $E_{p,q}$ be the matrix with a $1$ at entry $(p,q)$ and $0$ elsewhere: $(E_{p,q})_{p,q}$ is the canonical basis of $\mathbb{R}^{u\times v}$. 
-- If user $p$ rated item $q$ with grade $y_{p,q}$, then
-$$y_{p,q}=A^*_{p,q}=\inr{A^*,E_{p,q}}.$$
+- If user $p$ rated item $q$ with grade $y_{p,q}$, then [$y_{p,q}=A^*_{p,q}=\inr{A^*,E_{p,q}}.$]{.blue}
 - With $\Omega=\{(p,q):\text{user }p\text{ rated item }q\}$, we observe $(A^*_{p,q})_{(p,q)\in\Omega}$.
 
 . . .
 
 - Completing the matrix is therefore reconstructing $A^*$ from $m=|\Omega|$ linear measurements, with $X_i\in\{E_{p,q}:1\leq p\leq u,\ 1\leq q\leq v\}$.
-- The solution set $\{A:\inr{A,X_i}=y_i,\ i=1,\ldots,m\}$ is an **affine space**, so without extra structure the problem has no unique solution.
+
+. . .
+
+:::{.box-green}
+The solution set $\{A:\inr{A,X_i}=y_i,\ i=1,\ldots,m\}$ is an **affine space**, so without extra structure the problem has no unique solution.
+
+**Q.:** Why is the low-rank assumption a natural assumption for the users/items matrix in the Netflix Prize?
+:::
 
 ## The low-rank assumption {.smaller .spread-out}
 
@@ -153,7 +181,7 @@ The users/items matrix is approximately low rank. Completion algorithms, and hen
 
 # Convex Relaxation in Matrix Completion
 
-## Notation: spectrum, Schatten norms, symmetric and orthogonal matrices {.smaller .spread-out}
+## Notation and dictionary vector/matrix {style="font-size: 0.85em;"}
 
 - Inner product on $\R^{u\times v}$: $\inr{A,B}=\sum_{i,j}A_{ij}B_{ij}$.
 - **Spectrum** $\sigma_A=(\sigma_j(A))_{j=1}^{u\wedge v}$: the singular values (square roots of the eigenvalues of $A^\top A$), with $\sigma_1(A)\geq\cdots\geq\sigma_{u\wedge v}(A)\geq0$.
@@ -162,37 +190,42 @@ The users/items matrix is approximately low rank. Completion algorithms, and hen
 
 . . .
 
+
 | Norm | Name | Vector analog |
-|:--|:--|:--|
+|:---:|:---:|:---:|
 | $\norm{\cdot}_{S_1}$ | nuclear norm (trace norm) | $\ell_1$ |
 | $\norm{\cdot}_{S_2}$ | Frobenius norm (Hilbert norm of $\inr{\cdot,\cdot}$) | $\ell_2$ |
 | $\norm{\cdot}_{S_\infty}$ | operator norm $\sup_{\norm{x}_2=1}\norm{Ax}_2$ | $\ell_\infty$ |
+: {tbl-colwidths="[25, 50, 25]"}
+
+. . .
 
 - **Duality:** $\norm{A}_{S_q}=\sup\big(\inr{A,B}:\norm{B}_{S_p}\leq1\big)$ when $p^{-1}+q^{-1}=1$.
 - $\cS^p$: symmetric matrices; $\cS^p_+$: positive semidefinite ($A\succeq0$); $\cS^p_{++}$: positive definite ($A\succ0$); $\cO(p)=\{A:A^\top A=AA^\top=I_p\}$: orthogonal matrices.
 
-## Rank minimization procedure {.smaller .spread-out}
+## Rank minimization procedure
 
-:::{.box-blue}
-**Questions.** Given $y_i=\inr{A^*,X_i}$ with $A^*$ of low rank:
+:::{.box-blue style="font-size: 0.85em;"}
+**Problems:** Given $y_i=\inr{A^*,X_i}$ with $A^*$ of low rank:
 
 - How can $A^*$ be reconstructed exactly?
 - How many measurements $m$ are needed, and how should $X_1,\ldots,X_m$ be chosen?
-- For matrix completion: what happens when the $X_i$ must be taken in $\{E_{p,q}\}$?
+- For matrix completion: what happens when the $X_i$'s must be taken in $\{E_{p,q}\}$?
 :::
 
 . . .
 
-<div style="height: 1cm;"></div>
-
-::: {.callout-note title="Definition (rank minimization)" icon=false}
+::: {.callout-note title="Definition (rank minimization)" icon=false style="font-size: 0.75em;"}
 $$\min\Big({\rm rank}(A):\inr{A,X_i}=y_i,\ i=1,\ldots,m\Big)$$
 :::
 
-<div style="height: 1cm;"></div>
 
+. . .
+
+::: {style="font-size: 0.85em;"}
 - The analog of $\ell_0$ minimization (the rank is the $\ell_0$ norm of the spectrum): look for the solution of smallest rank among all matrices with the same measurements.
 - We could study it as we studied $\ell_0$ minimization, but it fails for the **same algorithmic reason**.
+:::
 
 ## Rank minimization is NP-hard {.smaller .spread-out}
 
@@ -203,15 +236,14 @@ Finding a solution to rank minimization over an affine space, $\min_{\cA(A)=y}{\
 . . .
 
 1. **Reduction from $\ell_0$.** Start from any problem $\min_{Bt=b}\norm{t}_0$ with $B\in\R^{m_0\times N}$. Take $u=v=N$ and $m=m_0+N^2$.
-2. Define $\cA(A)=\begin{pmatrix}B\,{\rm diag}(A)\\ A-{\rm diag}(A)\end{pmatrix}$ and $y=\begin{pmatrix}b\\0\end{pmatrix}$, where ${\rm diag}(A)=(a_{ii})_{i=1}^N$.
+2. Define $\cA(A)=\begin{pmatrix}B\,{\rm diag}(A)\\ A-{\rm Diag}(A)\end{pmatrix}$ and $y=\begin{pmatrix}b\\0\end{pmatrix}$, where ${\rm diag}(A)=(a_{ii})_{i=1}^N$ and ${\rm Diag}(A) = {\rm diag}(a_{11}, \ldots, a_{NN})\in\bR^{N\times N}$.
 3. Then $\{A:\cA(A)=y\}$ is the set of **diagonal** matrices whose diagonal $t$ satisfies $Bt=b$, and the rank of a diagonal matrix is the $\ell_0$ "norm" of its diagonal.
 4. So a rank-minimization solver also solves $\ell_0$ minimization, through a polynomial-time construction. Since $\ell_0$ minimization is NP-hard, so is rank minimization.
 
 . . .
 
-<div style="height: 1cm;"></div>
 
-::: {.box-blue}
+::: {.box-blue style="font-size: 1.15em;"}
 The affine constraint is easy; the **nonconvex** objective $A\mapsto{\rm rank}(A)$ is the difficulty. **Convex relaxation** replaces it by the "closest convex function". 
 
 [Can you guess what is the convex relaxation of the rank function (on some set)?]{.blue}
@@ -224,7 +256,7 @@ Let $C$ be a convex subset of a vector space and $f:C\to\R$. The **convex envelo
 $${\rm conv}(f)(x)=\sup\big(g(x):g\text{ convex},\ g\leq f\text{ on }C\big).$$
 :::
 
-:::: {.columns align="center"}
+:::: {.columns style="display: flex; align-items: center;"}
 ::: {.column width="55%"}
 In a Hilbert space $H$, it suffices to take **affine** minorants:
 
@@ -245,7 +277,7 @@ $${\rm conv}(f)(x)=\sup_{a\in H,\,b\in\R}\big(\inr{a,x}+b:\ \inr{a,y}+b\leq f(y)
 
     % Axes
     \draw[->, thick] (0, 0) -- (7, 0) node[below] {$x$};
-    \draw[->, thick] (0, 0) -- (0, 5.5) node[left] {$y$};
+    \draw[->, thick] (0, 0) -- (0, 5.5);
 
     % Tangent lines (Affine minorants)
     % Computed using f(x) = 0.4*(x-3.5)^2 + 1
@@ -281,19 +313,44 @@ $${\rm conv}(f)(x)=\sup_{a\in H,\,b\in\R}\big(\inr{a,x}+b:\ \inr{a,y}+b\leq f(y)
 
 ::: {.callout-note title="Definition (Fenchel transform)" icon=false}
 For $f:C\to\R$ with $C\subset H$ a convex set, **the Fenchel transform** of $f$ is
-$$f^*: x\in H \to \sup_{y\in C}\big(\inr{x,y}-f(y)\big).$$
+$$f^*: y\in H \to \sup_{x\in C}\big(\inr{x,y}-f(x)\big).$$
 :::
 
 *Note:* $f^*$ is defined over the entire space $H$ even though $f$ may only be defined over $C$.
 
 :::{.box-green}
-*Exercise:* Show that $f^*$ is convex (even when $f$ is not). 
+**Exercise:** Show that $f^*$ is convex (even when $f$ is not). 
 :::
 
-::: {.callout-note title="Definition (biconjugate)" icon=false}
-The **biconjugate** of $f$ is the function
-$f^{**}:y\in H\to\sup_{x\in H}\big(\inr{x,y}-f^*(x)\big).$
+. . .
+
+:::{.box-yellow}
+**Exercise:** (Negative entropy): Let $f : \mathbb{R} \to \mathbb{R} \cup \{+\infty\}$ be the univariate negative entropy function defined by:
+    $$
+    f(x) = \begin{cases} x \ln(x) & \text{if } x > 0, \\ 0 & \text{if } x = 0, \\ +\infty & \text{if } x < 0. \end{cases}
+    $$
+    Show that $f^*(y) = e^{y-1}$ for all $y \in \mathbb{R}$.
 :::
+
+## The biconjugate function
+
+::: {.callout-note title="Definition (biconjugate)" icon=false style="font-size: 0.8em;"}
+The **biconjugate** of $f$ is the function $f^{**}:x\in H\to\sup_{y\in H}\big(\inr{x,y}-f^*(y)\big).$
+:::
+
+. . .
+
+:::{.box-yellow style="font-size: 0.90em;"}
+**Ex.1:** Compute the biconjugate of the negative entropy function.
+
+**Ex.2:** Let $f : x\in \mathbb{R} \to (|x| - 1)^2$ be the double-well function. 
+
+- Show that $f$ is not convex.
+- Show that the Fenchel conjugate is $f^*(y)=|y| + \frac{y^2}{4}$ for all $y \in \mathbb{R}$.
+- Show that the Fenchel biconjugate $f^{**}(x) = \begin{cases} 0 & \text{if } |x| \leq 1, \\ (|x| - 1)^2 & \text{if } |x| > 1. \end{cases}$ for all $x \in \mathbb{R}$.
+- Show that $f^{**}(x) \leq f(x)$ for all $x \in \mathbb{R}$, and interpret $f^{**}$ geometrically in terms of the convex envelope $\overline{\rm conv}(f)$.
+:::
+
 
 
 ## Convex envelope = biconjugate {.smaller .spread-out}
