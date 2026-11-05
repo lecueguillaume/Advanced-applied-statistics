@@ -7,6 +7,13 @@
     "text": "Reconstructing a matrix from few linear measurements\n\nUnknown matrix \\(A^*\\in\\R^{u\\times v}\\), observed through \\(m\\) linear measurements \\[y_i=\\inr{A^*,X_i},\\qquad i=1,\\ldots,m,\\qquad\\text{where }\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}.\\]\n\n\n\\(uv\\) unknowns parameters but only \\(m\\ll uv\\) equations: a highly underdetermined problem, as in compressed sensing.\nIt becomes solvable when the true dimension of \\(A^*\\) is much smaller than \\(uv\\), and in particular smaller than \\(m\\).\nThe natural structure here is low rank: \\({\\rm rank}(A^*)=r\\ll u\\wedge v\\).\n\n\n\n\n\n\nIdea: low rank is the low-dimensional structure of the ‘signal’\\(A^*\\)\n\n\nTo reconstruct a matrix from a small number of linear measurements, the low-rank assumption plays the role that sparsity played for vectors."
   },
   {
+    "objectID": "recommendation_systems.html#the-rank-of-a-matrix",
+    "href": "recommendation_systems.html#the-rank-of-a-matrix",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The rank of a matrix",
+    "text": "The rank of a matrix\n\nThe rank of a matrix \\(A\\in\\R^{u\\times v}\\) is the number of non-zero singular values of \\(A\\), i.e. the number of non-zero entries in the spectrum of \\(A\\).\n\nIt is also the number of linearly independent rows or columns of \\(A\\), i.e. the dimension of the row space or column space of \\(A\\), which is the same as the dimension of the image of \\(A\\).\n\nWhat are the rank of the following matrices?\n\nthe identity matrix \\(I\\in\\R^{u\\times u}\\)? The matrix full of zeros?\nthe diagonal matrix \\(D={\\rm diag}(d_1,\\ldots,d_s, 0, \\ldots, 0)\\)?\n\\(A=\\begin{pmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9\\end{pmatrix}\\)?\nthe \\(u\\times v\\) matrix with all entries equal to \\(1\\)?\nThe block matrix \\(B=\\begin{pmatrix}A & 0 \\\\ 0 & A\\end{pmatrix}\\), where \\(A\\) is a \\(u\\times v\\) matrix full of ones?\nthe matrix \\(A= x x^\\top\\), where \\(x\\in\\R^u\\) is a vector?"
+  },
+  {
     "objectID": "recommendation_systems.html#recommender-systems-by-completion-of-the-usersitems-matrix",
     "href": "recommendation_systems.html#recommender-systems-by-completion-of-the-usersitems-matrix",
     "title": "Matrix completion and recommendation systems",
@@ -35,11 +42,11 @@
     "text": "The low-rank assumption\n\n\n\nUsers fall into a small number of profiles: fans of science fiction, of crime films, of adventure films, and so on.\nMovies fall into a small number of themes.\nHomogeneous groups give (more or less) the same ratings to movies of the same category.\nSo \\(A^*\\) is close to a block matrix, whose rank is of the order of the number of groups.\nWe assume \\(A^*\\) is exactly low rank. The approximately low-rank and noisy cases need no new ideas.\n\n\n\n\n\n\n\nA block-constant users/items matrix with 3 user groups and 3 item groups has rank at most 3.\n\n\n\n\n\n\n\n\n\nIdea: exploit the low rank structure of the users/items matrix\n\n\nThe users/items matrix is approximately low rank. Completion algorithms, and hence recommender systems, are designed to exploit this property."
   },
   {
-    "objectID": "recommendation_systems.html#notation-spectrum-schatten-norms-symmetric-and-orthogonal-matrices",
-    "href": "recommendation_systems.html#notation-spectrum-schatten-norms-symmetric-and-orthogonal-matrices",
+    "objectID": "recommendation_systems.html#notation-and-dictionary-vectormatrix",
+    "href": "recommendation_systems.html#notation-and-dictionary-vectormatrix",
     "title": "Matrix completion and recommendation systems",
-    "section": "Notation: spectrum, Schatten norms, symmetric and orthogonal matrices",
-    "text": "Notation: spectrum, Schatten norms, symmetric and orthogonal matrices\n\nInner product on \\(\\R^{u\\times v}\\): \\(\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}\\).\nSpectrum \\(\\sigma_A=(\\sigma_j(A))_{j=1}^{u\\wedge v}\\): the singular values (square roots of the eigenvalues of \\(A^\\top A\\)), with \\(\\sigma_1(A)\\geq\\cdots\\geq\\sigma_{u\\wedge v}(A)\\geq0\\).\nSchatten norms: \\(\\norm{A}_{S_p}=\\norm{\\sigma_A}_{\\ell_p}=\\Big(\\sum_j\\sigma_j(A)^p\\Big)^{1/p}\\), \\(p\\geq1\\).\nRank = number of nonzero singular values: \\({\\rm rank}(A)=\\norm{\\sigma_A}_{\\ell_0}\\).\n\n\n\n\n\n\n\n\n\n\nNorm\nName\nVector analog\n\n\n\n\n\\(\\norm{\\cdot}_{S_1}\\)\nnuclear norm (trace norm)\n\\(\\ell_1\\)\n\n\n\\(\\norm{\\cdot}_{S_2}\\)\nFrobenius norm (Hilbert norm of \\(\\inr{\\cdot,\\cdot}\\))\n\\(\\ell_2\\)\n\n\n\\(\\norm{\\cdot}_{S_\\infty}\\)\noperator norm \\(\\sup_{\\norm{x}_2=1}\\norm{Ax}_2\\)\n\\(\\ell_\\infty\\)\n\n\n\n\nDuality: \\(\\norm{A}_{S_q}=\\sup\\big(\\inr{A,B}:\\norm{B}_{S_p}\\leq1\\big)\\) when \\(p^{-1}+q^{-1}=1\\).\n\\(\\cS^p\\): symmetric matrices; \\(\\cS^p_+\\): positive semidefinite (\\(A\\succeq0\\)); \\(\\cS^p_{++}\\): positive definite (\\(A\\succ0\\)); \\(\\cO(p)=\\{A:A^\\top A=AA^\\top=I_p\\}\\): orthogonal matrices."
+    "section": "Notation and dictionary vector/matrix",
+    "text": "Notation and dictionary vector/matrix\n\nInner product on \\(\\R^{u\\times v}\\): \\(\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}\\).\nSpectrum \\(\\sigma_A=(\\sigma_j(A))_{j=1}^{u\\wedge v}\\): the singular values (square roots of the eigenvalues of \\(A^\\top A\\)), with \\(\\sigma_1(A)\\geq\\cdots\\geq\\sigma_{u\\wedge v}(A)\\geq0\\).\nSchatten norms: \\(\\norm{A}_{S_p}=\\norm{\\sigma_A}_{\\ell_p}=\\Big(\\sum_j\\sigma_j(A)^p\\Big)^{1/p}\\), \\(p\\geq1\\).\nRank = number of nonzero singular values: \\({\\rm rank}(A)=\\norm{\\sigma_A}_{\\ell_0}\\).\n\n\n\n\n\n\n\n\n\n\nNorm\nName\nVector analog\n\n\n\n\n\\(\\norm{\\cdot}_{S_1}\\)\nnuclear norm (trace norm)\n\\(\\ell_1\\)\n\n\n\\(\\norm{\\cdot}_{S_2}\\)\nFrobenius norm (Hilbert norm of \\(\\inr{\\cdot,\\cdot}\\))\n\\(\\ell_2\\)\n\n\n\\(\\norm{\\cdot}_{S_\\infty}\\)\noperator norm \\(\\sup_{\\norm{x}_2=1}\\norm{Ax}_2\\)\n\\(\\ell_\\infty\\)\n\n\n\n\n\n\nDuality: \\(\\norm{A}_{S_q}=\\sup\\big(\\inr{A,B}:\\norm{B}_{S_p}\\leq1\\big)\\) when \\(p^{-1}+q^{-1}=1\\).\n\\(\\cS^p\\): symmetric matrices; \\(\\cS^p_+\\): positive semidefinite (\\(A\\succeq0\\)); \\(\\cS^p_{++}\\): positive definite (\\(A\\succ0\\)); \\(\\cO(p)=\\{A:A^\\top A=AA^\\top=I_p\\}\\): orthogonal matrices."
   },
   {
     "objectID": "recommendation_systems.html#rank-minimization-procedure",
@@ -68,6 +75,13 @@
     "title": "Matrix completion and recommendation systems",
     "section": "Fenchel transform",
     "text": "Fenchel transform\n\n\n\n\nDefinition (Fenchel transform)\n\n\nFor \\(f:C\\to\\R\\) with \\(C\\subset H\\) a convex set, the Fenchel transform of \\(f\\) is \\[f^*: y\\in H \\to \\sup_{x\\in C}\\big(\\inr{x,y}-f(x)\\big).\\]\n\n\n\n\nNote: \\(f^*\\) is defined over the entire space \\(H\\) even though \\(f\\) may only be defined over \\(C\\).\n\nExercise: Show that \\(f^*\\) is convex (even when \\(f\\) is not).\n\n\n\nExercise: (Negative entropy): Let \\(f : \\mathbb{R} \\to \\mathbb{R} \\cup \\{+\\infty\\}\\) be the univariate negative entropy function defined by: \\[\n    f(x) = \\begin{cases} x \\ln(x) & \\text{if } x &gt; 0, \\\\ 0 & \\text{if } x = 0, \\\\ +\\infty & \\text{if } x &lt; 0. \\end{cases}\n    \\] Show that \\(f^*(y) = e^{y-1}\\) for all \\(y \\in \\mathbb{R}\\)."
+  },
+  {
+    "objectID": "recommendation_systems.html#the-biconjugate-function",
+    "href": "recommendation_systems.html#the-biconjugate-function",
+    "title": "Matrix completion and recommendation systems",
+    "section": "The biconjugate function",
+    "text": "The biconjugate function\n\n\n\n\nDefinition (biconjugate)\n\n\nThe biconjugate of \\(f\\) is the function \\(f^{**}:x\\in H\\to\\sup_{y\\in H}\\big(\\inr{x,y}-f^*(y)\\big).\\)\n\n\n\n\n\n\nEx.1: Compute the biconjugate of the negative entropy function.\nEx.2: Let \\(f : x\\in \\mathbb{R} \\to (|x| - 1)^2\\) be the double-well function.\n\nShow that \\(f\\) is not convex.\nShow that the Fenchel conjugate is \\(f^*(y)=|y| + \\frac{y^2}{4}\\) for all \\(y \\in \\mathbb{R}\\).\nShow that the Fenchel biconjugate \\(f^{**}(x) = \\begin{cases} 0 & \\text{if } |x| \\leq 1, \\\\ (|x| - 1)^2 & \\text{if } |x| &gt; 1. \\end{cases}\\) for all \\(x \\in \\mathbb{R}\\).\nShow that \\(f^{**}(x) \\leq f(x)\\) for all \\(x \\in \\mathbb{R}\\), and interpret \\(f^{**}\\) geometrically in terms of the convex envelope \\(\\overline{\\rm conv}(f)\\)."
   },
   {
     "objectID": "recommendation_systems.html#convex-envelope-biconjugate",
@@ -1482,33 +1496,5 @@
     "title": "Advanced applied Statistics",
     "section": "Exercises",
     "text": "Exercises\n\nExercises on compressed sensing"
-  },
-  {
-    "objectID": "recommendation_systems.html#the-rank-of-a-matrix",
-    "href": "recommendation_systems.html#the-rank-of-a-matrix",
-    "title": "Matrix completion and recommendation systems",
-    "section": "The rank of a matrix",
-    "text": "The rank of a matrix\n\nThe rank of a matrix \\(A\\in\\R^{u\\times v}\\) is the number of non-zero singular values of \\(A\\), i.e. the number of non-zero entries in the spectrum of \\(A\\).\n\nIt is also the number of linearly independent rows or columns of \\(A\\), i.e. the dimension of the row space or column space of \\(A\\), which is the same as the dimension of the image of \\(A\\).\n\nWhat are the rank of the following matrices?\n\nthe identity matrix \\(I\\in\\R^{u\\times u}\\)? The matrix full of zeros?\nthe diagonal matrix \\(D={\\rm diag}(d_1,\\ldots,d_s, 0, \\ldots, 0)\\)?\n\\(A=\\begin{pmatrix}1 & 2 & 3 \\\\ 4 & 5 & 6 \\\\ 7 & 8 & 9\\end{pmatrix}\\)?\nthe \\(u\\times v\\) matrix with all entries equal to \\(1\\)?\nThe block matrix \\(B=\\begin{pmatrix}A & 0 \\\\ 0 & A\\end{pmatrix}\\), where \\(A\\) is a \\(u\\times v\\) matrix full of ones?\nthe matrix \\(A= x x^\\top\\), where \\(x\\in\\R^u\\) is a vector?"
-  },
-  {
-    "objectID": "recommendation_systems.html#notation-and-dictionnary-vectormatrix",
-    "href": "recommendation_systems.html#notation-and-dictionnary-vectormatrix",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Notation and dictionnary vector/matrix",
-    "text": "Notation and dictionnary vector/matrix\n\nInner product on \\(\\R^{u\\times v}\\): \\(\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}\\).\nSpectrum \\(\\sigma_A=(\\sigma_j(A))_{j=1}^{u\\wedge v}\\): the singular values (square roots of the eigenvalues of \\(A^\\top A\\)), with \\(\\sigma_1(A)\\geq\\cdots\\geq\\sigma_{u\\wedge v}(A)\\geq0\\).\nSchatten norms: \\(\\norm{A}_{S_p}=\\norm{\\sigma_A}_{\\ell_p}=\\Big(\\sum_j\\sigma_j(A)^p\\Big)^{1/p}\\), \\(p\\geq1\\).\nRank = number of nonzero singular values: \\({\\rm rank}(A)=\\norm{\\sigma_A}_{\\ell_0}\\).\n\n\n\n\n\n\n\n\n\n\nNorm\nName\nVector analog\n\n\n\n\n\\(\\norm{\\cdot}_{S_1}\\)\nnuclear norm (trace norm)\n\\(\\ell_1\\)\n\n\n\\(\\norm{\\cdot}_{S_2}\\)\nFrobenius norm (Hilbert norm of \\(\\inr{\\cdot,\\cdot}\\))\n\\(\\ell_2\\)\n\n\n\\(\\norm{\\cdot}_{S_\\infty}\\)\noperator norm \\(\\sup_{\\norm{x}_2=1}\\norm{Ax}_2\\)\n\\(\\ell_\\infty\\)\n\n\n\n\nDuality: \\(\\norm{A}_{S_q}=\\sup\\big(\\inr{A,B}:\\norm{B}_{S_p}\\leq1\\big)\\) when \\(p^{-1}+q^{-1}=1\\).\n\\(\\cS^p\\): symmetric matrices; \\(\\cS^p_+\\): positive semidefinite (\\(A\\succeq0\\)); \\(\\cS^p_{++}\\): positive definite (\\(A\\succ0\\)); \\(\\cO(p)=\\{A:A^\\top A=AA^\\top=I_p\\}\\): orthogonal matrices."
-  },
-  {
-    "objectID": "recommendation_systems.html#notation-and-dictionary-vectormatrix",
-    "href": "recommendation_systems.html#notation-and-dictionary-vectormatrix",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Notation and dictionary vector/matrix",
-    "text": "Notation and dictionary vector/matrix\n\nInner product on \\(\\R^{u\\times v}\\): \\(\\inr{A,B}=\\sum_{i,j}A_{ij}B_{ij}\\).\nSpectrum \\(\\sigma_A=(\\sigma_j(A))_{j=1}^{u\\wedge v}\\): the singular values (square roots of the eigenvalues of \\(A^\\top A\\)), with \\(\\sigma_1(A)\\geq\\cdots\\geq\\sigma_{u\\wedge v}(A)\\geq0\\).\nSchatten norms: \\(\\norm{A}_{S_p}=\\norm{\\sigma_A}_{\\ell_p}=\\Big(\\sum_j\\sigma_j(A)^p\\Big)^{1/p}\\), \\(p\\geq1\\).\nRank = number of nonzero singular values: \\({\\rm rank}(A)=\\norm{\\sigma_A}_{\\ell_0}\\).\n\n\n\n\n\n\n\n\n\n\nNorm\nName\nVector analog\n\n\n\n\n\\(\\norm{\\cdot}_{S_1}\\)\nnuclear norm (trace norm)\n\\(\\ell_1\\)\n\n\n\\(\\norm{\\cdot}_{S_2}\\)\nFrobenius norm (Hilbert norm of \\(\\inr{\\cdot,\\cdot}\\))\n\\(\\ell_2\\)\n\n\n\\(\\norm{\\cdot}_{S_\\infty}\\)\noperator norm \\(\\sup_{\\norm{x}_2=1}\\norm{Ax}_2\\)\n\\(\\ell_\\infty\\)\n\n\n\n\n\n\nDuality: \\(\\norm{A}_{S_q}=\\sup\\big(\\inr{A,B}:\\norm{B}_{S_p}\\leq1\\big)\\) when \\(p^{-1}+q^{-1}=1\\).\n\\(\\cS^p\\): symmetric matrices; \\(\\cS^p_+\\): positive semidefinite (\\(A\\succeq0\\)); \\(\\cS^p_{++}\\): positive definite (\\(A\\succ0\\)); \\(\\cO(p)=\\{A:A^\\top A=AA^\\top=I_p\\}\\): orthogonal matrices."
-  },
-  {
-    "objectID": "recommendation_systems.html#the-biconjugate-function",
-    "href": "recommendation_systems.html#the-biconjugate-function",
-    "title": "Matrix completion and recommendation systems",
-    "section": "The biconjugate function",
-    "text": "The biconjugate function\n\n\n\n\nDefinition (biconjugate)\n\n\nThe biconjugate of \\(f\\) is the function \\(f^{**}:x\\in H\\to\\sup_{y\\in H}\\big(\\inr{x,y}-f^*(y)\\big).\\)\n\n\n\n\n\n\nEx.1: Compute the biconjugate of the negative entropy function.\nEx.2: Let \\(f : x\\in \\mathbb{R} \\to (|x| - 1)^2\\) be the double-well function.\n\nShow that \\(f\\) is not convex.\nShow that the Fenchel conjugate is \\(f^*(y)=|y| + \\frac{y^2}{4}\\) for all \\(y \\in \\mathbb{R}\\).\nShow that the Fenchel biconjugate \\(f^{**}(x) = \\begin{cases} 0 & \\text{if } |x| \\leq 1, \\\\ (|x| - 1)^2 & \\text{if } |x| &gt; 1. \\end{cases}\\) for all \\(x \\in \\mathbb{R}\\).\nShow that \\(f^{**}(x) \\leq f(x)\\) for all \\(x \\in \\mathbb{R}\\), and interpret \\(f^{**}\\) geometrically in terms of the convex envelope \\(\\overline{\\rm conv}(f)\\)."
   }
 ]

@@ -36,4 +36,4 @@ format:
 
 ## Exercises
 
-- [Exercises on compressed sensing](materials/exercises/exos_cs_english.pdf)
+- [Exercises on compressed sensing and matrix completion](materials/exercises/exos_cs_english.pdf)
