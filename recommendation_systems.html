@@ -299,7 +299,7 @@ Guillaume Lecué
 </div>
 <ul>
 <li><span class="math inline">\(uv\)</span> unknowns parameters but only <span class="math inline">\(m\ll uv\)</span> equations: a <strong>highly underdetermined</strong> problem, as in compressed sensing.</li>
-<li>It becomes solvable when the ‘true dimension’ of <span class="math inline">\(A^*\)</span> is much smaller than <span class="math inline">\(uv\)</span>, and in particular smaller than <span class="math inline">\(m\)</span>.</li>
+<li>It becomes solvable when the <span class="red">true dimension</span> of <span class="math inline">\(A^*\)</span> is much smaller than <span class="math inline">\(uv\)</span>, and in particular smaller than <span class="math inline">\(m\)</span>.</li>
 <li>The natural structure here is <strong>low rank</strong>: <span class="math inline">\({\rm rank}(A^*)=r\ll u\wedge v\)</span>.</li>
 </ul>
 <div class="fragment">
@@ -315,6 +315,24 @@ Guillaume Lecué
 </div>
 </div>
 </div>
+</div>
+</section>
+<section id="the-rank-of-a-matrix" class="slide level2 smaller">
+<h2>The rank of a matrix</h2>
+<div class="box-blue">
+<p>The <span class="red">rank</span> of a matrix <span class="math inline">\(A\in\R^{u\times v}\)</span> is the number of non-zero singular values of <span class="math inline">\(A\)</span>, i.e.&nbsp;the number of non-zero entries in the spectrum of <span class="math inline">\(A\)</span>.</p>
+</div>
+<p>It is also the number of linearly independent rows or columns of <span class="math inline">\(A\)</span>, i.e.&nbsp;the dimension of the row space or column space of <span class="math inline">\(A\)</span>, which is the same as the dimension of the image of <span class="math inline">\(A\)</span>.</p>
+<div class="box-green">
+<p>What are the rank of the following matrices?</p>
+<ul>
+<li>the identity matrix <span class="math inline">\(I\in\R^{u\times u}\)</span>? The matrix full of zeros?</li>
+<li>the diagonal matrix <span class="math inline">\(D={\rm diag}(d_1,\ldots,d_s, 0, \ldots, 0)\)</span>?</li>
+<li><span class="math inline">\(A=\begin{pmatrix}1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9\end{pmatrix}\)</span>?</li>
+<li>the <span class="math inline">\(u\times v\)</span> matrix with all entries equal to <span class="math inline">\(1\)</span>?</li>
+<li>The block matrix <span class="math inline">\(B=\begin{pmatrix}A &amp; 0 \\ 0 &amp; A\end{pmatrix}\)</span>, where <span class="math inline">\(A\)</span> is a <span class="math inline">\(u\times v\)</span> matrix full of ones?</li>
+<li>the matrix <span class="math inline">\(A= x x^\top\)</span>, where <span class="math inline">\(x\in\R^u\)</span> is a vector?</li>
+</ul>
 </div>
 </section>
 <section id="recommender-systems-by-completion-of-the-usersitems-matrix" class="slide level2 smaller scrollable">
@@ -345,16 +363,21 @@ Guillaume Lecué
 <h2>The Netflix Prize</h2>
 <ul>
 <li>The matrix-completion viewpoint became very popular after the <strong>Netflix Prize</strong>.</li>
-<li><span class="math inline">\(u=480\,189\)</span> users and <span class="math inline">\(v=17\,770\)</span> items (movies).</li>
+<li><span class="math inline">\(480\,189\)</span> users and <span class="math inline">\(17\,770\)</span> items (movies).</li>
 <li>Ratings range from <span class="math inline">\(1\)</span> (“did not like it”) to <span class="math inline">\(5\)</span> (“liked it very much”).</li>
-<li>Only <span class="math inline">\(100\,480\,507\)</span> ratings were observed, about <span class="math inline">\(1.2\%\)</span> of the <span class="math inline">\(uv\)</span> possible entries.</li>
+<li>Only <span class="math inline">\(100\,480\,507\)</span> ratings were observed, about <span class="math inline">\(1.2\%\)</span> of all possible entries.</li>
 </ul>
 <div class="fragment">
-<div style="height: 90px;">
-
-</div>
 <div class="box-green">
 <p><strong>Idea:</strong> One can build a recommender system by completing the users/items matrix.</p>
+</div>
+</div>
+<div class="fragment">
+<div class="box-yellow">
+<ul>
+<li><strong>Q1:</strong> Write the data in the Netflix Prize as a matrix <span class="math inline">\(A^*\in\R^{u\times v}\)</span> and a set of linear measurements <span class="math inline">\(y_i=\inr{A^*,X_i}\)</span> (what are the <span class="math inline">\(X_i\)</span>’s, <span class="math inline">\(u,v\)</span> and <span class="math inline">\(m\)</span>?).</li>
+<li><strong>Q2:</strong> Imagine that you have a matrix completion algorithm that can complete the matrix <span class="math inline">\(A^*\)</span> from the linear measurements <span class="math inline">\(y_i\)</span>. How would you use this algorithm to build a recommender system?</li>
+</ul>
 </div>
 </div>
 </section>
@@ -362,14 +385,19 @@ Guillaume Lecué
 <h2>Matrix completion as linear measurements</h2>
 <ul>
 <li>Let <span class="math inline">\(E_{p,q}\)</span> be the matrix with a <span class="math inline">\(1\)</span> at entry <span class="math inline">\((p,q)\)</span> and <span class="math inline">\(0\)</span> elsewhere: <span class="math inline">\((E_{p,q})_{p,q}\)</span> is the canonical basis of <span class="math inline">\(\mathbb{R}^{u\times v}\)</span>.</li>
-<li>If user <span class="math inline">\(p\)</span> rated item <span class="math inline">\(q\)</span> with grade <span class="math inline">\(y_{p,q}\)</span>, then <span class="math display">\[y_{p,q}=A^*_{p,q}=\inr{A^*,E_{p,q}}.\]</span></li>
+<li>If user <span class="math inline">\(p\)</span> rated item <span class="math inline">\(q\)</span> with grade <span class="math inline">\(y_{p,q}\)</span>, then <span class="blue"><span class="math inline">\(y_{p,q}=A^*_{p,q}=\inr{A^*,E_{p,q}}.\)</span></span></li>
 <li>With <span class="math inline">\(\Omega=\{(p,q):\text{user }p\text{ rated item }q\}\)</span>, we observe <span class="math inline">\((A^*_{p,q})_{(p,q)\in\Omega}\)</span>.</li>
 </ul>
 <div class="fragment">
 <ul>
 <li>Completing the matrix is therefore reconstructing <span class="math inline">\(A^*\)</span> from <span class="math inline">\(m=|\Omega|\)</span> linear measurements, with <span class="math inline">\(X_i\in\{E_{p,q}:1\leq p\leq u,\ 1\leq q\leq v\}\)</span>.</li>
-<li>The solution set <span class="math inline">\(\{A:\inr{A,X_i}=y_i,\ i=1,\ldots,m\}\)</span> is an <strong>affine space</strong>, so without extra structure the problem has no unique solution.</li>
 </ul>
+</div>
+<div class="fragment">
+<div class="box-green">
+<p>The solution set <span class="math inline">\(\{A:\inr{A,X_i}=y_i,\ i=1,\ldots,m\}\)</span> is an <strong>affine space</strong>, so without extra structure the problem has no unique solution.</p>
+<p><strong>Q.:</strong> Why is the low-rank assumption a natural assumption for the users/items matrix in the Netflix Prize?</p>
+</div>
 </div>
 </section>
 <section id="the-low-rank-assumption" class="slide level2 smaller spread-out">
@@ -413,8 +441,8 @@ Guillaume Lecué
 <h1>Convex Relaxation in Matrix Completion</h1>
 
 </section>
-<section id="notation-spectrum-schatten-norms-symmetric-and-orthogonal-matrices" class="slide level2 smaller spread-out">
-<h2>Notation: spectrum, Schatten norms, symmetric and orthogonal matrices</h2>
+<section id="notation-and-dictionary-vectormatrix" class="slide level2" style="font-size: 0.85em;">
+<h2>Notation and dictionary vector/matrix</h2>
 <ul>
 <li>Inner product on <span class="math inline">\(\R^{u\times v}\)</span>: <span class="math inline">\(\inr{A,B}=\sum_{i,j}A_{ij}B_{ij}\)</span>.</li>
 <li><strong>Spectrum</strong> <span class="math inline">\(\sigma_A=(\sigma_j(A))_{j=1}^{u\wedge v}\)</span>: the singular values (square roots of the eigenvalues of <span class="math inline">\(A^\top A\)</span>), with <span class="math inline">\(\sigma_1(A)\geq\cdots\geq\sigma_{u\wedge v}(A)\geq0\)</span>.</li>
@@ -424,56 +452,55 @@ Guillaume Lecué
 <div class="fragment">
 <table class="caption-top">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 25%">
+<col style="width: 50%">
+<col style="width: 25%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Norm</th>
-<th style="text-align: left;">Name</th>
-<th style="text-align: left;">Vector analog</th>
+<th style="text-align: center;">Norm</th>
+<th style="text-align: center;">Name</th>
+<th style="text-align: center;">Vector analog</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><span class="math inline">\(\norm{\cdot}_{S_1}\)</span></td>
-<td style="text-align: left;">nuclear norm (trace norm)</td>
-<td style="text-align: left;"><span class="math inline">\(\ell_1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\norm{\cdot}_{S_1}\)</span></td>
+<td style="text-align: center;">nuclear norm (trace norm)</td>
+<td style="text-align: center;"><span class="math inline">\(\ell_1\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><span class="math inline">\(\norm{\cdot}_{S_2}\)</span></td>
-<td style="text-align: left;">Frobenius norm (Hilbert norm of <span class="math inline">\(\inr{\cdot,\cdot}\)</span>)</td>
-<td style="text-align: left;"><span class="math inline">\(\ell_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\norm{\cdot}_{S_2}\)</span></td>
+<td style="text-align: center;">Frobenius norm (Hilbert norm of <span class="math inline">\(\inr{\cdot,\cdot}\)</span>)</td>
+<td style="text-align: center;"><span class="math inline">\(\ell_2\)</span></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><span class="math inline">\(\norm{\cdot}_{S_\infty}\)</span></td>
-<td style="text-align: left;">operator norm <span class="math inline">\(\sup_{\norm{x}_2=1}\norm{Ax}_2\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(\ell_\infty\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\norm{\cdot}_{S_\infty}\)</span></td>
+<td style="text-align: center;">operator norm <span class="math inline">\(\sup_{\norm{x}_2=1}\norm{Ax}_2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\ell_\infty\)</span></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="fragment">
 <ul>
 <li><strong>Duality:</strong> <span class="math inline">\(\norm{A}_{S_q}=\sup\big(\inr{A,B}:\norm{B}_{S_p}\leq1\big)\)</span> when <span class="math inline">\(p^{-1}+q^{-1}=1\)</span>.</li>
 <li><span class="math inline">\(\cS^p\)</span>: symmetric matrices; <span class="math inline">\(\cS^p_+\)</span>: positive semidefinite (<span class="math inline">\(A\succeq0\)</span>); <span class="math inline">\(\cS^p_{++}\)</span>: positive definite (<span class="math inline">\(A\succ0\)</span>); <span class="math inline">\(\cO(p)=\{A:A^\top A=AA^\top=I_p\}\)</span>: orthogonal matrices.</li>
 </ul>
 </div>
 </section>
-<section id="rank-minimization-procedure" class="slide level2 smaller spread-out">
+<section id="rank-minimization-procedure" class="slide level2">
 <h2>Rank minimization procedure</h2>
-<div class="box-blue">
-<p><strong>Questions.</strong> Given <span class="math inline">\(y_i=\inr{A^*,X_i}\)</span> with <span class="math inline">\(A^*\)</span> of low rank:</p>
+<div class="box-blue" style="font-size: 0.85em;">
+<p><strong>Problems:</strong> Given <span class="math inline">\(y_i=\inr{A^*,X_i}\)</span> with <span class="math inline">\(A^*\)</span> of low rank:</p>
 <ul>
 <li>How can <span class="math inline">\(A^*\)</span> be reconstructed exactly?</li>
 <li>How many measurements <span class="math inline">\(m\)</span> are needed, and how should <span class="math inline">\(X_1,\ldots,X_m\)</span> be chosen?</li>
-<li>For matrix completion: what happens when the <span class="math inline">\(X_i\)</span> must be taken in <span class="math inline">\(\{E_{p,q}\}\)</span>?</li>
+<li>For matrix completion: what happens when the <span class="math inline">\(X_i\)</span>’s must be taken in <span class="math inline">\(\{E_{p,q}\}\)</span>?</li>
 </ul>
 </div>
 <div class="fragment">
-<div style="height: 1cm;">
-
-</div>
-<div title="Definition (rank minimization)">
+<div title="Definition (rank minimization)" style="font-size: 0.75em;">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -485,13 +512,14 @@ Guillaume Lecué
 </div>
 </div>
 </div>
-<div style="height: 1cm;">
-
 </div>
+<div class="fragment">
+<div style="font-size: 0.85em;">
 <ul>
 <li>The analog of <span class="math inline">\(\ell_0\)</span> minimization (the rank is the <span class="math inline">\(\ell_0\)</span> norm of the spectrum): look for the solution of smallest rank among all matrices with the same measurements.</li>
 <li>We could study it as we studied <span class="math inline">\(\ell_0\)</span> minimization, but it fails for the <strong>same algorithmic reason</strong>.</li>
 </ul>
+</div>
 </div>
 </section>
 <section id="rank-minimization-is-np-hard" class="slide level2 smaller spread-out scrollable">
@@ -511,16 +539,13 @@ Guillaume Lecué
 <div class="fragment">
 <ol type="1">
 <li><strong>Reduction from <span class="math inline">\(\ell_0\)</span>.</strong> Start from any problem <span class="math inline">\(\min_{Bt=b}\norm{t}_0\)</span> with <span class="math inline">\(B\in\R^{m_0\times N}\)</span>. Take <span class="math inline">\(u=v=N\)</span> and <span class="math inline">\(m=m_0+N^2\)</span>.</li>
-<li>Define <span class="math inline">\(\cA(A)=\begin{pmatrix}B\,{\rm diag}(A)\\ A-{\rm diag}(A)\end{pmatrix}\)</span> and <span class="math inline">\(y=\begin{pmatrix}b\\0\end{pmatrix}\)</span>, where <span class="math inline">\({\rm diag}(A)=(a_{ii})_{i=1}^N\)</span>.</li>
+<li>Define <span class="math inline">\(\cA(A)=\begin{pmatrix}B\,{\rm diag}(A)\\ A-{\rm Diag}(A)\end{pmatrix}\)</span> and <span class="math inline">\(y=\begin{pmatrix}b\\0\end{pmatrix}\)</span>, where <span class="math inline">\({\rm diag}(A)=(a_{ii})_{i=1}^N\)</span> and <span class="math inline">\({\rm Diag}(A) = {\rm diag}(a_{11}, \ldots, a_{NN})\in\bR^{N\times N}\)</span>.</li>
 <li>Then <span class="math inline">\(\{A:\cA(A)=y\}\)</span> is the set of <strong>diagonal</strong> matrices whose diagonal <span class="math inline">\(t\)</span> satisfies <span class="math inline">\(Bt=b\)</span>, and the rank of a diagonal matrix is the <span class="math inline">\(\ell_0\)</span> “norm” of its diagonal.</li>
 <li>So a rank-minimization solver also solves <span class="math inline">\(\ell_0\)</span> minimization, through a polynomial-time construction. Since <span class="math inline">\(\ell_0\)</span> minimization is NP-hard, so is rank minimization.</li>
 </ol>
 </div>
 <div class="fragment">
-<div style="height: 1cm;">
-
-</div>
-<div class="box-blue">
+<div class="box-blue" style="font-size: 1.15em;">
 <p>The affine constraint is easy; the <strong>nonconvex</strong> objective <span class="math inline">\(A\mapsto{\rm rank}(A)\)</span> is the difficulty. <strong>Convex relaxation</strong> replaces it by the “closest convex function”.</p>
 <p><span class="blue">Can you guess what is the convex relaxation of the rank function (on some set)?</span></p>
 </div>
@@ -540,7 +565,7 @@ Guillaume Lecué
 </div>
 </div>
 </div>
-<div class="columns" data-align="center">
+<div class="columns" style="display: flex; align-items: center;">
 <div class="column" style="width:55%;">
 <p>In a Hilbert space <span class="math inline">\(H\)</span>, it suffices to take <strong>affine</strong> minorants:</p>
 <p><span class="math display">\[{\rm conv}(f)(x)=\sup_{a\in H,\,b\in\R}\big(\inr{a,x}+b:\ \inr{a,y}+b\leq f(y),\ \forall y\in C\big).\]</span></p>
@@ -566,25 +591,47 @@ Guillaume Lecué
 <p><strong>Definition (Fenchel transform)</strong></p>
 </div>
 <div class="callout-content">
-<p>For <span class="math inline">\(f:C\to\R\)</span> with <span class="math inline">\(C\subset H\)</span> a convex set, <strong>the Fenchel transform</strong> of <span class="math inline">\(f\)</span> is <span class="math display">\[f^*: x\in H \to \sup_{y\in C}\big(\inr{x,y}-f(y)\big).\]</span></p>
+<p>For <span class="math inline">\(f:C\to\R\)</span> with <span class="math inline">\(C\subset H\)</span> a convex set, <strong>the Fenchel transform</strong> of <span class="math inline">\(f\)</span> is <span class="math display">\[f^*: y\in H \to \sup_{x\in C}\big(\inr{x,y}-f(x)\big).\]</span></p>
 </div>
 </div>
 </div>
 </div>
 <p><em>Note:</em> <span class="math inline">\(f^*\)</span> is defined over the entire space <span class="math inline">\(H\)</span> even though <span class="math inline">\(f\)</span> may only be defined over <span class="math inline">\(C\)</span>.</p>
 <div class="box-green">
-<p><em>Exercise:</em> Show that <span class="math inline">\(f^*\)</span> is convex (even when <span class="math inline">\(f\)</span> is not).</p>
+<p><strong>Exercise:</strong> Show that <span class="math inline">\(f^*\)</span> is convex (even when <span class="math inline">\(f\)</span> is not).</p>
 </div>
-<div title="Definition (biconjugate)">
+<div class="fragment">
+<div class="box-yellow">
+<p><strong>Exercise:</strong> (Negative entropy): Let <span class="math inline">\(f : \mathbb{R} \to \mathbb{R} \cup \{+\infty\}\)</span> be the univariate negative entropy function defined by: <span class="math display">\[
+    f(x) = \begin{cases} x \ln(x) &amp; \text{if } x &gt; 0, \\ 0 &amp; \text{if } x = 0, \\ +\infty &amp; \text{if } x &lt; 0. \end{cases}
+    \]</span> Show that <span class="math inline">\(f^*(y) = e^{y-1}\)</span> for all <span class="math inline">\(y \in \mathbb{R}\)</span>.</p>
+</div>
+</div>
+</section>
+<section id="the-biconjugate-function" class="slide level2">
+<h2>The biconjugate function</h2>
+<div title="Definition (biconjugate)" style="font-size: 0.8em;">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <p><strong>Definition (biconjugate)</strong></p>
 </div>
 <div class="callout-content">
-<p>The <strong>biconjugate</strong> of <span class="math inline">\(f\)</span> is the function <span class="math inline">\(f^{**}:y\in H\to\sup_{x\in H}\big(\inr{x,y}-f^*(x)\big).\)</span></p>
+<p>The <strong>biconjugate</strong> of <span class="math inline">\(f\)</span> is the function <span class="math inline">\(f^{**}:x\in H\to\sup_{y\in H}\big(\inr{x,y}-f^*(y)\big).\)</span></p>
 </div>
 </div>
+</div>
+</div>
+<div class="fragment">
+<div class="box-yellow" style="font-size: 0.90em;">
+<p><strong>Ex.1:</strong> Compute the biconjugate of the negative entropy function.</p>
+<p><strong>Ex.2:</strong> Let <span class="math inline">\(f : x\in \mathbb{R} \to (|x| - 1)^2\)</span> be the double-well function.</p>
+<ul>
+<li>Show that <span class="math inline">\(f\)</span> is not convex.</li>
+<li>Show that the Fenchel conjugate is <span class="math inline">\(f^*(y)=|y| + \frac{y^2}{4}\)</span> for all <span class="math inline">\(y \in \mathbb{R}\)</span>.</li>
+<li>Show that the Fenchel biconjugate <span class="math inline">\(f^{**}(x) = \begin{cases} 0 &amp; \text{if } |x| \leq 1, \\ (|x| - 1)^2 &amp; \text{if } |x| &gt; 1. \end{cases}\)</span> for all <span class="math inline">\(x \in \mathbb{R}\)</span>.</li>
+<li>Show that <span class="math inline">\(f^{**}(x) \leq f(x)\)</span> for all <span class="math inline">\(x \in \mathbb{R}\)</span>, and interpret <span class="math inline">\(f^{**}\)</span> geometrically in terms of the convex envelope <span class="math inline">\(\overline{\rm conv}(f)\)</span>.</li>
+</ul>
 </div>
 </div>
 </section>
