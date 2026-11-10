@@ -98,3 +98,23 @@ figcaption {
 .reveal .spaced-list ol li:last-child {
   margin-bottom: 0 !important;
 }
+
+/* Fully center all elements (horizontally and vertically) on marked slides */
+.reveal .slides section.all-center {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center; /* Vertical centering */
+  align-items: center;     /* Horizontal centering for boxes, tables, figures */
+  text-align: center;      /* Horizontal text alignment */
+  height: 100% !important;
+}
+
+
+/* Increase spacing between bullet points on marked slides */
+.reveal .spaced-list ul > li {
+  margin-bottom: 1.8em !important; /* Adjust gap to taste (e.g. 1.2em to 2em) */
+}
+
+.reveal .spaced-list ul > li:last-child {
+  margin-bottom: 0 !important;
+}

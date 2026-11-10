@@ -273,7 +273,7 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Advanced applied Statistics</h1>
-  <p class="subtitle">AIDAMS - S7</p>
+  <p class="subtitle">Course presentation</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -281,7 +281,7 @@
 Guillaume Lecué
 </div>
         <p class="quarto-title-affiliation">
-            </p><p><img data-src="Logo-essec.jpg" width="200"></p>
+            </p><p><img data-src="Logo-essec.jpg" width="200"> <br> “AIDAMS - S7”</p>
           <p></p>
     </div>
 </div>
@@ -296,10 +296,14 @@ Guillaume Lecué
 <li>Construct <span class="red">efficient algorithms</span> leveraging this structure</li>
 <li><strong>Idea:</strong> Mathematics are not siloed: algebra, approximation theory, statistics, probability, geometry and convex optimization all interact in this course.</li>
 </ol>
-<div style="height: 100px;">
-
+<div class="box-red" style="text-align: center;">
+<p><strong>Convex relaxation</strong> <span class="math display">\[
+\min_{x\in K_0}f_0(x) \leadsto \min_{x\in K_1}f_1(x)
+\]</span> where <span class="math inline">\(K_1\)</span> and <span class="math inline">\(f_1\)</span> are convex sets and functions as ‘close as possible’ to <span class="math inline">\(K_0\)</span> and <span class="math inline">\(f_0\)</span>.</p>
 </div>
-<h3 id="aim-of-the-evaluation">Aim of the evaluation</h3>
+</section>
+<section id="aim-of-the-evaluation" class="slide level2 scrollable">
+<h2>Aim of the evaluation</h2>
 <ol type="1">
 <li>Develop a habit of <span class="blue">scientific monitoring</span> and research</li>
 <li>Report <span class="blue">technical content to a large audience</span></li>
@@ -699,7 +703,7 @@ Guillaume Lecué
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/lecueguillaume\.github\.io\/Advanced-applied-statistics\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

@@ -369,14 +369,16 @@ Guillaume Lecué
 </section>
 <section id="the-haar-basis-in-l201" class="slide level2">
 <h2>The Haar basis in <span class="math inline">\(L^2([0,1])\)</span></h2>
+<div class="box-yellow">
+<p>The Fourier basis of <span class="math inline">\(L^2([0,1])\)</span>: <span class="math inline">\((1, \sqrt{2}\cos(2\pi k t), \sin(2\pi (k+1) t):k\geq1)\)</span> is not robust to local perturbations.</p>
+</div>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:60%;">
 <ul>
 <li>Mother wavelet <span class="math inline">\(\Psi=\mathbb{1}_{[0,1/2)}-\mathbb{1}_{[1/2,1)}\)</span>, scaling function <span class="math inline">\(\Phi\equiv 1\)</span>.</li>
 <li>Translations and dilations, for <span class="math inline">\(j\in\N\)</span> and <span class="math inline">\(i=0,\ldots,2^j-1\)</span>: <span class="math display">\[\Psi_i^j(t)=\sqrt{2^j}\,\Psi\big(2^j(t-i/2^j)\big),\]</span> for all <span class="math inline">\(t\in\{0, \cdots, n-1\}.\)</span></li>
-<li>The Fourier basis of <span class="math inline">\(L^2([0,1])\)</span>: <span class="math inline">\((1, \sqrt{2}\cos(2\pi k t), \sin(2\pi (k+1) t):k\geq1)\)</span> is not robust to local perturbations.</li>
 </ul>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:40%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -569,6 +571,9 @@ The mixed $\ell_2$/$\ell_1$ norms are unavoidable: an $\ell_2$ approximation err
 </div>
 </div>
 <div class="fragment">
+<div style="height: 50px;">
+
+</div>
 <div class="box-green" style="text-align: center;">
 <p>Is there a better way to choose the measurement vectors than all the indicators of all pixels?</p>
 </div>
@@ -693,7 +698,7 @@ $$\mu(\cB_f,\cB_\Gamma)=\max_{1\leq p,q\leq N}|\inr{\Gamma_p,f_q}|\in\Big[\tfrac
 <section id="the-ell_0-minimization-procedure" class="slide level2">
 <h2>The <span class="math inline">\(\ell_0\)</span> minimization procedure</h2>
 <ul>
-<li>The solution set of <span class="math inline">\(At=y\)</span> is the affine space <span class="math inline">\(x+\kerA\)</span> of dimension <span class="math inline">\(\geq N-m\)</span>.</li>
+<li>The solution set of <span class="math inline">\(At=y\)</span> is the affine space <span class="math inline">\(x+\kerA\)</span> of dimension <span class="math inline">\(\geq N-m\)</span>, <span class="math inline">\(\kerA=\{t\in\R^N:At=0\}\)</span>.</li>
 <li><strong>Idea:</strong> The target signal is sparse, hence, pick the <strong>sparsest</strong> element of this space.</li>
 <li><strong>Def.:</strong> <span class="math inline">\(\norm{t}_0= |\{j\in[N]: t_j\neq0\}|\)</span> is the size of the support of <span class="math inline">\(t\in\mathbb{R}^N\)</span></li>
 </ul>
@@ -1197,11 +1202,12 @@ However, the release made significant progress on adjacent problems:
 <h2>Basis Pursuit as a linear program</h2>
 <div class="columns" style="display: flex; align-items: center;">
 <div class="column" style="width:50%;">
-<p><span class="math display">\[\min_{(z^+,z^-)\in\R^{2N}}\ \sum_{j=1}^N z_j^++z_j^-\]</span> <span class="math display">\[\text{s.t. } [A\,|\,-A]\begin{bmatrix}z^+\\ z^-\end{bmatrix}=y,\quad \begin{bmatrix}z^+\\ z^-\end{bmatrix}\geq0\tag{LP}\]</span></p>
+<p><span class="math display">\[\min_{(z^{(+)},z^{(-)})\in\R^{2N}}\ \sum_{j=1}^N z_j^{(+)}+z_j^{(-)}\]</span> <span class="math display">\[\text{s.t. } [A\,|\,-A]\begin{bmatrix}z^{(+)}\\ z^{(-)}\end{bmatrix}=y,\quad \begin{bmatrix}z^{(+)}\\ z^{(-)}\end{bmatrix}\geq0\tag{LP}\]</span></p>
 </div><div class="column" style="margin-top: 0;">
 <ul>
 <li>Linear objective,</li>
 <li>linear constraints.</li>
+<li>LP problem in <span class="math inline">\(\bR^{2N}\)</span></li>
 </ul>
 </div></div>
 <div style="height: 20px;">
@@ -1224,10 +1230,14 @@ However, the release made significant progress on adjacent problems:
 </div>
 </div>
 <div class="fragment">
-<p><strong>Key inequality:</strong> <span class="math inline">\(\norm{z^+-z^-}_1\leq\sum_j z_j^++z_j^-\)</span>, with equality for <span class="math inline">\((x^+,x^-)\)</span>.</p>
+<p><strong>Key inequalities:</strong></p>
+<ul>
+<li>for all <span class="math inline">\(t\in\bR\)</span>, <span class="math inline">\(t=t^+-t^-\)</span> and <span class="math inline">\(|t| = t^+ + t^-\)</span>.</li>
+<li><span class="math inline">\(\norm{z^{(+)}-z^{(-)}}_{1}\leq\sum_j z_j^{(+)}+z_j^{(-)}\)</span>, with equality for <span class="math inline">\((x^+,x^-)\)</span>.</li>
+</ul>
 <div class="box-blue" style="font-size: 1.3em;">
-<p>From an <span class="math inline">\(NP\)</span>-hard problem to a <strong>linear program</strong>: the algorithmic complexity gain is big!</p>
-<p><span class="math inline">\(\Rightarrow\)</span> What is the price to pay?</p>
+<p>From a <span class="math inline">\(NP\)</span>-hard problem to a <strong>linear program</strong>: the algorithmic complexity gain is big!</p>
+<p><span class="math inline">\(\Rightarrow\)</span> What are the prices to pay?</p>
 </div>
 </div>
 </section>
@@ -1456,16 +1466,15 @@ m\geq\frac{1}{\log5}\Big\lfloor\frac s2\Big\rfloor\log\Big(\Big\lfloor\frac{N}{8
 <section id="nsps-is-equivalent-to-exact-reconstruction" class="slide level2">
 <h2><span class="math inline">\(NSP(s)\)</span> is equivalent to exact reconstruction</h2>
 <div title="Theorem">
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
 <p><strong>Theorem</strong></p>
 </div>
 <div class="callout-content">
+<div style="text-align: center;">
 <p><span class="math inline">\(A\)</span> satisfies <span class="math inline">\(RE(s)\)</span> <span class="math inline">\(\iff\)</span> <span class="math inline">\(A\)</span> satisfies <span class="math inline">\(NSP(s)\)</span>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1509,7 +1518,7 @@ m\geq\frac{1}{\log5}\Big\lfloor\frac s2\Big\rfloor\log\Big(\Big\lfloor\frac{N}{8
 <div style="height: 30px;">
 
 </div>
-<div class="box-yellow">
+<div class="box-yellow" style="text-align: center;">
 <p>If <span class="math inline">\({\rm diam}(B_1^N\cap{\rm Ker}(A),\ell_2^N)\)</span> is small enough, then <span class="math inline">\(NSP(s)\)</span> should be true.</p>
 </div>
 <div style="height: 20px;">
@@ -1559,16 +1568,15 @@ m\geq\frac{1}{\log5}\Big\lfloor\frac s2\Big\rfloor\log\Big(\Big\lfloor\frac{N}{8
 <section id="gelfands-rightarrow-nsps" class="slide level2 scrollable">
 <h2><span class="math inline">\(Gelfand(s) \Rightarrow NSP(s)\)</span></h2>
 <div title="Theorem">
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
 <p><strong>Theorem</strong></p>
 </div>
 <div class="callout-content">
+<div style="text-align: center;">
 <p>If <span class="math inline">\(A\)</span> satisfies <span class="math inline">\(Gelfand(s)\)</span>, then <span class="math inline">\(A\)</span> satisfies <span class="math inline">\(NSP(s)\)</span>.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1924,10 +1932,13 @@ m\geq\frac{1}{\log5}\Big\lfloor\frac s2\Big\rfloor\log\Big(\Big\lfloor\frac{N}{8
 </section>
 <section id="lab-session-on-the-phase-transition-diagram" class="slide level2">
 <h2>Lab session on the phase transition diagram</h2>
-<div style="display: flex; justify-content: center; align-items: center; height: 550px;">
+<div style="display: flex; justify-content: center; align-items: center; height: 450px;">
 <div class="box-green" style="text-align: center; max-width: 850px; width: 100%;">
 <p>Open the notebook <code>0_lab_phase_transition_cvx.ipynb</code></p>
 </div>
+</div>
+<div class="box-yellow">
+<p><strong>Aim:</strong> Given a sparsity level <span class="math inline">\(s\)</span>, find the minimum number of measurements <span class="math inline">\(m\)</span> needed to recover a signal <span class="math inline">\(x\)</span> from its measurements <span class="math inline">\(y=Ax\)</span>.</p>
 </div>
 <!-- Part 4 source: manuscript_english/3_lasso/lasso_ridge_aggregation.tex -->
 <!-- (OLS, ell0 model selection and LASSO only; no ERM, Ridge or aggregation) -->
@@ -2731,7 +2742,7 @@ Y_i=\inr{X_i,\beta^*}+\varepsilon_i,\qquad\E\varepsilon_i=0,\quad i=1,\ldots,n.
         }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
-            var filterRegex = new RegExp("https:\/\/lecueguillaume\.github\.io\/Advanced-applied-statistics\/");
+            var filterRegex = new RegExp('/' + window.location.host + '/');
           var isInternal = (href) => {
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }

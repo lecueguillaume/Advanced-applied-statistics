@@ -122,23 +122,26 @@ Orthonormal basis (such as the Trigonometric basis in $L^2([0,1])$) are used to 
 
 ## The Haar basis in $L^2([0,1])$
 
+:::{.box-yellow}
+The Fourier basis of $L^2([0,1])$: $(1, \sqrt{2}\cos(2\pi k t), \sin(2\pi (k+1) t):k\geq1)$ is not robust to local perturbations.
+:::
+
 :::: {.columns}
-::: {.column width="50%"}
+::: {.column width="60%"}
 - Mother wavelet $\Psi=\mathbb{1}_{[0,1/2)}-\mathbb{1}_{[1/2,1)}$, scaling function $\Phi\equiv 1$.
 - Translations and dilations, for $j\in\N$ and $i=0,\ldots,2^j-1$:
 $$\Psi_i^j(t)=\sqrt{2^j}\,\Psi\big(2^j(t-i/2^j)\big),$$
 for all $t\in\{0, \cdots, n-1\}.$
-- The Fourier basis of  $L^2([0,1])$: $(1, \sqrt{2}\cos(2\pi k t), \sin(2\pi (k+1) t):k\geq1)$ is not robust to local perturbations.
 :::
 
-::: {.column width="50%"}
+::: {.column width="40%"}
 ```{tikz}
 %| label: haar
 %| echo: false
 %| fig-align: center
 %| fig-cap: "Haar mother wavelet (red) and level $j=1$ (blue, green)."
 
-\pgfplotsset{width=6cm}
+\pgfplotsset{width=5cm}
 \begin{tikzpicture}
 \begin{axis}[scale only axis, ymin=-1.5, ymax=1.5, xmin=-0.5, xmax=1.5]
 \addplot[color=red,thick] coordinates {(0, 1) (0.5,1)};
@@ -375,6 +378,9 @@ $$y_i=\inr{x,X_i}.$$
 
 . . .
 
+::: {style="height: 50px;"}
+:::
+
 :::{.box-green style="text-align: center;"}
 Is there a better way to choose the measurement vectors than all the indicators of all pixels?
 :::
@@ -495,7 +501,7 @@ In many applications the measurements are **imposed** by the physics or the data
 
 ## The $\ell_0$ minimization procedure
 
-- The solution set of $At=y$ is the affine space $x+\kerA$ of dimension $\geq N-m$.
+- The solution set of $At=y$ is the affine space $x+\kerA$ of dimension $\geq N-m$, $\kerA=\{t\in\R^N:At=0\}$.
 - **Idea:** The target signal is sparse, hence, pick the **sparsest** element of this space.
 - **Def.:** $\norm{t}_0= |\{j\in[N]: t_j\neq0\}|$ is the size of the support of $t\in\mathbb{R}^N$
 
@@ -983,13 +989,14 @@ Convex relaxation turns combinatorial searches into problems solvable with conve
 
 :::: {.columns style="display: flex; align-items: center;"}
 ::: {.column width="50%"}
-$$\min_{(z^+,z^-)\in\R^{2N}}\ \sum_{j=1}^N z_j^++z_j^-$$
-$$\text{s.t. } [A\,|\,-A]\begin{bmatrix}z^+\\ z^-\end{bmatrix}=y,\quad \begin{bmatrix}z^+\\ z^-\end{bmatrix}\geq0\tag{LP}$$
+$$\min_{(z^{(+)},z^{(-)})\in\R^{2N}}\ \sum_{j=1}^N z_j^{(+)}+z_j^{(-)}$$
+$$\text{s.t. } [A\,|\,-A]\begin{bmatrix}z^{(+)}\\ z^{(-)}\end{bmatrix}=y,\quad \begin{bmatrix}z^{(+)}\\ z^{(-)}\end{bmatrix}\geq0\tag{LP}$$
 :::
 
 ::: {.column width="50%" style="margin-top: 0;"}
 - Linear objective, 
 - linear constraints.
+- LP problem in $\bR^{2N}$
 :::
 ::::
 
@@ -1004,13 +1011,16 @@ Where for all $x\in\bR^N$, $x^+=(x_j^+)_{j=1}^N$ and $x^-=(x_j^-)_{j=1}^N$  with
 
 . . .
 
-**Key inequality:** $\norm{z^+-z^-}_1\leq\sum_j z_j^++z_j^-$, with equality for $(x^+,x^-)$.
+**Key inequalities:** 
+
+- for all $t\in\bR$, $t=t^+-t^-$ and $|t| = t^+ + t^-$.
+- $\norm{z^{(+)}-z^{(-)}}_{1}\leq\sum_j z_j^{(+)}+z_j^{(-)}$, with equality for $(x^+,x^-)$.
 
 
 :::{.box-blue style="font-size: 1.3em;"}
- From an $NP$-hard problem to a **linear program**: the algorithmic complexity gain is big! 
+ From a $NP$-hard problem to a **linear program**: the algorithmic complexity gain is big! 
 
-$\Rightarrow$  What is the price to pay?
+$\Rightarrow$ What are the prices to pay?
 :::
 
 
@@ -1155,8 +1165,10 @@ We say that $A\in\mathbb{R}^{m\times N}$ satisfies the **Null Space Property of 
 
 ## $NSP(s)$ is equivalent to exact reconstruction
 
-::: {.callout-note title="Theorem"}
+::: {.callout-note title="Theorem" icon=false}
+:::{style="text-align: center;"}
 $A$ satisfies $RE(s)$ $\iff$ $A$ satisfies $NSP(s)$.
+:::
 :::
 
 . . .
@@ -1218,7 +1230,7 @@ $NSP$ is necessary and sufficient, but we do not know how to check it directly o
 :::{style="height: 30px;"}
 :::
 
-:::{.box-yellow}
+:::{.box-yellow style="text-align: center;"}
 If ${\rm diam}(B_1^N\cap{\rm Ker}(A),\ell_2^N)$ is small enough, then $NSP(s)$ should be true.
 :::
 
@@ -1248,8 +1260,10 @@ The Gelfand property is a **very restrictive** condition: we don't know (so far)
 
 ## $Gelfand(s) \Rightarrow NSP(s)$ 
 
-::: {.callout-note title="Theorem"}
+::: {.callout-note title="Theorem" icon=false}
+:::{style="text-align: center;"}
 If $A$ satisfies $Gelfand(s)$, then $A$ satisfies $NSP(s)$.
+:::
 :::
 
 . . .
@@ -1505,10 +1519,14 @@ The cost of convex relaxation is pretty low compare to the algorithmic gain!
 
 ## Lab session on the phase transition diagram
 
-::: {style="display: flex; justify-content: center; align-items: center; height: 550px;"}
+::: {style="display: flex; justify-content: center; align-items: center; height: 450px;"}
 ::: {.box-green style="text-align: center; max-width: 850px; width: 100%;"}
 Open the notebook `0_lab_phase_transition_cvx.ipynb`
 :::
+:::
+
+:::{.box-yellow}
+**Aim:** Given a sparsity level $s$, find the minimum number of measurements $m$ needed to recover a signal $x$ from its measurements $y=Ax$.
 :::
 
 <!-- Part 4 source: manuscript_english/3_lasso/lasso_ridge_aggregation.tex -->

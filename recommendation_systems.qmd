@@ -309,7 +309,7 @@ $${\rm conv}(f)(x)=\sup_{a\in H,\,b\in\R}\big(\inr{a,x}+b:\ \inr{a,y}+b\leq f(y)
 :::
 ::::
 
-## Fenchel transform {.smaller .spread-out}
+## Fenchel transform {.smaller}
 
 ::: {.callout-note title="Definition (Fenchel transform)" icon=false}
 For $f:C\to\R$ with $C\subset H$ a convex set, **the Fenchel transform** of $f$ is
@@ -332,6 +332,77 @@ $$f^*: y\in H \to \sup_{x\in C}\big(\inr{x,y}-f(x)\big).$$
     Show that $f^*(y) = e^{y-1}$ for all $y \in \mathbb{R}$.
 :::
 
+## Geometric interpretation of the Fenchel transform {center="true"}
+
+:::: {.columns style="display: flex; align-items: center;"}
+
+::: {.column width="50%"}
+:::{.box-blue style="font-size: 1.10em;"}
+Given a slope $y\in H$, the Fenchel transform finds the intercept of the largest affine function with slope $y$ below the graph of $f$.
+:::
+:::
+
+::: {.column width="80%"}
+```{tikz}
+%| label: fenchel
+%| echo: false
+%| fig-align: center
+%| out-width: 65%
+
+
+\begin{tikzpicture}[>=stealth, scale=1.2]
+  % Grid / background area (optional, kept clean)
+  % Epigraph shading
+  \fill[blue!7, domain=-1.1:3.0, samples=100]
+    (-1.1, 5.2) -- plot (\x, {0.5*\x*\x + 1}) -- (3.0, 5.2) -- cycle;
+  \node[blue!60!black, font=\small] at (0.6, 4.2) {$\operatorname{epi}(f)$};
+
+  % Coordinate axes
+  \draw[->, thick] (-1.5, 0) -- (3.8, 0) node[right] {$u$};
+  \draw[->, thick] (0, -1.8) -- (0, 5.4) node[above] {$z$};
+  \node[below left, font=\small] at (0, 0) {$0$};
+
+  % Function f(u) = 0.5 * u^2 + 1
+  \draw[very thick, blue!80!black, domain=-1.1:2.9, samples=100]
+    plot (\x, {0.5*\x*\x + 1})
+    node[above] {$f(u)$};
+
+  % Supporting hyperplane (tangent line): L(u) = y*u - f*(y) with y = 2, f*(y) = 1
+  % L(u) = 2*u - 1
+  \draw[thick, red!85!black, domain=-0.35:3.1]
+    plot (\x, {2*\x - 1})
+    node[right, font=\small] {$L(u) = y u - f^*(y)$};
+
+  % Key coordinates
+  \coordinate (P) at (2, 3);
+  \coordinate (P0) at (0, -1);
+  \coordinate (Px) at (2, 0);
+  \coordinate (Pz) at (0, 3);
+
+  % Dashed projections for contact point
+  \draw[dashed, gray!80] (2, 3) -- (Px) node[below, black, font=\small] {$x$};
+  \draw[dashed, gray!80] (2, 3) -- (Pz) node[left, black, font=\small] {$f(x)$};
+
+  % Tangency contact point
+  \fill[blue!80!black] (P) circle (2.2pt) node[above left, black, font=\small] {$(x, f(x))$};
+
+  % Intercept at u = 0: value is -f*(y)
+  \fill[red!85!black] (P0) circle (2.2pt);
+  \node[right, red!85!black, font=\small] at (0.1, -1) {$-f^*(y)$};
+
+  % Distance indicator for f*(y)
+  \draw[<->, thick, red!85!black] (-0.35, 0) -- (-0.35, -1)
+    node[midway, left, font=\small] {$f^*(y)$};
+
+  % Slope indicator triangle
+  \draw[darkgray, thin] (2.2, 3.4) -- (2.7, 3.4) -- (2.7, 4.4);
+  \node[right, darkgray, font=\scriptsize] at (2.7, 3.9) {$\text{slope } y$};
+\end{tikzpicture}
+```
+:::
+
+::::
+
 ## The biconjugate function
 
 ::: {.callout-note title="Definition (biconjugate)" icon=false style="font-size: 0.8em;"}
@@ -340,15 +411,16 @@ The **biconjugate** of $f$ is the function $f^{**}:x\in H\to\sup_{y\in H}\big(\i
 
 . . .
 
-:::{.box-yellow style="font-size: 0.90em;"}
+:::{.box-yellow style="font-size: 0.92em;"}
 **Ex.1:** Compute the biconjugate of the negative entropy function.
+
+. . .
 
 **Ex.2:** Let $f : x\in \mathbb{R} \to (|x| - 1)^2$ be the double-well function. 
 
-- Show that $f$ is not convex.
-- Show that the Fenchel conjugate is $f^*(y)=|y| + \frac{y^2}{4}$ for all $y \in \mathbb{R}$.
-- Show that the Fenchel biconjugate $f^{**}(x) = \begin{cases} 0 & \text{if } |x| \leq 1, \\ (|x| - 1)^2 & \text{if } |x| > 1. \end{cases}$ for all $x \in \mathbb{R}$.
-- Show that $f^{**}(x) \leq f(x)$ for all $x \in \mathbb{R}$, and interpret $f^{**}$ geometrically in terms of the convex envelope $\overline{\rm conv}(f)$.
+- Show that $f$ is not convex and draw its convex envelope.
+- The Fenchel conjugate is $f^*(y)=|y| + \frac{y^2}{4}$ for all $y \in \mathbb{R}$ and the Fenchel biconjugate is $f^{**}(x) = \begin{cases} 0 & \text{if } |x| \leq 1, \\ (|x| - 1)^2 & \text{if } |x| > 1. \end{cases}$ for all $x \in \mathbb{R}$.
+- Draw the Fenchel biconjugate $f$ and make a conjecture about the convex envelope of $f$.
 :::
 
 
@@ -366,22 +438,22 @@ $$\forall x\in C, f^{**}(x)={\rm conv}(f)(x).$$
 
 **Proof.**
 
-1. For a fixed slope $a$, the affine function $\inr{a,\cdot}+b$ is below $f$ on $C$ iff $b\leq f(y)-\inr{a,y}$ for all $y\in C$.
+1. For a fixed slope $y\in H$, the affine function $\inr{y,\cdot}+b$ is below $f$ on $C$ iff $b\leq f(x)-\inr{y,x}$ for all $x\in C$.
 
 . . .
 
-2. The best intercept is $b=\inf_{y\in C}\big(f(y)-\inr{a,y}\big)=-f^*(a)$.
+2. The best intercept is $b=\inf_{x\in C}\big(f(x)-\inr{y,x}\big)=-f^*(y)$.
 
 . . .
 
-3. Hence ${\rm conv}(f)(x)=\sup_{a\in H}\big(\inr{a,x}-f^*(a)\big)=f^{**}(x)$.
+3. Hence ${\rm conv}(f)(x)=\sup_{y\in H}\big(\inr{y,x}-f^*(y)\big)=f^{**}(x)$.
 
 . . .
 
-<div style="height: 1cm;"></div>
+<div style="height: 1.2cm;"></div>
 
-::: {.box-green}
-**Idea:** To find the convex envelope of the rank, it suffices to compute its biconjugate.
+::: {.box-green style="text-align: center; font-size: 1.10em;"}
+**Idea:** To find the convex envelope of the rank function, it suffices to compute its biconjugate.
 :::
 
 ## The nuclear norm is the convex envelope of the rank {.spread-out}
@@ -390,14 +462,14 @@ $$\forall x\in C, f^{**}(x)={\rm conv}(f)(x).$$
 The convex envelope of the rank function on $B_{S_\infty}=\{A\in\R^{u\times v}:\norm{A}_{S_\infty}\leq1\}$ is the nuclear norm $\norm{\cdot}_{S_1}$.
 :::
 
-- The matrix analogue of "$\ell_1$ is the convex envelope of $\ell_0$ on $B_\infty^N$".
-- The 'dictionary' between 'vectors' and 'matrix' goes through the spectrum:
+- The matrix analog of "$\ell_1$ is the convex envelope of $\ell_0$ on $B_\infty^N$".
+- The dictionary between 'vectors' and 'matrices' goes through the spectrum:
 $${\rm rank}(A)=\norm{\sigma_A}_{\ell_0},\qquad\norm{A}_{S_1}=\norm{\sigma_A}_{\ell_1},\qquad\norm{A}_{S_\infty}=\norm{\sigma_A}_{\ell_\infty}.$$
 - The key tool for reducing matrix problems to problems on spectra is **von Neumann's inequality**.
 
-## von Neumann's inequality {.smaller}
+## von Neumann's inequality
 
-::: {.callout-note title="Proposition (von Neumann's inequality)" icon=false}
+::: {.callout-note title="Proposition (von Neumann's inequality)" style="font-size: 0.8em;" icon=false}
 For $A,B\in\R^{u\times v}$,
 $$|\inr{A,B}|\leq\sum_i\sigma_i(A)\sigma_i(B).$$
 Equality $\inr{A,B}=\sum_i\sigma_i(A)\sigma_i(B)$ holds iff, for an SVD $A=U_AD_AV_A^\top$, one has $U_A^\top BV_A=D_B$.
@@ -433,40 +505,71 @@ So $f^{**}=\norm{\cdot}_{S_1}$ on $B_{S_\infty}$. $\square$
 
 ## Nuclear norm minimization procedure {.smaller}
 
+::: {.callout-tip title="Key Idea: convex relaxation" icon=false}
+The nuclear norm is the convex envelope of the rank on $B_{S_\infty}$, so it is natural to replace the (none convex) rank function by the (convex) nuclear norm in the NP-hard rank minimization problem.
+:::
+
+::: {style="height: 50px;"}
+:::
+
 ::: {.callout-note title="Definition (nuclear norm minimization)" icon=false}
 With $\cA(A)=(\inr{A,X_i})_{i=1}^m$ and $y=(y_i)_{i=1}^m$,
-$$\hat A\in\argmin_{A\in\R^{u\times v}}\big(\norm{A}_{S_1}:\cA(A)=y\big).\tag{NM}$$
+$$\hat A\in\argmin_{A\in\R^{u\times v}}\big(\color{red}{\norm{A}_{S_1}}:\cA(A)=y\big).\tag{NM}$$
 :::
 
 - The convex relaxation of rank minimization: the matrix analogue of **Basis Pursuit**.
 - (NM) is a convex problem.
 - Basis Pursuit was rewritten as a **linear program**. (NM) can likewise be rewritten as a **semidefinite program** (SDP).
 
-. . .
+## Semidefinite programs in standard form {.smaller}
 
-::: {.callout-tip title="Key Idea: convex relaxation" icon=false}
-The nuclear norm is the convex envelope of the rank on $B_{S_\infty}$, so it is natural to replace the (non convex) rank function by the (convex) nuclear norm in the NP-hard rank minimization problem.
+::: {.callout-note title="Definition -- semidefinite program (SDP)" icon=false}
+An optimization problem is a **semidefinite program** if it can be written as
+$$\min_{X\in\cS^p}\Big(\inr{C,X}:\tilde\cA(X)=b,\ X\succeq0\Big),$$
+where $C\in\cS^p$, $\tilde\cA:\cS^p\to\R^m$ is linear and $b\in\R^m$.
 :::
 
-## Nuclear norm minimization as an SDP problem {.smaller}
+We write (NM) in this form, with variable $M$ such that 
+$$
+M=\begin{bmatrix}Y&X\\X^\top&Z\end{bmatrix}\in\cS^{u+v}, C=I_{u+v}
+$$ 
+so $\inr{C,M}={\rm Tr}(Y)+{\rm Tr}(Z)$ and $\tilde\cA(M)=\cA(X) , b=y.$
 
-$$\min_{X\in\R^{u\times v},\,Y\in\cS^u,\,Z\in\cS^v}{\rm Tr}(Y)+{\rm Tr}(Z)\quad\text{such that}\quad\cA(X)=y,\quad\begin{bmatrix}Y&X\\X^\top&Z\end{bmatrix}\succeq0.\tag{SDP}$$
+::: {style="height: 30px;"}
+:::
 
-::: {.callout-important title="Theorem" icon=false}
-(NM) and (SDP) are equivalent:
+::: {.box-yellow}
+- Like linear programs, SDPs are solved approximately by primal–dual barrier methods (e.g. `cvxopt.solvers.conelp`).
+- however, SDP solvers are **expensive in high dimension**: this motivates the gradient methods of the next part.
+:::
+
+
+
+## Nuclear norm minimization as an SDP problem
+We define the (SDP) problem as
+$$\min_{X\in\R^{u\times v},\,Y\in\cS^u,\,Z\in\cS^v}{\rm Tr}(Y)+{\rm Tr}(Z)\quad\text{such that}\quad\cA(X)=y,\quad\begin{bmatrix}Y&X\\X^\top&Z\end{bmatrix}\succeq0$$
+(*Note:* (SDP) is a semidefinite program)
+
+::: {style="height: 50px;"}
+:::
+
+::: {.callout-important title="Theorem: (NM) and (SDP) are equivalent:" icon=false style="font-size: 0.9em;"}
 
 1. if $\hat A$ solves (NM), then $(\hat A,\hat Y,\hat Z)$ solves (SDP) for some $\hat Y,\hat Z$ depending only on $\hat A$;
 2. if $(\hat X,\hat Y,\hat Z)$ solves (SDP), then $\hat X$ solves (NM).
 :::
 
-. . .
+
+
+## Proof sketch: the SDP lemma 
+
 
 ::: {.callout-note title="Lemma" icon=false}
 Let $A\in\R^{u\times v}$ and $t\geq0$. Then $\norm{A}_{S_1}\leq t$ iff there exist $Y\in\cS^u$ and $Z\in\cS^v$ such that
 $${\rm Tr}(Y)+{\rm Tr}(Z)\leq2t\qquad\text{and}\qquad\begin{bmatrix}Y&A\\A^\top&Z\end{bmatrix}\succeq0.$$
 :::
 
-## Proof sketch: the SDP lemma {.smaller}
+## Proof sketch {.smaller}
 
 The lemma gives $\min_{Y,Z}\frac12\big({\rm Tr}(Y)+{\rm Tr}(Z)\big)=\norm{X}_{S_1}$ for every feasible $X$, hence the theorem.
 
@@ -487,26 +590,13 @@ $$0\leq{\rm Tr}\Big(M\begin{bmatrix}Y&A\\A^\top&Z\end{bmatrix}\Big)={\rm Tr}(Y)+
 4. Then
 $$\begin{bmatrix}Y&A\\A^\top&Z\end{bmatrix}=\begin{bmatrix}U_r\\V_r\end{bmatrix}D_r\begin{bmatrix}U_r^\top&V_r^\top\end{bmatrix}+\gamma I_{u+v}\succeq0.\qquad\square$$
 
-## Semidefinite programs in standard form {.smaller}
 
-::: {.callout-note title="Definition (SDP)" icon=false}
-An optimization problem is a **semidefinite program** if it can be written as
-$$\min_{X\in\cS^p}\Big(\inr{C,X}:\tilde\cA(X)=b,\ X\succeq0\Big),$$
-where $C\in\cS^p$, $\tilde\cA:\cS^p\to\R^m$ is linear and $b\in\R^m$.
+## Sparse vectors $\leftrightarrow$ low-rank matrices
+
+::: {style="height: 50px;"}
 :::
 
-- (SDP) has this form, with variable $M=\begin{bmatrix}Y&X\\X^\top&Z\end{bmatrix}\in\cS^{u+v}$, $C=I_{u+v}$ (so $\inr{C,M}={\rm Tr}(Y)+{\rm Tr}(Z)$), $\tilde\cA(M)=\cA(X)$ and $b=y$.
-- Like linear programs, SDPs are solved approximately by primal–dual barrier methods (e.g. `cvxopt.solvers.conelp`).
-
-. . .
-
-::: {.callout-caution title="Remark" icon=false}
-SDP solvers are expensive in high dimension: this motivates the gradient methods of the next part.
-:::
-
-## Sparse vectors vs. low-rank matrices
-
-| | Sparse vectors (CS) | Low-rank matrices |
+| | Sparse vectors (CS) | Low-rank matrices (MC) |
 |:--|:--|:--|
 | Unknown | $x^*\in\R^N$ | $A^*\in\R^{u\times v}$ |
 | Structure | $\norm{x^*}_0\leq s$ | ${\rm rank}(A^*)=\norm{\sigma_{A^*}}_0\leq r$ |
@@ -515,11 +605,19 @@ SDP solvers are expensive in high dimension: this motivates the gradient methods
 | Convex procedure | Basis Pursuit | Nuclear norm minimization |
 | Implementation | linear program | semidefinite program |
 | Gaussian measurements | $m\gtrsim s\log(eN/s)$ | $m\gtrsim r(u+v)$ |
+: {tbl-colwidths="[27, 33, 39]"}
 
 
-# Proximal Gradient Descent for Matrix Completion
+# First order algorithms for Matrix Completion
 
-## The mask operator $P_\Omega$
+::: {style="height: 70px;"}
+:::
+
+::: {.callout-tip title="Idea: avoid SDP via first order methods" icon=false style="font-size: 0.9em;"}
+The SDP reformulation is hard to solve in high dimension. Here, we build first order algorithms to bypass this limitation.
+:::
+
+## The mask operator $P_\Omega$ {.spaced-list}
 
 - Each observation reveals one entry of the matrix: a **mask**
 $$P_\Omega:\R^{u\times v}\to\R^{u\times v},\qquad\big(P_\Omega(A)\big)_{ij}=\begin{cases}A_{ij}&\text{if }(i,j)\in\Omega,\\0&\text{otherwise,}\end{cases}$$
@@ -527,13 +625,10 @@ where $\Omega\subset\{1,\ldots,u\}\times\{1,\ldots,v\}$ is the set of revealed e
 - $P_\Omega$ is a projection ($P_\Omega^2=P_\Omega$) and is self-adjoint ($P_\Omega^\top=P_\Omega$).
 - We observe $P_\Omega(A^*)$ and assume that $A^*$ has **low rank**.
 
-. . .
 
-::: {.callout-tip title="Key Idea: avoid the SDP" icon=false}
-The SDP reformulation is hard to solve in high dimension. We now build a first order algorithms that work directly on the matrix.
-:::
 
-## Two procedures: rank constraint and nuclear norm penalty {.smaller}
+
+## Two procedures:
 
 :::{.box-yellow} 
 **Rank-constrained least squares:**
@@ -544,20 +639,20 @@ $$
 
 :::{.box-yellow} 
 **Nuclear-norm-penalized least squares:**
-$$\bar A\in\argmin_{A}\Big(\frac12\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}^2+\lambda\norm{A}_{S_1}\Big)$$
+$$\bar A\in\argmin_{A\in\bR^{u\times v}}\Big(\frac12\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}^2+\lambda\norm{A}_{S_1}\Big)$$
 :::
 
 
-- Both combine a **data-fidelity term** $A\mapsto\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}$ with a rank constraint or a nuclear norm regularization.
 
-
-. . .
-
-:::{.box-red style="text-align: center;"}
-Let us now construct first order algorithms to approximate their solutions based on matrix versions of **hard** and **soft thresholding** acting on the spectrum.
+::: {style="height: 50px;"}
 :::
 
-## Projected gradient for the rank constraint {.smaller}
+:::{.box-blue style="font-size: 0.9em;"}
+Both combine a **data-fidelity term** $A\mapsto\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}$ with a rank constraint or a nuclear norm regularization. 
+<!-- Let us now construct first order algorithms to approximate their solutions based on matrix versions of **hard** and **soft thresholding** acting on the spectrum. -->
+:::
+
+## Projected gradient for the rank constraint procedure
 
 - $F(A)=\frac12\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}^2$ is convex and differentiable, with
 $$\nabla F(A)=-P_\Omega^\top\big(P_\Omega(A^*)-P_\Omega(A)\big)=P_\Omega(A)-P_\Omega(A^*).$$
@@ -565,31 +660,31 @@ $$\nabla F(A)=-P_\Omega^\top\big(P_\Omega(A^*)-P_\Omega(A)\big)=P_\Omega(A)-P_\O
 
 . . .
 
-:::: {.columns}
-::: {.column width="58%"}
-::: {.callout-note title="Algorithm (projected gradient descent)" icon=false}
+
+::: {.callout-note title="Algorithm (projected gradient descent)" style="font-size: 0.9em;" icon=false}
 With step sizes $(\gamma_k)_k$,
-$$A^{k+1}=S_r^{hard}\Big(A^k+\gamma_k\big(P_\Omega(A^*)-P_\Omega(A^k)\big)\Big),$$
+$$A^{k+1}=\color{red}{S_r^{hard}}\Big(A^k+\gamma_k\big(P_\Omega(A^*)-P_\Omega(A^k)\big)\Big),$$
 where $S_r^{hard}$ keeps the $r$ largest singular values and sets the others to $0$.
 :::
-:::
 
-::: {.column width="42%"}
-::: {.callout-caution title="Remark" icon=false}
+
+
+<!-- ::: {.callout-caution title="Remark" icon=false}
 With $\gamma_k=1$: $A^{k+1}=S_r^{hard}\big(P_\Omega(A^*)+P_{\Omega^c}(A^k)\big)$, i.e. iterative rank-$r$ PCA for **missing data** (missMDA).
-:::
-:::
-::::
+::: -->
+
 
 ## Projection onto matrices of rank at most $r$ {.smaller}
 
-::: {.callout-note title="Proposition" icon=false}
-Let $A=PDQ^\top$ be an SVD of $A$, with $D={\rm diag}(\sigma_1,\ldots,\sigma_{u\wedge v})$. A projection of $A$ onto $\{B:{\rm rank}(B)\leq r\}$ in $\norm{\cdot}_{S_2}$ is
-$$S_r^{hard}(A)=PD_rQ^\top,\qquad D_r={\rm diag}(\sigma_1,\ldots,\sigma_r,0,\ldots,0).$$
+::: {.callout-note title="Proposition" icon=false style="font-size: 0.85em;"}
+Let $A\in\bR^{u\times v}$ and $r\geq0$.
+
+Let $A=PDQ^\top$ be an SVD of $A$, with $D={\rm diag}(\sigma_1,\ldots,\sigma_{u\wedge v})$ and $\sigma_1\geq\sigma_2\geq\cdots\geq\sigma_{u\wedge v}\geq0$. 
+
+A projection of $A$ onto $\{B:{\rm rank}(B)\leq r\}$ in $\norm{\cdot}_{S_2}$ is
+$$\color{red}{S_r^{hard}}(A) = PD_rQ^\top,\qquad D_r={\rm diag}(\sigma_1,\ldots,\sigma_r,0,\ldots,0).$$
 It is the unique projection when $\sigma_r>\sigma_{r+1}$.
 :::
-
-
 
 . . .
 
@@ -600,15 +695,22 @@ It is the unique projection when $\sigma_r>\sigma_{r+1}$.
 
 . . .
 
+::: {style="height: 40px;"}
+:::
 
 :::{.box-green}
-- Cost: one SVD per iteration, and only the $r$ leading singular triplets are needed.
-- It is a very special case where one can solve efficiently a non-convex optimization problem.
+- $S_r^{hard}(\cdot)$ is called the **hard thresholding spectral operator**.
+- Its `only` costs one SVD (and only the $r$ leading singular triplets are needed).
+- It is a special case where one can solve efficiently a non-convex optimization problem.
 :::
 
 
 
 ## The subdifferential of a convex function  {.smaller}
+
+**Aim:** Construct a first order algorithm for the nuclear norm penalized least squares procedure. 
+
+**Problem:** The nuclear norm is not differentiable.
 
 ::: {.callout-note title="Definition (Subdifferential)" icon=false}
  Let $f:C\to\R$ be a convex function (on a convex set $C\subset\R^n$). Let $x\in C$. The **Subdifferential of $f$ in $x$** is the set
@@ -616,13 +718,12 @@ $$\partial^-f(x)=\big\{g\in\R^n:f(y)\geq f(x)+\inr{g,y-x},\ \forall y\in C\big\}
 Its elements are called the **subgradients**.
 :::
 
-::: {style="height: 40px;"}
-:::
+. . .
 
 :::{.box-green}
-- **Exercise 1:** Show that if $f$ is a convex function that is differentiable at $x$ then $\partial^-f(x)=\{\nabla f(x)\}$.
-- **Exercise 2:** Compute the gradient of the absolute function $t\to|t|$ at all points of $\bR$.
-- **Exercise 3:** Let $f$ be a convex function: show that $x^*$ is solution to $\min_{x\in C}f(x)$ iff $0\in \partial^-f(x^*)$.
+- **Exercise 1:** Show that if $f$ is a convex function that is differentiable at $x\in \overset{\circ}{A}$ then $\partial^-f(x)=\{\nabla f(x)\}$.
+- **Exercise 2:** Compute the subdifferential of the absolute function $t\to|t|$ at all points of $\bR$.
+- **Exercise 3:** Let $f$ be a convex function on an open convex set $C\subset\R^n$: show that $x^*$ is solution to $\min_{x\in C}f(x)$ iff $0\in \partial^-f(x^*)$.
 - **Exercise 4:** Compute the subdifferential of the Euclidean norm over $\mathbb{R}^p$.
 :::
 
@@ -633,29 +734,41 @@ For a convex function $g:\R^n\to\R$,
 $${\rm prox}_g(x)=\argmin_{u\in\R^n}\Big(\frac12\norm{u-x}_2^2+g(u)\Big).$$
 :::
 
-- **It generalizes projections.** If $i_K$ is the indicator of $K$ ($0$ on $K$, $+\infty$ outside), then
-$$\argmin_{y\in K}\norm{x-y}_2=\argmin_{y\in\R^n}\Big(\frac12\norm{x-y}_2^2+i_K(y)\Big)={\rm prox}_{i_K}(x).$$
+::: {style="height: 30px;"}
+:::
 
 :::{.box-green}
-- **Exercise 1:** Let $K$ be a non-empty closed and convex set and denote by $i_K$ its indicator. Then for all $\gamma>0$, ${\rm prox}_{\gamma i_C}(x) = P_C(x)$, where $P_K$ is the projection operator over $K$. 
-- **Exercise 2:** Let $f(u)=|u|$ and let $\gamma > 0$. Show that ${\rm prox}_{\gamma f}(x) = {\rm sign}(x) \max(|x| - \gamma, 0).$
+- **Exercise 1:** Let $K$ be a non-empty closed and convex set and denote by $i_K$ its indicator function ($0$ on $K$, $+\infty$ outside). Then for all $\gamma>0$, ${\rm prox}_{\gamma i_C}(x) = P_C(x)$, where $P_K$ is the projection operator over $K$. 
+- **Exercise 2:** Let $f(u)=|u|$ and let $\gamma > 0$. Show that ${\rm prox}_{\gamma f}(x) = {\rm sign}(x) \max(|x| - \gamma, 0)$ and draw the proximal map of $f$.
+:::
+
+::: {style="height: 40px;"}
+:::
+
+:::{.box-red}
+**Proximal operators generalize projections:** For $K$ be a non-empty closed and convex set: for all $x\in\R^n$,
+$${\rm proj}_K(x)={\rm prox}_{i_K}(x).$$
 :::
 
 ## Proximal maps of $\ell_1$ and $\ell_0$ {.smaller}
 
 :::: {.columns}
 ::: {.column width="58%"}
-- The problem is **separable**: $\ \frac12\norm{u-z}_2^2+\gamma\norm{u}_1=\sum_j\Big(\frac12(u_j-z_j)^2+\gamma|u_j|\Big)$.
-- Scalar problem: study $\varphi(t)=\frac12(s-t)^2+\gamma|t|$ on $t<0$, $t=0$ and $t>0$:
-$$\argmin_{t\in\R}\varphi(t)=\begin{cases}s-\gamma&\text{if }s\geq\gamma\\0&\text{if }|s|\leq\gamma\\s+\gamma&\text{if }s\leq-\gamma\end{cases}={\rm sgn}(s)\big(|s|-\gamma\big)_+.$$
+The objective functions are **separable**:
+
+\begin{align*}
+\frac12\norm{u-z}_2^2+\gamma\norm{u}_{\color{blue}{1}}&=\sum_j\Big(\frac12(u_j-z_j)^2+\gamma|u_j|\Big)\\
+\frac12\norm{u-z}_2^2+\gamma\norm{u}_{\color{blue}{0}}&=\sum_j\Big(\frac12(u_j-z_j)^2+\gamma I(u_j\neq 0)\Big)
+\end{align*}
+
 :::
 
 
-::: {.column width="42%"}
+::: {.column width="35%"}
 ```{tikz}
 %| label: thresholding
 %| echo: false
-%| fig-align: center
+%| fig-align: "right"
 %| fig-cap: "Soft thresholding (left) and hard thresholding (right) at level $\\gamma$."
 
 \begin{tikzpicture}[scale=0.55]
@@ -684,13 +797,21 @@ $$\argmin_{t\in\R}\varphi(t)=\begin{cases}s-\gamma&\text{if }s\geq\gamma\\0&\tex
 :::
 ::::
 
-::: {.callout-note title="Proposition (proximal maps of $\ell_1$ and $\ell_0$)" icon=false}
-For $z\in\R^N$:
+Scalar problems: for all $s\in\R$,
+$$
+\argmin_{t\in\R}\left[\frac12(s-t)^2+\gamma|t|\right]  ={\rm sgn}(s)\big(|s|-\gamma\big)_+  \text{ and } 
+\argmin_{t\in\R}\left[\frac12(s-t)^2+\gamma I(t\neq 0)\right] =s\,I(|s|\geq \sqrt{2\gamma}).
+$$
+
+::: {style="height: 30px;"}
+:::
+
+::: {.callout-note title="Proposition (proximal maps of $\ell_1$ and $\ell_0$): For all $z\in\R^N$:" icon=false}
 
 :::: {.columns style="align-items: center;"}
 
 ::: {.column width="50%"}
-- **soft thresholding:** ${\rm prox}_{\gamma\norm{\cdot}_1}(z)=\big({\rm sgn}(z_j)(|z_j|-\gamma)_+\big)_{j=1}^N$;
+- **soft thresholding:** ${\rm prox}_{\gamma\norm{\cdot}_1}(z)=\big({\rm sgn}(z_j)(|z_j|-\gamma)_+\big)_{j=1}^N$
 :::
 
 ::: {.column width="50%"}
@@ -703,23 +824,28 @@ For $z\in\R^N$:
 ## Fixed-point characterization of proximal gradient descent {.smaller}
 
 ::: {.callout-note title="Proposition" icon=false}
-Let $f:\R^n\to\R$ be convex and differentiable, $g:\R^n\to\R$ convex, and $\gamma>0$. Then
+Let $f:\R^n\to\R$ be [convex and differentiable]{.blue}, $g:\R^n\to\R$ [convex]{.blue}, and $\gamma>0$. Then
 $$x^*\in\argmin_{x\in\R^n}\big(f(x)+g(x)\big)\iff x^*={\rm prox}_{\gamma g}\big(x^*-\gamma\nabla f(x^*)\big).$$
 :::
 
 
 
-. . .
-
 **Proof.**
 
 1. Replacing $(f,g)$ by $(\gamma f,\gamma g)$, we may take $\gamma=1$.
 2. By the optimality condition for the prox: $\ u^*={\rm prox}_g(z)\iff z-u^*\in\partial^-g(u^*)$.
-3. So $x^*={\rm prox}_g\big(x^*-\nabla f(x^*)\big)\iff-\nabla f(x^*)\in\partial^-g(x^*)\iff0\in\nabla f(x^*)+\partial^-g(x^*)$. $\square$
+3. So $x^*={\rm prox}_g\big(x^*-\nabla f(x^*)\big)\iff-\nabla f(x^*)\in\partial^-g(x^*)\iff0\in\nabla f(x^*)+\partial^-g(x^*)$.
 
 . . .
 
-- Look for a fixed point of $G:x\mapsto{\rm prox}_{\gamma g}\big(x-\gamma\nabla f(x)\big)$ by iterating $x_{k+1}=G(x_k)$, possibly with varying steps $\gamma_k$.
+::: {style="height: 30px;"}
+:::
+
+:::{.box-red}
+A solution to the problem $\min_{x\in\R^n}\big(f(x)+g(x)\big)$ is a fixed point of $G:x\mapsto{\rm prox}_{\gamma g}\big(x-\gamma\nabla f(x)\big)$. 
+
+We can use a **fixed point algorithm** to approximate it: $\color{red}{x_{k+1}=G(x_k)}$, possibly with varying steps $\gamma_k$.
+:::
 
 ## Prox of the nuclear norm: soft spectral thresholding {.smaller}
 
@@ -730,24 +856,32 @@ $${\rm prox}_{\gamma\norm{\cdot}_{S_1}}(A)=S_\gamma^{soft}(A)=UD_\gamma V^\top,\
 
 
 
-. . .
-
 **Proof.**
 
 1. von Neumann: $\norm{A-B}_{S_2}^2=\norm{A}_{S_2}^2+\norm{B}_{S_2}^2-2\inr{A,B}\geq\norm{\sigma_A-\sigma_B}_2^2$, with equality for $B=U\,{\rm diag}(\sigma_B)V^\top$.
 2. So the prox has the form $U{\rm diag}(\hat d)V^\top$, with $\hat d={\rm prox}_{\gamma\norm{\cdot}_1}(\sigma_A)$.
 3. Since $\sigma_A\geq0$, soft thresholding gives $\hat d=\big((\sigma_i-\gamma)_+\big)_i$. $\square$
 
+. . .
+
+::: {style="height: 60px;"}
+:::
+
+:::{.box-green}
+**Exercise:** Construct a proximal gradient descent algorithm for matrix completion.
+:::
+
 ## Proximal gradient descent for matrix completion {.smaller}
 
 ::: {.callout-note title="Algorithm (proximal gradient descent)" icon=false}
-For $\min_A\big(F(A)+\lambda\norm{A}_{S_1}\big)$, with step sizes $(\gamma_k)_k$:
+For $\min_A\big(\frac12\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}^2+\lambda\norm{A}_{S_1}\big)$, with step sizes $(\gamma_k)_k$:
 $$A_{k+1}=S_{\lambda\gamma_k}^{soft}\Big(A_k+\gamma_k\big(P_\Omega(A^*)-P_\Omega(A_k)\big)\Big).$$
 :::
 
 - Same cost for both methods: no SDP, but one SVD (or a truncated SVD) per iteration, which can still be expensive.
 
-
+::: {style="height: 40px;"}
+:::
 
 | Problem | Method | Spectral step |
 |:--|:--|:--|
@@ -756,16 +890,25 @@ $$A_{k+1}=S_{\lambda\gamma_k}^{soft}\Big(A_k+\gamma_k\big(P_\Omega(A^*)-P_\Omega
 
 
 
-::: {.box-green}
-**Key Idea: thresholding the spectrum:** Projecting onto low-rank matrices and computing the prox of the nuclear norm give matrix completion algorithms by projected or proximal gradient descent.
+::: {style="height: 60px;"}
 :::
 
-## Matrix completion on pictures via SDP and gradient proximal
+::: {.box-green}
+**Key Idea: thresholding the spectrum:** Projecting onto low-rank matrices and computing the prox of the nuclear norm give two first order methods for matrix completion by projected or proximal gradient descent.
+:::
 
-::: {style="display: flex; justify-content: center; align-items: center; height: 550px;"}
+## Matrix completion on pictures via SDP and  proximal gradient descent
+
+::: {style="display: flex; justify-content: center; align-items: center; height: 450px;"}
 ::: {.box-green style="text-align: center; max-width: 850px; width: 100%;"}
 Open the notebook `lab_mat_completion.ipynb`
 :::
+:::
+
+:::{.box-yellow}
+- Check that real images have low rank.
+- Use an SDP solver to complete a matrix.
+- Implement a proximal gradient descent algorithm for matrix completion.
 :::
 
 # Matrix Factorization and Metadata for Recommender Systems
@@ -932,11 +1075,15 @@ $$A^*_{ij}\approx\inr{p_i,q_j}+\underbrace{(a_i+\inr{b_i,x_i})}_{\text{user feat
 - If user $r$ influences $i$ ($U_{ir}\gg0$) and $r$ likes $j$ ($\inr{p_r,q_j}\gg0$), the predicted rating of $j$ by $i$ increases.
 - We take $U_{ii}=0$ and $I_{jj}=0$, so that $\inr{p_i,q_j}$ is not counted twice.
 
-## Learning the metadata model
+## Learning model's parameters
 
-- Parameters: the latent vectors $(p_i)_i$, $(q_j)_j$ and the coefficients $a_i,b_i,c_j,d_j$.
+- **Parameters:** the latent vectors $(p_i)_i$, $(q_j)_j$ and the coefficients $a_i,b_i,c_j,d_j$.
 - Minimize the regularized squared error
-$$F=\sum_{(i,j)\in\Omega}\Big[A^*_{ij}-\Big(\inr{p_i,q_j}+(a_i+\inr{b_i,x_i})+(c_j+\inr{d_j,z_j})+\alpha\sum_rU_{ir}\inr{p_r,q_j}+\beta\sum_sI_{js}\inr{p_i,q_s}\Big)\Big]^2+\lambda\Big(\sum_i\norm{p_i}_2^2+\sum_j\norm{q_j}_2^2\Big).$$
+$$
+F\big((p_i), (q_j), (a_i), (b_i), (c_j), (d_j)\big)= \\
+\sum_{(i,j)\in\Omega}\Big[A^*_{ij}-\Big(\inr{p_i,q_j}+(a_i+\inr{b_i,x_i})+(c_j+\inr{d_j,z_j})\\
++\alpha\sum_rU_{ir}\inr{p_r,q_j}+\beta\sum_sI_{js}\inr{p_i,q_s}\Big)\Big]^2+\lambda\Big(\sum_i\norm{p_i}_2^2+\sum_j\norm{q_j}_2^2\Big).
+$$
 
 . . .
 
@@ -1182,7 +1329,8 @@ This diagnosis has recently been called into question: deep networks can make ze
 
 ::: {style="display: flex; justify-content: center; align-items: center; height: 550px;"}
 ::: {.box-green style="text-align: center; max-width: 850px; width: 100%;"}
-Open the notebook `deep-learning-recommender-systems.ipynb`
+Open the notebook <br> 
+`lab_recommender_convex_vs_deep.ipynb`
 :::
 :::
 

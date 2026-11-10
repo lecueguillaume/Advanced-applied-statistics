@@ -1,9 +1,10 @@
 ---
 title: "Advanced applied Statistics"
-subtitle: "AIDAMS - S7"
+subtitle: "Course presentation"
 author: "Guillaume Lecué"
 institute: |
-  ![](Logo-essec.jpg){width=200px} 
+  ![](Logo-essec.jpg){width=200px} <br>
+  "AIDAMS - S7"
 engine: knitr
 format:
   revealjs:
@@ -35,11 +36,18 @@ knitr:
 3. Construct [efficient algorithms]{.red} leveraging this structure
 4. **Idea:** Mathematics are not siloed: algebra, approximation theory, statistics, probability, geometry and convex optimization all interact in this course.
 
-::: {style="height: 100px;"}
-::: 
 
 
-### Aim of the evaluation
+
+:::{.box-red  style="text-align: center;"}
+**Convex relaxation**
+$$
+\min_{x\in K_0}f_0(x) \leadsto \min_{x\in K_1}f_1(x)
+$$
+where $K_1$ and $f_1$ are convex sets and functions as 'close as possible' to $K_0$ and $f_0$.
+:::
+
+## Aim of the evaluation
 
 1. Develop a habit of [scientific monitoring]{.blue} and research
 2. Report [technical content to a large audience]{.blue}
