@@ -582,7 +582,7 @@ Guillaume Lecué
 </div>
 </div></div>
 </section>
-<section id="fenchel-transform" class="slide level2 smaller spread-out">
+<section id="fenchel-transform" class="slide level2 smaller">
 <h2>Fenchel transform</h2>
 <div title="Definition (Fenchel transform)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -608,6 +608,25 @@ Guillaume Lecué
 </div>
 </div>
 </section>
+<section id="geometric-interpretation-of-the-fenchel-transform" class="slide level2" data-center="true">
+<h2>Geometric interpretation of the Fenchel transform</h2>
+<div class="columns" style="display: flex; align-items: center;">
+<div class="column" style="width:50%;">
+<div class="box-blue" style="font-size: 1.10em;">
+<p>Given a slope <span class="math inline">\(y\in H\)</span>, the Fenchel transform finds the intercept of the largest affine function with slope <span class="math inline">\(y\)</span> below the graph of <span class="math inline">\(f\)</span>.</p>
+</div>
+</div><div class="column" style="width:80%;">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="recommendation_systems_files/figure-revealjs/fenchel-1.svg" class="quarto-figure quarto-figure-center" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
 <section id="the-biconjugate-function" class="slide level2">
 <h2>The biconjugate function</h2>
 <div title="Definition (biconjugate)" style="font-size: 0.8em;">
@@ -623,15 +642,16 @@ Guillaume Lecué
 </div>
 </div>
 <div class="fragment">
-<div class="box-yellow" style="font-size: 0.90em;">
+<div class="box-yellow" style="font-size: 0.92em;">
 <p><strong>Ex.1:</strong> Compute the biconjugate of the negative entropy function.</p>
+<div class="fragment">
 <p><strong>Ex.2:</strong> Let <span class="math inline">\(f : x\in \mathbb{R} \to (|x| - 1)^2\)</span> be the double-well function.</p>
 <ul>
-<li>Show that <span class="math inline">\(f\)</span> is not convex.</li>
-<li>Show that the Fenchel conjugate is <span class="math inline">\(f^*(y)=|y| + \frac{y^2}{4}\)</span> for all <span class="math inline">\(y \in \mathbb{R}\)</span>.</li>
-<li>Show that the Fenchel biconjugate <span class="math inline">\(f^{**}(x) = \begin{cases} 0 &amp; \text{if } |x| \leq 1, \\ (|x| - 1)^2 &amp; \text{if } |x| &gt; 1. \end{cases}\)</span> for all <span class="math inline">\(x \in \mathbb{R}\)</span>.</li>
-<li>Show that <span class="math inline">\(f^{**}(x) \leq f(x)\)</span> for all <span class="math inline">\(x \in \mathbb{R}\)</span>, and interpret <span class="math inline">\(f^{**}\)</span> geometrically in terms of the convex envelope <span class="math inline">\(\overline{\rm conv}(f)\)</span>.</li>
+<li>Show that <span class="math inline">\(f\)</span> is not convex and draw its convex envelope.</li>
+<li>The Fenchel conjugate is <span class="math inline">\(f^*(y)=|y| + \frac{y^2}{4}\)</span> for all <span class="math inline">\(y \in \mathbb{R}\)</span> and the Fenchel biconjugate is <span class="math inline">\(f^{**}(x) = \begin{cases} 0 &amp; \text{if } |x| \leq 1, \\ (|x| - 1)^2 &amp; \text{if } |x| &gt; 1. \end{cases}\)</span> for all <span class="math inline">\(x \in \mathbb{R}\)</span>.</li>
+<li>Draw the Fenchel biconjugate <span class="math inline">\(f\)</span> and make a conjecture about the convex envelope of <span class="math inline">\(f\)</span>.</li>
 </ul>
+</div>
 </div>
 </div>
 </section>
@@ -652,25 +672,25 @@ Guillaume Lecué
 <div class="fragment">
 <p><strong>Proof.</strong></p>
 <ol type="1">
-<li>For a fixed slope <span class="math inline">\(a\)</span>, the affine function <span class="math inline">\(\inr{a,\cdot}+b\)</span> is below <span class="math inline">\(f\)</span> on <span class="math inline">\(C\)</span> iff <span class="math inline">\(b\leq f(y)-\inr{a,y}\)</span> for all <span class="math inline">\(y\in C\)</span>.</li>
+<li>For a fixed slope <span class="math inline">\(y\in H\)</span>, the affine function <span class="math inline">\(\inr{y,\cdot}+b\)</span> is below <span class="math inline">\(f\)</span> on <span class="math inline">\(C\)</span> iff <span class="math inline">\(b\leq f(x)-\inr{y,x}\)</span> for all <span class="math inline">\(x\in C\)</span>.</li>
 </ol>
 </div>
 <div class="fragment">
 <ol start="2" type="1">
-<li>The best intercept is <span class="math inline">\(b=\inf_{y\in C}\big(f(y)-\inr{a,y}\big)=-f^*(a)\)</span>.</li>
+<li>The best intercept is <span class="math inline">\(b=\inf_{x\in C}\big(f(x)-\inr{y,x}\big)=-f^*(y)\)</span>.</li>
 </ol>
 </div>
 <div class="fragment">
 <ol start="3" type="1">
-<li>Hence <span class="math inline">\({\rm conv}(f)(x)=\sup_{a\in H}\big(\inr{a,x}-f^*(a)\big)=f^{**}(x)\)</span>.</li>
+<li>Hence <span class="math inline">\({\rm conv}(f)(x)=\sup_{y\in H}\big(\inr{y,x}-f^*(y)\big)=f^{**}(x)\)</span>.</li>
 </ol>
 </div>
 <div class="fragment">
-<div style="height: 1cm;">
+<div style="height: 1.2cm;">
 
 </div>
-<div class="box-green">
-<p><strong>Idea:</strong> To find the convex envelope of the rank, it suffices to compute its biconjugate.</p>
+<div class="box-green" style="text-align: center; font-size: 1.10em;">
+<p><strong>Idea:</strong> To find the convex envelope of the rank function, it suffices to compute its biconjugate.</p>
 </div>
 </div>
 </section>
@@ -689,14 +709,14 @@ Guillaume Lecué
 </div>
 </div>
 <ul>
-<li>The matrix analogue of “<span class="math inline">\(\ell_1\)</span> is the convex envelope of <span class="math inline">\(\ell_0\)</span> on <span class="math inline">\(B_\infty^N\)</span>”.</li>
-<li>The ‘dictionary’ between ‘vectors’ and ‘matrix’ goes through the spectrum: <span class="math display">\[{\rm rank}(A)=\norm{\sigma_A}_{\ell_0},\qquad\norm{A}_{S_1}=\norm{\sigma_A}_{\ell_1},\qquad\norm{A}_{S_\infty}=\norm{\sigma_A}_{\ell_\infty}.\]</span></li>
+<li>The matrix analog of “<span class="math inline">\(\ell_1\)</span> is the convex envelope of <span class="math inline">\(\ell_0\)</span> on <span class="math inline">\(B_\infty^N\)</span>”.</li>
+<li>The dictionary between ‘vectors’ and ‘matrices’ goes through the spectrum: <span class="math display">\[{\rm rank}(A)=\norm{\sigma_A}_{\ell_0},\qquad\norm{A}_{S_1}=\norm{\sigma_A}_{\ell_1},\qquad\norm{A}_{S_\infty}=\norm{\sigma_A}_{\ell_\infty}.\]</span></li>
 <li>The key tool for reducing matrix problems to problems on spectra is <strong>von Neumann’s inequality</strong>.</li>
 </ul>
 </section>
-<section id="von-neumanns-inequality" class="slide level2 smaller">
+<section id="von-neumanns-inequality" class="slide level2">
 <h2>von Neumann’s inequality</h2>
-<div title="Proposition (von Neumann's inequality)">
+<div title="Proposition (von Neumann's inequality)" style="font-size: 0.8em;">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -738,6 +758,21 @@ Guillaume Lecué
 </section>
 <section id="nuclear-norm-minimization-procedure" class="slide level2 smaller">
 <h2>Nuclear norm minimization procedure</h2>
+<div title="Key Idea: convex relaxation">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Key Idea: convex relaxation</strong></p>
+</div>
+<div class="callout-content">
+<p>The nuclear norm is the convex envelope of the rank on <span class="math inline">\(B_{S_\infty}\)</span>, so it is natural to replace the (none convex) rank function by the (convex) nuclear norm in the NP-hard rank minimization problem.</p>
+</div>
+</div>
+</div>
+</div>
+<div style="height: 50px;">
+
+</div>
 <div title="Definition (nuclear norm minimization)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -745,7 +780,7 @@ Guillaume Lecué
 <p><strong>Definition (nuclear norm minimization)</strong></p>
 </div>
 <div class="callout-content">
-<p>With <span class="math inline">\(\cA(A)=(\inr{A,X_i})_{i=1}^m\)</span> and <span class="math inline">\(y=(y_i)_{i=1}^m\)</span>, <span class="math display">\[\hat A\in\argmin_{A\in\R^{u\times v}}\big(\norm{A}_{S_1}:\cA(A)=y\big).\tag{NM}\]</span></p>
+<p>With <span class="math inline">\(\cA(A)=(\inr{A,X_i})_{i=1}^m\)</span> and <span class="math inline">\(y=(y_i)_{i=1}^m\)</span>, <span class="math display">\[\hat A\in\argmin_{A\in\R^{u\times v}}\big(\color{red}{\norm{A}_{S_1}}:\cA(A)=y\big).\tag{NM}\]</span></p>
 </div>
 </div>
 </div>
@@ -755,32 +790,47 @@ Guillaume Lecué
 <li>(NM) is a convex problem.</li>
 <li>Basis Pursuit was rewritten as a <strong>linear program</strong>. (NM) can likewise be rewritten as a <strong>semidefinite program</strong> (SDP).</li>
 </ul>
-<div class="fragment">
-<div title="Key Idea: convex relaxation">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
+</section>
+<section id="semidefinite-programs-in-standard-form" class="slide level2 smaller">
+<h2>Semidefinite programs in standard form</h2>
+<div title="Definition -- semidefinite program (SDP)">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Key Idea: convex relaxation</strong></p>
+<p><strong>Definition – semidefinite program (SDP)</strong></p>
 </div>
 <div class="callout-content">
-<p>The nuclear norm is the convex envelope of the rank on <span class="math inline">\(B_{S_\infty}\)</span>, so it is natural to replace the (non convex) rank function by the (convex) nuclear norm in the NP-hard rank minimization problem.</p>
+<p>An optimization problem is a <strong>semidefinite program</strong> if it can be written as <span class="math display">\[\min_{X\in\cS^p}\Big(\inr{C,X}:\tilde\cA(X)=b,\ X\succeq0\Big),\]</span> where <span class="math inline">\(C\in\cS^p\)</span>, <span class="math inline">\(\tilde\cA:\cS^p\to\R^m\)</span> is linear and <span class="math inline">\(b\in\R^m\)</span>.</p>
 </div>
 </div>
 </div>
 </div>
+<p>We write (NM) in this form, with variable <span class="math inline">\(M\)</span> such that <span class="math display">\[
+M=\begin{bmatrix}Y&amp;X\\X^\top&amp;Z\end{bmatrix}\in\cS^{u+v}, C=I_{u+v}
+\]</span> so <span class="math inline">\(\inr{C,M}={\rm Tr}(Y)+{\rm Tr}(Z)\)</span> and <span class="math inline">\(\tilde\cA(M)=\cA(X) , b=y.\)</span></p>
+<div style="height: 30px;">
+
+</div>
+<div class="box-yellow">
+<ul>
+<li>Like linear programs, SDPs are solved approximately by primal–dual barrier methods (e.g.&nbsp;<code>cvxopt.solvers.conelp</code>).</li>
+<li>however, SDP solvers are <strong>expensive in high dimension</strong>: this motivates the gradient methods of the next part.</li>
+</ul>
 </div>
 </section>
-<section id="nuclear-norm-minimization-as-an-sdp-problem" class="slide level2 smaller scrollable">
+<section id="nuclear-norm-minimization-as-an-sdp-problem" class="slide level2 scrollable">
 <h2>Nuclear norm minimization as an SDP problem</h2>
-<p><span class="math display">\[\min_{X\in\R^{u\times v},\,Y\in\cS^u,\,Z\in\cS^v}{\rm Tr}(Y)+{\rm Tr}(Z)\quad\text{such that}\quad\cA(X)=y,\quad\begin{bmatrix}Y&amp;X\\X^\top&amp;Z\end{bmatrix}\succeq0.\tag{SDP}\]</span></p>
-<div title="Theorem">
+<p>We define the (SDP) problem as <span class="math display">\[\min_{X\in\R^{u\times v},\,Y\in\cS^u,\,Z\in\cS^v}{\rm Tr}(Y)+{\rm Tr}(Z)\quad\text{such that}\quad\cA(X)=y,\quad\begin{bmatrix}Y&amp;X\\X^\top&amp;Z\end{bmatrix}\succeq0\]</span> (<em>Note:</em> (SDP) is a semidefinite program)</p>
+<div style="height: 50px;">
+
+</div>
+<div title="Theorem: (NM) and (SDP) are equivalent:" style="font-size: 0.9em;">
 <div class="callout callout-important no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Theorem</strong></p>
+<p><strong>Theorem: (NM) and (SDP) are equivalent:</strong></p>
 </div>
 <div class="callout-content">
-<p>(NM) and (SDP) are equivalent:</p>
 <ol type="1">
 <li>if <span class="math inline">\(\hat A\)</span> solves (NM), then <span class="math inline">\((\hat A,\hat Y,\hat Z)\)</span> solves (SDP) for some <span class="math inline">\(\hat Y,\hat Z\)</span> depending only on <span class="math inline">\(\hat A\)</span>;</li>
 <li>if <span class="math inline">\((\hat X,\hat Y,\hat Z)\)</span> solves (SDP), then <span class="math inline">\(\hat X\)</span> solves (NM).</li>
@@ -789,7 +839,9 @@ Guillaume Lecué
 </div>
 </div>
 </div>
-<div class="fragment">
+</section>
+<section id="proof-sketch-the-sdp-lemma" class="slide level2">
+<h2>Proof sketch: the SDP lemma</h2>
 <div title="Lemma">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -802,10 +854,9 @@ Guillaume Lecué
 </div>
 </div>
 </div>
-</div>
 </section>
-<section id="proof-sketch-the-sdp-lemma" class="slide level2 smaller scrollable">
-<h2>Proof sketch: the SDP lemma</h2>
+<section id="proof-sketch" class="slide level2 smaller scrollable">
+<h2>Proof sketch</h2>
 <p>The lemma gives <span class="math inline">\(\min_{Y,Z}\frac12\big({\rm Tr}(Y)+{\rm Tr}(Z)\big)=\norm{X}_{S_1}\)</span> for every feasible <span class="math inline">\(X\)</span>, hence the theorem.</p>
 <p><strong>(<span class="math inline">\(\Leftarrow\)</span>)</strong> Take an SVD <span class="math inline">\(A=UDV^\top\)</span> and <span class="math inline">\(I_{u,v}={\rm diag}(1,\ldots,1)\in\R^{u\times v}\)</span>.</p>
 <div class="fragment">
@@ -822,52 +873,22 @@ Guillaume Lecué
 </ol>
 </div>
 </section>
-<section id="semidefinite-programs-in-standard-form" class="slide level2 smaller">
-<h2>Semidefinite programs in standard form</h2>
-<div title="Definition (SDP)">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Definition (SDP)</strong></p>
+<section id="sparse-vectors-leftrightarrow-low-rank-matrices" class="slide level2">
+<h2>Sparse vectors <span class="math inline">\(\leftrightarrow\)</span> low-rank matrices</h2>
+<div style="height: 50px;">
+
 </div>
-<div class="callout-content">
-<p>An optimization problem is a <strong>semidefinite program</strong> if it can be written as <span class="math display">\[\min_{X\in\cS^p}\Big(\inr{C,X}:\tilde\cA(X)=b,\ X\succeq0\Big),\]</span> where <span class="math inline">\(C\in\cS^p\)</span>, <span class="math inline">\(\tilde\cA:\cS^p\to\R^m\)</span> is linear and <span class="math inline">\(b\in\R^m\)</span>.</p>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li>(SDP) has this form, with variable <span class="math inline">\(M=\begin{bmatrix}Y&amp;X\\X^\top&amp;Z\end{bmatrix}\in\cS^{u+v}\)</span>, <span class="math inline">\(C=I_{u+v}\)</span> (so <span class="math inline">\(\inr{C,M}={\rm Tr}(Y)+{\rm Tr}(Z)\)</span>), <span class="math inline">\(\tilde\cA(M)=\cA(X)\)</span> and <span class="math inline">\(b=y\)</span>.</li>
-<li>Like linear programs, SDPs are solved approximately by primal–dual barrier methods (e.g.&nbsp;<code>cvxopt.solvers.conelp</code>).</li>
-</ul>
-<div class="fragment">
-<div title="Remark">
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Remark</strong></p>
-</div>
-<div class="callout-content">
-<p>SDP solvers are expensive in high dimension: this motivates the gradient methods of the next part.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="sparse-vectors-vs.-low-rank-matrices" class="slide level2">
-<h2>Sparse vectors vs.&nbsp;low-rank matrices</h2>
-<table class="caption-top">
+<table class="caption-top" style="width:99%;">
 <colgroup>
+<col style="width: 27%">
 <col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
+<col style="width: 39%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
 <th style="text-align: left;">Sparse vectors (CS)</th>
-<th style="text-align: left;">Low-rank matrices</th>
+<th style="text-align: left;">Low-rank matrices (MC)</th>
 </tr>
 </thead>
 <tbody>
@@ -910,98 +931,85 @@ Guillaume Lecué
 </table>
 </section></section>
 <section>
-<section id="proximal-gradient-descent-for-matrix-completion" class="title-slide slide level1 center">
-<h1>Proximal Gradient Descent for Matrix Completion</h1>
+<section id="first-order-algorithms-for-matrix-completion" class="title-slide slide level1 center">
+<h1>First order algorithms for Matrix Completion</h1>
+<div style="height: 70px;">
 
+</div>
+<div title="Idea: avoid SDP via first order methods" style="font-size: 0.9em;">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Idea: avoid SDP via first order methods</strong></p>
+</div>
+<div class="callout-content">
+<p>The SDP reformulation is hard to solve in high dimension. Here, we build first order algorithms to bypass this limitation.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="the-mask-operator-p_omega" class="slide level2">
+<section id="the-mask-operator-p_omega" class="slide level2 spaced-list">
 <h2>The mask operator <span class="math inline">\(P_\Omega\)</span></h2>
 <ul>
 <li>Each observation reveals one entry of the matrix: a <strong>mask</strong> <span class="math display">\[P_\Omega:\R^{u\times v}\to\R^{u\times v},\qquad\big(P_\Omega(A)\big)_{ij}=\begin{cases}A_{ij}&amp;\text{if }(i,j)\in\Omega,\\0&amp;\text{otherwise,}\end{cases}\]</span> where <span class="math inline">\(\Omega\subset\{1,\ldots,u\}\times\{1,\ldots,v\}\)</span> is the set of revealed entries.</li>
 <li><span class="math inline">\(P_\Omega\)</span> is a projection (<span class="math inline">\(P_\Omega^2=P_\Omega\)</span>) and is self-adjoint (<span class="math inline">\(P_\Omega^\top=P_\Omega\)</span>).</li>
 <li>We observe <span class="math inline">\(P_\Omega(A^*)\)</span> and assume that <span class="math inline">\(A^*\)</span> has <strong>low rank</strong>.</li>
 </ul>
-<div class="fragment">
-<div title="Key Idea: avoid the SDP">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Key Idea: avoid the SDP</strong></p>
-</div>
-<div class="callout-content">
-<p>The SDP reformulation is hard to solve in high dimension. We now build a first order algorithms that work directly on the matrix.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
 </section>
-<section id="two-procedures-rank-constraint-and-nuclear-norm-penalty" class="slide level2 smaller">
-<h2>Two procedures: rank constraint and nuclear norm penalty</h2>
+<section id="two-procedures" class="slide level2">
+<h2>Two procedures:</h2>
 <div class="box-yellow">
 <p><strong>Rank-constrained least squares:</strong> <span class="math display">\[
 \tilde A\in\argmin_{{\rm rank}(A)\leq r}\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}
 \]</span></p>
 </div>
 <div class="box-yellow">
-<p><strong>Nuclear-norm-penalized least squares:</strong> <span class="math display">\[\bar A\in\argmin_{A}\Big(\frac12\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}^2+\lambda\norm{A}_{S_1}\Big)\]</span></p>
+<p><strong>Nuclear-norm-penalized least squares:</strong> <span class="math display">\[\bar A\in\argmin_{A\in\bR^{u\times v}}\Big(\frac12\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}^2+\lambda\norm{A}_{S_1}\Big)\]</span></p>
 </div>
-<ul>
-<li>Both combine a <strong>data-fidelity term</strong> <span class="math inline">\(A\mapsto\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}\)</span> with a rank constraint or a nuclear norm regularization.</li>
-</ul>
-<div class="fragment">
-<div class="box-red" style="text-align: center;">
-<p>Let us now construct first order algorithms to approximate their solutions based on matrix versions of <strong>hard</strong> and <strong>soft thresholding</strong> acting on the spectrum.</p>
+<div style="height: 50px;">
+
 </div>
+<div class="box-blue" style="font-size: 0.9em;">
+<p>Both combine a <strong>data-fidelity term</strong> <span class="math inline">\(A\mapsto\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}\)</span> with a rank constraint or a nuclear norm regularization. <!-- Let us now construct first order algorithms to approximate their solutions based on matrix versions of **hard** and **soft thresholding** acting on the spectrum. --></p>
 </div>
 </section>
-<section id="projected-gradient-for-the-rank-constraint" class="slide level2 smaller">
-<h2>Projected gradient for the rank constraint</h2>
+<section id="projected-gradient-for-the-rank-constraint-procedure" class="slide level2">
+<h2>Projected gradient for the rank constraint procedure</h2>
 <ul>
 <li><span class="math inline">\(F(A)=\frac12\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}^2\)</span> is convex and differentiable, with <span class="math display">\[\nabla F(A)=-P_\Omega^\top\big(P_\Omega(A^*)-P_\Omega(A)\big)=P_\Omega(A)-P_\Omega(A^*).\]</span></li>
 <li>The constraint <span class="math inline">\(\{{\rm rank}(A)\leq r\}\)</span> is <strong>not convex</strong>, but we can still project onto it (next slide).</li>
 </ul>
 <div class="fragment">
-<div class="columns">
-<div class="column" style="width:58%;">
-<div title="Algorithm (projected gradient descent)">
+<div title="Algorithm (projected gradient descent)" style="font-size: 0.9em;">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <p><strong>Algorithm (projected gradient descent)</strong></p>
 </div>
 <div class="callout-content">
-<p>With step sizes <span class="math inline">\((\gamma_k)_k\)</span>, <span class="math display">\[A^{k+1}=S_r^{hard}\Big(A^k+\gamma_k\big(P_\Omega(A^*)-P_\Omega(A^k)\big)\Big),\]</span> where <span class="math inline">\(S_r^{hard}\)</span> keeps the <span class="math inline">\(r\)</span> largest singular values and sets the others to <span class="math inline">\(0\)</span>.</p>
+<p>With step sizes <span class="math inline">\((\gamma_k)_k\)</span>, <span class="math display">\[A^{k+1}=\color{red}{S_r^{hard}}\Big(A^k+\gamma_k\big(P_\Omega(A^*)-P_\Omega(A^k)\big)\Big),\]</span> where <span class="math inline">\(S_r^{hard}\)</span> keeps the <span class="math inline">\(r\)</span> largest singular values and sets the others to <span class="math inline">\(0\)</span>.</p>
 </div>
 </div>
 </div>
 </div>
-</div><div class="column" style="width:42%;">
-<div title="Remark">
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Remark</strong></p>
-</div>
-<div class="callout-content">
-<p>With <span class="math inline">\(\gamma_k=1\)</span>: <span class="math inline">\(A^{k+1}=S_r^{hard}\big(P_\Omega(A^*)+P_{\Omega^c}(A^k)\big)\)</span>, i.e.&nbsp;iterative rank-<span class="math inline">\(r\)</span> PCA for <strong>missing data</strong> (missMDA).</p>
-</div>
-</div>
-</div>
-</div>
-</div></div>
+<!-- ::: {.callout-caution title="Remark" icon=false}
+With $\gamma_k=1$: $A^{k+1}=S_r^{hard}\big(P_\Omega(A^*)+P_{\Omega^c}(A^k)\big)$, i.e. iterative rank-$r$ PCA for **missing data** (missMDA).
+::: -->
 </div>
 </section>
 <section id="projection-onto-matrices-of-rank-at-most-r" class="slide level2 smaller scrollable">
 <h2>Projection onto matrices of rank at most <span class="math inline">\(r\)</span></h2>
-<div title="Proposition">
+<div title="Proposition" style="font-size: 0.85em;">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <p><strong>Proposition</strong></p>
 </div>
 <div class="callout-content">
-<p>Let <span class="math inline">\(A=PDQ^\top\)</span> be an SVD of <span class="math inline">\(A\)</span>, with <span class="math inline">\(D={\rm diag}(\sigma_1,\ldots,\sigma_{u\wedge v})\)</span>. A projection of <span class="math inline">\(A\)</span> onto <span class="math inline">\(\{B:{\rm rank}(B)\leq r\}\)</span> in <span class="math inline">\(\norm{\cdot}_{S_2}\)</span> is <span class="math display">\[S_r^{hard}(A)=PD_rQ^\top,\qquad D_r={\rm diag}(\sigma_1,\ldots,\sigma_r,0,\ldots,0).\]</span> It is the unique projection when <span class="math inline">\(\sigma_r&gt;\sigma_{r+1}\)</span>.</p>
+<p>Let <span class="math inline">\(A\in\bR^{u\times v}\)</span> and <span class="math inline">\(r\geq0\)</span>.</p>
+<p>Let <span class="math inline">\(A=PDQ^\top\)</span> be an SVD of <span class="math inline">\(A\)</span>, with <span class="math inline">\(D={\rm diag}(\sigma_1,\ldots,\sigma_{u\wedge v})\)</span> and <span class="math inline">\(\sigma_1\geq\sigma_2\geq\cdots\geq\sigma_{u\wedge v}\geq0\)</span>.</p>
+<p>A projection of <span class="math inline">\(A\)</span> onto <span class="math inline">\(\{B:{\rm rank}(B)\leq r\}\)</span> in <span class="math inline">\(\norm{\cdot}_{S_2}\)</span> is <span class="math display">\[\color{red}{S_r^{hard}}(A) = PD_rQ^\top,\qquad D_r={\rm diag}(\sigma_1,\ldots,\sigma_r,0,\ldots,0).\]</span> It is the unique projection when <span class="math inline">\(\sigma_r&gt;\sigma_{r+1}\)</span>.</p>
 </div>
 </div>
 </div>
@@ -1014,16 +1022,22 @@ Guillaume Lecué
 </ol>
 </div>
 <div class="fragment">
+<div style="height: 40px;">
+
+</div>
 <div class="box-green">
 <ul>
-<li>Cost: one SVD per iteration, and only the <span class="math inline">\(r\)</span> leading singular triplets are needed.</li>
-<li>It is a very special case where one can solve efficiently a non-convex optimization problem.</li>
+<li><span class="math inline">\(S_r^{hard}(\cdot)\)</span> is called the <strong>hard thresholding spectral operator</strong>.</li>
+<li>Its <code>only</code> costs one SVD (and only the <span class="math inline">\(r\)</span> leading singular triplets are needed).</li>
+<li>It is a special case where one can solve efficiently a non-convex optimization problem.</li>
 </ul>
 </div>
 </div>
 </section>
 <section id="the-subdifferential-of-a-convex-function" class="slide level2 smaller">
 <h2>The subdifferential of a convex function</h2>
+<p><strong>Aim:</strong> Construct a first order algorithm for the nuclear norm penalized least squares procedure.</p>
+<p><strong>Problem:</strong> The nuclear norm is not differentiable.</p>
 <div title="Definition (Subdifferential)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -1036,16 +1050,15 @@ Guillaume Lecué
 </div>
 </div>
 </div>
-<div style="height: 40px;">
-
-</div>
+<div class="fragment">
 <div class="box-green">
 <ul>
-<li><strong>Exercise 1:</strong> Show that if <span class="math inline">\(f\)</span> is a convex function that is differentiable at <span class="math inline">\(x\)</span> then <span class="math inline">\(\partial^-f(x)=\{\nabla f(x)\}\)</span>.</li>
-<li><strong>Exercise 2:</strong> Compute the gradient of the absolute function <span class="math inline">\(t\to|t|\)</span> at all points of <span class="math inline">\(\bR\)</span>.</li>
-<li><strong>Exercise 3:</strong> Let <span class="math inline">\(f\)</span> be a convex function: show that <span class="math inline">\(x^*\)</span> is solution to <span class="math inline">\(\min_{x\in C}f(x)\)</span> iff <span class="math inline">\(0\in \partial^-f(x^*)\)</span>.</li>
+<li><strong>Exercise 1:</strong> Show that if <span class="math inline">\(f\)</span> is a convex function that is differentiable at <span class="math inline">\(x\in \overset{\circ}{A}\)</span> then <span class="math inline">\(\partial^-f(x)=\{\nabla f(x)\}\)</span>.</li>
+<li><strong>Exercise 2:</strong> Compute the subdifferential of the absolute function <span class="math inline">\(t\to|t|\)</span> at all points of <span class="math inline">\(\bR\)</span>.</li>
+<li><strong>Exercise 3:</strong> Let <span class="math inline">\(f\)</span> be a convex function on an open convex set <span class="math inline">\(C\subset\R^n\)</span>: show that <span class="math inline">\(x^*\)</span> is solution to <span class="math inline">\(\min_{x\in C}f(x)\)</span> iff <span class="math inline">\(0\in \partial^-f(x^*)\)</span>.</li>
 <li><strong>Exercise 4:</strong> Compute the subdifferential of the Euclidean norm over <span class="math inline">\(\mathbb{R}^p\)</span>.</li>
 </ul>
+</div>
 </div>
 </section>
 <section id="proximal-operators" class="slide level2 smaller">
@@ -1062,28 +1075,35 @@ Guillaume Lecué
 </div>
 </div>
 </div>
-<ul>
-<li><strong>It generalizes projections.</strong> If <span class="math inline">\(i_K\)</span> is the indicator of <span class="math inline">\(K\)</span> (<span class="math inline">\(0\)</span> on <span class="math inline">\(K\)</span>, <span class="math inline">\(+\infty\)</span> outside), then <span class="math display">\[\argmin_{y\in K}\norm{x-y}_2=\argmin_{y\in\R^n}\Big(\frac12\norm{x-y}_2^2+i_K(y)\Big)={\rm prox}_{i_K}(x).\]</span></li>
-</ul>
+<div style="height: 30px;">
+
+</div>
 <div class="box-green">
 <ul>
-<li><strong>Exercise 1:</strong> Let <span class="math inline">\(K\)</span> be a non-empty closed and convex set and denote by <span class="math inline">\(i_K\)</span> its indicator. Then for all <span class="math inline">\(\gamma&gt;0\)</span>, <span class="math inline">\({\rm prox}_{\gamma i_C}(x) = P_C(x)\)</span>, where <span class="math inline">\(P_K\)</span> is the projection operator over <span class="math inline">\(K\)</span>.</li>
-<li><strong>Exercise 2:</strong> Let <span class="math inline">\(f(u)=|u|\)</span> and let <span class="math inline">\(\gamma &gt; 0\)</span>. Show that <span class="math inline">\({\rm prox}_{\gamma f}(x) = {\rm sign}(x) \max(|x| - \gamma, 0).\)</span></li>
+<li><strong>Exercise 1:</strong> Let <span class="math inline">\(K\)</span> be a non-empty closed and convex set and denote by <span class="math inline">\(i_K\)</span> its indicator function (<span class="math inline">\(0\)</span> on <span class="math inline">\(K\)</span>, <span class="math inline">\(+\infty\)</span> outside). Then for all <span class="math inline">\(\gamma&gt;0\)</span>, <span class="math inline">\({\rm prox}_{\gamma i_C}(x) = P_C(x)\)</span>, where <span class="math inline">\(P_K\)</span> is the projection operator over <span class="math inline">\(K\)</span>.</li>
+<li><strong>Exercise 2:</strong> Let <span class="math inline">\(f(u)=|u|\)</span> and let <span class="math inline">\(\gamma &gt; 0\)</span>. Show that <span class="math inline">\({\rm prox}_{\gamma f}(x) = {\rm sign}(x) \max(|x| - \gamma, 0)\)</span> and draw the proximal map of <span class="math inline">\(f\)</span>.</li>
 </ul>
+</div>
+<div style="height: 40px;">
+
+</div>
+<div class="box-red">
+<p><strong>Proximal operators generalize projections:</strong> For <span class="math inline">\(K\)</span> be a non-empty closed and convex set: for all <span class="math inline">\(x\in\R^n\)</span>, <span class="math display">\[{\rm proj}_K(x)={\rm prox}_{i_K}(x).\]</span></p>
 </div>
 </section>
 <section id="proximal-maps-of-ell_1-and-ell_0" class="slide level2 smaller">
 <h2>Proximal maps of <span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_0\)</span></h2>
 <div class="columns">
 <div class="column" style="width:58%;">
-<ul>
-<li>The problem is <strong>separable</strong>: <span class="math inline">\(\ \frac12\norm{u-z}_2^2+\gamma\norm{u}_1=\sum_j\Big(\frac12(u_j-z_j)^2+\gamma|u_j|\Big)\)</span>.</li>
-<li>Scalar problem: study <span class="math inline">\(\varphi(t)=\frac12(s-t)^2+\gamma|t|\)</span> on <span class="math inline">\(t&lt;0\)</span>, <span class="math inline">\(t=0\)</span> and <span class="math inline">\(t&gt;0\)</span>: <span class="math display">\[\argmin_{t\in\R}\varphi(t)=\begin{cases}s-\gamma&amp;\text{if }s\geq\gamma\\0&amp;\text{if }|s|\leq\gamma\\s+\gamma&amp;\text{if }s\leq-\gamma\end{cases}={\rm sgn}(s)\big(|s|-\gamma\big)_+.\]</span></li>
-</ul>
-</div><div class="column" style="width:42%;">
-<div class="cell" data-layout-align="center">
+<p>The objective functions are <strong>separable</strong>:</p>
+<p><span class="math display">\[\begin{align*}
+\frac12\norm{u-z}_2^2+\gamma\norm{u}_{\color{blue}{1}}&amp;=\sum_j\Big(\frac12(u_j-z_j)^2+\gamma|u_j|\Big)\\
+\frac12\norm{u-z}_2^2+\gamma\norm{u}_{\color{blue}{0}}&amp;=\sum_j\Big(\frac12(u_j-z_j)^2+\gamma I(u_j\neq 0)\Big)
+\end{align*}\]</span></p>
+</div><div class="column" style="width:35%;">
+<div class="cell" data-layout-align="right">
 <div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-right">
 <figure>
 <p><img data-src="recommendation_systems_files/figure-revealjs/thresholding-1.svg" width="960"></p>
 <figcaption>Soft thresholding (left) and hard thresholding (right) at level <span class="math inline">\(\gamma\)</span>.</figcaption>
@@ -1092,18 +1112,24 @@ Guillaume Lecué
 </div>
 </div>
 </div></div>
-<div title="Proposition (proximal maps of $\ell_1$ and $\ell_0$)">
+<p>Scalar problems: for all <span class="math inline">\(s\in\R\)</span>, <span class="math display">\[
+\argmin_{t\in\R}\left[\frac12(s-t)^2+\gamma|t|\right]  ={\rm sgn}(s)\big(|s|-\gamma\big)_+  \text{ and }
+\argmin_{t\in\R}\left[\frac12(s-t)^2+\gamma I(t\neq 0)\right] =s\,I(|s|\geq \sqrt{2\gamma}).
+\]</span></p>
+<div style="height: 30px;">
+
+</div>
+<div title="Proposition (proximal maps of $\ell_1$ and $\ell_0$): For all $z\in\R^N$:">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Proposition (proximal maps of <span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_0\)</span>)</strong></p>
+<p><strong>Proposition (proximal maps of <span class="math inline">\(\ell_1\)</span> and <span class="math inline">\(\ell_0\)</span>): For all <span class="math inline">\(z\in\R^N\)</span>:</strong></p>
 </div>
 <div class="callout-content">
-<p>For <span class="math inline">\(z\in\R^N\)</span>:</p>
 <div class="columns" style="align-items: center;">
 <div class="column" style="width:50%;">
 <ul>
-<li><strong>soft thresholding:</strong> <span class="math inline">\({\rm prox}_{\gamma\norm{\cdot}_1}(z)=\big({\rm sgn}(z_j)(|z_j|-\gamma)_+\big)_{j=1}^N\)</span>;</li>
+<li><strong>soft thresholding:</strong> <span class="math inline">\({\rm prox}_{\gamma\norm{\cdot}_1}(z)=\big({\rm sgn}(z_j)(|z_j|-\gamma)_+\big)_{j=1}^N\)</span></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <ul>
@@ -1124,23 +1150,25 @@ Guillaume Lecué
 <p><strong>Proposition</strong></p>
 </div>
 <div class="callout-content">
-<p>Let <span class="math inline">\(f:\R^n\to\R\)</span> be convex and differentiable, <span class="math inline">\(g:\R^n\to\R\)</span> convex, and <span class="math inline">\(\gamma&gt;0\)</span>. Then <span class="math display">\[x^*\in\argmin_{x\in\R^n}\big(f(x)+g(x)\big)\iff x^*={\rm prox}_{\gamma g}\big(x^*-\gamma\nabla f(x^*)\big).\]</span></p>
+<p>Let <span class="math inline">\(f:\R^n\to\R\)</span> be <span class="blue">convex and differentiable</span>, <span class="math inline">\(g:\R^n\to\R\)</span> <span class="blue">convex</span>, and <span class="math inline">\(\gamma&gt;0\)</span>. Then <span class="math display">\[x^*\in\argmin_{x\in\R^n}\big(f(x)+g(x)\big)\iff x^*={\rm prox}_{\gamma g}\big(x^*-\gamma\nabla f(x^*)\big).\]</span></p>
 </div>
 </div>
 </div>
 </div>
-<div class="fragment">
 <p><strong>Proof.</strong></p>
 <ol type="1">
 <li>Replacing <span class="math inline">\((f,g)\)</span> by <span class="math inline">\((\gamma f,\gamma g)\)</span>, we may take <span class="math inline">\(\gamma=1\)</span>.</li>
 <li>By the optimality condition for the prox: <span class="math inline">\(\ u^*={\rm prox}_g(z)\iff z-u^*\in\partial^-g(u^*)\)</span>.</li>
-<li>So <span class="math inline">\(x^*={\rm prox}_g\big(x^*-\nabla f(x^*)\big)\iff-\nabla f(x^*)\in\partial^-g(x^*)\iff0\in\nabla f(x^*)+\partial^-g(x^*)\)</span>. <span class="math inline">\(\square\)</span></li>
+<li>So <span class="math inline">\(x^*={\rm prox}_g\big(x^*-\nabla f(x^*)\big)\iff-\nabla f(x^*)\in\partial^-g(x^*)\iff0\in\nabla f(x^*)+\partial^-g(x^*)\)</span>.</li>
 </ol>
-</div>
 <div class="fragment">
-<ul>
-<li>Look for a fixed point of <span class="math inline">\(G:x\mapsto{\rm prox}_{\gamma g}\big(x-\gamma\nabla f(x)\big)\)</span> by iterating <span class="math inline">\(x_{k+1}=G(x_k)\)</span>, possibly with varying steps <span class="math inline">\(\gamma_k\)</span>.</li>
-</ul>
+<div style="height: 30px;">
+
+</div>
+<div class="box-red">
+<p>A solution to the problem <span class="math inline">\(\min_{x\in\R^n}\big(f(x)+g(x)\big)\)</span> is a fixed point of <span class="math inline">\(G:x\mapsto{\rm prox}_{\gamma g}\big(x-\gamma\nabla f(x)\big)\)</span>.</p>
+<p>We can use a <strong>fixed point algorithm</strong> to approximate it: <span class="math inline">\(\color{red}{x_{k+1}=G(x_k)}\)</span>, possibly with varying steps <span class="math inline">\(\gamma_k\)</span>.</p>
+</div>
 </div>
 </section>
 <section id="prox-of-the-nuclear-norm-soft-spectral-thresholding" class="slide level2 smaller scrollable">
@@ -1157,16 +1185,22 @@ Guillaume Lecué
 </div>
 </div>
 </div>
-<div class="fragment">
 <p><strong>Proof.</strong></p>
 <ol type="1">
 <li>von Neumann: <span class="math inline">\(\norm{A-B}_{S_2}^2=\norm{A}_{S_2}^2+\norm{B}_{S_2}^2-2\inr{A,B}\geq\norm{\sigma_A-\sigma_B}_2^2\)</span>, with equality for <span class="math inline">\(B=U\,{\rm diag}(\sigma_B)V^\top\)</span>.</li>
 <li>So the prox has the form <span class="math inline">\(U{\rm diag}(\hat d)V^\top\)</span>, with <span class="math inline">\(\hat d={\rm prox}_{\gamma\norm{\cdot}_1}(\sigma_A)\)</span>.</li>
 <li>Since <span class="math inline">\(\sigma_A\geq0\)</span>, soft thresholding gives <span class="math inline">\(\hat d=\big((\sigma_i-\gamma)_+\big)_i\)</span>. <span class="math inline">\(\square\)</span></li>
 </ol>
+<div class="fragment">
+<div style="height: 60px;">
+
+</div>
+<div class="box-green">
+<p><strong>Exercise:</strong> Construct a proximal gradient descent algorithm for matrix completion.</p>
+</div>
 </div>
 </section>
-<section id="proximal-gradient-descent-for-matrix-completion-1" class="slide level2 smaller">
+<section id="proximal-gradient-descent-for-matrix-completion" class="slide level2 smaller">
 <h2>Proximal gradient descent for matrix completion</h2>
 <div title="Algorithm (proximal gradient descent)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -1175,7 +1209,7 @@ Guillaume Lecué
 <p><strong>Algorithm (proximal gradient descent)</strong></p>
 </div>
 <div class="callout-content">
-<p>For <span class="math inline">\(\min_A\big(F(A)+\lambda\norm{A}_{S_1}\big)\)</span>, with step sizes <span class="math inline">\((\gamma_k)_k\)</span>: <span class="math display">\[A_{k+1}=S_{\lambda\gamma_k}^{soft}\Big(A_k+\gamma_k\big(P_\Omega(A^*)-P_\Omega(A_k)\big)\Big).\]</span></p>
+<p>For <span class="math inline">\(\min_A\big(\frac12\norm{P_\Omega(A^*)-P_\Omega(A)}_{S_2}^2+\lambda\norm{A}_{S_1}\big)\)</span>, with step sizes <span class="math inline">\((\gamma_k)_k\)</span>: <span class="math display">\[A_{k+1}=S_{\lambda\gamma_k}^{soft}\Big(A_k+\gamma_k\big(P_\Omega(A^*)-P_\Omega(A_k)\big)\Big).\]</span></p>
 </div>
 </div>
 </div>
@@ -1183,6 +1217,9 @@ Guillaume Lecué
 <ul>
 <li>Same cost for both methods: no SDP, but one SVD (or a truncated SVD) per iteration, which can still be expensive.</li>
 </ul>
+<div style="height: 40px;">
+
+</div>
 <table class="caption-top">
 <colgroup>
 <col style="width: 33%">
@@ -1209,16 +1246,26 @@ Guillaume Lecué
 </tr>
 </tbody>
 </table>
+<div style="height: 60px;">
+
+</div>
 <div class="box-green">
-<p><strong>Key Idea: thresholding the spectrum:</strong> Projecting onto low-rank matrices and computing the prox of the nuclear norm give matrix completion algorithms by projected or proximal gradient descent.</p>
+<p><strong>Key Idea: thresholding the spectrum:</strong> Projecting onto low-rank matrices and computing the prox of the nuclear norm give two first order methods for matrix completion by projected or proximal gradient descent.</p>
 </div>
 </section>
-<section id="matrix-completion-on-pictures-via-sdp-and-gradient-proximal" class="slide level2">
-<h2>Matrix completion on pictures via SDP and gradient proximal</h2>
-<div style="display: flex; justify-content: center; align-items: center; height: 550px;">
+<section id="matrix-completion-on-pictures-via-sdp-and-proximal-gradient-descent" class="slide level2">
+<h2>Matrix completion on pictures via SDP and proximal gradient descent</h2>
+<div style="display: flex; justify-content: center; align-items: center; height: 450px;">
 <div class="box-green" style="text-align: center; max-width: 850px; width: 100%;">
 <p>Open the notebook <code>lab_mat_completion.ipynb</code></p>
 </div>
+</div>
+<div class="box-yellow">
+<ul>
+<li>Check that real images have low rank.</li>
+<li>Use an SDP solver to complete a matrix.</li>
+<li>Implement a proximal gradient descent algorithm for matrix completion.</li>
+</ul>
 </div>
 </section></section>
 <section>
@@ -1391,11 +1438,15 @@ Guillaume Lecué
 </ul>
 </div>
 </section>
-<section id="learning-the-metadata-model" class="slide level2">
-<h2>Learning the metadata model</h2>
+<section id="learning-models-parameters" class="slide level2">
+<h2>Learning model’s parameters</h2>
 <ul>
-<li>Parameters: the latent vectors <span class="math inline">\((p_i)_i\)</span>, <span class="math inline">\((q_j)_j\)</span> and the coefficients <span class="math inline">\(a_i,b_i,c_j,d_j\)</span>.</li>
-<li>Minimize the regularized squared error <span class="math display">\[F=\sum_{(i,j)\in\Omega}\Big[A^*_{ij}-\Big(\inr{p_i,q_j}+(a_i+\inr{b_i,x_i})+(c_j+\inr{d_j,z_j})+\alpha\sum_rU_{ir}\inr{p_r,q_j}+\beta\sum_sI_{js}\inr{p_i,q_s}\Big)\Big]^2+\lambda\Big(\sum_i\norm{p_i}_2^2+\sum_j\norm{q_j}_2^2\Big).\]</span></li>
+<li><strong>Parameters:</strong> the latent vectors <span class="math inline">\((p_i)_i\)</span>, <span class="math inline">\((q_j)_j\)</span> and the coefficients <span class="math inline">\(a_i,b_i,c_j,d_j\)</span>.</li>
+<li>Minimize the regularized squared error <span class="math display">\[
+F\big((p_i), (q_j), (a_i), (b_i), (c_j), (d_j)\big)= \\
+\sum_{(i,j)\in\Omega}\Big[A^*_{ij}-\Big(\inr{p_i,q_j}+(a_i+\inr{b_i,x_i})+(c_j+\inr{d_j,z_j})\\
++\alpha\sum_rU_{ir}\inr{p_r,q_j}+\beta\sum_sI_{js}\inr{p_i,q_s}\Big)\Big]^2+\lambda\Big(\sum_i\norm{p_i}_2^2+\sum_j\norm{q_j}_2^2\Big).
+\]</span></li>
 </ul>
 <div class="fragment">
 <ul>
@@ -1742,7 +1793,7 @@ Guillaume Lecué
 <h2>Gradient proximal VS Neural collaborative filtering</h2>
 <div style="display: flex; justify-content: center; align-items: center; height: 550px;">
 <div class="box-green" style="text-align: center; max-width: 850px; width: 100%;">
-<p>Open the notebook <code>deep-learning-recommender-systems.ipynb</code></p>
+<p>Open the notebook <br> <code>lab_recommender_convex_vs_deep.ipynb</code></p>
 </div>
 </div>
 </section></section>
