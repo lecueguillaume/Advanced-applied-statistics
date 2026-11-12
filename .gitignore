@@ -8,6 +8,10 @@
 **/*.quarto_ipynb
 _site/
 
+# knitr TikZ intermediates (never commit; keep tikz-template.tex)
+tikz[0-9a-f]*
+*_files/figure-*/**/*.dvi
+
 # Ignore the synchronize .sh
 sync.sh
 

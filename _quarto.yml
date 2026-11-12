@@ -6,6 +6,12 @@ project:
   render:
     - "*.qmd"
     - "!materials/"
+  # Drop knitr TikZ intermediates left behind after interrupted / early-exit renders.
+  pre-render: sh ./clean-tikz-temps.sh
+  post-render: sh ./clean-tikz-temps.sh
 
 website:
   title: "Adavanced applied statistics"
+
+execute:
+  freeze: auto # This will freeze the execution of the code and .qmd files in the slides.

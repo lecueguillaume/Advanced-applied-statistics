@@ -77,6 +77,13 @@
     "text": "Fenchel transform\n\n\n\n\nDefinition (Fenchel transform)\n\n\nFor \\(f:C\\to\\R\\) with \\(C\\subset H\\) a convex set, the Fenchel transform of \\(f\\) is \\[f^*: y\\in H \\to \\sup_{x\\in C}\\big(\\inr{x,y}-f(x)\\big).\\]\n\n\n\n\nNote: \\(f^*\\) is defined over the entire space \\(H\\) even though \\(f\\) may only be defined over \\(C\\).\n\nExercise: Show that \\(f^*\\) is convex (even when \\(f\\) is not).\n\n\n\nExercise: (Negative entropy): Let \\(f : \\mathbb{R} \\to \\mathbb{R} \\cup \\{+\\infty\\}\\) be the univariate negative entropy function defined by: \\[\n    f(x) = \\begin{cases} x \\ln(x) & \\text{if } x &gt; 0, \\\\ 0 & \\text{if } x = 0, \\\\ +\\infty & \\text{if } x &lt; 0. \\end{cases}\n    \\] Show that \\(f^*(y) = e^{y-1}\\) for all \\(y \\in \\mathbb{R}\\)."
   },
   {
+    "objectID": "recommendation_systems.html#geometric-interpretation-of-the-fenchel-transform",
+    "href": "recommendation_systems.html#geometric-interpretation-of-the-fenchel-transform",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Geometric interpretation of the Fenchel transform",
+    "text": "Geometric interpretation of the Fenchel transform\n\n\n\nGiven a slope \\(y\\in H\\), the Fenchel transform finds the intercept of the largest affine function with slope \\(y\\) below the graph of \\(f\\)."
+  },
+  {
     "objectID": "recommendation_systems.html#the-biconjugate-function",
     "href": "recommendation_systems.html#the-biconjugate-function",
     "title": "Matrix completion and recommendation systems",
@@ -119,6 +126,13 @@
     "text": "Nuclear norm minimization procedure\n\n\n\n\nKey Idea: convex relaxation\n\n\nThe nuclear norm is the convex envelope of the rank on \\(B_{S_\\infty}\\), so it is natural to replace the (none convex) rank function by the (convex) nuclear norm in the NP-hard rank minimization problem.\n\n\n\n\n\n\n\n\n\n\n\nDefinition (nuclear norm minimization)\n\n\nWith \\(\\cA(A)=(\\inr{A,X_i})_{i=1}^m\\) and \\(y=(y_i)_{i=1}^m\\), \\[\\hat A\\in\\argmin_{A\\in\\R^{u\\times v}}\\big(\\color{red}{\\norm{A}_{S_1}}:\\cA(A)=y\\big).\\tag{NM}\\]\n\n\n\n\n\nThe convex relaxation of rank minimization: the matrix analogue of Basis Pursuit.\n(NM) is a convex problem.\nBasis Pursuit was rewritten as a linear program. (NM) can likewise be rewritten as a semidefinite program (SDP)."
   },
   {
+    "objectID": "recommendation_systems.html#semidefinite-programs-in-standard-form",
+    "href": "recommendation_systems.html#semidefinite-programs-in-standard-form",
+    "title": "Matrix completion and recommendation systems",
+    "section": "Semidefinite programs in standard form",
+    "text": "Semidefinite programs in standard form\n\n\n\n\nDefinition – semidefinite program (SDP)\n\n\nAn optimization problem is a semidefinite program if it can be written as \\[\\min_{X\\in\\cS^p}\\Big(\\inr{C,X}:\\tilde\\cA(X)=b,\\ X\\succeq0\\Big),\\] where \\(C\\in\\cS^p\\), \\(\\tilde\\cA:\\cS^p\\to\\R^m\\) is linear and \\(b\\in\\R^m\\).\n\n\n\n\nWe write (NM) in this form, with variable \\(M\\) such that \\[\nM=\\begin{bmatrix}Y&X\\\\X^\\top&Z\\end{bmatrix}\\in\\cS^{u+v}, C=I_{u+v}\n\\] so \\(\\inr{C,M}={\\rm Tr}(Y)+{\\rm Tr}(Z)\\) and \\(\\tilde\\cA(M)=\\cA(X) , b=y.\\)\n\n\n\n\n\nLike linear programs, SDPs are solved approximately by primal–dual barrier methods (e.g. cvxopt.solvers.conelp).\nhowever, SDP solvers are expensive in high dimension: this motivates the gradient methods of the next part."
+  },
+  {
     "objectID": "recommendation_systems.html#nuclear-norm-minimization-as-an-sdp-problem",
     "href": "recommendation_systems.html#nuclear-norm-minimization-as-an-sdp-problem",
     "title": "Matrix completion and recommendation systems",
@@ -133,18 +147,18 @@
     "text": "Proof sketch: the SDP lemma\n\n\n\n\nLemma\n\n\nLet \\(A\\in\\R^{u\\times v}\\) and \\(t\\geq0\\). Then \\(\\norm{A}_{S_1}\\leq t\\) iff there exist \\(Y\\in\\cS^u\\) and \\(Z\\in\\cS^v\\) such that \\[{\\rm Tr}(Y)+{\\rm Tr}(Z)\\leq2t\\qquad\\text{and}\\qquad\\begin{bmatrix}Y&A\\\\A^\\top&Z\\end{bmatrix}\\succeq0.\\]"
   },
   {
-    "objectID": "recommendation_systems.html#semidefinite-programs-in-standard-form",
-    "href": "recommendation_systems.html#semidefinite-programs-in-standard-form",
+    "objectID": "recommendation_systems.html#proof-sketch",
+    "href": "recommendation_systems.html#proof-sketch",
     "title": "Matrix completion and recommendation systems",
-    "section": "Semidefinite programs in standard form",
-    "text": "Semidefinite programs in standard form\n\n\n\n\nDefinition – semidefinite program (SDP)\n\n\nAn optimization problem is a semidefinite program if it can be written as \\[\\min_{X\\in\\cS^p}\\Big(\\inr{C,X}:\\tilde\\cA(X)=b,\\ X\\succeq0\\Big),\\] where \\(C\\in\\cS^p\\), \\(\\tilde\\cA:\\cS^p\\to\\R^m\\) is linear and \\(b\\in\\R^m\\).\n\n\n\n\nWe write (NM) in this form, with variable \\(M\\) such that \\[\nM=\\begin{bmatrix}Y&X\\\\X^\\top&Z\\end{bmatrix}\\in\\cS^{u+v}, C=I_{u+v}\n\\] so \\(\\inr{C,M}={\\rm Tr}(Y)+{\\rm Tr}(Z)\\) and \\(\\tilde\\cA(M)=\\cA(X) , b=y.\\)\n\n\n\n\n\nLike linear programs, SDPs are solved approximately by primal–dual barrier methods (e.g. cvxopt.solvers.conelp).\nhowever, SDP solvers are expensive in high dimension: this motivates the gradient methods of the next part."
+    "section": "Proof sketch",
+    "text": "Proof sketch\nThe lemma gives \\(\\min_{Y,Z}\\frac12\\big({\\rm Tr}(Y)+{\\rm Tr}(Z)\\big)=\\norm{X}_{S_1}\\) for every feasible \\(X\\), hence the theorem.\n(\\(\\Leftarrow\\)) Take an SVD \\(A=UDV^\\top\\) and \\(I_{u,v}={\\rm diag}(1,\\ldots,1)\\in\\R^{u\\times v}\\).\n\n\nThe matrix \\(M=\\begin{bmatrix}I_u&-UI_{u,v}V^\\top\\\\-VI_{u,v}^\\top U^\\top&I_v\\end{bmatrix}\\) is positive semidefinite, since \\[(x^\\top,y^\\top)\\,M\\begin{pmatrix}x\\\\y\\end{pmatrix}=\\norm{x}_2^2+\\norm{y}_2^2-2\\inr{U^\\top x,I_{u,v}V^\\top y}\\geq0.\\]\nThe trace of a product of two positive semidefinite matrices is nonnegative, so \\[0\\leq{\\rm Tr}\\Big(M\\begin{bmatrix}Y&A\\\\A^\\top&Z\\end{bmatrix}\\Big)={\\rm Tr}(Y)+{\\rm Tr}(Z)-2{\\rm Tr}(D),\\quad\\text{hence}\\quad2t\\geq2\\norm{A}_{S_1}.\\]\n\n\n\n(\\(\\Rightarrow\\)) Take a compact SVD \\(A=U_rD_rV_r^\\top\\), with \\(r={\\rm rank}(A)\\).\n\nSet \\(Y=U_rD_rU_r^\\top+\\gamma I_u\\) and \\(Z=V_rD_rV_r^\\top+\\gamma I_v\\), with \\(\\gamma=2(t-\\norm{A}_{S_1})/(u+v)\\), so that \\({\\rm Tr}(Y)+{\\rm Tr}(Z)=2t\\).\nThen \\[\\begin{bmatrix}Y&A\\\\A^\\top&Z\\end{bmatrix}=\\begin{bmatrix}U_r\\\\V_r\\end{bmatrix}D_r\\begin{bmatrix}U_r^\\top&V_r^\\top\\end{bmatrix}+\\gamma I_{u+v}\\succeq0.\\qquad\\square\\]"
   },
   {
-    "objectID": "recommendation_systems.html#sparse-vectors-vs.-low-rank-matrices",
-    "href": "recommendation_systems.html#sparse-vectors-vs.-low-rank-matrices",
+    "objectID": "recommendation_systems.html#sparse-vectors-leftrightarrow-low-rank-matrices",
+    "href": "recommendation_systems.html#sparse-vectors-leftrightarrow-low-rank-matrices",
     "title": "Matrix completion and recommendation systems",
-    "section": "Sparse vectors vs. low-rank matrices",
-    "text": "Sparse vectors vs. low-rank matrices\n\n\n\n\n\n\n\n\n\nSparse vectors (CS)\nLow-rank matrices\n\n\n\n\nUnknown\n\\(x^*\\in\\R^N\\)\n\\(A^*\\in\\R^{u\\times v}\\)\n\n\nStructure\n\\(\\norm{x^*}_0\\leq s\\)\n\\({\\rm rank}(A^*)=\\norm{\\sigma_{A^*}}_0\\leq r\\)\n\n\nNonconvex procedure\n\\(\\ell_0\\) minimization (NP-hard)\nrank minimization (NP-hard)\n\n\nConvex envelope\n\\(\\norm{\\cdot}_1\\) on \\(B_\\infty^N\\)\n\\(\\norm{\\cdot}_{S_1}\\) on \\(B_{S_\\infty}\\)\n\n\nConvex procedure\nBasis Pursuit\nNuclear norm minimization\n\n\nImplementation\nlinear program\nsemidefinite program\n\n\nGaussian measurements\n\\(m\\gtrsim s\\log(eN/s)\\)\n\\(m\\gtrsim r(u+v)\\)"
+    "section": "Sparse vectors \\(\\leftrightarrow\\) low-rank matrices",
+    "text": "Sparse vectors \\(\\leftrightarrow\\) low-rank matrices\n\n\n\n\n\n\n\n\n\n\n\n\nSparse vectors (CS)\nLow-rank matrices (MC)\n\n\n\n\nUnknown\n\\(x^*\\in\\R^N\\)\n\\(A^*\\in\\R^{u\\times v}\\)\n\n\nStructure\n\\(\\norm{x^*}_0\\leq s\\)\n\\({\\rm rank}(A^*)=\\norm{\\sigma_{A^*}}_0\\leq r\\)\n\n\nNonconvex procedure\n\\(\\ell_0\\) minimization (NP-hard)\nrank minimization (NP-hard)\n\n\nConvex envelope\n\\(\\norm{\\cdot}_1\\) on \\(B_\\infty^N\\)\n\\(\\norm{\\cdot}_{S_1}\\) on \\(B_{S_\\infty}\\)\n\n\nConvex procedure\nBasis Pursuit\nNuclear norm minimization\n\n\nImplementation\nlinear program\nsemidefinite program\n\n\nGaussian measurements\n\\(m\\gtrsim s\\log(eN/s)\\)\n\\(m\\gtrsim r(u+v)\\)"
   },
   {
     "objectID": "recommendation_systems.html#the-mask-operator-p_omega",
@@ -154,18 +168,18 @@
     "text": "The mask operator \\(P_\\Omega\\)\n\nEach observation reveals one entry of the matrix: a mask \\[P_\\Omega:\\R^{u\\times v}\\to\\R^{u\\times v},\\qquad\\big(P_\\Omega(A)\\big)_{ij}=\\begin{cases}A_{ij}&\\text{if }(i,j)\\in\\Omega,\\\\0&\\text{otherwise,}\\end{cases}\\] where \\(\\Omega\\subset\\{1,\\ldots,u\\}\\times\\{1,\\ldots,v\\}\\) is the set of revealed entries.\n\\(P_\\Omega\\) is a projection (\\(P_\\Omega^2=P_\\Omega\\)) and is self-adjoint (\\(P_\\Omega^\\top=P_\\Omega\\)).\nWe observe \\(P_\\Omega(A^*)\\) and assume that \\(A^*\\) has low rank."
   },
   {
-    "objectID": "recommendation_systems.html#two-procedures-rank-constraint-and-nuclear-norm-penalty",
-    "href": "recommendation_systems.html#two-procedures-rank-constraint-and-nuclear-norm-penalty",
+    "objectID": "recommendation_systems.html#two-procedures",
+    "href": "recommendation_systems.html#two-procedures",
     "title": "Matrix completion and recommendation systems",
-    "section": "Two procedures: rank constraint and nuclear norm penalty",
-    "text": "Two procedures: rank constraint and nuclear norm penalty\n\nRank-constrained least squares: \\[\n\\tilde A\\in\\argmin_{{\\rm rank}(A)\\leq r}\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\n\\]\n\n\nNuclear-norm-penalized least squares: \\[\\bar A\\in\\argmin_{A}\\Big(\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2+\\lambda\\norm{A}_{S_1}\\Big)\\]\n\n\n\nBoth combine a data-fidelity term \\(A\\mapsto\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\\) with a rank constraint or a nuclear norm regularization. Let us now construct first order algorithms to approximate their solutions based on matrix versions of hard and soft thresholding acting on the spectrum."
+    "section": "Two procedures:",
+    "text": "Two procedures:\n\nRank-constrained least squares: \\[\n\\tilde A\\in\\argmin_{{\\rm rank}(A)\\leq r}\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\n\\]\n\n\nNuclear-norm-penalized least squares: \\[\\bar A\\in\\argmin_{A\\in\\bR^{u\\times v}}\\Big(\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2+\\lambda\\norm{A}_{S_1}\\Big)\\]\n\n\n\n\n\nBoth combine a data-fidelity term \\(A\\mapsto\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\\) with a rank constraint or a nuclear norm regularization."
   },
   {
-    "objectID": "recommendation_systems.html#projected-gradient-for-the-rank-constraint",
-    "href": "recommendation_systems.html#projected-gradient-for-the-rank-constraint",
+    "objectID": "recommendation_systems.html#projected-gradient-for-the-rank-constraint-procedure",
+    "href": "recommendation_systems.html#projected-gradient-for-the-rank-constraint-procedure",
     "title": "Matrix completion and recommendation systems",
-    "section": "Projected gradient for the rank constraint",
-    "text": "Projected gradient for the rank constraint\n\n\\(F(A)=\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2\\) is convex and differentiable, with \\[\\nabla F(A)=-P_\\Omega^\\top\\big(P_\\Omega(A^*)-P_\\Omega(A)\\big)=P_\\Omega(A)-P_\\Omega(A^*).\\]\nThe constraint \\(\\{{\\rm rank}(A)\\leq r\\}\\) is not convex, but we can still project onto it (next slide).\n\n\n\n\n\n\nAlgorithm (projected gradient descent)\n\n\nWith step sizes \\((\\gamma_k)_k\\), \\[A^{k+1}=\\color{red}{S_r^{hard}}\\Big(A^k+\\gamma_k\\big(P_\\Omega(A^*)-P_\\Omega(A^k)\\big)\\Big),\\] where \\(S_r^{hard}\\) keeps the \\(r\\) largest singular values and sets the others to \\(0\\)."
+    "section": "Projected gradient for the rank constraint procedure",
+    "text": "Projected gradient for the rank constraint procedure\n\n\\(F(A)=\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2\\) is convex and differentiable, with \\[\\nabla F(A)=-P_\\Omega^\\top\\big(P_\\Omega(A^*)-P_\\Omega(A)\\big)=P_\\Omega(A)-P_\\Omega(A^*).\\]\nThe constraint \\(\\{{\\rm rank}(A)\\leq r\\}\\) is not convex, but we can still project onto it (next slide).\n\n\n\n\n\n\nAlgorithm (projected gradient descent)\n\n\nWith step sizes \\((\\gamma_k)_k\\), \\[A^{k+1}=\\color{red}{S_r^{hard}}\\Big(A^k+\\gamma_k\\big(P_\\Omega(A^*)-P_\\Omega(A^k)\\big)\\Big),\\] where \\(S_r^{hard}\\) keeps the \\(r\\) largest singular values and sets the others to \\(0\\)."
   },
   {
     "objectID": "recommendation_systems.html#projection-onto-matrices-of-rank-at-most-r",
@@ -210,18 +224,18 @@
     "text": "Prox of the nuclear norm: soft spectral thresholding\n\n\n\n\nProposition\n\n\nLet \\(\\gamma&gt;0\\) and let \\(A=UDV^\\top\\) be an SVD of \\(A\\). Then \\[{\\rm prox}_{\\gamma\\norm{\\cdot}_{S_1}}(A)=S_\\gamma^{soft}(A)=UD_\\gamma V^\\top,\\qquad D_\\gamma={\\rm diag}\\big((\\sigma_1-\\gamma)_+,\\ldots,(\\sigma_{u\\wedge v}-\\gamma)_+\\big).\\]\n\n\n\n\nProof.\n\nvon Neumann: \\(\\norm{A-B}_{S_2}^2=\\norm{A}_{S_2}^2+\\norm{B}_{S_2}^2-2\\inr{A,B}\\geq\\norm{\\sigma_A-\\sigma_B}_2^2\\), with equality for \\(B=U\\,{\\rm diag}(\\sigma_B)V^\\top\\).\nSo the prox has the form \\(U{\\rm diag}(\\hat d)V^\\top\\), with \\(\\hat d={\\rm prox}_{\\gamma\\norm{\\cdot}_1}(\\sigma_A)\\).\nSince \\(\\sigma_A\\geq0\\), soft thresholding gives \\(\\hat d=\\big((\\sigma_i-\\gamma)_+\\big)_i\\). \\(\\square\\)\n\n\n\n\n\n\nExercise: Construct a proximal gradient descent algorithm for matrix completion."
   },
   {
-    "objectID": "recommendation_systems.html#proximal-gradient-descent-for-matrix-completion-1",
-    "href": "recommendation_systems.html#proximal-gradient-descent-for-matrix-completion-1",
+    "objectID": "recommendation_systems.html#proximal-gradient-descent-for-matrix-completion",
+    "href": "recommendation_systems.html#proximal-gradient-descent-for-matrix-completion",
     "title": "Matrix completion and recommendation systems",
     "section": "Proximal gradient descent for matrix completion",
-    "text": "Proximal gradient descent for matrix completion\n\n\n\n\nAlgorithm (proximal gradient descent)\n\n\nFor \\(\\min_A\\big(F(A)+\\lambda\\norm{A}_{S_1}\\big)\\), with step sizes \\((\\gamma_k)_k\\): \\[A_{k+1}=S_{\\lambda\\gamma_k}^{soft}\\Big(A_k+\\gamma_k\\big(P_\\Omega(A^*)-P_\\Omega(A_k)\\big)\\Big).\\]\n\n\n\n\n\nSame cost for both methods: no SDP, but one SVD (or a truncated SVD) per iteration, which can still be expensive.\n\n\n\n\n\n\n\n\n\nProblem\nMethod\nSpectral step\n\n\n\n\n\\({\\rm rank}(A)\\leq r\\)\nprojected gradient\nhard: keep \\(\\sigma_1,\\ldots,\\sigma_r\\)\n\n\n\\(+\\lambda\\norm{A}_{S_1}\\)\nproximal gradient\nsoft: \\(\\sigma_i\\mapsto(\\sigma_i-\\lambda\\gamma_k)_+\\)\n\n\n\n\nKey Idea: thresholding the spectrum: Projecting onto low-rank matrices and computing the prox of the nuclear norm give matrix completion algorithms by projected or proximal gradient descent."
+    "text": "Proximal gradient descent for matrix completion\n\n\n\n\nAlgorithm (proximal gradient descent)\n\n\nFor \\(\\min_A\\big(\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2+\\lambda\\norm{A}_{S_1}\\big)\\), with step sizes \\((\\gamma_k)_k\\): \\[A_{k+1}=S_{\\lambda\\gamma_k}^{soft}\\Big(A_k+\\gamma_k\\big(P_\\Omega(A^*)-P_\\Omega(A_k)\\big)\\Big).\\]\n\n\n\n\n\nSame cost for both methods: no SDP, but one SVD (or a truncated SVD) per iteration, which can still be expensive.\n\n\n\n\n\n\n\n\n\n\n\n\nProblem\nMethod\nSpectral step\n\n\n\n\n\\({\\rm rank}(A)\\leq r\\)\nprojected gradient\nhard: keep \\(\\sigma_1,\\ldots,\\sigma_r\\)\n\n\n\\(+\\lambda\\norm{A}_{S_1}\\)\nproximal gradient\nsoft: \\(\\sigma_i\\mapsto(\\sigma_i-\\lambda\\gamma_k)_+\\)\n\n\n\n\n\n\n\nKey Idea: thresholding the spectrum: Projecting onto low-rank matrices and computing the prox of the nuclear norm give two first order methods for matrix completion by projected or proximal gradient descent."
   },
   {
-    "objectID": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-gradient-proximal",
-    "href": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-gradient-proximal",
+    "objectID": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-proximal-gradient-descent",
+    "href": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-proximal-gradient-descent",
     "title": "Matrix completion and recommendation systems",
-    "section": "Matrix completion on pictures via SDP and gradient proximal",
-    "text": "Matrix completion on pictures via SDP and gradient proximal\n\n\nOpen the notebook lab_mat_completion.ipynb"
+    "section": "Matrix completion on pictures via SDP and proximal gradient descent",
+    "text": "Matrix completion on pictures via SDP and proximal gradient descent\n\n\nOpen the notebook lab_mat_completion.ipynb\n\n\n\n\nCheck that real images have low rank.\nUse an SDP solver to complete a matrix.\nImplement a proximal gradient descent algorithm for matrix completion."
   },
   {
     "objectID": "recommendation_systems.html#a-latent-space-for-users-and-items",
@@ -273,11 +287,11 @@
     "text": "Adding metadata to matrix factorization\nMetadata are additional data beyond the ratings:\n\n\\(x_i\\): feature vector of user \\(i\\) (age, sex, socio-professional category; via one-hot encoding, embedding or autoencoding);\n\\(z_j\\): feature vector of item \\(j\\) (price, categories, and so on);\n\\(U\\in\\R^{u\\times u}\\): users/users matrix of influences (likes, positive messages, retweets);\n\\(I\\in\\R^{v\\times v}\\): items/items matrix of affinities (cast, producer, release year, genre).\n\n\nLinear model: for \\((i,j)\\in\\Omega\\), \\[A^*_{ij}\\approx\\inr{p_i,q_j}+\\underbrace{(a_i+\\inr{b_i,x_i})}_{\\text{user features}}+\\underbrace{(c_j+\\inr{d_j,z_j})}_{\\text{item features}}+\\underbrace{\\alpha\\sum_{r=1}^uU_{ir}\\inr{p_r,q_j}}_{\\text{influence of other users}}+\\underbrace{\\beta\\sum_{s=1}^vI_{js}\\inr{p_i,q_s}}_{\\text{similar items}}.\\]\n\nIf user \\(r\\) influences \\(i\\) (\\(U_{ir}\\gg0\\)) and \\(r\\) likes \\(j\\) (\\(\\inr{p_r,q_j}\\gg0\\)), the predicted rating of \\(j\\) by \\(i\\) increases.\nWe take \\(U_{ii}=0\\) and \\(I_{jj}=0\\), so that \\(\\inr{p_i,q_j}\\) is not counted twice."
   },
   {
-    "objectID": "recommendation_systems.html#learning-the-metadata-model",
-    "href": "recommendation_systems.html#learning-the-metadata-model",
+    "objectID": "recommendation_systems.html#learning-models-parameters",
+    "href": "recommendation_systems.html#learning-models-parameters",
     "title": "Matrix completion and recommendation systems",
-    "section": "Learning the metadata model",
-    "text": "Learning the metadata model\n\nParameters: the latent vectors \\((p_i)_i\\), \\((q_j)_j\\) and the coefficients \\(a_i,b_i,c_j,d_j\\).\nMinimize the regularized squared error \\[\nF\\big((p_i), (q_j), (a_i), (b_i), (c_j), (d_j)\\big)= \\\\\n\\sum_{(i,j)\\in\\Omega}\\Big[A^*_{ij}-\\Big(\\inr{p_i,q_j}+(a_i+\\inr{b_i,x_i})+(c_j+\\inr{d_j,z_j})\\\\\n+\\alpha\\sum_rU_{ir}\\inr{p_r,q_j}+\\beta\\sum_sI_{js}\\inr{p_i,q_s}\\Big)\\Big]^2+\\lambda\\Big(\\sum_i\\norm{p_i}_2^2+\\sum_j\\norm{q_j}_2^2\\Big).\n\\]\n\n\n\nAlternate minimizations in \\((p_i)_i\\) and in \\((q_j)_j\\), as in ARLS, and update \\(a_i,b_i,c_j,d_j\\) at each iteration.\nFor fixed \\((p_i)\\) and \\((q_j)\\), minimizing in \\((a_i,b_i,c_j,d_j)\\) is an explicit least-squares problem.\nInstead of the \\(\\ell_2\\) penalty, one can impose positivity of the \\(p_i\\) and \\(q_j\\), as in NMF."
+    "section": "Learning model’s parameters",
+    "text": "Learning model’s parameters\n\nParameters: the latent vectors \\((p_i)_i\\), \\((q_j)_j\\) and the coefficients \\(a_i,b_i,c_j,d_j\\).\nMinimize the regularized squared error \\[\nF\\big((p_i), (q_j), (a_i), (b_i), (c_j), (d_j)\\big)= \\\\\n\\sum_{(i,j)\\in\\Omega}\\Big[A^*_{ij}-\\Big(\\inr{p_i,q_j}+(a_i+\\inr{b_i,x_i})+(c_j+\\inr{d_j,z_j})\\\\\n+\\alpha\\sum_rU_{ir}\\inr{p_r,q_j}+\\beta\\sum_sI_{js}\\inr{p_i,q_s}\\Big)\\Big]^2+\\lambda\\Big(\\sum_i\\norm{p_i}_2^2+\\sum_j\\norm{q_j}_2^2\\Big).\n\\]\n\n\n\nAlternate minimizations in \\((p_i)_i\\) and in \\((q_j)_j\\), as in ARLS, and update \\(a_i,b_i,c_j,d_j\\) at each iteration.\nFor fixed \\((p_i)\\) and \\((q_j)\\), minimizing in \\((a_i,b_i,c_j,d_j)\\) is an explicit least-squares problem.\nInstead of the \\(\\ell_2\\) penalty, one can impose positivity of the \\(p_i\\) and \\(q_j\\), as in NMF."
   },
   {
     "objectID": "recommendation_systems.html#two-benchmark-families",
@@ -495,6 +509,13 @@
     "title": "Matrix completion and recommendation systems",
     "section": "Proof sketch: subdifferential of the nuclear norm",
     "text": "Proof sketch: subdifferential of the nuclear norm\nApply the lemma with \\(\\phi=\\norm{\\cdot}_1\\).\n\n\n\\(\\partial\\norm{\\cdot}_1(\\sigma_A)=\\{g:g_i=1\\text{ for }i\\leq r,\\ |g_i|\\leq1\\text{ for }i&gt;r\\}\\), so every subgradient is \\[G=\\sum_k\\lambda_kU_k\\Sigma_kV_k^\\top=U^{(1)}{V^{(1)}}^\\top+\\sum_k\\lambda_kU_k^{(2)}W_k{V_k^{(2)}}^\\top,\\] with \\(W_k\\) diagonal with entries in \\([-1,1]\\).\n\n\n\n\nEach SVD satisfies \\(U_k^{(2)}=U^{(2)}Y_k\\) and \\(V_k^{(2)}=V^{(2)}Z_k\\), with \\(Y_k\\in\\cO(u-r)\\) and \\(Z_k\\in\\cO(v-r)\\). Hence \\(G=U^{(1)}{V^{(1)}}^\\top+U^{(2)}W{V^{(2)}}^\\top\\) with \\(W=\\sum_k\\lambda_kY_kW_kZ_k^\\top\\).\n\n\n\n\nFinally, \\(\\sigma_1(W)\\leq\\sum_k\\lambda_k\\sigma_1(W_k)\\leq1\\). \\(\\square\\)\n\n\n\n\n\n\n\nKey Idea: sparsity comes from singularities\n\n\nA norm’s subdifferential is largest where the norm is not differentiable: at sparse vectors for \\(\\norm{\\cdot}_1\\), and at low-rank matrices for \\(\\norm{\\cdot}_{S_1}\\). Sparsity-inducing norms are built by creating singularities at the sparsest objects."
+  },
+  {
+    "objectID": "course_presentation.html#aim-of-the-evaluation",
+    "href": "course_presentation.html#aim-of-the-evaluation",
+    "title": "Advanced applied Statistics",
+    "section": "Aim of the evaluation",
+    "text": "Aim of the evaluation\n\nDevelop a habit of scientific monitoring and research\nReport technical content to a large audience"
   },
   {
     "objectID": "course_presentation.html#course-evaluation-13",
@@ -1498,73 +1519,556 @@
     "text": "Exercises\n\nExercises on compressed sensing and matrix completion"
   },
   {
-    "objectID": "course_presentation.html#aim-of-the-evaluation",
-    "href": "course_presentation.html#aim-of-the-evaluation",
-    "title": "Advanced applied Statistics",
-    "section": "Aim of the evaluation",
-    "text": "Aim of the evaluation\n\nDevelop a habit of scientific monitoring and research\nReport technical content to a large audience"
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-community-detection-problem-12",
+    "href": "matrix_lifting_SDP_relaxation.html#the-community-detection-problem-12",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The community detection problem (1/2)",
+    "text": "The community detection problem (1/2)\n\nNodes are people; an edge is a connection (messages, friendship, collaboration).\nGoal: find groups of nodes that are more densely connected to one another than to the rest of the graph.\nThese groups may be groups of friends, or people who share interests.\nOnce the communities are found, we may:\n\n\nLook for influencers and send them advertisements, or approach them directly.\nUnderstand the common features of the nodes inside this community to understand how the community was created and what share the people inside of it."
   },
   {
-    "objectID": "recommendation_systems.html#geometric-interpretation-of-the-fenchel-transform",
-    "href": "recommendation_systems.html#geometric-interpretation-of-the-fenchel-transform",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Geometric interpretation of the Fenchel transform",
-    "text": "Geometric interpretation of the Fenchel transform\n\n\n\nGiven a slope \\(y\\in H\\), the Fenchel transform finds the intercept of the largest affine function with slope \\(y\\) below the graph of \\(f\\)."
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-community-detection-problem-22",
+    "href": "matrix_lifting_SDP_relaxation.html#the-community-detection-problem-22",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The community detection problem (2/2)",
+    "text": "The community detection problem (2/2)\n\n\n\n\n\n\n\n\n\nIdea: density, not just connectivity\n\n\nA community is not a connected component. It is a set of nodes with a higher density of internal edges than of edges leaving the set."
   },
   {
-    "objectID": "recommendation_systems.html#proof-sketch",
-    "href": "recommendation_systems.html#proof-sketch",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Proof sketch",
-    "text": "Proof sketch\nThe lemma gives \\(\\min_{Y,Z}\\frac12\\big({\\rm Tr}(Y)+{\\rm Tr}(Z)\\big)=\\norm{X}_{S_1}\\) for every feasible \\(X\\), hence the theorem.\n(\\(\\Leftarrow\\)) Take an SVD \\(A=UDV^\\top\\) and \\(I_{u,v}={\\rm diag}(1,\\ldots,1)\\in\\R^{u\\times v}\\).\n\n\nThe matrix \\(M=\\begin{bmatrix}I_u&-UI_{u,v}V^\\top\\\\-VI_{u,v}^\\top U^\\top&I_v\\end{bmatrix}\\) is positive semidefinite, since \\[(x^\\top,y^\\top)\\,M\\begin{pmatrix}x\\\\y\\end{pmatrix}=\\norm{x}_2^2+\\norm{y}_2^2-2\\inr{U^\\top x,I_{u,v}V^\\top y}\\geq0.\\]\nThe trace of a product of two positive semidefinite matrices is nonnegative, so \\[0\\leq{\\rm Tr}\\Big(M\\begin{bmatrix}Y&A\\\\A^\\top&Z\\end{bmatrix}\\Big)={\\rm Tr}(Y)+{\\rm Tr}(Z)-2{\\rm Tr}(D),\\quad\\text{hence}\\quad2t\\geq2\\norm{A}_{S_1}.\\]\n\n\n\n(\\(\\Rightarrow\\)) Take a compact SVD \\(A=U_rD_rV_r^\\top\\), with \\(r={\\rm rank}(A)\\).\n\nSet \\(Y=U_rD_rU_r^\\top+\\gamma I_u\\) and \\(Z=V_rD_rV_r^\\top+\\gamma I_v\\), with \\(\\gamma=2(t-\\norm{A}_{S_1})/(u+v)\\), so that \\({\\rm Tr}(Y)+{\\rm Tr}(Z)=2t\\).\nThen \\[\\begin{bmatrix}Y&A\\\\A^\\top&Z\\end{bmatrix}=\\begin{bmatrix}U_r\\\\V_r\\end{bmatrix}D_r\\begin{bmatrix}U_r^\\top&V_r^\\top\\end{bmatrix}+\\gamma I_{u+v}\\succeq0.\\qquad\\square\\]"
+    "objectID": "matrix_lifting_SDP_relaxation.html#what-is-a-graph",
+    "href": "matrix_lifting_SDP_relaxation.html#what-is-a-graph",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "What is a graph?",
+    "text": "What is a graph?\n\n\n\n\nDefinition (graph)\n\n\nA graph is a pair \\((V,E)\\): \\(V\\) is the set of nodes, and \\(E\\subset V\\times V\\) is the set of edges.\nA weighted graph is a triple \\((V,E,W)\\) with \\(W\\in\\R^{|V|\\times|V|}\\). The entries of \\(W\\) are the weights.\n\n\n\n\n\n\nUndirected graph: \\((i,j)\\in E\\) implies \\((j,i)\\in E\\).\nUndirected weighted graph: the graph is undirected and \\(W=W^\\top\\).\nFour classical types of graphs: directed or not, weighted or not."
   },
   {
-    "objectID": "recommendation_systems.html#sparse-vectors-leftrightarrow-low-rank-matrices",
-    "href": "recommendation_systems.html#sparse-vectors-leftrightarrow-low-rank-matrices",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Sparse vectors \\(\\leftrightarrow\\) low-rank matrices",
-    "text": "Sparse vectors \\(\\leftrightarrow\\) low-rank matrices\n\n\n\n\n\n\n\n\n\n\n\n\nSparse vectors (CS)\nLow-rank matrices (MC)\n\n\n\n\nUnknown\n\\(x^*\\in\\R^N\\)\n\\(A^*\\in\\R^{u\\times v}\\)\n\n\nStructure\n\\(\\norm{x^*}_0\\leq s\\)\n\\({\\rm rank}(A^*)=\\norm{\\sigma_{A^*}}_0\\leq r\\)\n\n\nNonconvex procedure\n\\(\\ell_0\\) minimization (NP-hard)\nrank minimization (NP-hard)\n\n\nConvex envelope\n\\(\\norm{\\cdot}_1\\) on \\(B_\\infty^N\\)\n\\(\\norm{\\cdot}_{S_1}\\) on \\(B_{S_\\infty}\\)\n\n\nConvex procedure\nBasis Pursuit\nNuclear norm minimization\n\n\nImplementation\nlinear program\nsemidefinite program\n\n\nGaussian measurements\n\\(m\\gtrsim s\\log(eN/s)\\)\n\\(m\\gtrsim r(u+v)\\)"
+    "objectID": "matrix_lifting_SDP_relaxation.html#four-types-of-graphs",
+    "href": "matrix_lifting_SDP_relaxation.html#four-types-of-graphs",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Four types of graphs",
+    "text": "Four types of graphs\n\n\n\n\n\nUndirected/directed and unweighted/weighted graphs."
   },
   {
-    "objectID": "recommendation_systems.html#proximal-gradient-descent-for-matrix-completion",
-    "href": "recommendation_systems.html#proximal-gradient-descent-for-matrix-completion",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Proximal gradient descent for matrix completion",
-    "text": "Proximal gradient descent for matrix completion\n\n\n\n\nAlgorithm (proximal gradient descent)\n\n\nFor \\(\\min_A\\big(\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2+\\lambda\\norm{A}_{S_1}\\big)\\), with step sizes \\((\\gamma_k)_k\\): \\[A_{k+1}=S_{\\lambda\\gamma_k}^{soft}\\Big(A_k+\\gamma_k\\big(P_\\Omega(A^*)-P_\\Omega(A_k)\\big)\\Big).\\]\n\n\n\n\n\nSame cost for both methods: no SDP, but one SVD (or a truncated SVD) per iteration, which can still be expensive.\n\n\n\n\n\n\n\n\n\n\n\n\nProblem\nMethod\nSpectral step\n\n\n\n\n\\({\\rm rank}(A)\\leq r\\)\nprojected gradient\nhard: keep \\(\\sigma_1,\\ldots,\\sigma_r\\)\n\n\n\\(+\\lambda\\norm{A}_{S_1}\\)\nproximal gradient\nsoft: \\(\\sigma_i\\mapsto(\\sigma_i-\\lambda\\gamma_k)_+\\)\n\n\n\n\n\n\n\nKey Idea: thresholding the spectrum: Projecting onto low-rank matrices and computing the prox of the nuclear norm give two first order methods for matrix completion by projected or proximal gradient descent."
+    "objectID": "matrix_lifting_SDP_relaxation.html#complete-graphs-and-a-ring-graph",
+    "href": "matrix_lifting_SDP_relaxation.html#complete-graphs-and-a-ring-graph",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Complete graphs and a ring graph",
+    "text": "Complete graphs and a ring graph\n\n\n\n\n\n\n\nComplete graphs \\(K_4\\), \\(K_5\\) and \\(K_6\\).\n\n\n\n\n\n\n\n\n\n\nA directed ring graph."
   },
   {
-    "objectID": "recommendation_systems.html#two-procedures",
-    "href": "recommendation_systems.html#two-procedures",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Two procedures:",
-    "text": "Two procedures:\n\nRank-constrained least squares: \\[\n\\tilde A\\in\\argmin_{{\\rm rank}(A)\\leq r}\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\n\\]\n\n\nNuclear-norm-penalized least squares: \\[\\bar A\\in\\argmin_{A\\in\\bR^{u\\times v}}\\Big(\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2+\\lambda\\norm{A}_{S_1}\\Big)\\]\n\n\n\n\n\nBoth combine a data-fidelity term \\(A\\mapsto\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}\\) with a rank constraint or a nuclear norm regularization."
+    "objectID": "matrix_lifting_SDP_relaxation.html#adjacency-matrix",
+    "href": "matrix_lifting_SDP_relaxation.html#adjacency-matrix",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Adjacency matrix",
+    "text": "Adjacency matrix\n\n\n\n\nDefinition (adjacency matrix)\n\n\nLet \\(G=(V,E)\\). The adjacency matrix \\(A\\in\\{0,1\\}^{|V|\\times|V|}\\) is \\[A_{ij}=1\\quad\\text{if }(i,j)\\in E,\\qquad A_{ij}=0\\quad\\text{otherwise.}\\] For a weighted graph, \\(A_{ij}=W_{ij}\\) when \\((i,j)\\in E\\) and \\(A_{ij}=0\\) otherwise.\n\n\n\n\n\nIf \\(G\\) is undirected, then \\(A\\) is symmetric.\nThe Max-Cut and community detection problems are about the connectivity of \\(G\\), which is encoded in \\(A\\).\nEverything is inside \\(A\\) (all graphs problems are matrix problems): Adjacency matrix is the central mathematical object in graph theory."
   },
   {
-    "objectID": "recommendation_systems.html#projected-gradient-for-the-rank-constraint-procedure",
-    "href": "recommendation_systems.html#projected-gradient-for-the-rank-constraint-procedure",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Projected gradient for the rank constraint procedure",
-    "text": "Projected gradient for the rank constraint procedure\n\n\\(F(A)=\\frac12\\norm{P_\\Omega(A^*)-P_\\Omega(A)}_{S_2}^2\\) is convex and differentiable, with \\[\\nabla F(A)=-P_\\Omega^\\top\\big(P_\\Omega(A^*)-P_\\Omega(A)\\big)=P_\\Omega(A)-P_\\Omega(A^*).\\]\nThe constraint \\(\\{{\\rm rank}(A)\\leq r\\}\\) is not convex, but we can still project onto it (next slide).\n\n\n\n\n\n\nAlgorithm (projected gradient descent)\n\n\nWith step sizes \\((\\gamma_k)_k\\), \\[A^{k+1}=\\color{red}{S_r^{hard}}\\Big(A^k+\\gamma_k\\big(P_\\Omega(A^*)-P_\\Omega(A^k)\\big)\\Big),\\] where \\(S_r^{hard}\\) keeps the \\(r\\) largest singular values and sets the others to \\(0\\)."
+    "objectID": "matrix_lifting_SDP_relaxation.html#connectivity-and-connected-components",
+    "href": "matrix_lifting_SDP_relaxation.html#connectivity-and-connected-components",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Connectivity and connected components",
+    "text": "Connectivity and connected components\n\n\n\n\nDefinition (connected graph)\n\n\n\\(G=(V,E)\\) is connected if a path of edges links all the nodes. A connected component is a connected subgraph with no edge to its complement. A connected partition is a partition of \\(V\\) into connected components.\n\n\n\n\n\nWeighted version: the edges of the path must have nonzero weight. Unweighted graphs correspond to \\(W=(1)_{i,j}\\).\n\n\n\n\n\nRemark for community detection\n\n\nA nontrivial connected partition is an ideal setting: the communities do not interact. Rare in practice, but a good guide for algorithms."
   },
   {
-    "objectID": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-proximal-gradient-descent",
-    "href": "recommendation_systems.html#matrix-completion-on-pictures-via-sdp-and-proximal-gradient-descent",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Matrix completion on pictures via SDP and proximal gradient descent",
-    "text": "Matrix completion on pictures via SDP and proximal gradient descent\n\n\nOpen the notebook lab_mat_completion.ipynb\n\n\n\n\nCheck that real images have low rank.\nUse an SDP solver to complete a matrix.\nImplement a proximal gradient descent algorithm for matrix completion."
+    "objectID": "matrix_lifting_SDP_relaxation.html#definition-of-the-laplacian",
+    "href": "matrix_lifting_SDP_relaxation.html#definition-of-the-laplacian",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Definition of the Laplacian",
+    "text": "Definition of the Laplacian\n\n\n\n\nDefinition (Laplacian)\n\n\nLet \\(A\\) be the adjacency matrix of \\(G\\). The Laplacian is \\[L=D-A,\\qquad D={\\rm diag}(d),\\qquad d_i=\\sum_{j\\in V}A_{ij}\\] where \\(d_i\\) is the degree of node \\(i\\).\n\n\n\n\n\nOther definitions exist; we use this one throughout.\nIf \\(G\\) is undirected, then \\(L\\) is symmetric: the spectral theorem applies, and \\(L=PDP^\\top\\) with \\(P\\) orthogonal.\nThe spectrum of \\(L\\) is the key object of spectral community detection."
   },
   {
-    "objectID": "recommendation_systems.html#learning-the-models-parameters",
-    "href": "recommendation_systems.html#learning-the-models-parameters",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Learning the model’s parameters",
-    "text": "Learning the model’s parameters\n\nParameters: the latent vectors \\((p_i)_i\\), \\((q_j)_j\\) and the coefficients \\(a_i,b_i,c_j,d_j\\).\nMinimize the regularized squared error \\[\nF\\big((p_i), (q_j), (a_i), (b_i), (c_j), (d_j)\\big)= \\\\\n\\sum_{(i,j)\\in\\Omega}\\Big[A^*_{ij}-\\Big(\\inr{p_i,q_j}+(a_i+\\inr{b_i,x_i})+(c_j+\\inr{d_j,z_j})\\\\\n+\\alpha\\sum_rU_{ir}\\inr{p_r,q_j}+\\beta\\sum_sI_{js}\\inr{p_i,q_s}\\Big)\\Big]^2+\\lambda\\Big(\\sum_i\\norm{p_i}_2^2+\\sum_j\\norm{q_j}_2^2\\Big).\n\\]\n\n\n\nAlternate minimizations in \\((p_i)_i\\) and in \\((q_j)_j\\), as in ARLS, and update \\(a_i,b_i,c_j,d_j\\) at each iteration.\nFor fixed \\((p_i)\\) and \\((q_j)\\), minimizing in \\((a_i,b_i,c_j,d_j)\\) is an explicit least-squares problem.\nInstead of the \\(\\ell_2\\) penalty, one can impose positivity of the \\(p_i\\) and \\(q_j\\), as in NMF."
+    "objectID": "matrix_lifting_SDP_relaxation.html#quadratic-form-and-first-properties",
+    "href": "matrix_lifting_SDP_relaxation.html#quadratic-form-and-first-properties",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Quadratic form and first properties",
+    "text": "Quadratic form and first properties\n\n\n\n\nProposition\n\n\nLet \\(G=(V,E,W)\\) be undirected with \\(W_{ij}\\geq 0\\). Then:\n\n\\(f^\\top Lf=\\frac12\\sum_{(i,j)\\in E}W_{ij}(f_i-f_j)^2\\) for every \\(f\\in\\R^{|V|}\\);\n\\(L\\) is symmetric positive semidefinite;\n\\(0\\) is an eigenvalue and \\(L\\mathbf{1}=0\\).\n\n\n\n\n\nProof.\n\n\n\\(f^\\top(D-A)f=\\sum_i d_if_i^2-\\sum_{(i,j)\\in E}f_iW_{ij}f_j=\\frac12\\sum_{(i,j)\\in E}W_{ij}(f_i-f_j)^2\\).\nThe right-hand side is \\(\\geq 0\\), so \\(L\\succeq 0\\).\n\\((L\\mathbf{1})_i=d_i-\\sum_j A_{ij}=0\\). \\(\\square\\)"
   },
   {
-    "objectID": "recommendation_systems.html#learning-models-parameters",
-    "href": "recommendation_systems.html#learning-models-parameters",
-    "title": "Matrix completion and recommendation systems",
-    "section": "Learning model’s parameters",
-    "text": "Learning model’s parameters\n\nParameters: the latent vectors \\((p_i)_i\\), \\((q_j)_j\\) and the coefficients \\(a_i,b_i,c_j,d_j\\).\nMinimize the regularized squared error \\[\nF\\big((p_i), (q_j), (a_i), (b_i), (c_j), (d_j)\\big)= \\\\\n\\sum_{(i,j)\\in\\Omega}\\Big[A^*_{ij}-\\Big(\\inr{p_i,q_j}+(a_i+\\inr{b_i,x_i})+(c_j+\\inr{d_j,z_j})\\\\\n+\\alpha\\sum_rU_{ir}\\inr{p_r,q_j}+\\beta\\sum_sI_{js}\\inr{p_i,q_s}\\Big)\\Big]^2+\\lambda\\Big(\\sum_i\\norm{p_i}_2^2+\\sum_j\\norm{q_j}_2^2\\Big).\n\\]\n\n\n\nAlternate minimizations in \\((p_i)_i\\) and in \\((q_j)_j\\), as in ARLS, and update \\(a_i,b_i,c_j,d_j\\) at each iteration.\nFor fixed \\((p_i)\\) and \\((q_j)\\), minimizing in \\((a_i,b_i,c_j,d_j)\\) is an explicit least-squares problem.\nInstead of the \\(\\ell_2\\) penalty, one can impose positivity of the \\(p_i\\) and \\(q_j\\), as in NMF."
+    "objectID": "matrix_lifting_SDP_relaxation.html#multiplicity-of-0-and-connected-components",
+    "href": "matrix_lifting_SDP_relaxation.html#multiplicity-of-0-and-connected-components",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Multiplicity of \\(0\\) and connected components",
+    "text": "Multiplicity of \\(0\\) and connected components\n\n\n\n\nProposition\n\n\nFor an undirected weighted graph with nonnegative weights, the multiplicity of the eigenvalue \\(0\\) of \\(L\\) equals the number of connected components.\nMoreover \\({\\rm Ker}(L)\\) is spanned by \\(\\mathbf{1}_{V_1},\\ldots,\\mathbf{1}_{V_k}\\), where \\(V_1\\sqcup\\cdots\\sqcup V_k\\) is the partition of \\(V\\) into connected components.\n\n\n\n\n\n\n\n\nIdea: the kernel of \\(L\\) sees the communities\n\n\nIn the ideal case, the indicators of the communities are eigenvectors for \\(\\lambda=0\\). Spectral methods start from this fact."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#proof-sketch-one-connected-component",
+    "href": "matrix_lifting_SDP_relaxation.html#proof-sketch-one-connected-component",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Proof sketch: one connected component",
+    "text": "Proof sketch: one connected component\nAssume \\(G\\) is connected and \\(Lf=0\\). Then \\(f^\\top Lf=0\\), so \\[\\sum_{(i,j)\\in E}W_{ij}(f_i-f_j)^2=0.\\]\n\n\nWeights are nonnegative, so \\(W_{ij}(f_i-f_j)^2=0\\) on every edge: \\(W_{ij}=0\\) or \\(f_i=f_j\\).\nConnectivity: any \\(i,j\\) are joined by a path of positive weights, so \\(f\\) is constant along the path.\nHence \\(f\\) is constant: \\({\\rm Ker}(L)={\\rm span}(\\mathbf{1})\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#proof-sketch-several-components",
+    "href": "matrix_lifting_SDP_relaxation.html#proof-sketch-several-components",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Proof sketch: several components",
+    "text": "Proof sketch: several components\nUp to reordering the nodes, \\[L=\\begin{pmatrix}L_1&&\\\\&\\ddots&\\\\&&L_k\\end{pmatrix},\\] where \\(L_i\\) is the Laplacian of the \\(i\\)-th connected component.\n\n\nEach \\(L_i\\) has kernel spanned by the constant vector on \\(V_i\\), so \\(\\mathbf{1}_{V_i}\\in{\\rm Ker}(L)\\).\nConversely \\(Lf=0\\) if and only if \\(L_if=0\\) on each block, so \\(f\\) is constant on each \\(V_i\\).\nTherefore \\({\\rm Ker}(L)={\\rm span}(\\mathbf{1}_{V_1},\\ldots,\\mathbf{1}_{V_k})\\).\n\n\n\n\n\nRemark\n\n\nThe same statement holds for unweighted undirected graphs, by taking \\(W=(1)_{i,j}\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#example-the-complete-graph-k_n",
+    "href": "matrix_lifting_SDP_relaxation.html#example-the-complete-graph-k_n",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Example: the complete graph \\(K_n\\)",
+    "text": "Example: the complete graph \\(K_n\\)\nThe Laplacian of \\(K_n\\) is \\[L=nI_n-\\mathbf{1}\\mathbf{1}^\\top=\\begin{pmatrix}n-1&-1&\\cdots&-1\\\\-1&n-1&\\cdots&-1\\\\\\vdots&&\\ddots&\\vdots\\\\-1&-1&\\cdots&n-1\\end{pmatrix}.\\]\n\nIf \\(Lf=0\\), then \\(nf=\\inr{f,\\mathbf{1}}\\mathbf{1}\\), so \\(f\\in{\\rm span}(\\mathbf{1})\\).\nThe multiplicity of \\(0\\) is \\(1\\), as expected: \\(K_n\\) is connected."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#why-is-l-called-a-laplacian-newtons-law-of-cooling",
+    "href": "matrix_lifting_SDP_relaxation.html#why-is-l-called-a-laplacian-newtons-law-of-cooling",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Why is \\(L\\) called a Laplacian? Newton’s law of cooling",
+    "text": "Why is \\(L\\) called a Laplacian? Newton’s law of cooling\n\n\nImagine temperatures \\(T_i\\) on the nodes. Heat flows in proportion to the temperature difference: \\[\\frac{dT_i}{dt}=-\\kappa\\sum_{j\\in V}A_{ij}(T_i-T_j).\\]\n\nNode \\(i\\) exchanges heat only with its neighbours.\nIn vector form: \\(\\dfrac{dT}{dt}=-\\kappa(D-A)T=-\\kappa LT\\).\nCompare with the heat equation \\(\\partial_t u=\\alpha\\Delta u\\): one identifies \\(L\\) with \\(-\\Delta\\).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIdea: a discrete Laplacian\n\n\nThe graph Laplacian is the discrete analog of the Laplacian of the heat equation."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#ideal-setting-disjoint-communities",
+    "href": "matrix_lifting_SDP_relaxation.html#ideal-setting-disjoint-communities",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Ideal setting: disjoint communities",
+    "text": "Ideal setting: disjoint communities\n\nIdeal case: the communities are the connected components. They do not interact.\nAlmost never true in practice (a few inter-community edges always exist), but a good guide.\nThen \\({\\rm Ker}(L)={\\rm span}(\\mathbf{1}_{V_1},\\ldots,\\mathbf{1}_{V_k})\\).\nThe indicators \\(\\mathbf{1}_{V_i}\\) are hard to read off \\(L\\). An orthonormal basis \\(u_1,\\ldots,u_k\\) of \\({\\rm Ker}(L)\\) is easy."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-spectral-method-in-two-steps",
+    "href": "matrix_lifting_SDP_relaxation.html#the-spectral-method-in-two-steps",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The spectral method in two steps",
+    "text": "The spectral method in two steps\n\nCluster the \\(|V|\\) row vectors \\(y_i\\in\\R^k\\) of the matrix \\([u_1|\\cdots|u_k]\\) into \\(k\\) clusters \\(C_1,\\ldots,C_k\\).\nReturn \\(V_p=\\{i\\in V:y_i\\in C_p\\}\\). These are the detected communities.\n\n\n\n\n\n\nIdea: cluster the rows, not the nodes\n\n\nEach node \\(i\\) is represented by the \\(i\\)-th row of the eigenbasis matrix. Clustering these rows clusters the nodes."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#why-the-rotation-does-not-destroy-the-clusters",
+    "href": "matrix_lifting_SDP_relaxation.html#why-the-rotation-does-not-destroy-the-clusters",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Why the rotation does not destroy the clusters",
+    "text": "Why the rotation does not destroy the clusters\n\n\\(\\{\\mathbf{1}_{V_p}/\\sqrt{|V_p|}\\}_p\\) is an orthonormal basis of \\({\\rm Ker}(L)\\).\nSo is \\(\\{u_1,\\ldots,u_k\\}\\): there is \\(R\\in{\\rm O}(k)\\) with \\[[u_1|\\cdots|u_k]=\\big[\\mathbf{1}_{V_1}/\\sqrt{|V_1|}|\\cdots|\\mathbf{1}_{V_k}/\\sqrt{|V_k|}\\big]R.\\]\nThe rows of the indicator matrix take only \\(k\\) distinct values. A \\(k\\)-means on these rows recovers the components exactly.\nA rotation of \\(\\R^k\\) preserves this clustering.\n\n\nIn practice \\(G\\) is not a disjoint union: look at the eigenspace of the \\(k\\) smallest eigenvalues, not only the kernel. Choose \\(k\\) by an elbow in the spectrum, or by a modularity function."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#graph-cuts-and-modularity",
+    "href": "matrix_lifting_SDP_relaxation.html#graph-cuts-and-modularity",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Graph cuts and modularity",
+    "text": "Graph cuts and modularity\nDetecting communities \\(\\iff\\) finding a partition that minimizes the inter-community weight while keeping the communities large enough.\n\nA cut is a partition of \\(V\\).\nA modularity quantifies intra- versus inter-community mass.\n\nFor \\(A,B\\subset V\\), \\[W(A,B)=\\sum_{\\substack{(i,j)\\in E\\\\(i,j)\\in A\\times B}}(W_{ij}+W_{ji})=2\\sum_{\\substack{(i,j)\\in E\\\\(i,j)\\in A\\times B}}W_{ij}.\\]\nThe cut of a partition \\(V_1\\sqcup\\cdots\\sqcup V_k\\) is \\[{\\rm cut}(V_1,\\ldots,V_k)=\\frac12\\sum_{i=1}^k W(V_i,V_i^c).\\]"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-mincut-problem",
+    "href": "matrix_lifting_SDP_relaxation.html#the-mincut-problem",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The mincut problem",
+    "text": "The mincut problem\nFor two communities, encode \\(V_1\\) by \\(x\\in\\{0,1\\}^{|V|}\\): \\[{\\rm cut}(V_1,V_1^c)=2\\sum_{(i,j)\\in E}x_i W_{ij}(1-x_j).\\]\n\\[\\min_{x\\in\\{0,1\\}^{|V|}}\\sum_{(i,j)\\in E}x_i W_{ij}(1-x_j).\\]\n\nSolvable by the Stoer–Wagner algorithm.\nIn practice it often returns a singleton: the node of smallest degree.\n\n\n\n\n\n\nRemark\n\n\nA singleton is not a community. One must force the parts to have sufficient size."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#ratiocut",
+    "href": "matrix_lifting_SDP_relaxation.html#ratiocut",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "RatioCut",
+    "text": "RatioCut\n\n\n\n\nDefinition (RatioCut)\n\n\n\\[{\\rm RatioCut}(V_1,\\ldots,V_k)=\\frac12\\sum_{i=1}^k\\frac{W(V_i,V_i^c)}{|V_i|}.\\]\n\n\n\n\n\nThe factor \\(1/|V_i|\\) penalizes small communities.\nMinimizing RatioCut over \\(\\cP_k(V)\\) is NP-hard in general.\nWe rewrite it as a vector (then matrix) problem and convexify the constraint. The relaxation is the spectral method."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#membership-vector-for-two-communities",
+    "href": "matrix_lifting_SDP_relaxation.html#membership-vector-for-two-communities",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Membership vector for two communities",
+    "text": "Membership vector for two communities\nFor \\(V_1\\subset V\\), set \\[f_i^{V_1}=\\begin{cases}\\sqrt{|V_1^c|/|V_1|}& \\text{if }i\\in V_1,\\\\[4pt]-\\sqrt{|V_1|/|V_1^c|}& \\text{if }i\\notin V_1.\\end{cases}\\]\n\n\n\n\nProposition\n\n\nLet \\(L\\) be the Laplacian of an undirected weighted graph, and \\(n=|V|\\). Then\n\n\\(\\inr{f^{V_1},\\mathbf{1}}=0\\) and \\(\\norm{f^{V_1}}_2^2=n\\);\n\\((f^{V_1})^\\top L f^{V_1}=n\\,{\\rm RatioCut}(V_1,V_1^c)\\).\n\n\n\n\n\n\nSo minimizing RatioCut \\(\\iff\\) minimizing \\(f^\\top Lf\\) over these discrete vectors \\(f^{V_1}\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#proof-sketch-of-the-ratiocut-identity",
+    "href": "matrix_lifting_SDP_relaxation.html#proof-sketch-of-the-ratiocut-identity",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Proof sketch of the RatioCut identity",
+    "text": "Proof sketch of the RatioCut identity\nFrom the quadratic form, \\[(f^{V_1})^\\top Lf^{V_1}=\\frac12\\sum_{(i,j)\\in E}W_{ij}(f_i^{V_1}-f_j^{V_1})^2.\\]\n\nThe difference \\(f_i^{V_1}-f_j^{V_1}\\) is nonzero only across the cut.\nOn a cut edge, \\[\\Big(\\sqrt{\\tfrac{|V_1^c|}{|V_1|}}+\\sqrt{\\tfrac{|V_1|}{|V_1^c|}}\\Big)^2=\\frac{n}{|V_1|}+\\frac{n}{|V_1^c|}.\\]\nSumming both orientations of the cut gives \\(n\\,{\\rm RatioCut}(V_1,V_1^c)\\).\nThe two constraints: \\(\\norm{f^{V_1}}_2^2=|V_1|+|V_1^c|=n\\) and \\(\\inr{f^{V_1},\\mathbf{1}}=0\\). \\(\\square\\)"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#convex-relaxation-for-k2",
+    "href": "matrix_lifting_SDP_relaxation.html#convex-relaxation-for-k2",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Convex relaxation for \\(k=2\\)",
+    "text": "Convex relaxation for \\(k=2\\)\nThree equivalent discrete problems: \\[\\min_{V_1\\subset V}(f^{V_1})^\\top Lf^{V_1},\\qquad\\min_{V_1\\subset V}\\big((f^{V_1})^\\top Lf^{V_1}:\\norm{f^{V_1}}_2^2=n,\\,\\inr{f^{V_1},\\mathbf{1}}=0\\big),\\] and \\(\\min_{V_1}{\\rm RatioCut}(V_1,V_1^c)\\). All are NP-hard.\n\nThe map \\(f\\mapsto f^\\top Lf\\) is convex (\\({\\rm Hess}=2L\\succeq 0\\)).\nThe difficulty is the discrete constraint \\(f=f^{V_1}\\).\nRelax it to \\(f\\in\\R^{|V|}\\): \\[\\min_{f\\in\\R^{|V|}}\\big(f^\\top Lf:\\norm{f}_2^2=1,\\,\\inr{f,\\mathbf{1}}=0\\big).\\]"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-fiedler-vector",
+    "href": "matrix_lifting_SDP_relaxation.html#the-fiedler-vector",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The Fiedler vector",
+    "text": "The Fiedler vector\n\n\n\n\nDefinition (Fiedler vector)\n\n\nA Fiedler vector of \\(L\\) is an eigenvector for the second smallest eigenvalue. That eigenvalue is the algebraic connectivity.\n\n\n\n\n\n\n\n\nProposition\n\n\nThe Fiedler vectors are exactly the solutions of the relaxed problem.\n\n\n\n\nProof. Write \\(0=\\lambda_1\\leq\\lambda_2\\leq\\cdots\\leq\\lambda_n\\) and \\(u_1=\\mathbf{1}\\). If \\(\\norm{f}_2=1\\) and \\(\\inr{f,\\mathbf{1}}=0\\), \\[f^\\top Lf=\\sum_{i=2}^n\\lambda_i\\inr{u_i,f}^2\\geq\\lambda_2,\\] with equality at \\(f=u_2\\). \\(\\square\\)"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#from-a-fiedler-vector-to-two-communities",
+    "href": "matrix_lifting_SDP_relaxation.html#from-a-fiedler-vector-to-two-communities",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "From a Fiedler vector to two communities",
+    "text": "From a Fiedler vector to two communities\n\nA Fiedler vector \\(u_2\\) approximates the two-valued membership vector \\(f^{V_1^*}\\).\nIts coordinates should concentrate around two values.\nCluster the coordinates of \\(u_2\\) into two classes \\(C_1,C_2\\) on \\(\\R\\).\nThe communities are \\(\\{i:u_{2i}\\in C_1\\}\\) and \\(\\{i:u_{2i}\\in C_2\\}\\).\n\n\nThis is the spectral method for \\(k=2\\), with first eigenvector \\(u_1=\\mathbf{1}\\) (clustering the rows of \\([u_1|u_2]\\) is the same as clustering the coordinates of \\(u_2\\))."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#membership-matrix-for-k-communities",
+    "href": "matrix_lifting_SDP_relaxation.html#membership-matrix-for-k-communities",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Membership matrix for \\(k\\) communities",
+    "text": "Membership matrix for \\(k\\) communities\nTo a partition \\(V_1\\sqcup\\cdots\\sqcup V_k\\) associate \\(H\\in\\R^{|V|\\times k}\\) with columns \\(h_j=\\mathbf{1}_{V_j}/\\sqrt{|V_j|}\\): \\[H_{ij}=\\begin{cases}1/\\sqrt{|V_j|}& \\text{if }i\\in V_j,\\\\0& \\text{otherwise.}\\end{cases}\\]\n\n\n\n\nProposition\n\n\n\\(H^\\top H=I_k\\) and \\({\\rm RatioCut}(V_1,\\ldots,V_k)={\\rm Tr}(H^\\top LH)\\).\n\n\n\n\n\n\\(H^\\top H=I_k\\): the \\(V_j\\) are disjoint, and \\(\\sum_{i\\in V_j}1/|V_j|=1\\).\n\\({\\rm Tr}(H^\\top LH)=\\sum_p h_p^\\top Lh_p=\\sum_p W(V_p,V_p^c)/(2|V_p|)\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#relaxation-for-k-communities",
+    "href": "matrix_lifting_SDP_relaxation.html#relaxation-for-k-communities",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Relaxation for \\(k\\) communities",
+    "text": "Relaxation for \\(k\\) communities\nThe discrete problems \\(\\min{\\rm Tr}(H^\\top LH)\\) over membership matrices \\(H\\) are NP-hard. The objective \\(H\\mapsto{\\rm Tr}(H^\\top LH)\\) is convex. Relax the combinatorial constraint: \\[\\min_{\\substack{H\\in\\R^{|V|\\times k}\\\\H^\\top H=I_k}}{\\rm Tr}(H^\\top LH).\\]\nWrite \\(L=UDU^\\top\\) with \\(0=\\lambda_1\\leq\\cdots\\leq\\lambda_n\\). Then \\[{\\rm Tr}(H^\\top LH)=\\sum_i\\lambda_i\\norm{a_i}_2^2,\\qquad\\sum_i\\norm{a_i}_2^2=k,\\] where \\(a_i\\) is the \\(i\\)-th row of \\(U^\\top H\\). The minimum is \\(\\sum_{i=1}^k\\lambda_i\\), attained when \\[{\\rm span}(h_1,\\ldots,h_k)={\\rm span}(u_1,\\ldots,u_k).\\]\n\nThe solutions are orthonormal bases of the eigenspace of the \\(k\\) smallest eigenvalues.\nCluster the \\(n\\) rows of \\(H\\) into \\(k\\) groups: this is again the spectral method."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#algorithm-of-the-spectral-method",
+    "href": "matrix_lifting_SDP_relaxation.html#algorithm-of-the-spectral-method",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Algorithm of the spectral method",
+    "text": "Algorithm of the spectral method\n\n\n\n\nAlgorithm (spectral method)\n\n\nInput: Laplacian \\(L\\) of \\(G\\), and \\(k\\).\n\nCompute an orthonormal basis of \\(k\\) eigenvectors for the \\(k\\) smallest eigenvalues of \\(L\\).\nForm the \\(n\\times k\\) matrix \\(H\\) with these columns.\nCluster the \\(n\\) rows \\(y_1,\\ldots,y_n\\in\\R^k\\) into \\(k\\) clusters \\(C_1,\\ldots,C_k\\).\nOutput: communities \\(\\{i:y_i\\in C_p\\}\\), \\(p=1,\\ldots,k\\).\n\n\n\n\n\n\nJustified by the RatioCut relaxation, or by the ideal connected-component picture.\nChoose \\(k\\) by an elbow in the spectrum of \\(L\\), or by evaluating a modularity (e.g. RatioCut) as a function of \\(k\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#why-a-random-graph",
+    "href": "matrix_lifting_SDP_relaxation.html#why-a-random-graph",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Why a random graph?",
+    "text": "Why a random graph?\n\nUntil now every edge was observed.\nIn applications (genes, companies, ) some links are missing or uncertain.\nOne then assumes a probabilistic model under the observations, and still wants the communities.\nThe same spectral method will be applied to the Laplacian of the observed adjacency matrix."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-erdősrényi-model",
+    "href": "matrix_lifting_SDP_relaxation.html#the-erdősrényi-model",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The Erdős–Rényi model",
+    "text": "The Erdős–Rényi model\n\n\n\n\nDefinition (Erdős–Rényi)\n\n\n\\(G\\sim G(n,p)\\) is an undirected unweighted graph on \\(n\\) nodes with \\[A_{ij}=A_{ji},\\qquad A_{ii}=1,\\qquad (A_{ij})_{j&gt;i}\\ \\text{i.i.d. }{\\rm Bern}(p).\\]\n\n\n\n\n\nEvery pair of distinct nodes is connected independently with probability \\(p\\).\nNo community structure: a null model."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-stochastic-block-model",
+    "href": "matrix_lifting_SDP_relaxation.html#the-stochastic-block-model",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The stochastic block model",
+    "text": "The stochastic block model\n\n\n\n\nDefinition (SBM)\n\n\n\\(G\\sim G(n,p,q)\\) with \\(0\\leq q&lt;p\\leq 1\\) if there is a partition \\(V=V_1\\sqcup V_1^c\\) such that, for \\(i&lt;j\\), \\[A_{ij}\\sim\\begin{cases}{\\rm Bern}(p)&\\text{if }i,j\\text{ are in the same community},\\\\{\\rm Bern}(q)&\\text{otherwise,}\\end{cases}\\] and \\(A_{ji}=A_{ij}\\), \\(A_{ii}=1\\).\n\n\n\n\n\nIntra-community edges are more likely than inter-community edges (\\(p&gt;q\\)).\nProblem: given one draw of \\(G\\), recover \\(V_1\\) and \\(V_1^c\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#likelihood-in-the-two-community-sbm",
+    "href": "matrix_lifting_SDP_relaxation.html#likelihood-in-the-two-community-sbm",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Likelihood in the two-community SBM",
+    "text": "Likelihood in the two-community SBM\nGiven \\(A\\), the likelihood at \\((V_1,p,q)\\) is \\[\\cL(V_1,p,q)=\\prod_{(i,j)\\in\\cC}p^{A_{ij}}(1-p)^{1-A_{ij}}\\prod_{(i,j)\\in\\cC^c}q^{A_{ij}}(1-q)^{1-A_{ij}},\\] where \\(\\cC\\) is the set of intra-community pairs \\(i&lt;j\\) and \\(\\cC^c\\) the inter-community pairs.\n\nWrite \\(N_{\\cC}=\\sum_{(i,j)\\in\\cC}A_{ij}\\) and \\(P_{\\cC}=N_{\\cC}/|\\cC|\\) (and likewise for \\(\\cC^c\\)).\nThe MLE maximizes \\(\\log\\cL\\) in \\((V_1,p,q)\\) under \\(p\\geq q\\).\nFor equal-size communities, \\(|\\cC|=|\\cC^c|=(n^2-n)/4\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#maximum-likelihood-equals-ratiocut",
+    "href": "matrix_lifting_SDP_relaxation.html#maximum-likelihood-equals-ratiocut",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Maximum likelihood equals RatioCut",
+    "text": "Maximum likelihood equals RatioCut\nFor \\(|V_1|=n/2\\), maximizing in \\((p,q)\\) first (KKT) yields:\n\nif \\(P_{\\cC}&gt;P_{\\cC^c}\\), then \\(\\hat p=P_{\\cC}\\), \\(\\hat q=P_{\\cC^c}\\);\notherwise \\(\\hat p=\\hat q=(P_{\\cC}+P_{\\cC^c})/2\\), and the value does not depend on \\(V_1\\).\n\nThe remaining problem in \\(V_1\\) is to maximize an entropy under \\(P_{\\cC}\\geq P_{\\cC^c}\\). Since \\(P_{\\cC}+P_{\\cC^c}\\) is constant, this is equivalent to minimizing \\(P_{\\cC^c}\\).\n\n\\[P_{\\cC^c}={\\rm RatioCut}(V_1,V_1^c).\\]\n\n\n\n\nIdea: MLE is RatioCut\n\n\nFor two equal-size communities, the MLE in the SBM is the RatioCut problem."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#an-equivalent-discrete-program",
+    "href": "matrix_lifting_SDP_relaxation.html#an-equivalent-discrete-program",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "An equivalent discrete program",
+    "text": "An equivalent discrete program\n\n\n\n\nRemark\n\n\nFor \\(|V_1|=n/2\\) one has \\(f^{V_1}\\in\\{-1,1\\}^n\\), so the MLE / RatioCut problem is \\[\\min\\big(x^\\top Lx:\\inr{x,\\mathbf{1}}=0,\\,x\\in\\{-1,1\\}^n\\big).\\] Since \\(x^\\top Lx=-x^\\top Ax+\\sum_{i,j}A_{ij}\\) and the second term is constant, this is also \\[\\max\\big(x^\\top Ax:\\inr{x,\\mathbf{1}}=0,\\,x\\in\\{-1,1\\}^n\\big).\\]\n\n\n\n\nThis last form is the one we shall lift to an SDP."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#detectability-isolated-nodes",
+    "href": "matrix_lifting_SDP_relaxation.html#detectability-isolated-nodes",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Detectability: isolated nodes",
+    "text": "Detectability: isolated nodes\nIf a node of \\(V_1\\) has no edge inside \\(V_1\\), there is no reason to assign it to \\(V_1\\). Exact recovery then fails.\n\n\n\n\nProposition\n\n\nIf \\(p\\leq\\log(n/2)\\,/\\,(n/2-2)\\), then \\(\\PP[\\text{some node of }V_1\\text{ is isolated in }V_1]\\geq 1/2\\).\n\n\n\n\nProof idea. Let \\(A_i\\) be the event that \\(i\\in V_1\\) is isolated in \\(V_1\\), and \\(N=|V_1|-1\\). Then \\(\\PP[A_i]=(1-p)^N\\). A Bonferroni bound \\[\\PP[\\cup_i A_i]\\geq(N+1)(1-p)^N-(N+1)N(1-p)^{2N-1}\\] is at least \\(1/2\\) as soon as \\(p\\leq(\\log N)/(N-1)\\). \\(\\square\\)\n\nExact recovery therefore requires \\(p\\gtrsim\\alpha\\log n\\,/\\,n\\). The hard regime is \\(q=\\beta\\log n\\,/\\,n\\) with \\(\\beta&lt;\\alpha\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#information-theoretic-phase-transition",
+    "href": "matrix_lifting_SDP_relaxation.html#information-theoretic-phase-transition",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Information-theoretic phase transition",
+    "text": "Information-theoretic phase transition\n\n\n\n\nTheorem (phase transition in the equal-size SBM)\n\n\nLet \\(\\hat V_1\\) be the MLE (minimal RatioCut). If \\(p=\\alpha\\log n\\,/\\,n\\) and \\(q=\\beta\\log n\\,/\\,n\\), then:\n\nif \\(\\sqrt{\\alpha}-\\sqrt{\\beta}&gt;\\sqrt{2}\\), then \\(\\hat V_1,\\hat V_1^c\\) recover \\(V_1,V_1^c\\) with high probability;\nif \\(\\sqrt{\\alpha}-\\sqrt{\\beta}&lt;\\sqrt{2}\\), no algorithm succeeds with probability \\(\\geq 1/2\\).\n\n\n\n\n\n\nA sharp threshold, but the MLE is not computable.\nThe practical question: can a spectral or SDP method attain (or approach) this threshold?"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#spectral-method-for-the-equal-size-sbm",
+    "href": "matrix_lifting_SDP_relaxation.html#spectral-method-for-the-equal-size-sbm",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Spectral method for the equal-size SBM",
+    "text": "Spectral method for the equal-size SBM\n\n\n\n\nLemma\n\n\nIf \\(|V_1|=|V_1^c|=n/2\\), the following are equivalent:\n\n\\(u_2\\) is a Fiedler vector of \\(\\E L=\\E(D-A)\\);\n\\(u_2\\) is a leading eigenvector of \\[\\E A-\\Big[n\\tfrac{p+q}{2}+(1-p)\\Big]\\Big(\\tfrac{\\mathbf{1}}{\\sqrt n}\\Big)\\Big(\\tfrac{\\mathbf{1}}{\\sqrt n}\\Big)^\\top.\\]\n\n\n\n\n\nWhy. All mean degrees are equal, so \\(\\E D\\) is a multiple of \\(I_n\\). Eigenvectors of \\(\\E L\\) and \\(\\E A\\) coincide (eigenvalues reversed). The leading eigenspace of \\(\\E A\\) is \\({\\rm span}(\\mathbf{1})\\); removing it leaves the Fiedler direction."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#a-practical-spectral-problem",
+    "href": "matrix_lifting_SDP_relaxation.html#a-practical-spectral-problem",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "A practical spectral problem",
+    "text": "A practical spectral problem\nWe do not know \\(\\E A\\), \\(p\\) or \\(q\\). Estimate:\n\n\\(\\E A\\) by \\(A\\);\n\\((p+q)/2\\) by the edge density \\[\\lambda=\\frac{2}{n(n-1)}\\sum_{i&lt;j}A_{ij},\\qquad \\E\\lambda=\\frac{p+q}{2}-\\frac{p-q}{n-1}.\\]\n\nThe spectral method becomes \\[\\max_{\\norm{x}_2\\leq 1}\\inr{x,(A-\\lambda J_n)x},\\qquad J_n=\\mathbf{1}\\mathbf{1}^\\top.\\]"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#matrix-lifting",
+    "href": "matrix_lifting_SDP_relaxation.html#matrix-lifting",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Matrix lifting",
+    "text": "Matrix lifting\nUnder equal sizes, \\(f^{V_1}\\in\\{-1,1\\}^n\\), and the discrete problem is \\[\\max_{x\\in\\{-1,1\\}^n}x^\\top(A-\\lambda J_n)x=\\max_{x\\in\\{-1,1\\}^n}\\inr{A-\\lambda J_n,xx^\\top}.\\]\nPassing from a quadratic function of \\(x\\) to a linear function of \\(Z=xx^\\top\\) is matrix lifting.\nThe matrix \\(Z=xx^\\top\\) satisfies: \\(Z=Z^\\top\\), \\(Z\\succeq 0\\), \\({\\rm diag}(Z)=I_n\\), and \\({\\rm rank}(Z)=1\\).\n\n\n\n\n\nIdea: drop the rank\n\n\nThe only nonconvex constraint is \\({\\rm rank}(Z)=1\\). Removing it yields an SDP."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#sdp-relaxation",
+    "href": "matrix_lifting_SDP_relaxation.html#sdp-relaxation",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "SDP relaxation",
+    "text": "SDP relaxation\n\\[\\max_{\\substack{Z\\succeq 0\\\\{\\rm diag}(Z)\\preceq I_n}}\\inr{A-\\lambda J_n,Z}.\\]\n\nIf \\(\\hat Z\\) is a solution, take a leading eigenvector \\(\\hat x\\) and its sign.\n\\(\\{i:{\\rm sign}(\\hat x_i)=1\\}\\) and its complement are the estimated communities.\n\n\n\n\n\nProposition\n\n\nThe oracle problem \\(\\max\\inr{\\E A-\\alpha u_1\\otimes u_1,Z}\\) (same constraints) has the unique solution \\(\\bar x\\otimes\\bar x\\), where \\(\\bar x_i=\\pm 1\\) is the true membership vector and \\(\\alpha=n(p+q)/2+(1-p)\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#algorithm-of-the-sdp-method",
+    "href": "matrix_lifting_SDP_relaxation.html#algorithm-of-the-sdp-method",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Algorithm of the SDP method",
+    "text": "Algorithm of the SDP method\n\n\n\n\nAlgorithm (SDP relaxation)\n\n\nInput: adjacency matrix \\(A\\) of a two-community equal-size SBM.\n\nCompute \\(\\lambda=\\frac{2}{n(n-1)}\\sum_{i&lt;j}A_{ij}\\).\nSolve the SDP \\(\\max\\inr{A-\\lambda J_n,Z}\\) over \\(Z\\succeq 0\\), \\({\\rm diag}(Z)\\preceq I_n\\).\nTake a leading eigenvector \\(\\hat x\\) of the solution \\(\\hat Z\\).\nOutput: \\(\\hat V_1=\\{i:{\\rm sign}(\\hat x_i)=1\\}\\) and \\(\\hat V_1^c\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#what-we-want-to-prove",
+    "href": "matrix_lifting_SDP_relaxation.html#what-we-want-to-prove",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "What we want to prove",
+    "text": "What we want to prove\nObserve \\(A\\sim{\\rm SBM}(n,p,q)\\) with equal-size communities. Let \\(\\hat Z\\) be the SDP solution and \\(\\hat x\\) a leading eigenvector. We want \\(\\hat x\\) close to the membership \\(\\bar x\\in\\{\\pm 1\\}^n\\).\n\n\n\n\nTheorem (estimation of \\(\\bar x\\bar x^\\top\\))\n\n\nAssume \\(n\\geq 10^4\\eps\\), \\(\\max(p(1-p),q(1-q))\\geq 20/n\\), \\(p\\geq a/n\\), \\(q\\geq b/n\\) and \\((a-b)^2\\geq 10^4\\eps^{-2}(a+b)\\). Then, with probability at least \\(1-e^3 5^{-n}\\), \\[\\norm{\\hat Z-\\bar x\\bar x^\\top}_2^2\\leq \\eps n^2=\\eps\\norm{\\bar x\\bar x^\\top}_2^2.\\]"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#from-matrices-to-vectors-daviskahan",
+    "href": "matrix_lifting_SDP_relaxation.html#from-matrices-to-vectors-daviskahan",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "From matrices to vectors: Davis–Kahan",
+    "text": "From matrices to vectors: Davis–Kahan\n\n\n\n\nCorollary\n\n\nUnder the same assumptions, if \\(\\norm{\\hat x}_2=\\sqrt n\\), then \\[\\min_{\\alpha\\in\\{\\pm 1\\}}\\norm{\\alpha\\hat x-\\bar x}_2^2\\leq 8\\eps n=8\\eps\\norm{\\bar x}_2^2.\\]\n\n\n\n\n\n\n\n\nTheorem (Davis–Kahan)\n\n\nIf \\(A,B\\) are symmetric and \\(\\lambda_i(A)\\) has gap \\(\\delta&gt;0\\) from the rest of the spectrum, then \\[\\min_{\\alpha\\in\\{\\pm 1\\}}\\norm{u_i(A)-\\alpha u_i(B)}_2\\leq 2^{3/2}\\frac{\\norm{A-B}_2}{\\delta}.\\]\n\n\n\n\nApply it to \\(A=\\bar x\\bar x^\\top\\) (gap \\(\\delta=n\\)) and \\(B=\\hat Z\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#outline-of-the-proof",
+    "href": "matrix_lifting_SDP_relaxation.html#outline-of-the-proof",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Outline of the proof",
+    "text": "Outline of the proof\nWrite \\(\\cM_{\\rm opt}=\\{Z:Z\\succeq 0,\\,{\\rm diag}(Z)\\preceq I_n\\}\\). Three steps:\n\nOracle: \\(\\bar Z=\\bar x\\bar x^\\top\\) maximizes \\(Z\\mapsto\\inr{\\E(A-\\lambda J_n),Z}\\) over \\(\\cM_{\\rm opt}\\) (as in the oracle proposition).\nUniform concentration: with high probability, \\[\\sup_{Z\\in\\cM_{\\rm opt}}\\big|\\inr{(A-\\lambda J_n)-\\E(A-\\lambda J_n),Z}\\big|\\] is small. This is the probabilistic step.\nCurvature at the optimum: \\(\\inr{\\E(A-\\lambda J_n),\\bar Z-Z}\\gtrsim\\norm{Z-\\bar Z}_1\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#grothendiecks-inequality",
+    "href": "matrix_lifting_SDP_relaxation.html#grothendiecks-inequality",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Grothendieck’s inequality",
+    "text": "Grothendieck’s inequality\n\n\n\n\nTheorem (Grothendieck)\n\n\nIf \\(\\big|\\sum_{i,j}b_{ij}s_it_j\\big|\\leq 1\\) for all \\(s_i,t_j\\in\\{\\pm 1\\}\\), then for every Hilbert space \\(H\\) and unit vectors \\(u_i,v_j\\), \\(\\big|\\sum_{i,j}b_{ij}\\inr{u_i,v_j}\\big|\\leq K_G\\), with \\(K_G\\leq 1.783\\).\n\n\n\n\nWrite \\(\\cM_1=\\{st^\\top:s,t\\in\\{\\pm 1\\}^n\\}\\) and \\(\\cM_G=\\{XY^\\top:\\text{rows of }X,Y\\text{ in }B_2^n\\}\\).\n\n\n\n\nCorollary\n\n\n\\(\\displaystyle\\sup_{Z\\in\\cM_G}\\inr{B,Z}\\leq K_G\\sup_{Z\\in\\cM_1}\\inr{B,Z}=K_G\\norm{B}_{\\infty\\to 1}\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#why-grothendieck-applies-here",
+    "href": "matrix_lifting_SDP_relaxation.html#why-grothendieck-applies-here",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Why Grothendieck applies here",
+    "text": "Why Grothendieck applies here\n\n\n\n\nProposition\n\n\n\\(\\cM_{\\rm opt}\\subset\\cM_G\\).\n\n\n\n\nIf \\(Z\\succeq 0\\) then \\(Z=XX^\\top\\), and \\({\\rm diag}(Z)\\preceq I_n\\) means \\(\\norm{X_{i\\bullet}}_2\\leq 1\\).\n\nTherefore \\[\\sup_{Z\\in\\cM_{\\rm opt}}\\big|\\inr{(A-\\lambda J_n)-\\E(\\cdots),Z}\\big|\\leq K_G\\norm{A-\\E A}_{\\infty\\to 1}+K_G|\\lambda-\\E\\lambda|\\,\\norm{J_n}_{\\infty\\to 1}.\\]\n\nBound \\(\\norm{A-\\E A}_{\\infty\\to 1}\\) and \\(|\\lambda-\\E\\lambda|\\) by Bernstein and a union bound.\nIf \\(\\bar p=\\frac{2}{n(n-1)}\\sum_{i&lt;j}{\\rm Var}(A_{ij})&gt;9/n\\), then with probability \\(1-e^3 5^{-n}\\), \\[\\norm{A-\\E A}_{\\infty\\to 1}\\leq 6n(n-1)\\sqrt{\\bar p/n}.\\]"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#weak-duality-for-sdp-problems",
+    "href": "matrix_lifting_SDP_relaxation.html#weak-duality-for-sdp-problems",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Weak duality for SDP problems",
+    "text": "Weak duality for SDP problems\nA standard SDP and its dual: \\[\\min\\big(\\inr{C,X}:X\\succeq 0,\\,\\cA(X)=b\\big),\\qquad\\max\\big(\\inr{\\lambda,b}:C-\\cA^\\top(\\lambda)\\succeq 0\\big).\\]\n\nWeak duality: \\(\\inr{C,X}\\geq\\inr{\\lambda,b}\\) for every feasible pair.\nIf a feasible pair saturates the inequality, both are optimal: this is a dual certificate.\n\n\n\n\n\nTheorem (strong duality for SDP)\n\n\nIf there exist \\(X_0\\succ 0\\) with \\(\\cA(X_0)=b\\) and \\(\\lambda_0\\) with \\(C-\\cA^\\top(\\lambda_0)\\succ 0\\) (Slater), then both problems attain their optima and there is no duality gap."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-dual-certificate-method",
+    "href": "matrix_lifting_SDP_relaxation.html#the-dual-certificate-method",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The dual-certificate method",
+    "text": "The dual-certificate method\n\n\n\n\nProposition\n\n\nIf \\(X^*\\) is primal-feasible, \\(\\lambda^*\\) is dual-feasible, and \\(\\inr{C,X^*}=\\inr{b,\\lambda^*}\\), then both are optimal.\n\n\n\n\nStrategy.\n\nStart from an NP-hard problem \\((P_0)\\) (here, recover \\(g=f^{V_1}\\)).\nConvexify it into an SDP \\((P)\\).\nTake the candidate \\(X_0=gg^\\top\\) and build a dual-feasible \\(\\lambda_0\\) with equal objective values.\nThen \\(X_0\\) solves \\((P)\\): one has solved \\((P_0)\\) by solving \\((P)\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#another-sdp-designed-for-exact-recovery",
+    "href": "matrix_lifting_SDP_relaxation.html#another-sdp-designed-for-exact-recovery",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Another SDP, designed for exact recovery",
+    "text": "Another SDP, designed for exact recovery\nThe theoretical problem with \\(\\E L\\) has unique solutions \\(f^{V_1}\\) and \\(f^{V_1^c}\\). We observe only \\(L\\), so we solve the empirical version \\[\\max\\big(x^\\top Ax:\\inr{x,\\mathbf{1}}=0,\\,x\\in\\{-1,1\\}^n\\big).\\]\n\nDropping \\(\\inr{x,\\mathbf{1}}=0\\) makes \\(\\mathbf{1}\\) optimal: the trivial cut.\nPenalize: replace the objective by \\(x^\\top Ax-\\lambda\\inr{x,\\mathbf{1}}^2\\), and add the constant \\(\\lambda\\norm{x}_2^2\\).\nFor \\(\\lambda=1/2\\) this is \\(x^\\top Bx\\) with \\[B=2A-\\mathbf{1}\\mathbf{1}^\\top-I_n,\\qquad B_{ij}=\\begin{cases}0&i=j,\\\\1&(i,j)\\in E,\\\\-1&(i,j)\\notin E.\\end{cases}\\]"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#lifted-sdp",
+    "href": "matrix_lifting_SDP_relaxation.html#lifted-sdp",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Lifted SDP",
+    "text": "Lifted SDP\n\\[\\max\\big(x^\\top Bx:x\\in\\{-1,1\\}^n\\big)\\quad\\rightsquigarrow\\quad\\max\\big(\\inr{B,Z}:Z\\succeq 0,\\,Z_{ii}=1\\big).\\]\n\nThe rank constraint has been dropped: this is an SDP.\nFrom a solution \\(\\hat Z\\): take a leading eigenvector and its sign, or round \\(G\\sim\\cN(0,\\hat Z)\\) and take \\({\\rm sign}(G)\\).\nGoal: prove that \\(gg^\\top\\) is the unique solution, by a strict dual certificate."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#dual-of-the-community-detection-sdp",
+    "href": "matrix_lifting_SDP_relaxation.html#dual-of-the-community-detection-sdp",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Dual of the community-detection SDP",
+    "text": "Dual of the community-detection SDP\nThe dual can be written \\[\\min\\big({\\rm Tr}(Y):Y-B\\succeq 0,\\,Y\\text{ diagonal}\\big).\\]\nWeak duality: for primal-feasible \\(Z\\) and dual-feasible \\(Y\\), \\[\\inr{B,Z}\\leq{\\rm Tr}(Y).\\]\n\\(Y\\) certifies a feasible \\(Z\\) when \\(\\inr{B,Z}={\\rm Tr}(Y)\\), i.e. \\(\\inr{B-Y,Z}=0\\).\n\nFor uniqueness one needs a strict certificate: \\({\\rm Ker}(B-Y)\\) of dimension \\(1\\).\n\n\n\n\nLemma\n\n\nIf \\(Y\\) certifies \\(gg^\\top\\) and \\(\\dim{\\rm Ker}(B-Y)=1\\), then \\(gg^\\top\\) is the unique primal solution."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#construction-of-the-certificate",
+    "href": "matrix_lifting_SDP_relaxation.html#construction-of-the-certificate",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Construction of the certificate",
+    "text": "Construction of the certificate\nConditions on \\(Y\\): diagonal, \\(Y\\succeq B\\), \\((B-Y)g=0\\), and \\(\\lambda_2(Y-B)&gt;0\\).\nThe first three force \\[Y_{ii}=\\frac{(Bg)_i}{g_i}=\\frac{2(Ag)_i}{g_i}-1,\\qquad Y_{ij}=0\\text{ for }i\\neq j.\\]\n\n\n\n\nProposition\n\n\nIf \\(\\lambda_2(Y-B)&gt;0\\), then \\(gg^\\top\\) is the unique solution of the SDP.\n\n\n\n\nIt remains to prove \\(\\lambda_2(Y-B)&gt;0\\) with high probability in the SBM."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#deterministic-plus-concentration",
+    "href": "matrix_lifting_SDP_relaxation.html#deterministic-plus-concentration",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Deterministic plus concentration",
+    "text": "Deterministic plus concentration\nWrite \\(\\square=(\\alpha-\\beta)\\log n\\) when \\(p=\\alpha\\log n\\,/\\,n\\) and \\(q=\\beta\\log n\\,/\\,n\\). Enough to show:\n\n\\(\\lambda_2(\\E(Y-B))=\\square\\);\n\\(\\norm{(Y-B)-\\E(Y-B)}_{\\rm op}&lt;\\square\\) with high probability.\n\nWeyl / Courant–Fischer then gives \\[\\lambda_2(Y-B)\\geq\\lambda_2(\\E(Y-B))-\\norm{(Y-B)-\\E(Y-B)}_{\\rm op}&gt;0.\\]"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#spectrum-of-the-mean-certificate",
+    "href": "matrix_lifting_SDP_relaxation.html#spectrum-of-the-mean-certificate",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Spectrum of the mean certificate",
+    "text": "Spectrum of the mean certificate\nA computation with \\(g\\in\\{\\pm 1\\}^n\\) and \\(\\inr{g,\\mathbf{1}}=0\\) yields \\[\\E(Y-B)=n(p-q)I_n-(p-q)gg^\\top+(1-p-q)\\mathbf{1}\\mathbf{1}^\\top.\\]\n\n\\(g\\) is an eigenvector for the eigenvalue \\(0\\).\nOn \\(g^\\perp\\), if \\(p+q\\leq 1\\) then \\(v^\\top\\E(Y-B)v\\geq n(p-q)\\), with equality for \\(v\\perp\\mathbf{1}\\).\nHence \\(\\lambda_2(\\E(Y-B))=n(p-q)=(\\alpha-\\beta)\\log n\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#decomposing-intra--and-inter-community-edges",
+    "href": "matrix_lifting_SDP_relaxation.html#decomposing-intra--and-inter-community-edges",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Decomposing intra- and inter-community edges",
+    "text": "Decomposing intra- and inter-community edges\n\n\n\n\n\n\n\n\nFigure 1: Adjacency matrix \\(A=A^{\\sim}+A^{\\not\\sim}\\): intra-community blocks (blue) and inter-community blocks (red).\n\n\n\n\n\n\n\\(Y-B=2\\big[(D^{\\sim}-A^{\\sim})-(D^{\\not\\sim}-A^{\\not\\sim})\\big]+\\mathbf{1}\\mathbf{1}^\\top\\): difference of the two Laplacians.\nEach Laplacian is a sum of independent matrices \\(\\Delta_{ij}=E_{ii}+E_{jj}-E_{ij}-E_{ji}\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#matrix-bernstein",
+    "href": "matrix_lifting_SDP_relaxation.html#matrix-bernstein",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Matrix Bernstein",
+    "text": "Matrix Bernstein\n\n\n\n\nTheorem (matrix Bernstein)\n\n\nLet \\(X_k\\) be independent centered symmetric \\(d\\times d\\) matrices with \\(\\lambda_{\\max}(X_k)\\leq R\\) a.s. Then, with probability at least \\(1-d\\exp(-t)\\), \\[\\lambda_{\\max}\\Big(\\frac1n\\sum_k X_k\\Big)\\leq\\sigma\\sqrt{\\frac{2t}{n}}+\\frac{2Rt}{3n},\\qquad\\sigma^2=\\Big\\|\\frac1n\\sum_k\\E X_k^2\\Big\\|_{\\rm op}.\\]\n\n\n\n\n\nThe dimension \\(d\\) appears in the probability. Here \\(t\\sim\\log n\\), so it only costs constants.\nApplied to the sum over intra- and inter-edges: \\(R=2\\) and \\(\\sigma^2\\leq n(p+q)\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#exact-recovery-by-sdp",
+    "href": "matrix_lifting_SDP_relaxation.html#exact-recovery-by-sdp",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Exact recovery by SDP",
+    "text": "Exact recovery by SDP\n\n\n\n\nTheorem\n\n\nLet \\(p=\\alpha\\log n\\,/\\,n\\), \\(q=\\beta\\log n\\,/\\,n\\) with \\(0&lt;\\beta&lt;\\alpha\\) and \\(p+q&lt;1\\), and \\(|V_1|=n/2\\). Then \\[\\{gg^\\top\\}=\\argmax\\big(\\inr{B,Z}:Z\\succeq 0,\\,Z_{ii}=1\\big)\\] with probability at least \\(1-2/n^\\eps\\), as soon as \\[\\sqrt{2(1+\\eps)(\\alpha+\\beta)}+\\frac{4(1+\\eps)}{3}&lt;\\alpha-\\beta.\\]\n\n\n\n\n\nAn NP-hard problem is solved, for most SBM graphs, by an SDP.\nThe threshold is more restrictive than \\(\\sqrt{\\alpha}-\\sqrt{\\beta}&gt;\\sqrt{2}\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#no-computational-gap",
+    "href": "matrix_lifting_SDP_relaxation.html#no-computational-gap",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "No computational gap",
+    "text": "No computational gap\n\n\n\n\nTheorem (improved analysis)\n\n\nUnder the same SBM assumptions, \\(gg^\\top\\) is the unique SDP solution with high probability as soon as \\[\\sqrt{\\alpha}-\\sqrt{\\beta}&gt;\\sqrt{2}.\\]\n\n\n\n\n\n\n\nThe SDP attains the information-theoretic threshold.\nThere is no computational gap for two equal-size communities in the SBM.\n\n\n\n\n\n\nIdea: randomness does things well\n\n\nNP-hard problems can become easy under a natural random model. Convex relaxation — of the objective, of the constraint, or by matrix lifting — is the right device."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#dual-certificate-for-basis-pursuit",
+    "href": "matrix_lifting_SDP_relaxation.html#dual-certificate-for-basis-pursuit",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Dual certificate for basis pursuit",
+    "text": "Dual certificate for basis pursuit\nThe same idea applies to \\[\\min\\big(\\norm{t}_1:At=y\\big).\\]\n\nSubdifferential: \\(0\\in\\partial^-\\norm{\\cdot}_1(x^*)+\\mathrm{Im}(A^\\top)\\) iff there is \\(\\beta^*\\) with \\[\\norm{A^\\top\\beta^*}_\\infty\\leq 1,\\qquad (A^\\top\\beta^*)_I={\\rm sgn}(x^*_I),\\quad I={\\rm supp}(x^*).\\]\nLagrangian dual: \\(\\max\\big(\\inr{\\beta,y}:\\norm{A^\\top\\beta}_\\infty\\leq 1\\big)\\).\nWeak duality: \\(\\norm{t}_1\\geq\\inr{\\beta,y}\\). Equality plus dual feasibility certifies \\(t^*\\).\n\nA strict certificate rules out every other feasible \\(t\\): that is uniqueness.\n\n\n\n\nProposition\n\n\nUnder strong duality, if \\(\\lambda^*\\) solves the dual then \\(x^*\\) solves the primal if and only if \\(\\varphi(x^*)=\\psi(\\lambda^*)\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-lifting-device",
+    "href": "matrix_lifting_SDP_relaxation.html#the-lifting-device",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The lifting device",
+    "text": "The lifting device\n\nIdea: Any (purely) quadratic problem in \\(x\\) (i.e. a quadratic objective and quadratic constraints without linear terms) can be rewritten as a linear problem in \\(Z=xx^\\top\\).\n\n\n\nExercise 1: Let \\(x\\in\\bR^n\\). What are the size and the entries of the matrix \\(Z= \\begin{pmatrix}1\\\\x\\end{pmatrix}\\begin{pmatrix}1&x^\\top\\end{pmatrix}\\)?\nExercise 2: Write any quadratic problem in \\(x\\) (that may contain linear terms) into a problem with variable \\(Z= \\begin{pmatrix}1\\\\x\\end{pmatrix}\\begin{pmatrix}1&x^\\top\\end{pmatrix}\\).\n\n\n\n\nLifting device: transform a ‘vector’ quadratic problem into a ‘matrix’ linear problem. The price to pay is that we go from dimension \\(n\\) to dimension \\((n+1)^2\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#lifting-a-leading-eigenvector",
+    "href": "matrix_lifting_SDP_relaxation.html#lifting-a-leading-eigenvector",
+    "title": "SDP relaxations for community detection",
+    "section": "Lifting a leading eigenvector",
+    "text": "Lifting a leading eigenvector\n\\[u_1\\in\\argmax_{\\norm{x}_2=1}\\norm{Ax}_2\\qquad\\Longleftrightarrow\\qquad\\max_{\\substack{Z\\succeq 0\\\\{\\rm rank}(Z)=1\\\\{\\rm Tr}(Z)=1}}\\inr{A^2,Z}.\\]\n\n\\(\\norm{Ax}_2^2=\\inr{A^2,xx^\\top}\\) and \\(\\norm{x}_2=1\\iff{\\rm Tr}(xx^\\top)=1\\).\nDrop the rank: \\(\\max\\{\\inr{A^2,Z}:Z\\succeq 0,\\,{\\rm Tr}(Z)=1\\}\\).\n\n\n\n\n\n\nRemark\n\n\nThis relaxation is exact: \\(\\inr{A^2,Z}\\leq\\lambda_1(A)^2\\), with equality at \\(u_1u_1^\\top\\). If \\(\\lambda_1\\) is simple, the SDP has the unique solution \\(u_1u_1^\\top\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-max-cut-problem",
+    "href": "matrix_lifting_SDP_relaxation.html#the-max-cut-problem",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The Max-Cut problem",
+    "text": "The Max-Cut problem\n\nGiven an undirected and unweighted graph \\(G=(V,E)\\), a cut is a partition \\(S\\sqcup S^c=V\\) of the nodes.\nThe Max-Cut problem is to find a cut that maximizes the number of edges across the cut.\n\n\n\n\n\n\n\n\n\n\nExample in Frequency Allocation: Nodes are cellular towers, and edges represent overlapping broadcast radii (interference zones) (possibly weighted by the population density in that overlap). Finding the Max-Cut assigns the towers to Frequency 1 (set \\(S\\)) and Frequency 2 (set \\(S^c\\)) such that the maximum amount of interference is neutralized."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-goemanswilliamson-relaxation",
+    "href": "matrix_lifting_SDP_relaxation.html#the-goemanswilliamson-relaxation",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The Goemans–Williamson relaxation",
+    "text": "The Goemans–Williamson relaxation\n\\[\\min\\big(\\inr{A,Z}:Z\\succeq 0,\\,Z_{ii}=1\\big).\\]\nRounding: draw \\(G\\sim\\cN(0,Z_1)\\) and set \\(\\hat u={\\rm sign}(G)\\). Then \\[\\E\\Big[\\frac12\\sum_{i,j}A_{ij}(1-\\hat u_i\\hat u_j)\\Big]\\geq 0.868\\cdot{\\rm OPT}.\\]\n\nThe same Gaussian rounding appears in the proof of Grothendieck’s inequality.\n\n\n\n\n\nIdea: bidual = SDP\n\n\nA first Lagrangian dual of MAX-CUT, then a second dual of that dual, is the Goemans–Williamson SDP: \\[\\max_u\\big(\\inr{\\mathbf{1},u}:A-{\\rm Diag}(u)\\succeq 0\\big)\\leq\\min_{Z\\succeq 0,\\,Z_{ii}=1}\\inr{A,Z}\\leq\\min_{x_i^2=1}x^\\top Ax.\\]"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#lifting-linear-and-quadratic-constraints",
+    "href": "matrix_lifting_SDP_relaxation.html#lifting-linear-and-quadratic-constraints",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Lifting linear and quadratic constraints",
+    "text": "Lifting linear and quadratic constraints\nThe constraint \\(\\inr{x,\\mathbf{1}}=0\\) is linear in \\(x\\), hence not a linear function of \\(xx^\\top\\). One can still lift it by adding one coordinate: \\[\\begin{pmatrix}1\\\\x\\end{pmatrix}\\rightsquigarrow Z=\\begin{pmatrix}1&x^\\top\\\\x&xx^\\top\\end{pmatrix}.\\]\nThe equal-size community problem becomes the SDP \\[\\min\\big(\\inr{L,Z}:Z\\succeq 0,\\,Z_{00}=1,\\,Z_{ii}=1,\\,\\inr{Z,A}=0\\big),\\] after dropping the rank. Linear terms live in the first row and column of \\(Z\\).\n\n\n\n\n\nIdea: one extra dimension\n\n\nQuadratic terms live in \\(xx^\\top\\). Linear terms appear as soon as one lifts \\((1,x)\\) instead of \\(x\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#exercise",
+    "href": "matrix_lifting_SDP_relaxation.html#exercise",
+    "title": "Spectral methods and SDP relaxations for community detection",
+    "section": "Exercise",
+    "text": "Exercise\n\nExercise 1: Let \\(x\\in\\bR^n\\).\n\nWhat is the size and the entries of the matrix \\(Z=xx^\\top\\)?\nHow can you write \\(\\norm{x}_2^2\\) using \\(Z\\)?\nHow can you write \\(\\norm{Ax}_2^2\\) using \\(Z\\)?\n\n\n\n\nExercise 2: Let \\(f, g:x\\mapsto x^\\top M_fx, x^\\top M_gx\\) be two quadratic functions. Let \\(K = \\{x:g(x)\\leq1\\}\\). Write the problem \\(\\min_{x\\in K} f(x)\\) with variable \\(x\\) into a problem with variable \\(Z=xx^\\top\\). What are the pros and cons of this transformation?\n\n\n\n\nExercise 3: Show that a matrix \\(Z\\) is positive semidefinite and of rank 1 if and only if there exists \\(x\\in\\bR^n\\) such that \\(Z=xx^\\top\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#exercises",
+    "href": "matrix_lifting_SDP_relaxation.html#exercises",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Exercises",
+    "text": "Exercises\n\nExercise 1: Let \\(x\\in\\bR^n\\).\n\nWhat are the size and the entries of the matrix \\(Z=xx^\\top\\)?\nHow can you write \\(\\norm{x}_2^2\\) using \\(Z\\)?\nHow can you write \\(\\norm{Ax}_2^2\\) using \\(Z\\) where \\(A\\) is a matrix?\n\n\n\n\nExercise 2: Show that \\(Z\\) is positive semidefinite, rank 1 matrix if and only if there exists \\(x\\in\\bR^n\\) such that \\(Z=xx^\\top\\).\n\n\n\n\nExercise 3: Let \\(f, g:x\\mapsto x^\\top M_fx, x^\\top M_gx\\) be two quadratic functions. Let \\(K = \\{x:g(x)\\leq1\\}\\). Write the problem \\(\\min_{x\\in K} f(x)\\) with variable \\(x\\) into a problem with variable \\(Z=xx^\\top\\). What are the pros and cons of this transformation?"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#problem-find-a-leading-eigenvector",
+    "href": "matrix_lifting_SDP_relaxation.html#problem-find-a-leading-eigenvector",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Problem: find a leading eigenvector",
+    "text": "Problem: find a leading eigenvector\n\n\n\n\nProblem statement\n\n\nLet \\(A\\in\\bR^{n\\times n}\\). Find \\(x\\in\\bR^n\\) such that \\(\\norm{x}_2=1\\) and \\(\\norm{Ax}_2\\) is maximized.\n\n\n\n\nClassical solution: The most efficient way to solve this problem is to use the power method: take \\(x_0\\in\\bR^n\\) at random and iterate \\(x_{k+1} = \\frac{Ax_k}{\\norm{Ax_k}_2}\\).\n\nAn alternative solution is using the lifting device: \\[\n(P_x) \\quad \\max_{\\norm{x}_2=1}\\norm{Ax}_2 = \\max_{\\substack{Z\\succeq 0\\\\ {\\rm rank}(Z)=1\\\\ {\\rm Tr}(Z)=1}}\\inr{A^\\top A,Z} \\quad (P_Z)\n\\]\nBecause: \\(\\norm{Ax}_2^2=\\inr{A^\\top A,xx^\\top}\\), \\(\\norm{x}_2=1\\) iff \\({\\rm Tr}(xx^\\top)=1\\) and \\(Z=xx^\\top\\) iff \\(Z\\succeq 0\\) and \\({\\rm rank}(Z)=1\\).\nMoreover: \\(v_1\\) is a leading eigenvector of \\(A\\) (i.e. a solution of \\((P_x)\\)) iff \\(Z=v_1v_1^\\top\\) is a solution of \\((P_Z)\\).\n\n\n\n\n\n\nProblem: The rank \\(1\\) constraint is not convex.\nSolution: Drop the rank constraint!"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#sdp-relaxation-for-the-problem-of-finding-a-leading-eigenvector",
+    "href": "matrix_lifting_SDP_relaxation.html#sdp-relaxation-for-the-problem-of-finding-a-leading-eigenvector",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "SDP relaxation for the problem of finding a leading eigenvector",
+    "text": "SDP relaxation for the problem of finding a leading eigenvector\nDropping the rank constraint, we get the following optimization problem: \\[\n\\max_{\\substack{Z\\succeq 0\\\\ {\\rm Tr}(Z)=1}}\\inr{A^\\top A,Z} \\quad (P^\\prime_Z)\n\\]\nQuestions:\n\nWhat kind of optimization problem is \\((P^\\prime_Z)\\)?\nWhat do we lose by dropping the rank constraint?\n\n\n\n\nWe get an SDP problem: this is what we call an SDP relaxation.\nWe lose nothing! This relaxation is exact: \\((P_Z)\\) and \\((P^\\prime_Z)\\) have the same optimal value and the same optimal solution(s). (this is not always the case!)"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#take-away-message",
+    "href": "matrix_lifting_SDP_relaxation.html#take-away-message",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Take away message",
+    "text": "Take away message\n\nWe have seen matrix lifting: transforming a ‘vector’ quadratic problem in $x into a ‘matrix’ linear problem in \\(Z= \\begin{pmatrix}1\\\\x\\end{pmatrix}\\begin{pmatrix}1&x^\\top\\end{pmatrix}\\). The price to pay is that we go from dimension \\(n\\) to dimension \\((n+1)^2\\).\n\n\nWe have seen SDP relaxation: dropping the rank constraint in a matrix problem to get an SDP problem. Sometimes, this relaxation is exact, but sometimes it is not.\n\n\nNext, we will see how to use these techniques to solve two problems:\n\nThe Max-Cut problem,\nThe community detection problem."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#take-away-message-from-this-introduction-example",
+    "href": "matrix_lifting_SDP_relaxation.html#take-away-message-from-this-introduction-example",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Take away message from this introduction example:",
+    "text": "Take away message from this introduction example:\n\nWe have seen matrix lifting: transforming a vector quadratic  problem in \\(x\\) into a  matrix linear  problem in \\(Z= \\begin{pmatrix}1\\\\x\\end{pmatrix}\\begin{pmatrix}1&x^\\top\\end{pmatrix}\\). The price to pay is that we go from dimension \\(n\\) to dimension \\((n+1)^2\\).\n\n\nWe have seen SDP relaxation: dropping the rank constraint in a matrix problem to get an SDP problem. Sometimes, this relaxation is exact, but sometimes it is not.\n\n\nNext, we will see how to use these techniques to solve two problems:\n\nThe Max-Cut problem,\nThe community detection problem."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#exercise-international-trade-network",
+    "href": "matrix_lifting_SDP_relaxation.html#exercise-international-trade-network",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Exercise: International Trade Network",
+    "text": "Exercise: International Trade Network\nQuestion: The bipartite graph below represents annual exports (in billions of €) between France (FR), the UK, and Germany (DE). Construct the \\(3 \\times 3\\) adjacency matrix \\(A\\) for this directed, weighted graph.\n\n\n\n\n\n\n\nInternational Trade Network.\n\n\n\n\n\n\nSolution:\nAssuming the node order is 1: FR, 2: UK, 3: DE:\n\\[\nA = \\begin{pmatrix}\n0 & 30 & 70 \\\\\n25 & 0 & 40 \\\\\n65 & 50 & 0\n\\end{pmatrix}\n\\]\n\nNote: \\(A_{i,j}\\) represents the edge from node \\(i\\) to node \\(j\\). For example, \\(A_{1,2} = 30\\) means FR exports 30 to the UK."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#equivalent-formulation-of-the-max-cut-problem",
+    "href": "matrix_lifting_SDP_relaxation.html#equivalent-formulation-of-the-max-cut-problem",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Equivalent formulation of the Max-Cut problem",
+    "text": "Equivalent formulation of the Max-Cut problem\n\nExercise 1: Show that the Max-Cut problem is equivalent to \\[\\max_{S\\subset V}\\sum_{(i,j)\\in E}\\mathbf{1}_{i\\in S,\\,j\\in S^c}=\\max_{x\\in\\{\\pm 1\\}^n}\\frac14\\sum_{i,j}A_{ij}(1-x_ix_j).\\]\nExercise 2: Show that one can find a solution to the Max-Cut problem from a solution to the following problem: \\[\\min\\big(x^\\top Ax:x_i^2=1\\big) \\quad (\\dagger)\\]\n\n\n\n\n\n\n\nIs \\((\\dagger)\\) an easy problem to solve?\nWhat sort of problem is \\((\\dagger)\\)?\nCan you suggest a convex surrogate problem for \\((\\dagger)\\)?"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-goemanswilliamson-sdp-relaxation",
+    "href": "matrix_lifting_SDP_relaxation.html#the-goemanswilliamson-sdp-relaxation",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The Goemans–Williamson SDP relaxation",
+    "text": "The Goemans–Williamson SDP relaxation\n\nExercise: Lift and relax \\(\\min\\big(x^\\top Ax:x_i^2=1\\big) \\quad (\\dagger)\\).\n\n\nLifting: \\((\\dagger)\\) is a purely quadratic problem in \\(x\\) (i.e. only quadratic terms in \\(x\\) in both the objective function and the constraints). One can lift this type of problem to a matrix optimization problem:\n\\[\\min\\big(x^\\top Ax:x_i^2=1\\big) = \\min\\big(\\inr{A, Z}:Z\\succeq 0, {\\rm rank}(Z) = 1, Z_{ii}=1\\big).\\]\nSDP relaxation: drop the rank constraint to get the SDP problem: \\[\\min\\big(\\inr{A,Z}:Z\\succeq 0,\\,Z_{ii}=1\\big). \\quad (\\dagger\\dagger)\\]\n\n\\((\\dagger\\dagger)\\) is the Goemans–Williamson SDP relaxation of the Max-Cut problem.\n\n\n\n\n\n\n\nUsually \\((\\dagger\\dagger)\\) does not have a rank one solution and so \\((\\dagger)\\) and \\((\\dagger\\dagger)\\) are not equivalent (in general).\nQuestion: How can we find a solution to the Max-Cut problem from a solution to \\((\\dagger\\dagger)\\)?\nSolution: Rounding: from \\(Z^*\\) a solution to \\((\\dagger\\dagger)\\), we draw \\(G\\sim\\cN(0, Z^*)\\) and set \\(x^{**} = {\\rm sign}(G)\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#formulation-of-the-max-cut-problem",
+    "href": "matrix_lifting_SDP_relaxation.html#formulation-of-the-max-cut-problem",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Formulation of the Max-Cut problem",
+    "text": "Formulation of the Max-Cut problem\n\nExercise: Write the mathematical formulation of the Max-cut problem.\n\n\n\n\n\nMAX-CUT maximizes over all possible cuts the number of edges across the cut: \\[\\max_{S\\subset V}\\sum_{(i,j)\\in E}\\mathbf{1}_{i\\in S,\\,j\\in S^c}\\] where \\(\\mathbf{1}_{i\\in S,\\,j\\in S^c}\\) is the indicator function of the event \\(\\{i\\in S,\\,j\\in S^c\\}\\): \\[\n\\mathbf{1}_{i\\in S,\\,j\\in S^c} = \\begin{cases}\n1 & \\text{if } i\\in S \\text{ and } j\\in S^c \\\\\n0 & \\text{otherwise}\n\\end{cases}\n\\]"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#exercise-finding-the-max-cut",
+    "href": "matrix_lifting_SDP_relaxation.html#exercise-finding-the-max-cut",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Exercise: Finding the Max-Cut",
+    "text": "Exercise: Finding the Max-Cut\nQuestion: Consider the graph \\(G=(V,E)\\) below. Find a partition \\(S \\sqcup S^c = V\\) that solves the Max-Cut problem. What is the value of the maximum cut?\n\n\n\n\n\n\n\n\n\n\n\n\nSolution:\nThe Max-Cut value is 4.\nThe Partition: \\(S = \\{1, 3\\}\\) and \\(S^c = \\{2, 4\\}\\).\nWhy? Because nodes 1, 2, and 3 form a triangle, it is impossible to cut all 5 edges (any cut of a triangle can cross at most 2 of its 3 edges). Therefore, the theoretical maximum is \\(5 - 1 = 4\\).\nBy grouping the diagonal’s endpoints (1 and 3) into the same set \\(S\\), we make \\((1,3)\\) the only internal edge.\nThe cut edges are: \\((1,2), (2,3), (3,4),\\) and \\((4,1)\\)."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-goemanswilliamson-rounding-device",
+    "href": "matrix_lifting_SDP_relaxation.html#the-goemanswilliamson-rounding-device",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The Goemans–Williamson rounding device",
+    "text": "The Goemans–Williamson rounding device\nRounding: from \\(Z^*\\) a solution to \\((\\dagger\\dagger)\\), we draw \\(G\\sim\\cN(0, Z^*)\\) and set \\(x^{**} = {\\rm sign}(G)\\). Then \\[\\E\\Big[\\frac14\\sum_{i,j}A_{ij}(1- x^{**}_i x^{**}_j)\\Big]\\geq 0.868\\cdot{\\rm OPT}.\\]\n\nThe same Gaussian rounding appears in the proof of Grothendieck’s inequality.\n\n\n\n\n\nIdea: bidual = SDP\n\n\nA first Lagrangian dual of MAX-CUT, then a second dual of that dual, is the Goemans–Williamson SDP: \\[\\max_u\\big(\\inr{\\mathbf{1},u}:A-{\\rm Diag}(u)\\succeq 0\\big)\\leq\\min_{Z\\succeq 0,\\,Z_{ii}=1}\\inr{A,Z}\\leq\\min_{x_i^2=1}x^\\top Ax.\\]"
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#the-goemanswilliamson-theorem",
+    "href": "matrix_lifting_SDP_relaxation.html#the-goemanswilliamson-theorem",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "The Goemans–Williamson Theorem",
+    "text": "The Goemans–Williamson Theorem\n\nLet \\(Z^*\\) be a solution to, \\[\\min\\big(\\inr{A,Z}:Z\\succeq 0,\\,Z_{ii}=1\\big). \\quad (\\dagger\\dagger)\\] Let \\(G\\sim\\cN(0, Z^*)\\) and set \\(x^{**} = {\\rm sign}(G)\\). Then, \\[\\E\\Big[\\frac14\\sum_{i,j}A_{ij}(1- x^{**}_i x^{**}_j)\\Big]\\geq \\alpha_{GW}\\cdot{\\rm OPT}\\] where \\(\\alpha_{GW} = \\frac{2}{\\pi}\\min_{0\\leq \\theta\\leq \\pi}\\frac{\\theta}{1-\\cos(\\theta)} \\approx 0.878\\) and \\({\\rm OPT}\\) is the value of the optimal solution to the Max-Cut problem.\n\n\n\nQuestion: Tell what is random in the result above.\n\n\nIdea: Goemans-Williamson approximating solution to the Max-Cut problem is a polynomial time randomized algorithm.\nThere are many such algorithms in computer science. The class of such algorithms with polynomial time complexity is called BPP (Bounded-error Probabilistic Polynomial time). It is believed that BPP = P."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#can-we-do-better-than-the-alpha_gw-factor",
+    "href": "matrix_lifting_SDP_relaxation.html#can-we-do-better-than-the-alpha_gw-factor",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Can we do better than the \\(\\alpha_{GW}\\) factor?",
+    "text": "Can we do better than the \\(\\alpha_{GW}\\) factor?\n\nQuestion: Is it possible to construct in polynomial time an approximating solution to the Max-Cut problem that can do better than the \\(\\alpha_{GW}\\) factor? That is to construct (in polynomial time) a cut \\(x^\\circ\\) such that \\[\\frac14\\sum_{i,j}A_{ij}(1- x^{\\circ}_i x^{\\circ}_j) &gt; \\alpha_{GW}\\cdot{\\rm OPT} ?\\] (in a deterministic or randomized way).\n\n\n\n\n\n\nOpenAI (6/10/26) answer: No, it is not possible to construct in polynomial time an approximating solution to the Max-Cut problem that can do better than the \\(\\alpha_{GW}\\) factor (unless \\(P=NP\\)) for both deterministic and randomized algorithms."
+  },
+  {
+    "objectID": "matrix_lifting_SDP_relaxation.html#sketch-of-proof-of-the-goemans-williamson-theorem",
+    "href": "matrix_lifting_SDP_relaxation.html#sketch-of-proof-of-the-goemans-williamson-theorem",
+    "title": "SDP relaxation   Max-Cut and community detection",
+    "section": "Sketch of Proof of the Goemans-Williamson Theorem",
+    "text": "Sketch of Proof of the Goemans-Williamson Theorem\nThe proof relies on evaluating the expected contribution of a single pair \\((i,j)\\) and comparing it to the SDP’s contribution.\n\n1. The Bivariate Gaussian Since \\(G \\sim \\cN(0, Z^*)\\), the marginals \\(G_i\\) and \\(G_j\\) form a zero-mean bivariate normal distribution. Their variances are \\(Z^*_{ii}=1\\) and \\(Z^*_{jj}=1\\), and their covariance is \\(Z^*_{ij}\\).\n\n\n2. Sheppard’s Lemma (Geometric Probability) The probability that \\(G_i\\) and \\(G_j\\) have different signs is determined by the angle between them. By setting \\(Z^*_{ij} = \\cos(\\theta)\\), the probability they are separated by the random hyperplane (i.e., \\(x^{**}_i \\neq x^{**}_j\\)) is exactly \\(\\frac{\\theta}{\\pi}\\).\n\n\n3. Term-by-Term Ratio We compare the expected cut for the pair \\((i,j)\\) against the SDP’s relaxed value for that same pair: \\[\n\\frac{\\text{Expected Cut}_{ij}}{\\text{SDP Value}_{ij}} = \\frac{\\frac{1}{2}\\cdot\\frac{\\theta}{\\pi}}{\\frac{1}{4}(1 - Z^*_{ij})} = \\frac{2}{\\pi} \\frac{\\theta}{1 - \\cos(\\theta)}\n\\]\n\n\n4. Global Bound Because this ratio is bounded below by \\(\\alpha_{GW} \\approx 0.878\\) for every angle \\(\\theta \\in [0, \\pi]\\), we sum over all pairs \\((i,j)\\) by linearity of expectation to get: \\[\n\\E[\\text{Cut}] \\geq \\alpha_{GW} \\cdot \\text{SDP-VAL} \\geq \\alpha_{GW} \\cdot \\text{OPT}\n\\]"
   }
 ]

@@ -14,6 +14,7 @@ format:
 - [Course presentation](course_presentation.html)
 - [Compressed Sensing](compressed_sensing.html)
 - [Matrix completion and recommendation systems](recommendation_systems.html)
+- [Matrix lifting and SDP relaxation](matrix_lifting_SDP_relaxation.html)
 - [Community detection](community_detection.html)
 
 
@@ -31,7 +32,8 @@ format:
 
 - [Images are sparse](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/0_lab_wavelets_transform)
 - [Phase transition in compressed sensing](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/1_lab_phase_transition_CS_cvx)
-- [Lab on matrix completion](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/2_lab_matrix_completion)
+- [Lab on matrix completion via SDP and proximal methods](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/2_lab_matrix_completion)
+- [Lab on recommendation systems](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/3_lab_recommendation_systems)
 - [Lab on community detection](https://github.com/lecueguillaume/Advanced-applied-statistics/tree/main/materials/lab_sessions/3_lab_community_detection)
 
 ## Exercises

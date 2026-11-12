@@ -118,3 +118,16 @@ figcaption {
 .reveal .spaced-list ul > li:last-child {
   margin-bottom: 0 !important;
 }
+
+/* Increase spacing between bullet points on marked slides */
+.reveal .spaced-list-two ul > li {
+  margin-bottom: 1.4em !important; /* Adjust gap to taste (e.g. 1.2em to 2em) */
+}
+
+.reveal .spaced-list-two ul > li:last-child {
+  margin-bottom: 0 !important;
+}
+
+.reveal ul {
+  list-style-position: inside;
+}
