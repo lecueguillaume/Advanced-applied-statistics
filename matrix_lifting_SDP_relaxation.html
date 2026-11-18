@@ -522,16 +522,23 @@ A = \begin{pmatrix}
 <p>Given an undirected and unweighted graph <span class="math inline">\(G=(V,E)\)</span>, a <strong>cut</strong> is a partition <span class="math inline">\(S\sqcup S^c=V\)</span> of the nodes.</p>
 <p>The <strong>Max-Cut problem</strong> is to find a cut that maximizes the number of edges across the cut.</p>
 </div>
+<div style="height: 50px;">
+
+</div>
+<div class="columns" style="align-items: center;">
+<div class="column" style="width:50%;">
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="matrix_lifting_SDP_relaxation_files/figure-revealjs/unnamed-chunk-2-1.svg" class="quarto-figure quarto-figure-center" style="width:40.0%"></p>
+<p><img data-src="matrix_lifting_SDP_relaxation_files/figure-revealjs/unnamed-chunk-2-1.svg" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
 </figure>
 </div>
 </div>
 </div>
+</div><div class="column" style="font-size: 0.9em;">
 <p><strong>Example in Frequency Allocation:</strong> Nodes are cellular towers, and edges represent overlapping broadcast radii (interference zones) (possibly weighted by the population density in that overlap). Finding the Max-Cut assigns the towers to Frequency 1 (set <span class="math inline">\(S\)</span>) and Frequency 2 (set <span class="math inline">\(S^c\)</span>) such that the maximum amount of interference is neutralized.</p>
+</div></div>
 </section>
 <section id="exercise-finding-the-max-cut" class="slide level2">
 <h2>Exercise: Finding the Max-Cut</h2>
@@ -631,7 +638,7 @@ A = \begin{pmatrix}
 </div>
 </div>
 </section>
-<section id="sketch-of-proof-of-the-goemans-williamson-theorem" class="slide level2" style="font-size: 0.9em;">
+<section id="sketch-of-proof-of-the-goemans-williamson-theorem" class="slide level2" style="font-size: 0.8em;">
 <h2>Sketch of Proof of the Goemans-Williamson Theorem</h2>
 <p>The proof relies on evaluating the expected contribution of a single pair <span class="math inline">\((i,j)\)</span> and comparing it to the SDP’s contribution.</p>
 <div class="fragment mt-4">
@@ -664,62 +671,30 @@ A = \begin{pmatrix}
 <p><strong>OpenAI (6/10/26) answer:</strong> No, it is not possible to construct in polynomial time an approximating solution to the Max-Cut problem that can do better than the <span class="math inline">\(\alpha_{GW}\)</span> factor (unless <span class="math inline">\(P=NP\)</span>) for both deterministic and randomized algorithms.</p>
 </div>
 </div>
-</section>
-<section id="lifting-linear-and-quadratic-constraints" class="slide level2 smaller">
-<h2>Lifting linear and quadratic constraints</h2>
-<p>The constraint <span class="math inline">\(\inr{x,\mathbf{1}}=0\)</span> is <strong>linear</strong> in <span class="math inline">\(x\)</span>, hence not a linear function of <span class="math inline">\(xx^\top\)</span>. One can still lift it by adding one coordinate: <span class="math display">\[\begin{pmatrix}1\\x\end{pmatrix}\rightsquigarrow Z=\begin{pmatrix}1&amp;x^\top\\x&amp;xx^\top\end{pmatrix}.\]</span></p>
-<p>The equal-size community problem becomes the SDP <span class="math display">\[\min\big(\inr{L,Z}:Z\succeq 0,\,Z_{00}=1,\,Z_{ii}=1,\,\inr{Z,A}=0\big),\]</span> after dropping the rank. Linear terms live in the first row and column of <span class="math inline">\(Z\)</span>.</p>
-<div class="fragment">
-<div title="Idea: one extra dimension">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Idea: one extra dimension</strong></p>
-</div>
-<div class="callout-content">
-<p>Quadratic terms live in <span class="math inline">\(xx^\top\)</span>. Linear terms appear as soon as one lifts <span class="math inline">\((1,x)\)</span> instead of <span class="math inline">\(x\)</span>.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
 </section></section>
 <section>
-<section id="introduction" class="title-slide slide level1 center">
-<h1>Introduction</h1>
-
-</section>
-<section id="the-community-detection-problem-12" class="slide level2 scrollable">
-<h2>The community detection problem (1/2)</h2>
-<ul>
-<li><span class="blue">Nodes</span> are people; an <span class="blue">edge</span> is a connection (messages, friendship, collaboration).</li>
-<li><strong>Goal:</strong> find groups of nodes that are more densely connected to one another than to the rest of the graph.</li>
-<li>These groups may be groups of friends, or people who share interests.</li>
-<li>Once the communities are found, we may:</li>
-</ul>
-<ol type="1">
-<li><p>Look for <strong>influencers</strong> and send them advertisements, or approach them directly.</p></li>
-<li><p>Understand the <strong>common features</strong> of the nodes inside this community to understand how the community was created and what share the people inside of it.</p></li>
-</ol>
-</section>
-<section id="the-community-detection-problem-22" class="slide level2">
-<h2>The community detection problem (2/2)</h2>
+<section id="convex-relaxation-for-community-detection" class="title-slide slide level1 center">
+<h1>Convex relaxation for community detection</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/community_detection.png" class="quarto-figure quarto-figure-center" style="width:46.0%" alt="Community detection network diagram"></p>
 </figure>
 </div>
-<div title="Idea: density, not just connectivity" style="font-size: 0.85em;">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Idea: density, not just connectivity</strong></p>
+</section>
+<section id="the-community-detection-problem" class="slide level2">
+<h2>The community detection problem</h2>
+<div class="box-blue">
+<p><strong>Goal:</strong> find groups of nodes that are more densely connected to one another than to the rest of the graph.</p>
 </div>
-<div class="callout-content">
-<p>A community is not a connected component. It is a set of nodes with a <strong>higher density of internal edges</strong> than of edges leaving the set.</p>
-</div>
-</div>
-</div>
+<div style="font-size: 0.8em;">
+<p>Once the communities are found, we may:</p>
+<ul>
+<li><p>Look for <strong>influencers</strong> (ie nodes with high centrality) and send them advertisements, or approach them directly.</p></li>
+<li><p>Look for <strong>connectors</strong> (ie nodes with high betweenness centrality).</p></li>
+<li><p>Understand the <strong>common features</strong> of the nodes inside this community to understand how the community was created based on what share the people inside of it. Then target the entire community with an advertisement based on the common features or use it for <strong>fraud detection</strong>, identifies suspicious behavior on the network (like bot activity or fake accounts).</p></li>
+<li><p>Measure <strong>polarization</strong> between the communities (how dense the edges are within the community compared to the edges between the communities).</p></li>
+</ul>
+<p><strong>Applications:</strong> recommendation systems, fraud detection, social media analysis, protein function prediction, topic modeling, etc.</p>
 </div>
 </section>
 <section id="connectivity-and-connected-components" class="slide level2 smaller">
@@ -751,11 +726,6 @@ A = \begin{pmatrix}
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="the-laplacian-of-a-graph" class="title-slide slide level1 center">
-<h1>The Laplacian of a graph</h1>
-
 </section>
 <section id="definition-of-the-laplacian" class="slide level2 smaller">
 <h2>Definition of the Laplacian</h2>
@@ -771,11 +741,13 @@ A = \begin{pmatrix}
 </div>
 </div>
 </div>
-<ul>
-<li>Other definitions exist; we use this one throughout.</li>
-<li>If <span class="math inline">\(G\)</span> is undirected, then <span class="math inline">\(L\)</span> is <strong>symmetric</strong>: the spectral theorem applies, and <span class="math inline">\(L=PDP^\top\)</span> with <span class="math inline">\(P\)</span> orthogonal.</li>
-<li>The <strong>spectrum</strong> of <span class="math inline">\(L\)</span> is the key object of spectral community detection.</li>
-</ul>
+<div style="height: 50px;">
+
+</div>
+<div class="box-blue">
+<p>If <span class="math inline">\(G\)</span> is undirected, then <span class="math inline">\(L\)</span> is <strong>symmetric</strong>: the spectral theorem applies, and <span class="math inline">\(L=PDP^\top\)</span> with <span class="math inline">\(P\)</span> orthogonal.</p>
+<p>The <strong>spectrum</strong> of <span class="math inline">\(L\)</span> is the key object behind ‘spectral community detection algorithms’.</p>
+</div>
 </section>
 <section id="quadratic-form-and-first-properties" class="slide level2 smaller scrollable">
 <h2>Quadratic form and first properties</h2>
@@ -820,10 +792,16 @@ A = \begin{pmatrix}
 </div>
 </div>
 </div>
+<div style="height: 50px;">
+
+</div>
 <div title="Idea: the kernel of $L$ sees the communities">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
 <p><strong>Idea: the kernel of <span class="math inline">\(L\)</span> sees the communities</strong></p>
 </div>
 <div class="callout-content">
@@ -846,13 +824,29 @@ A = \begin{pmatrix}
 </section>
 <section id="proof-sketch-several-components" class="slide level2 smaller">
 <h2>Proof sketch: several components</h2>
-<p>Up to reordering the nodes, <span class="math display">\[L=\begin{pmatrix}L_1&amp;&amp;\\&amp;\ddots&amp;\\&amp;&amp;L_k\end{pmatrix},\]</span> where <span class="math inline">\(L_i\)</span> is the Laplacian of the <span class="math inline">\(i\)</span>-th connected component.</p>
+<p>Up to reordering the nodes, <span class="math display">\[
+L=
+\left[
+\begin{array}{c|c|c|c}
+L_1&amp; 0 &amp; \cdots &amp; 0 \\
+\hline
+0 &amp; L_2 &amp; \cdots &amp; 0 \\
+\hline
+\cdots &amp; \cdots &amp; \ddots &amp; 0 \\
+\hline
+0 &amp; 0 &amp; \cdots &amp; L_k
+\end{array}
+\right]
+\]</span> where <span class="math inline">\(L_i\)</span> is the Laplacian of the <span class="math inline">\(i\)</span>-th connected component.</p>
 <div class="fragment">
 <ul>
 <li>Each <span class="math inline">\(L_i\)</span> has kernel spanned by the constant vector on <span class="math inline">\(V_i\)</span>, so <span class="math inline">\(\mathbf{1}_{V_i}\in{\rm Ker}(L)\)</span>.</li>
 <li>Conversely <span class="math inline">\(Lf=0\)</span> if and only if <span class="math inline">\(L_if=0\)</span> on each block, so <span class="math inline">\(f\)</span> is constant on each <span class="math inline">\(V_i\)</span>.</li>
 <li>Therefore <span class="math inline">\({\rm Ker}(L)={\rm span}(\mathbf{1}_{V_1},\ldots,\mathbf{1}_{V_k})\)</span>.</li>
 </ul>
+<div style="height: 50px;">
+
+</div>
 <div title="Remark">
 <div class="callout callout-caution no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -867,12 +861,18 @@ A = \begin{pmatrix}
 </div>
 </div>
 </section>
-<section id="example-the-complete-graph-k_n" class="slide level2">
+<section id="example-the-complete-graph-k_n" class="slide level2 scrollable">
 <h2>Example: the complete graph <span class="math inline">\(K_n\)</span></h2>
-<p>The Laplacian of <span class="math inline">\(K_n\)</span> is <span class="math display">\[L=nI_n-\mathbf{1}\mathbf{1}^\top=\begin{pmatrix}n-1&amp;-1&amp;\cdots&amp;-1\\-1&amp;n-1&amp;\cdots&amp;-1\\\vdots&amp;&amp;\ddots&amp;\vdots\\-1&amp;-1&amp;\cdots&amp;n-1\end{pmatrix}.\]</span></p>
+<div class="box-yellow">
+<ol type="1">
+<li>Compute the Laplacian <span class="math inline">\(L\)</span> of the complete graph <span class="math inline">\(K_n\)</span>.</li>
+<li>Show that the multiplicity of <span class="math inline">\(0\)</span> is <span class="math inline">\(1\)</span>, as expected: <span class="math inline">\(K_n\)</span> is connected.</li>
+</ol>
+</div>
+<p>The Laplacian of <span class="math inline">\(K_n\)</span> is <span class="math display">\[L=\begin{pmatrix}n-1&amp;-1&amp;\cdots&amp;-1\\-1&amp;n-1&amp;\cdots&amp;-1\\\vdots&amp;&amp;\ddots&amp;\vdots\\-1&amp;-1&amp;\cdots&amp;n-1\end{pmatrix} =nI_n-\mathbf{1}\mathbf{1}^\top.\]</span></p>
 <ul>
 <li>If <span class="math inline">\(Lf=0\)</span>, then <span class="math inline">\(nf=\inr{f,\mathbf{1}}\mathbf{1}\)</span>, so <span class="math inline">\(f\in{\rm span}(\mathbf{1})\)</span>.</li>
-<li>The multiplicity of <span class="math inline">\(0\)</span> is <span class="math inline">\(1\)</span>, as expected: <span class="math inline">\(K_n\)</span> is connected.</li>
+<li>Hence, the multiplicity of <span class="math inline">\(0\)</span> is <span class="math inline">\(1\)</span>.</li>
 </ul>
 </section>
 <section id="why-is-l-called-a-laplacian-newtons-law-of-cooling" class="slide level2 smaller">
@@ -883,7 +883,7 @@ A = \begin{pmatrix}
 <ul>
 <li>Node <span class="math inline">\(i\)</span> exchanges heat only with its neighbours.</li>
 <li>In vector form: <span class="math inline">\(\dfrac{dT}{dt}=-\kappa(D-A)T=-\kappa LT\)</span>.</li>
-<li>Compare with the heat equation <span class="math inline">\(\partial_t u=\alpha\Delta u\)</span>: one identifies <span class="math inline">\(L\)</span> with <span class="math inline">\(-\Delta\)</span>.</li>
+<li>Compare with the heat equation <span class="math inline">\(\partial_t u=\alpha\Delta u\)</span>, where the Laplacian is <span class="math inline">\(\Delta = \partial_1^2 + \partial_2^2 + \cdots + \partial_n^2\)</span>. Hence, one identifies <span class="math inline">\(L\)</span> with <span class="math inline">\(-\Delta\)</span>.</li>
 </ul>
 </div><div class="column" style="width:38%;">
 <div class="quarto-figure quarto-figure-center">
@@ -907,89 +907,97 @@ A = \begin{pmatrix}
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="principle-of-spectral-methods" class="title-slide slide level1 center">
-<h1>Principle of spectral methods</h1>
-
 </section>
 <section id="ideal-setting-disjoint-communities" class="slide level2">
 <h2>Ideal setting: disjoint communities</h2>
+<div style="height: 70px;">
+
+</div>
+<div class="box-blue">
+<p><strong>Ideal case:</strong> the communities are the connected components. They do not interact. Then <span class="math inline">\({\rm Ker}(L)={\rm span}(\mathbf{1}_{V_1},\ldots,\mathbf{1}_{V_k})\)</span> where <span class="math inline">\(\mathbf{1}_{V_i}\)</span> are the indicator vectors of the communities.</p>
+</div>
+<div style="height: 60px;">
+
+</div>
+<div class="box-red">
 <ul>
-<li><strong>Ideal case:</strong> the communities are the connected components. They do not interact.</li>
-<li>Almost never true in practice (a few inter-community edges always exist), but a good guide.</li>
-<li>Then <span class="math inline">\({\rm Ker}(L)={\rm span}(\mathbf{1}_{V_1},\ldots,\mathbf{1}_{V_k})\)</span>.</li>
-<li>The indicators <span class="math inline">\(\mathbf{1}_{V_i}\)</span> are hard to read off <span class="math inline">\(L\)</span>. An <strong>orthonormal basis</strong> <span class="math inline">\(u_1,\ldots,u_k\)</span> of <span class="math inline">\({\rm Ker}(L)\)</span> is easy.</li>
+<li>Almost never true in practice (a few inter-community edges always exist), but a good guide: <br> <span class="blue">replace the kernel of <span class="math inline">\(L\)</span> by the eigenspace of the <span class="math inline">\(k\)</span> smallest eigenvalues</span>.</li>
+<li>Given a linear space spanned by <span class="math inline">\(\mathbf{1}_{V_1},\ldots,\mathbf{1}_{V_k}\)</span>, it is hard to find the indicator vectors <span class="math inline">\(\mathbf{1}_{V_i}\)</span> but an <span class="blue"><strong>orthonormal basis</strong> <span class="math inline">\(u_1,\ldots,u_k\)</span> of the space is easy to find</span>.</li>
 </ul>
+</div>
 </section>
-<section id="the-spectral-method-in-two-steps" class="slide level2 scrollable">
-<h2>The spectral method in two steps</h2>
+<section id="the-spectral-method-for-community-detection" class="slide level2 scrollable">
+<h2>The spectral method for community detection</h2>
 <ol type="1">
+<li>Find an orthonormal basis <span class="math inline">\(u_1,\ldots,u_k\)</span> of <span class="math inline">\(k\)</span> eigenvectors for the <span class="math inline">\(k\)</span> smallest eigenvalues of <span class="math inline">\(L\)</span> (<span class="math inline">\(k\)</span> is a given parameter)</li>
 <li>Cluster the <span class="math inline">\(|V|\)</span> <strong>row vectors</strong> <span class="math inline">\(y_i\in\R^k\)</span> of the matrix <span class="math inline">\([u_1|\cdots|u_k]\)</span> into <span class="math inline">\(k\)</span> clusters <span class="math inline">\(C_1,\ldots,C_k\)</span>.</li>
 <li>Return <span class="math inline">\(V_p=\{i\in V:y_i\in C_p\}\)</span>. These are the detected communities.</li>
 </ol>
 <div class="fragment">
-<div title="Idea: cluster the rows, not the nodes">
+<div title="Idea: cluster the rows =  cluster the nodes">
 <div class="callout callout-tip no-icon callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
-<p><strong>Idea: cluster the rows, not the nodes</strong></p>
+<p><strong>Idea: cluster the rows = cluster the nodes</strong></p>
 </div>
 <div class="callout-content">
-<p>Each node <span class="math inline">\(i\)</span> is represented by the <span class="math inline">\(i\)</span>-th row of the eigenbasis matrix. Clustering these rows clusters the nodes.</p>
+<p>Each node <span class="math inline">\(i\)</span> is represented by the <span class="math inline">\(i\)</span>-th row of the <span class="math inline">\(n\times k\)</span> eigenbasis matrix <span class="math inline">\([u_1|\cdots|u_k]\)</span>. Clustering these rows clusters the nodes.</p>
 </div>
 </div>
 </div>
 </div>
-</div>
-</section>
-<section id="why-the-rotation-does-not-destroy-the-clusters" class="slide level2 smaller">
-<h2>Why the rotation does not destroy the clusters</h2>
-<ul>
-<li><span class="math inline">\(\{\mathbf{1}_{V_p}/\sqrt{|V_p|}\}_p\)</span> is an orthonormal basis of <span class="math inline">\({\rm Ker}(L)\)</span>.</li>
-<li>So is <span class="math inline">\(\{u_1,\ldots,u_k\}\)</span>: there is <span class="math inline">\(R\in{\rm O}(k)\)</span> with <span class="math display">\[[u_1|\cdots|u_k]=\big[\mathbf{1}_{V_1}/\sqrt{|V_1|}|\cdots|\mathbf{1}_{V_k}/\sqrt{|V_k|}\big]R.\]</span></li>
-<li>The rows of the indicator matrix take only <span class="math inline">\(k\)</span> distinct values. A <span class="math inline">\(k\)</span>-means on these rows recovers the components <strong>exactly</strong>.</li>
-<li>A rotation of <span class="math inline">\(\R^k\)</span> preserves this clustering.</li>
-</ul>
-<div class="fragment">
-<p><strong>In practice</strong> <span class="math inline">\(G\)</span> is not a disjoint union: look at the eigenspace of the <strong><span class="math inline">\(k\)</span> smallest eigenvalues</strong>, not only the kernel. Choose <span class="math inline">\(k\)</span> by an elbow in the spectrum, or by a modularity function.</p>
+<p><strong>Rem.:</strong> In the ideal disjoint communities setting where the <span class="math inline">\(u_i\)</span>’s are the <span class="math inline">\(k\)</span> normalized indicator of communities vectors, the spectral method recovers the communities exactly.</p>
+<!-- ## Why the rotation does not destroy the clusters {.smaller}
+
+- $\{\mathbf{1}_{V_p}/\sqrt{|V_p|}\}_p$ is an orthonormal basis of ${\rm Ker}(L)$.
+- So is $\{u_1,\ldots,u_k\}$: there is $R\in{\rm O}(k)$ with
+$$[u_1|\cdots|u_k]=\big[\mathbf{1}_{V_1}/\sqrt{|V_1|}|\cdots|\mathbf{1}_{V_k}/\sqrt{|V_k|}\big]R.$$
+- The rows of the indicator matrix take only $k$ distinct values. A $k$-means on these rows recovers the components **exactly**.
+- A rotation of $\R^k$ preserves this clustering.
+
+. . .
+
+**In practice** $G$ is not a disjoint union: look at the eigenspace of the **$k$ smallest eigenvalues**, not only the kernel. Choose $k$ by an elbow in the spectrum, or by a modularity function. -->
 </div>
 </section>
 <section id="graph-cuts-and-modularity" class="slide level2 smaller">
 <h2>Graph cuts and modularity</h2>
-<p>Detecting communities <span class="math inline">\(\iff\)</span> finding a partition that <strong>minimizes the inter-community weight</strong> while keeping the communities <strong>large enough</strong>.</p>
-<ul>
-<li>A <strong>cut</strong> is a partition of <span class="math inline">\(V\)</span>.</li>
-<li>A <strong>modularity</strong> quantifies intra- versus inter-community mass.</li>
-</ul>
-<p>For <span class="math inline">\(A,B\subset V\)</span>, <span class="math display">\[W(A,B)=\sum_{\substack{(i,j)\in E\\(i,j)\in A\times B}}(W_{ij}+W_{ji})=2\sum_{\substack{(i,j)\in E\\(i,j)\in A\times B}}W_{ij}.\]</span></p>
-<p>The <strong>cut</strong> of a partition <span class="math inline">\(V_1\sqcup\cdots\sqcup V_k\)</span> is <span class="math display">\[{\rm cut}(V_1,\ldots,V_k)=\frac12\sum_{i=1}^k W(V_i,V_i^c).\]</span></p>
+<div class="box-green">
+<p>Next, let us write the spectral method as an algorithm for a <strong>convex relaxation</strong> problem derived from a modularity minimization problem.</p>
+</div>
+<div class="fragment">
+<div class="box-red">
+<p>Detecting communities <span class="math inline">\(\iff\)</span> finding a <em>cut</em> (ie a partition of the nodes) that <strong>minimizes the inter-community weight</strong> while keeping the communities <strong>large enough</strong>.</p>
+</div>
+<div class="box-blue">
+<p>A first <strong>modularity</strong> function (that does not keep communities’ sizes large enough): the <code>cut</code> modularity function of a partition <span class="math inline">\(V_1\sqcup\cdots\sqcup V_k = V\)</span> is defined as: <span class="math display">\[{\rm cut}(V_1,\ldots,V_k)=\frac12\sum_{i=1}^k W(V_i,V_i^c)\]</span> where for all <span class="math inline">\(A,B\subset V\)</span>, <span class="math display">\[W(A,B)=\sum_{\substack{(i,j)\in E\\(i,j)\in A\times B}}(W_{ij}+W_{ji})=2\sum_{\substack{(i,j)\in E\\(i,j)\in A\times B}}W_{ij}.\]</span></p>
+</div>
+</div>
 </section>
-<section id="the-mincut-problem" class="slide level2 smaller">
-<h2>The mincut problem</h2>
-<p>For two communities, encode <span class="math inline">\(V_1\)</span> by <span class="math inline">\(x\in\{0,1\}^{|V|}\)</span>: <span class="math display">\[{\rm cut}(V_1,V_1^c)=2\sum_{(i,j)\in E}x_i W_{ij}(1-x_j).\]</span></p>
-<p><span class="math display">\[\min_{x\in\{0,1\}^{|V|}}\sum_{(i,j)\in E}x_i W_{ij}(1-x_j).\]</span></p>
+<section id="the-mincut-problem-over-two-communities" class="slide level2 smaller">
+<h2>The mincut problem over two communities</h2>
+<div class="box-blue">
+<p>The mincut problem over two communities is: <span class="math display">\[\min_{V_1\subset V}{\rm cut}(V_1,V_1^c).\]</span></p>
+</div>
+<div class="fragment">
+<div class="box-yellow">
+<p>Show that the mincut problem over two communities is equivalent to: <span class="math display">\[\min_{x\in\{0,1\}^{|V|}}\sum_{(i,j)\in E}x_i W_{ij}(1-x_j).\]</span></p>
+</div>
+</div>
+<div class="fragment">
 <ul>
 <li>Solvable by the <strong>Stoer–Wagner</strong> algorithm.</li>
 <li>In practice it often returns a singleton: the node of <strong>smallest degree</strong>.</li>
 </ul>
+</div>
 <div class="fragment">
-<div title="Remark">
-<div class="callout callout-caution no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Remark</strong></p>
-</div>
-<div class="callout-content">
-<p>A singleton is not a community. One must force the parts to have sufficient size.</p>
-</div>
-</div>
-</div>
+<div class="box-red">
+<p>A singleton is not a community. One must force the communities to have sufficient size <br> <span class="math inline">\(\Rightarrow\)</span> we introduce the <span class="blue">RatioCut</span> modularity function that forces communities to have sufficient size.</p>
 </div>
 </div>
 </section>
-<section id="ratiocut" class="slide level2">
-<h2>RatioCut</h2>
+<section id="the-ratiocut-modularity-function" class="slide level2">
+<h2>The RatioCut modularity function</h2>
 <div title="Definition (RatioCut)">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -997,20 +1005,21 @@ A = \begin{pmatrix}
 <p><strong>Definition (RatioCut)</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="math display">\[{\rm RatioCut}(V_1,\ldots,V_k)=\frac12\sum_{i=1}^k\frac{W(V_i,V_i^c)}{|V_i|}.\]</span></p>
+<p><span class="math display">\[{\rm RatioCut}(V_1,\ldots,V_k)=\frac12\sum_{i=1}^k\frac{W(V_i,V_i^c)}{\color{red}{|V_i|}}.\]</span></p>
 </div>
 </div>
 </div>
 </div>
 <ul>
 <li>The factor <span class="math inline">\(1/|V_i|\)</span> penalizes small communities.</li>
-<li>Minimizing RatioCut over <span class="math inline">\(\cP_k(V)\)</span> is <strong>NP-hard</strong> in general.</li>
-<li>We rewrite it as a vector (then matrix) problem and <strong>convexify the constraint</strong>. The relaxation is the spectral method.</li>
+<li>Minimizing RatioCut over all partitions of <span class="math inline">\(V\)</span> is <strong>NP-hard</strong> in general.</li>
+<li>We rewrite it as a vector optimization problem for the problem of finding two communities (then as a matrix problem for the general <span class="math inline">\(k\)</span> communities case).</li>
+<li>The convex relaxation of this problem will coincide with the spectral method.</li>
 </ul>
 </section>
-<section id="membership-vector-for-two-communities" class="slide level2 smaller scrollable">
+<section id="membership-vector-for-two-communities" class="slide level2 smaller">
 <h2>Membership vector for two communities</h2>
-<p>For <span class="math inline">\(V_1\subset V\)</span>, set <span class="math display">\[f_i^{V_1}=\begin{cases}\sqrt{|V_1^c|/|V_1|}&amp; \text{if }i\in V_1,\\[4pt]-\sqrt{|V_1|/|V_1^c|}&amp; \text{if }i\notin V_1.\end{cases}\]</span></p>
+<p>For <span class="math inline">\(V_1\subset V\)</span>, we define the <strong>membership vector</strong> as <span class="math inline">\(f^{V_1} = (f_i^{V_1})_{i\in V}\)</span> with <span class="math inline">\(i\)</span>th coordinate given by <span class="math display">\[f_i^{V_1}=\begin{cases}\sqrt{|V_1^c|/|V_1|}&amp; \text{if }i\in V_1,\\[4pt]-\sqrt{|V_1|/|V_1^c|}&amp; \text{if }i\notin V_1.\end{cases}\]</span></p>
 <div title="Proposition">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
 <div class="callout-body">
@@ -1018,37 +1027,47 @@ A = \begin{pmatrix}
 <p><strong>Proposition</strong></p>
 </div>
 <div class="callout-content">
-<p>Let <span class="math inline">\(L\)</span> be the Laplacian of an undirected weighted graph, and <span class="math inline">\(n=|V|\)</span>. Then</p>
-<ol type="1">
-<li><span class="math inline">\(\inr{f^{V_1},\mathbf{1}}=0\)</span> and <span class="math inline">\(\norm{f^{V_1}}_2^2=n\)</span>;</li>
-<li><span class="math inline">\((f^{V_1})^\top L f^{V_1}=n\,{\rm RatioCut}(V_1,V_1^c)\)</span>.</li>
-</ol>
+<p>Let <span class="math inline">\(L\)</span> be the Laplacian of an undirected weighted graph, and <span class="math inline">\(n=|V|\)</span>. Then for all <span class="math inline">\(V_1\subset V\)</span>, <span class="math inline">\(\inr{f^{V_1},\mathbf{1}}=0\)</span> and <span class="math inline">\(\norm{f^{V_1}}_2^2=n\)</span>. Moreover, <span class="math inline">\((f^{V_1})^\top L f^{V_1}=n\,{\rm RatioCut}(V_1,V_1^c)\)</span>.</p>
 </div>
 </div>
 </div>
 </div>
-<ul>
-<li>So minimizing RatioCut <span class="math inline">\(\iff\)</span> minimizing <span class="math inline">\(f^\top Lf\)</span> over these discrete vectors <span class="math inline">\(f^{V_1}\)</span>.</li>
-</ul>
+<div style="height: 50px;">
+
+</div>
+<div class="fragment">
+<div class="box-red">
+<p>Minimizing RatioCut is equivalent to minimizing <span class="math inline">\(f\to f^\top Lf\)</span> over these discrete vectors <span class="math inline">\(f^{V_1}\)</span>: <span class="math display">\[
+\min_{V_1\subset V}\left((f^{V_1})^\top L f^{V_1} \right) =
+\min_{V_1\subset V}\left((f^{V_1})^\top L f^{V_1}: \inr{f^{V_1},\mathbf{1}}=0,\,\norm{f^{V_1}}_2^2=n\right).
+\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<div class="box-yellow">
+<p>Is it a convex optimization problem? What could we do to make it convex?</p>
+</div>
+</div>
 </section>
-<section id="proof-sketch-of-the-ratiocut-identity" class="slide level2 smaller">
-<h2>Proof sketch of the RatioCut identity</h2>
-<p>From the quadratic form, <span class="math display">\[(f^{V_1})^\top Lf^{V_1}=\frac12\sum_{(i,j)\in E}W_{ij}(f_i^{V_1}-f_j^{V_1})^2.\]</span></p>
-<ul>
-<li>The difference <span class="math inline">\(f_i^{V_1}-f_j^{V_1}\)</span> is nonzero only across the cut.</li>
-<li>On a cut edge, <span class="math display">\[\Big(\sqrt{\tfrac{|V_1^c|}{|V_1|}}+\sqrt{\tfrac{|V_1|}{|V_1^c|}}\Big)^2=\frac{n}{|V_1|}+\frac{n}{|V_1^c|}.\]</span></li>
-<li>Summing both orientations of the cut gives <span class="math inline">\(n\,{\rm RatioCut}(V_1,V_1^c)\)</span>.</li>
-<li>The two constraints: <span class="math inline">\(\norm{f^{V_1}}_2^2=|V_1|+|V_1^c|=n\)</span> and <span class="math inline">\(\inr{f^{V_1},\mathbf{1}}=0\)</span>. <span class="math inline">\(\square\)</span></li>
-</ul>
-</section>
-<section id="convex-relaxation-for-k2" class="slide level2 smaller">
-<h2>Convex relaxation for <span class="math inline">\(k=2\)</span></h2>
-<p>Three equivalent <strong>discrete</strong> problems: <span class="math display">\[\min_{V_1\subset V}(f^{V_1})^\top Lf^{V_1},\qquad\min_{V_1\subset V}\big((f^{V_1})^\top Lf^{V_1}:\norm{f^{V_1}}_2^2=n,\,\inr{f^{V_1},\mathbf{1}}=0\big),\]</span> and <span class="math inline">\(\min_{V_1}{\rm RatioCut}(V_1,V_1^c)\)</span>. All are NP-hard.</p>
+<section id="convex-relaxation-for-k2-communities" class="slide level2 smaller">
+<h2>Convex relaxation for <span class="math inline">\(k=2\)</span> communities</h2>
+<p>Three equivalent <strong>discrete</strong> problems: <span class="math display">\[
+\min_{V_1\subset V}(f^{V_1})^\top Lf^{V_1},\qquad\min_{V_1\subset V}\big((f^{V_1})^\top Lf^{V_1}:\norm{f^{V_1}}_2^2=n,\,\inr{f^{V_1},\mathbf{1}}=0\big), \qquad \min_{V_1\subset V}{\rm RatioCut}(V_1,V_1^c).
+\]</span> All are NP-hard.</p>
 <ul>
 <li>The map <span class="math inline">\(f\mapsto f^\top Lf\)</span> is <strong>convex</strong> (<span class="math inline">\({\rm Hess}=2L\succeq 0\)</span>).</li>
-<li>The difficulty is the discrete constraint <span class="math inline">\(f=f^{V_1}\)</span>.</li>
-<li><strong>Relax</strong> it to <span class="math inline">\(f\in\R^{|V|}\)</span>: <span class="math display">\[\min_{f\in\R^{|V|}}\big(f^\top Lf:\norm{f}_2^2=1,\,\inr{f,\mathbf{1}}=0\big).\]</span></li>
+<li>The difficulty is the discrete constraint <span class="math inline">\(f=f^{V_1}\)</span> or <span class="math inline">\(V_1\subset V\)</span>.</li>
 </ul>
+<div class="fragment">
+<div style="height: 70px;">
+
+</div>
+<div class="box-red">
+<p><strong>Convex relaxation:</strong> Drop the <em>none convex</em> constraint <span class="math inline">\(f=f^{V_1}\)</span> to <span class="math inline">\(f\in\R^{|V|}\)</span>: <span class="math display">\[
+\min_{f\in\R^{|V|}}\big(f^\top Lf:\norm{f}_2^2=1,\,\inr{f,\mathbf{1}}=0\big).
+\]</span></p>
+</div>
+</div>
 </section>
 <section id="the-fiedler-vector" class="slide level2 smaller">
 <h2>The Fiedler vector</h2>
@@ -1063,6 +1082,9 @@ A = \begin{pmatrix}
 </div>
 </div>
 </div>
+</div>
+<div style="height: 50px;">
+
 </div>
 <div title="Proposition">
 <div class="callout callout-note no-icon callout-titled callout-style-default">
@@ -1702,28 +1724,6 @@ Figure&nbsp;1: Adjacency matrix <span class="math inline">\(A=A^{\sim}+A^{\not\s
 </div>
 </div>
 </div></div>
-</section>
-<section id="dual-certificate-for-basis-pursuit" class="slide level2 smaller">
-<h2>Dual certificate for basis pursuit</h2>
-<p>The same idea applies to <span class="math display">\[\min\big(\norm{t}_1:At=y\big).\]</span></p>
-<ul>
-<li>Subdifferential: <span class="math inline">\(0\in\partial^-\norm{\cdot}_1(x^*)+\mathrm{Im}(A^\top)\)</span> iff there is <span class="math inline">\(\beta^*\)</span> with <span class="math display">\[\norm{A^\top\beta^*}_\infty\leq 1,\qquad (A^\top\beta^*)_I={\rm sgn}(x^*_I),\quad I={\rm supp}(x^*).\]</span></li>
-<li>Lagrangian dual: <span class="math inline">\(\max\big(\inr{\beta,y}:\norm{A^\top\beta}_\infty\leq 1\big)\)</span>.</li>
-<li>Weak duality: <span class="math inline">\(\norm{t}_1\geq\inr{\beta,y}\)</span>. Equality plus dual feasibility certifies <span class="math inline">\(t^*\)</span>.</li>
-</ul>
-<p>A <strong>strict</strong> certificate rules out every other feasible <span class="math inline">\(t\)</span>: that is uniqueness.</p>
-<div title="Proposition">
-<div class="callout callout-note no-icon callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<p><strong>Proposition</strong></p>
-</div>
-<div class="callout-content">
-<p>Under strong duality, if <span class="math inline">\(\lambda^*\)</span> solves the dual then <span class="math inline">\(x^*\)</span> solves the primal if and only if <span class="math inline">\(\varphi(x^*)=\psi(\lambda^*)\)</span>.</p>
-</div>
-</div>
-</div>
-</div>
 
 
 </section></section>
