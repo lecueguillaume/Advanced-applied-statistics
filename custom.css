@@ -28,12 +28,6 @@
   background-color: #fef2f2 !important; /* Soft red */
 }
 
-/* Ensure ordered lists have enough clearance from the left edge */
-.reveal ol {
-  padding-left: 2em !important;
-  margin-left: 0 !important;
-}
-
 .red {
   color: red;
 }
@@ -128,6 +122,29 @@ figcaption {
   margin-bottom: 0 !important;
 }
 
+
+/* Global list clearance */
 .reveal ul {
-  list-style-position: inside;
+  list-style-position: outside !important;
+  padding-left: 1.6em !important;
+  margin-left: 0.5em !important;
+}
+
+.reveal ol {
+  list-style-position: outside !important;
+  padding-left: 2.2em !important; /* Extra room for numeric markers 1., 2., etc. */
+  margin-left: 0.5em !important;
+}
+
+/* Ensure lists inside callout blocks and colored attention boxes have safe clearance from borders and left bands */
+.reveal .callout ol,
+.reveal [class*="box-"] ol {
+  padding-left: 2.4em !important;
+  margin-left: 0.6em !important;
+}
+
+.reveal .callout ul,
+.reveal [class*="box-"] ul {
+  padding-left: 1.8em !important;
+  margin-left: 0.6em !important;
 }

@@ -15,7 +15,6 @@ format:
 - [Compressed Sensing](compressed_sensing.html)
 - [Matrix completion and recommendation systems](recommendation_systems.html)
 - [Matrix lifting and SDP relaxation](matrix_lifting_SDP_relaxation.html)
-- [Community detection](community_detection.html)
 
 
 ## Lecture notes

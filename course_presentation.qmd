@@ -78,7 +78,7 @@ Deadline of the submission is a week after the last lesson.
 
 ## Course evaluation -- 3/3
 
-1. The [final grade]{.blue} will be based solely on this project submission. 
+1. The [final grade]{.blue} will be based solely on this project (deliverable + 1-to-1 interview + presentation if necessary). 
 
 2. Students should [prepare their project at home]{.blue}.
 

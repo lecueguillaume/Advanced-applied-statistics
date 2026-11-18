@@ -382,10 +382,17 @@ Given an undirected and unweighted graph $G=(V,E)$, a **cut** is a partition $S\
 The **Max-Cut problem** is to find a cut that maximizes the number of edges across the cut.
 :::
 
+::: {style="height: 50px;"}
+:::
+
+:::: {.columns style="align-items: center;"}
+
+::: {.column width="50%"}
+
 ```{tikz}
 %| echo: false
 %| fig-align: center
-%| out-width: "40%"
+%| out-width: "60%"
 
 \usetikzlibrary{shapes, calc, positioning}
 \begin{tikzpicture}[
@@ -439,8 +446,12 @@ The **Max-Cut problem** is to find a cut that maximizes the number of edges acro
 
 \end{tikzpicture}
 ```
+:::
 
+::: {.column width="50%" style="font-size: 0.9em;"}
 **Example in Frequency Allocation:** Nodes are cellular towers, and edges represent overlapping broadcast radii (interference zones) (possibly weighted by the population density in that overlap). Finding the Max-Cut assigns the towers to Frequency 1 (set $S$) and Frequency 2 (set $S^c$) such that the maximum amount of interference is neutralized.
+:::
+::::  
 
 
 ## Exercise: Finding the Max-Cut
@@ -601,7 +612,7 @@ where $\alpha_{GW} = \frac{2}{\pi}\min_{0\leq \theta\leq \pi}\frac{\theta}{1-\co
 There are many such algorithms in computer science. The class of such algorithms with polynomial time complexity is called BPP (Bounded-error Probabilistic Polynomial time). It is believed that BPP = P.
 :::
 
-## Sketch of Proof of the Goemans-Williamson Theorem {style="font-size: 0.9em;"}
+## Sketch of Proof of the Goemans-Williamson Theorem {style="font-size: 0.8em;"}
 
 The proof relies on evaluating the expected contribution of a single pair $(i,j)$ and comparing it to the SDP's contribution.
 
@@ -650,47 +661,32 @@ $$\frac14\sum_{i,j}A_{ij}(1- x^{\circ}_i x^{\circ}_j) > \alpha_{GW}\cdot{\rm OPT
 :::
 
 
-## Lifting linear and quadratic constraints {.smaller}
-
-The constraint $\inr{x,\mathbf{1}}=0$ is **linear** in $x$, hence not a linear function of $xx^\top$. One can still lift it by adding one coordinate:
-$$\begin{pmatrix}1\\x\end{pmatrix}\rightsquigarrow Z=\begin{pmatrix}1&x^\top\\x&xx^\top\end{pmatrix}.$$
-
-The equal-size community problem becomes the SDP
-$$\min\big(\inr{L,Z}:Z\succeq 0,\,Z_{00}=1,\,Z_{ii}=1,\,\inr{Z,A}=0\big),$$
-after dropping the rank. Linear terms live in the first row and column of $Z$.
-
-. . .
-
-::: {.callout-tip title="Idea: one extra dimension" icon=false}
-Quadratic terms live in $xx^\top$. Linear terms appear as soon as one lifts $(1,x)$ instead of $x$.
-:::
 
 
-
-
-# Introduction
-
-
-## The community detection problem (1/2)
-
-- [Nodes]{.blue} are people; an [edge]{.blue} is a connection (messages, friendship, collaboration).
-- **Goal:** find groups of nodes that are more densely connected to one another than to the rest of the graph.
-- These groups may be groups of friends, or people who share interests.
-- Once the communities are found, we may: 
-
-1. Look for **influencers** and send them advertisements, or approach them directly.
-
-2.  Understand the **common features** of the nodes inside this community to understand how the community was created and what share the people inside of it.
-
-
-
-## The community detection problem (2/2)
+# Convex relaxation for community detection
 
 ![](images/community_detection.png){width=46% fig-align="center" fig-alt="Community detection network diagram"}
 
-::: {.callout-tip title="Idea: density, not just connectivity" icon=false style="font-size: 0.85em;"}
-A community is not a connected component. It is a set of nodes with a **higher density of internal edges** than of edges leaving the set.
+## The community detection problem
+
+:::{.box-blue}
+**Goal:** find groups of nodes that are more densely connected to one another than to the rest of the graph.
 :::
+
+:::{style="font-size: 0.8em;"}
+Once the communities are found, we may: 
+
+- Look for **influencers** (ie nodes with high centrality) and send them advertisements, or approach them directly.
+
+- Look for **connectors** (ie nodes with high betweenness centrality).
+
+-  Understand the **common features** of the nodes inside this community to understand how the community was created based on what share the people inside of it. Then target the entire community with an advertisement based on the common features or use it for **fraud detection**, identifies suspicious behavior on the network (like bot activity or fake accounts).
+
+- Measure **polarization** between the communities (how dense the edges are within the community compared to the edges between the communities).
+
+**Applications:** recommendation systems, fraud detection, social media analysis, protein function prediction, topic modeling, etc.
+:::
+
 
 ## Connectivity and connected components {.smaller}
 
@@ -705,8 +701,6 @@ A nontrivial connected partition is an **ideal** setting: the communities do not
 :::
 
 
-# The Laplacian of a graph
-
 ## Definition of the Laplacian {.smaller}
 
 ::: {.callout-note title="Definition (Laplacian)" icon=false}
@@ -715,9 +709,14 @@ $$L=D-A,\qquad D={\rm diag}(d),\qquad d_i=\sum_{j\in V}A_{ij}$$
 where $d_i$ is the **degree** of node $i$.
 :::
 
-- Other definitions exist; we use this one throughout.
-- If $G$ is undirected, then $L$ is **symmetric**: the spectral theorem applies, and $L=PDP^\top$ with $P$ orthogonal.
-- The **spectrum** of $L$ is the key object of spectral community detection.
+::: {style="height: 50px;"}
+:::
+
+:::{.box-blue}
+If $G$ is undirected, then $L$ is **symmetric**: the spectral theorem applies, and $L=PDP^\top$ with $P$ orthogonal.
+
+The **spectrum** of $L$ is the key object behind 'spectral community detection algorithms'.
+:::
 
 ## Quadratic form and first properties {.smaller}
 
@@ -745,7 +744,10 @@ For an undirected weighted graph with nonnegative weights, the multiplicity of t
 Moreover ${\rm Ker}(L)$ is spanned by $\mathbf{1}_{V_1},\ldots,\mathbf{1}_{V_k}$, where $V_1\sqcup\cdots\sqcup V_k$ is the partition of $V$ into connected components.
 :::
 
-::: {.callout-tip title="Idea: the kernel of $L$ sees the communities" icon=false}
+::: {style="height: 50px;"}
+:::
+
+::: {.callout-tip title="Idea: the kernel of $L$ sees the communities"}
 In the ideal case, the indicators of the communities are eigenvectors for $\lambda=0$. Spectral methods start from this fact.
 :::
 
@@ -763,7 +765,20 @@ $$\sum_{(i,j)\in E}W_{ij}(f_i-f_j)^2=0.$$
 ## Proof sketch: several components {.smaller}
 
 Up to reordering the nodes,
-$$L=\begin{pmatrix}L_1&&\\&\ddots&\\&&L_k\end{pmatrix},$$
+$$
+L=
+\left[
+\begin{array}{c|c|c|c}
+L_1& 0 & \cdots & 0 \\
+\hline
+0 & L_2 & \cdots & 0 \\
+\hline
+\cdots & \cdots & \ddots & 0 \\
+\hline
+0 & 0 & \cdots & L_k
+\end{array}
+\right]
+$$
 where $L_i$ is the Laplacian of the $i$-th connected component.
 
 . . .
@@ -772,17 +787,25 @@ where $L_i$ is the Laplacian of the $i$-th connected component.
 - Conversely $Lf=0$ if and only if $L_if=0$ on each block, so $f$ is constant on each $V_i$.
 - Therefore ${\rm Ker}(L)={\rm span}(\mathbf{1}_{V_1},\ldots,\mathbf{1}_{V_k})$.
 
+::: {style="height: 50px;"}
+:::
+
 ::: {.callout-caution title="Remark" icon=false}
 The same statement holds for unweighted undirected graphs, by taking $W=(1)_{i,j}$.
 :::
 
 ## Example: the complete graph $K_n$
 
+:::{.box-yellow}
+1. Compute the Laplacian $L$ of the complete graph $K_n$.
+2. Show that the multiplicity of $0$ is $1$, as expected: $K_n$ is connected.
+:::
+
 The Laplacian of $K_n$ is
-$$L=nI_n-\mathbf{1}\mathbf{1}^\top=\begin{pmatrix}n-1&-1&\cdots&-1\\-1&n-1&\cdots&-1\\\vdots&&\ddots&\vdots\\-1&-1&\cdots&n-1\end{pmatrix}.$$
+$$L=\begin{pmatrix}n-1&-1&\cdots&-1\\-1&n-1&\cdots&-1\\\vdots&&\ddots&\vdots\\-1&-1&\cdots&n-1\end{pmatrix} =nI_n-\mathbf{1}\mathbf{1}^\top.$$
 
 - If $Lf=0$, then $nf=\inr{f,\mathbf{1}}\mathbf{1}$, so $f\in{\rm span}(\mathbf{1})$.
-- The multiplicity of $0$ is $1$, as expected: $K_n$ is connected.
+- Hence, the multiplicity of $0$ is $1$.
 
 ## Why is $L$ called a Laplacian? Newton's law of cooling {.smaller}
 
@@ -793,7 +816,7 @@ $$\frac{dT_i}{dt}=-\kappa\sum_{j\in V}A_{ij}(T_i-T_j).$$
 
 - Node $i$ exchanges heat only with its neighbours.
 - In vector form: $\dfrac{dT}{dt}=-\kappa(D-A)T=-\kappa LT$.
-- Compare with the heat equation $\partial_t u=\alpha\Delta u$: one identifies $L$ with $-\Delta$.
+- Compare with the heat equation $\partial_t u=\alpha\Delta u$, where the Laplacian is $\Delta = \partial_1^2 + \partial_2^2 + \cdots + \partial_n^2$. Hence, one identifies $L$ with $-\Delta$.
 :::
 
 
@@ -810,27 +833,39 @@ $$\frac{dT_i}{dt}=-\kappa\sum_{j\in V}A_{ij}(T_i-T_j).$$
 The graph Laplacian is the *discrete analog* of the Laplacian of the heat equation.
 :::
 
-# Principle of spectral methods
-
 ## Ideal setting: disjoint communities
 
-- **Ideal case:** the communities are the connected components. They do not interact.
-- Almost never true in practice (a few inter-community edges always exist), but a good guide.
-- Then ${\rm Ker}(L)={\rm span}(\mathbf{1}_{V_1},\ldots,\mathbf{1}_{V_k})$.
-- The indicators $\mathbf{1}_{V_i}$ are hard to read off $L$. An **orthonormal basis** $u_1,\ldots,u_k$ of ${\rm Ker}(L)$ is easy.
+::: {style="height: 70px;"}
+:::
 
-## The spectral method in two steps
+:::{.box-blue}
+**Ideal case:** the communities are the connected components. They do not interact. Then ${\rm Ker}(L)={\rm span}(\mathbf{1}_{V_1},\ldots,\mathbf{1}_{V_k})$ where $\mathbf{1}_{V_i}$ are the  indicator vectors of the communities.
+:::
 
+::: {style="height: 60px;"}
+:::
+
+:::{.box-red}
+- Almost never true in practice (a few inter-community edges always exist), but a good guide: <br> [replace the kernel of $L$ by the eigenspace of the $k$ smallest eigenvalues]{.blue}.
+- Given a linear space spanned by $\mathbf{1}_{V_1},\ldots,\mathbf{1}_{V_k}$, it is hard to find the indicator vectors $\mathbf{1}_{V_i}$ but an [**orthonormal basis** $u_1,\ldots,u_k$ of the space is easy to find]{.blue}.
+:::
+
+
+## The spectral method for community detection
+
+1. Find an orthonormal basis $u_1,\ldots,u_k$ of $k$ eigenvectors for the $k$ smallest eigenvalues of $L$ ($k$ is a given parameter)
 1. Cluster the $|V|$ **row vectors** $y_i\in\R^k$ of the matrix $[u_1|\cdots|u_k]$ into $k$ clusters $C_1,\ldots,C_k$.
 2. Return $V_p=\{i\in V:y_i\in C_p\}$. These are the detected communities.
 
 . . .
 
-::: {.callout-tip title="Idea: cluster the rows, not the nodes" icon=false}
-Each node $i$ is represented by the $i$-th row of the eigenbasis matrix. Clustering these rows clusters the nodes.
+::: {.callout-tip title="Idea: cluster the rows =  cluster the nodes" icon=false}
+Each node $i$ is represented by the $i$-th row of the $n\times k$ eigenbasis matrix $[u_1|\cdots|u_k]$. Clustering these rows clusters the nodes.
 :::
 
-## Why the rotation does not destroy the clusters {.smaller}
+**Rem.:** In the ideal disjoint communities setting where the $u_i$'s are the $k$ normalized indicator of communities vectors, the spectral method recovers the communities exactly.
+
+<!-- ## Why the rotation does not destroy the clusters {.smaller}
 
 - $\{\mathbf{1}_{V_p}/\sqrt{|V_p|}\}_p$ is an orthonormal basis of ${\rm Ker}(L)$.
 - So is $\{u_1,\ldots,u_k\}$: there is $R\in{\rm O}(k)$ with
@@ -840,87 +875,126 @@ $$[u_1|\cdots|u_k]=\big[\mathbf{1}_{V_1}/\sqrt{|V_1|}|\cdots|\mathbf{1}_{V_k}/\s
 
 . . .
 
-**In practice** $G$ is not a disjoint union: look at the eigenspace of the **$k$ smallest eigenvalues**, not only the kernel. Choose $k$ by an elbow in the spectrum, or by a modularity function.
+**In practice** $G$ is not a disjoint union: look at the eigenspace of the **$k$ smallest eigenvalues**, not only the kernel. Choose $k$ by an elbow in the spectrum, or by a modularity function. -->
 
 ## Graph cuts and modularity {.smaller}
 
-Detecting communities $\iff$ finding a partition that **minimizes the inter-community weight** while keeping the communities **large enough**.
+:::{.box-green}
+Next, let us write the spectral method as an algorithm for a **convex relaxation** problem derived from a modularity minimization problem.
+:::
 
-- A **cut** is a partition of $V$.
-- A **modularity** quantifies intra- versus inter-community mass.
+. . .
 
-For $A,B\subset V$,
+:::{.box-red}
+Detecting communities $\iff$ finding a *cut* (ie a partition of the nodes) that **minimizes the inter-community weight** while keeping the communities **large enough**.
+:::
+
+:::{.box-blue} 
+A first **modularity** function (that does not keep communities' sizes large enough): the `cut` modularity function of a partition $V_1\sqcup\cdots\sqcup V_k = V$ is defined as:
+$${\rm cut}(V_1,\ldots,V_k)=\frac12\sum_{i=1}^k W(V_i,V_i^c)$$
+where for all $A,B\subset V$,
 $$W(A,B)=\sum_{\substack{(i,j)\in E\\(i,j)\in A\times B}}(W_{ij}+W_{ji})=2\sum_{\substack{(i,j)\in E\\(i,j)\in A\times B}}W_{ij}.$$
+:::
 
-The **cut** of a partition $V_1\sqcup\cdots\sqcup V_k$ is
-$${\rm cut}(V_1,\ldots,V_k)=\frac12\sum_{i=1}^k W(V_i,V_i^c).$$
 
-## The mincut problem {.smaller}
 
-For two communities, encode $V_1$ by $x\in\{0,1\}^{|V|}$:
-$${\rm cut}(V_1,V_1^c)=2\sum_{(i,j)\in E}x_i W_{ij}(1-x_j).$$
+## The mincut problem over two communities {.smaller}
 
+:::{.box-blue}
+The mincut problem over two communities is:
+$$\min_{V_1\subset V}{\rm cut}(V_1,V_1^c).$$
+:::
+
+. . .
+
+
+:::{.box-yellow}
+Show that the mincut problem over two communities is equivalent to:
 $$\min_{x\in\{0,1\}^{|V|}}\sum_{(i,j)\in E}x_i W_{ij}(1-x_j).$$
+:::
+
+. . .
 
 - Solvable by the **Stoer–Wagner** algorithm.
 - In practice it often returns a singleton: the node of **smallest degree**.
 
 . . .
 
-::: {.callout-caution title="Remark" icon=false}
-A singleton is not a community. One must force the parts to have sufficient size.
+::: {.box-red}
+A singleton is not a community. One must force the communities to have sufficient size <br>
+$\Rightarrow$ we introduce the [RatioCut]{.blue} modularity function that forces communities to have sufficient size.
 :::
 
-## RatioCut
+## The RatioCut modularity function
 
 ::: {.callout-note title="Definition (RatioCut)" icon=false}
-$${\rm RatioCut}(V_1,\ldots,V_k)=\frac12\sum_{i=1}^k\frac{W(V_i,V_i^c)}{|V_i|}.$$
+$${\rm RatioCut}(V_1,\ldots,V_k)=\frac12\sum_{i=1}^k\frac{W(V_i,V_i^c)}{\color{red}{|V_i|}}.$$
 :::
 
 - The factor $1/|V_i|$ penalizes small communities.
-- Minimizing RatioCut over $\cP_k(V)$ is **NP-hard** in general.
-- We rewrite it as a vector (then matrix) problem and **convexify the constraint**. The relaxation is the spectral method.
+- Minimizing RatioCut over all partitions of $V$ is **NP-hard** in general.
+- We rewrite it as a vector optimization problem for the problem of finding two communities (then as a matrix problem for the general $k$ communities case).
+- The convex relaxation of this problem will coincide with the spectral method.
 
 ## Membership vector for two communities {.smaller}
 
-For $V_1\subset V$, set
+For $V_1\subset V$, we define the **membership vector** as $f^{V_1} = (f_i^{V_1})_{i\in V}$ with $i$th coordinate given by 
 $$f_i^{V_1}=\begin{cases}\sqrt{|V_1^c|/|V_1|}& \text{if }i\in V_1,\\[4pt]-\sqrt{|V_1|/|V_1^c|}& \text{if }i\notin V_1.\end{cases}$$
 
 ::: {.callout-note title="Proposition" icon=false}
-Let $L$ be the Laplacian of an undirected weighted graph, and $n=|V|$. Then
-
-1. $\inr{f^{V_1},\mathbf{1}}=0$ and $\norm{f^{V_1}}_2^2=n$;
-2. $(f^{V_1})^\top L f^{V_1}=n\,{\rm RatioCut}(V_1,V_1^c)$.
+Let $L$ be the Laplacian of an undirected weighted graph, and $n=|V|$. Then for all $V_1\subset V$, $\inr{f^{V_1},\mathbf{1}}=0$ and $\norm{f^{V_1}}_2^2=n$. Moreover, $(f^{V_1})^\top L f^{V_1}=n\,{\rm RatioCut}(V_1,V_1^c)$.
 :::
 
-- So minimizing RatioCut $\iff$ minimizing $f^\top Lf$ over these discrete vectors $f^{V_1}$.
+::: {style="height: 50px;"}
+:::
 
-## Proof sketch of the RatioCut identity {.smaller}
+. . .
 
-From the quadratic form,
-$$(f^{V_1})^\top Lf^{V_1}=\frac12\sum_{(i,j)\in E}W_{ij}(f_i^{V_1}-f_j^{V_1})^2.$$
+:::{.box-red}
+Minimizing RatioCut is equivalent to minimizing $f\to f^\top Lf$ over these discrete vectors $f^{V_1}$:
+$$
+\min_{V_1\subset V}\left((f^{V_1})^\top L f^{V_1} \right) =
+\min_{V_1\subset V}\left((f^{V_1})^\top L f^{V_1}: \inr{f^{V_1},\mathbf{1}}=0,\,\norm{f^{V_1}}_2^2=n\right).
+$$
+:::
 
-- The difference $f_i^{V_1}-f_j^{V_1}$ is nonzero only across the cut.
-- On a cut edge,
-$$\Big(\sqrt{\tfrac{|V_1^c|}{|V_1|}}+\sqrt{\tfrac{|V_1|}{|V_1^c|}}\Big)^2=\frac{n}{|V_1|}+\frac{n}{|V_1^c|}.$$
-- Summing both orientations of the cut gives $n\,{\rm RatioCut}(V_1,V_1^c)$.
-- The two constraints: $\norm{f^{V_1}}_2^2=|V_1|+|V_1^c|=n$ and $\inr{f^{V_1},\mathbf{1}}=0$. $\square$
+. . .
 
-## Convex relaxation for $k=2$ {.smaller}
+:::{.box-yellow}
+Is it a convex optimization problem? What could we do to make it convex?
+:::
+
+## Convex relaxation for $k=2$ communities {.smaller}
 
 Three equivalent **discrete** problems:
-$$\min_{V_1\subset V}(f^{V_1})^\top Lf^{V_1},\qquad\min_{V_1\subset V}\big((f^{V_1})^\top Lf^{V_1}:\norm{f^{V_1}}_2^2=n,\,\inr{f^{V_1},\mathbf{1}}=0\big),$$
-and $\min_{V_1}{\rm RatioCut}(V_1,V_1^c)$. All are NP-hard.
+$$
+\min_{V_1\subset V}(f^{V_1})^\top Lf^{V_1},\qquad\min_{V_1\subset V}\big((f^{V_1})^\top Lf^{V_1}:\norm{f^{V_1}}_2^2=n,\,\inr{f^{V_1},\mathbf{1}}=0\big), \qquad \min_{V_1\subset V}{\rm RatioCut}(V_1,V_1^c).
+$$ 
+All are NP-hard.
 
 - The map $f\mapsto f^\top Lf$ is **convex** (${\rm Hess}=2L\succeq 0$).
-- The difficulty is the discrete constraint $f=f^{V_1}$.
-- **Relax** it to $f\in\R^{|V|}$:
-$$\min_{f\in\R^{|V|}}\big(f^\top Lf:\norm{f}_2^2=1,\,\inr{f,\mathbf{1}}=0\big).$$
+- The difficulty is the discrete constraint $f=f^{V_1}$ or $V_1\subset V$.
+
+. . .
+
+::: {style="height: 70px;"}
+:::
+
+:::{.box-red}
+**Convex relaxation:** Drop the *none convex* constraint $f=f^{V_1}$ to $f\in\R^{|V|}$:
+$$
+\min_{f\in\R^{|V|}}\big(f^\top Lf:\norm{f}_2^2=1,\,\inr{f,\mathbf{1}}=0\big).
+$$
+:::
+
 
 ## The Fiedler vector {.smaller}
 
 ::: {.callout-note title="Definition (Fiedler vector)" icon=false}
 A **Fiedler vector** of $L$ is an eigenvector for the **second smallest** eigenvalue. That eigenvalue is the **algebraic connectivity**.
+:::
+
+::: {style="height: 50px;"}
 :::
 
 ::: {.callout-note title="Proposition" icon=false}
@@ -1369,20 +1443,4 @@ NP-hard problems can become easy under a natural random model. Convex relaxation
 :::
 :::
 ::::
-
-## Dual certificate for basis pursuit {.smaller}
-
-The same idea applies to
-$$\min\big(\norm{t}_1:At=y\big).$$
-
-- Subdifferential: $0\in\partial^-\norm{\cdot}_1(x^*)+\mathrm{Im}(A^\top)$ iff there is $\beta^*$ with
-$$\norm{A^\top\beta^*}_\infty\leq 1,\qquad (A^\top\beta^*)_I={\rm sgn}(x^*_I),\quad I={\rm supp}(x^*).$$
-- Lagrangian dual: $\max\big(\inr{\beta,y}:\norm{A^\top\beta}_\infty\leq 1\big)$.
-- Weak duality: $\norm{t}_1\geq\inr{\beta,y}$. Equality plus dual feasibility certifies $t^*$.
-
-A **strict** certificate rules out every other feasible $t$: that is uniqueness.
-
-::: {.callout-note title="Proposition" icon=false}
-Under strong duality, if $\lambda^*$ solves the dual then $x^*$ solves the primal if and only if $\varphi(x^*)=\psi(\lambda^*)$.
-:::
 
