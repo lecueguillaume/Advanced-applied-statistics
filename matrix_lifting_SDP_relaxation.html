@@ -606,10 +606,9 @@ A = \begin{pmatrix}
 </div>
 <div class="fragment">
 <p><strong>Lifting:</strong> <span class="math inline">\((\dagger)\)</span> is a purely quadratic problem in <span class="math inline">\(x\)</span> (i.e.&nbsp;only quadratic terms in <span class="math inline">\(x\)</span> in both the objective function and the constraints). One can <strong>lift</strong> this type of problem to a matrix optimization problem:</p>
-<p><span class="math display">\[\min\big(x^\top Ax:x_i^2=1\big) = \min\big(\inr{A, Z}:Z\succeq 0, {\rm rank}(Z) = 1, Z_{ii}=1\big).\]</span></p>
-<p><strong>SDP relaxation:</strong> drop the rank constraint to get the SDP problem: <span class="math display">\[\min\big(\inr{A,Z}:Z\succeq 0,\,Z_{ii}=1\big). \quad (\dagger\dagger)\]</span></p>
+<p><span class="math display">\[\min\big(x^\top Ax:x_i^2=1\big) = \min\big(\inr{A, Z}:Z\succeq 0, {\rm rank}(Z) = 1, Z_{ii}=1, \forall i\in V\big).\]</span></p>
 <div class="box-red">
-<p><span class="math inline">\((\dagger\dagger)\)</span> is the Goemans–Williamson SDP relaxation of the Max-Cut problem.</p>
+<p><strong>SDP relaxation:</strong> drop the rank constraint to get the SDP problem: <span class="math display">\[\min\big(\inr{A,Z}:Z\succeq 0,\,Z_{ii}=1\big). \quad (\dagger\dagger)\]</span> <span class="math inline">\((\dagger\dagger)\)</span> is the Goemans–Williamson SDP relaxation of the Max-Cut problem.</p>
 </div>
 </div>
 <div class="fragment">
@@ -619,14 +618,14 @@ A = \begin{pmatrix}
 <div class="box-blue">
 <p>Usually <span class="math inline">\((\dagger\dagger)\)</span> does not have a rank one solution and so <span class="math inline">\((\dagger)\)</span> and <span class="math inline">\((\dagger\dagger)\)</span> are not equivalent (in general).</p>
 <p><strong>Question:</strong> How can we find a solution to the Max-Cut problem from a solution to <span class="math inline">\((\dagger\dagger)\)</span>?</p>
-<p><strong>Solution:</strong> <span class="blue"><strong>Rounding:</strong></span> from <span class="math inline">\(Z^*\)</span> a solution to <span class="math inline">\((\dagger\dagger)\)</span>, we draw <span class="math inline">\(G\sim\cN(0, Z^*)\)</span> and set <span class="math inline">\(x^{**} = {\rm sign}(G)\)</span>.</p>
+<p><strong>Solution:</strong> <span class="blue"><strong>Rounding:</strong></span> from <span class="math inline">\(Z^*\)</span> a solution to <span class="math inline">\((\dagger\dagger)\)</span>, we draw <span class="math inline">\(G\sim\cN(0, Z^*)\)</span> and set <span class="math inline">\(x^{**} = {\rm sign}(G)\)</span> ie <span class="math inline">\(S^{**} = \{i\in V: x^{**}_i = 1\}\)</span>.</p>
 </div>
 </div>
 </section>
 <section id="the-goemanswilliamson-theorem" class="slide level2 smaller">
 <h2>The Goemans–Williamson Theorem</h2>
 <div class="box-red">
-<p>Let <span class="math inline">\(Z^*\)</span> be a solution to, <span class="math display">\[\min\big(\inr{A,Z}:Z\succeq 0,\,Z_{ii}=1\big). \quad (\dagger\dagger)\]</span> Let <span class="math inline">\(G\sim\cN(0, Z^*)\)</span> and set <span class="math inline">\(x^{**} = {\rm sign}(G)\)</span>. Then, <span class="math display">\[\E\Big[\frac14\sum_{i,j}A_{ij}(1- x^{**}_i x^{**}_j)\Big]\geq \alpha_{GW}\cdot{\rm OPT}\]</span> where <span class="math inline">\(\alpha_{GW} = \frac{2}{\pi}\min_{0\leq \theta\leq \pi}\frac{\theta}{1-\cos(\theta)} \approx 0.878\)</span> and <span class="math inline">\({\rm OPT}\)</span> is the value of the optimal solution to the Max-Cut problem.</p>
+<p>Let <span class="math inline">\(Z^*\)</span> be a solution to, <span class="math display">\[\min\big(\inr{A,Z}:Z\succeq 0,\,Z_{ii}=1\big). \quad (\dagger\dagger)\]</span> Let <span class="math inline">\(G\sim\cN(0, Z^*)\)</span> and set <span class="math inline">\(x^{**} = {\rm sign}(G)\)</span>. Then, <span class="math display">\[\E\Big[\frac14\sum_{i,j}A_{ij}(1- x^{**}_i x^{**}_j)\Big]\geq \alpha_{GW}\cdot{\rm OPT}\]</span> where <span class="math inline">\(\alpha_{GW} = \frac{2}{\pi}\min_{0\leq \theta\leq \pi}\frac{\theta}{1-\cos(\theta)} \approx 0.878\)</span> and <span class="math inline">\({\rm OPT}:=\max_{x\in\{\pm 1\}^n}\frac14\sum_{i,j}A_{ij}(1-x_ix_j)\)</span> is the value achieved by the optimal solution to the Max-Cut problem.</p>
 </div>
 <div class="fragment">
 <div class="box-yellow">
@@ -661,7 +660,7 @@ A = \begin{pmatrix}
 <section id="can-we-do-better-than-the-alpha_gw-factor" class="slide level2">
 <h2>Can we do better than the <span class="math inline">\(\alpha_{GW}\)</span> factor?</h2>
 <div class="box-yellow">
-<p><strong>Question:</strong> Is it possible to construct in polynomial time an approximating solution to the Max-Cut problem that can do better than the <span class="math inline">\(\alpha_{GW}\)</span> factor? That is to construct (in polynomial time) a cut <span class="math inline">\(x^\circ\)</span> such that <span class="math display">\[\frac14\sum_{i,j}A_{ij}(1- x^{\circ}_i x^{\circ}_j) &gt; \alpha_{GW}\cdot{\rm OPT} ?\]</span> (in a deterministic or randomized way).</p>
+<p><strong>Question:</strong> Is it possible to construct in polynomial time an approximating solution to the Max-Cut problem that can do better than the <span class="math inline">\(\alpha_{GW}\)</span> factor? That is to construct (in polynomial time) a cut <span class="math inline">\(x^\circ\in\{\pm 1\}^{|V|}\)</span> such that <span class="math display">\[\frac14\sum_{i,j}A_{ij}(1- x^{\circ}_i x^{\circ}_j) &gt; \alpha_{GW}\cdot{\rm OPT} ?\]</span> (in a deterministic or randomized way).</p>
 </div>
 <div class="fragment">
 <div style="height: 50px;">
@@ -673,8 +672,8 @@ A = \begin{pmatrix}
 </div>
 </section></section>
 <section>
-<section id="convex-relaxation-for-community-detection" class="title-slide slide level1 center">
-<h1>Convex relaxation for community detection</h1>
+<section id="relaxations-for-community-detection" class="title-slide slide level1 center">
+<h1>Relaxations for community detection</h1>
 <div class="quarto-figure quarto-figure-center">
 <figure>
 <p><img data-src="images/community_detection.png" class="quarto-figure quarto-figure-center" style="width:46.0%" alt="Community detection network diagram"></p>
@@ -929,15 +928,18 @@ L_1&amp; 0 &amp; \cdots &amp; 0 \\
 <section id="the-spectral-method-for-community-detection" class="slide level2 scrollable">
 <h2>The spectral method for community detection</h2>
 <ol type="1">
-<li>Find an orthonormal basis <span class="math inline">\(u_1,\ldots,u_k\)</span> of <span class="math inline">\(k\)</span> eigenvectors for the <span class="math inline">\(k\)</span> smallest eigenvalues of <span class="math inline">\(L\)</span> (<span class="math inline">\(k\)</span> is a given parameter)</li>
+<li>Find an orthonormal basis <span class="math inline">\(u_1,\ldots,u_k\)</span> of <span class="math inline">\(k\)</span> eigenvectors for the <span class="math inline">\(k\)</span> smallest eigenvalues of <span class="math inline">\(L\)</span> (<span class="math inline">\(k\)</span> is a given parameter) <span style="font-size: 0.7em;">(no need to compute the full SVD of <span class="math inline">\(L\)</span>, one can use Locally <em>Optimal Block Preconditioned Conjugate Gradient</em> or <em>Implicitly Restarted Lanczos Method</em> methods instead)</span></li>
 <li>Cluster the <span class="math inline">\(|V|\)</span> <strong>row vectors</strong> <span class="math inline">\(y_i\in\R^k\)</span> of the matrix <span class="math inline">\([u_1|\cdots|u_k]\)</span> into <span class="math inline">\(k\)</span> clusters <span class="math inline">\(C_1,\ldots,C_k\)</span>.</li>
 <li>Return <span class="math inline">\(V_p=\{i\in V:y_i\in C_p\}\)</span>. These are the detected communities.</li>
 </ol>
 <div class="fragment">
-<div title="Idea: cluster the rows =  cluster the nodes">
-<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div title="Idea: cluster the rows =  cluster the nodes" style="font-size: 0.8em;">
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
 <p><strong>Idea: cluster the rows = cluster the nodes</strong></p>
 </div>
 <div class="callout-content">
@@ -963,7 +965,7 @@ $$[u_1|\cdots|u_k]=\big[\mathbf{1}_{V_1}/\sqrt{|V_1|}|\cdots|\mathbf{1}_{V_k}/\s
 <section id="graph-cuts-and-modularity" class="slide level2 smaller">
 <h2>Graph cuts and modularity</h2>
 <div class="box-green">
-<p>Next, let us write the spectral method as an algorithm for a <strong>convex relaxation</strong> problem derived from a modularity minimization problem.</p>
+<p>Next, let us write the spectral method as an algorithm for a <strong>(none convex) relaxation</strong> problem derived from a modularity minimization problem.</p>
 </div>
 <div class="fragment">
 <div class="box-red">
@@ -1014,7 +1016,7 @@ $$[u_1|\cdots|u_k]=\big[\mathbf{1}_{V_1}/\sqrt{|V_1|}|\cdots|\mathbf{1}_{V_k}/\s
 <li>The factor <span class="math inline">\(1/|V_i|\)</span> penalizes small communities.</li>
 <li>Minimizing RatioCut over all partitions of <span class="math inline">\(V\)</span> is <strong>NP-hard</strong> in general.</li>
 <li>We rewrite it as a vector optimization problem for the problem of finding two communities (then as a matrix problem for the general <span class="math inline">\(k\)</span> communities case).</li>
-<li>The convex relaxation of this problem will coincide with the spectral method.</li>
+<li>A relaxation of this problem will be the spectral method.</li>
 </ul>
 </section>
 <section id="membership-vector-for-two-communities" class="slide level2 smaller">
@@ -1045,7 +1047,7 @@ $$[u_1|\cdots|u_k]=\big[\mathbf{1}_{V_1}/\sqrt{|V_1|}|\cdots|\mathbf{1}_{V_k}/\s
 </div>
 <div class="fragment">
 <div class="box-yellow">
-<p>Is it a convex optimization problem? What could we do to make it convex?</p>
+<p>Is there a fast algorithm to solve this optimization problem? What makes it difficult?</p>
 </div>
 </div>
 </section>
@@ -1055,17 +1057,22 @@ $$[u_1|\cdots|u_k]=\big[\mathbf{1}_{V_1}/\sqrt{|V_1|}|\cdots|\mathbf{1}_{V_k}/\s
 \min_{V_1\subset V}(f^{V_1})^\top Lf^{V_1},\qquad\min_{V_1\subset V}\big((f^{V_1})^\top Lf^{V_1}:\norm{f^{V_1}}_2^2=n,\,\inr{f^{V_1},\mathbf{1}}=0\big), \qquad \min_{V_1\subset V}{\rm RatioCut}(V_1,V_1^c).
 \]</span> All are NP-hard.</p>
 <ul>
-<li>The map <span class="math inline">\(f\mapsto f^\top Lf\)</span> is <strong>convex</strong> (<span class="math inline">\({\rm Hess}=2L\succeq 0\)</span>).</li>
-<li>The difficulty is the discrete constraint <span class="math inline">\(f=f^{V_1}\)</span> or <span class="math inline">\(V_1\subset V\)</span>.</li>
+<li>The objective function <span class="math inline">\(f\mapsto f^\top Lf\)</span> is <strong>convex</strong> (<span class="math inline">\({\rm Hess}=2L\succeq 0\)</span>). <span style="color: #2e7d32;">✔</span></li>
+<li>The difficulty is the discrete constraint <span class="math inline">\(f=f^{V_1}\)</span> or <span class="math inline">\(V_1\subset V\)</span>. <span style="color: #c62828;">✘</span></li>
 </ul>
 <div class="fragment">
 <div style="height: 70px;">
 
 </div>
 <div class="box-red">
-<p><strong>Convex relaxation:</strong> Drop the <em>none convex</em> constraint <span class="math inline">\(f=f^{V_1}\)</span> to <span class="math inline">\(f\in\R^{|V|}\)</span>: <span class="math display">\[
-\min_{f\in\R^{|V|}}\big(f^\top Lf:\norm{f}_2^2=1,\,\inr{f,\mathbf{1}}=0\big).
+<p><strong>Relaxation:</strong> Drop the <em>combinatorial</em> constraint <code>$f=f^{V_1}$</code> to let <code>$f\in\R^{|V|}$</code>: <span class="math display">\[
+\min_{f\in\color{red}{\R^{|V|}}}\big(f^\top Lf:\norm{f}_2^2=1,\,\inr{f,\mathbf{1}}=0\big).
 \]</span></p>
+</div>
+</div>
+<div class="fragment">
+<div class="box-yellow">
+<p>Is this a convex optimization problem? Is it better than the discrete problems?</p>
 </div>
 </div>
 </section>
@@ -1109,7 +1116,7 @@ $$[u_1|\cdots|u_k]=\big[\mathbf{1}_{V_1}/\sqrt{|V_1|}|\cdots|\mathbf{1}_{V_k}/\s
 <li>The communities are <span class="math inline">\(\{i:u_{2i}\in C_1\}\)</span> and <span class="math inline">\(\{i:u_{2i}\in C_2\}\)</span>.</li>
 </ul>
 <div class="fragment">
-<p>This <strong>is</strong> the spectral method for <span class="math inline">\(k=2\)</span>, with first eigenvector <span class="math inline">\(u_1=\mathbf{1}\)</span> (clustering the rows of <span class="math inline">\([u_1|u_2]\)</span> is the same as clustering the coordinates of <span class="math inline">\(u_2\)</span>).</p>
+<p>This <strong>is</strong> the spectral method for <span class="math inline">\(k=2\)</span>, with first eigenvector <span class="math inline">\(u_1=\mathbf{1}\)</span> <span style="font-size: 0.7em;">(clustering the rows of <span class="math inline">\([u_1|u_2]\)</span> is the same as clustering the coordinates of <span class="math inline">\(u_2\)</span>)</span>.</p>
 </div>
 </section>
 <section id="membership-matrix-for-k-communities" class="slide level2 smaller">
@@ -1152,9 +1159,9 @@ $$[u_1|\cdots|u_k]=\big[\mathbf{1}_{V_1}/\sqrt{|V_1|}|\cdots|\mathbf{1}_{V_k}/\s
 <div class="callout-content">
 <p><strong>Input:</strong> Laplacian <span class="math inline">\(L\)</span> of <span class="math inline">\(G\)</span>, and <span class="math inline">\(k\)</span>.</p>
 <ol type="1">
-<li>Compute an orthonormal basis of <span class="math inline">\(k\)</span> eigenvectors for the <span class="math inline">\(k\)</span> smallest eigenvalues of <span class="math inline">\(L\)</span>.</li>
-<li>Form the <span class="math inline">\(n\times k\)</span> matrix <span class="math inline">\(H\)</span> with these columns.</li>
-<li>Cluster the <span class="math inline">\(n\)</span> rows <span class="math inline">\(y_1,\ldots,y_n\in\R^k\)</span> into <span class="math inline">\(k\)</span> clusters <span class="math inline">\(C_1,\ldots,C_k\)</span>.</li>
+<li>Compute an orthonormal basis of <span class="math inline">\(k\)</span> eigenvectors <span class="math inline">\(u_1,\ldots,u_k\)</span> for the <span class="math inline">\(k\)</span> smallest eigenvalues of <span class="math inline">\(L\)</span>.</li>
+<li>Form the <span class="math inline">\(n\times k\)</span> matrix <span class="math inline">\(H=[u_1|\cdots|u_k]\)</span> with these columns.</li>
+<li>Cluster the <span class="math inline">\(n\)</span> rows <span class="math inline">\(y_1,\ldots,y_n\in\R^k\)</span> of <span class="math inline">\(H\)</span> into <span class="math inline">\(k\)</span> clusters <span class="math inline">\(C_1,\ldots,C_k\)</span>.</li>
 <li><strong>Output:</strong> communities <span class="math inline">\(\{i:y_i\in C_p\}\)</span>, <span class="math inline">\(p=1,\ldots,k\)</span>.</li>
 </ol>
 </div>
@@ -1162,13 +1169,15 @@ $$[u_1|\cdots|u_k]=\big[\mathbf{1}_{V_1}/\sqrt{|V_1|}|\cdots|\mathbf{1}_{V_k}/\s
 </div>
 </div>
 <ul>
-<li>Justified by the RatioCut relaxation, or by the ideal connected-component picture.</li>
-<li>Choose <span class="math inline">\(k\)</span> by an <strong>elbow</strong> in the spectrum of <span class="math inline">\(L\)</span>, or by evaluating a modularity (e.g.&nbsp;RatioCut) as a function of <span class="math inline">\(k\)</span>.</li>
+<li>Justified by the <strong>relaxation of the RatioCut minimization problem</strong>, or by the ideal connected-component picture.</li>
 </ul>
+<div class="box-blue">
+<p>Choose <span class="math inline">\(k\)</span> by an <strong>elbow</strong> in the spectrum of <span class="math inline">\(L\)</span>, or by evaluating a modularity (e.g.&nbsp;RatioCut) as a function of <span class="math inline">\(k\)</span>.</p>
+</div>
 </section></section>
 <section>
-<section id="probabilistic-graph-models" class="title-slide slide level1 center">
-<h1>Probabilistic graph models</h1>
+<section id="probabilistic-graph-models-for-community-detection" class="title-slide slide level1 center">
+<h1>Probabilistic graph models for community detection</h1>
 
 </section>
 <section id="why-a-random-graph" class="slide level2">
