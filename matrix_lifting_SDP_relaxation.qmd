@@ -566,14 +566,11 @@ $$\min\big(x^\top Ax:x_i^2=1\big) \quad (\dagger)$$
 
 **Lifting:** $(\dagger)$ is a purely quadratic problem in $x$ (i.e. only quadratic terms in $x$ in both the objective function and the constraints). One can **lift** this type of problem to a matrix optimization problem:
 
-$$\min\big(x^\top Ax:x_i^2=1\big) = \min\big(\inr{A, Z}:Z\succeq 0, {\rm rank}(Z) = 1, Z_{ii}=1\big).$$
-
-
-**SDP relaxation:** drop the rank constraint to get the SDP problem:
-$$\min\big(\inr{A,Z}:Z\succeq 0,\,Z_{ii}=1\big). \quad (\dagger\dagger)$$
-
+$$\min\big(x^\top Ax:x_i^2=1\big) = \min\big(\inr{A, Z}:Z\succeq 0, {\rm rank}(Z) = 1, Z_{ii}=1, \forall i\in V\big).$$
 
 :::{.box-red}
+**SDP relaxation:** drop the rank constraint to get the SDP problem:
+$$\min\big(\inr{A,Z}:Z\succeq 0,\,Z_{ii}=1\big). \quad (\dagger\dagger)$$
 $(\dagger\dagger)$ is the Goemans–Williamson SDP relaxation of the Max-Cut problem.
 :::
 
@@ -587,7 +584,7 @@ Usually $(\dagger\dagger)$ does not have a rank one solution and so $(\dagger)$ 
 
 **Question:** How can we find a solution to the Max-Cut problem from a solution to $(\dagger\dagger)$?
 
-**Solution:** [**Rounding:**]{.blue} from $Z^*$ a solution to $(\dagger\dagger)$, we draw $G\sim\cN(0, Z^*)$ and set $x^{**} = {\rm sign}(G)$.
+**Solution:** [**Rounding:**]{.blue} from $Z^*$ a solution to $(\dagger\dagger)$, we draw $G\sim\cN(0, Z^*)$ and set $x^{**} = {\rm sign}(G)$ ie $S^{**} = \{i\in V: x^{**}_i = 1\}$.
 :::
 
 ## The Goemans–Williamson Theorem {.smaller}
@@ -597,7 +594,7 @@ Let $Z^*$ be a solution to,
 $$\min\big(\inr{A,Z}:Z\succeq 0,\,Z_{ii}=1\big). \quad (\dagger\dagger)$$
 Let $G\sim\cN(0, Z^*)$ and set $x^{**} = {\rm sign}(G)$. Then,
 $$\E\Big[\frac14\sum_{i,j}A_{ij}(1- x^{**}_i x^{**}_j)\Big]\geq \alpha_{GW}\cdot{\rm OPT}$$
-where $\alpha_{GW} = \frac{2}{\pi}\min_{0\leq \theta\leq \pi}\frac{\theta}{1-\cos(\theta)} \approx 0.878$ and ${\rm OPT}$ is the value of the optimal solution to the Max-Cut problem.
+where $\alpha_{GW} = \frac{2}{\pi}\min_{0\leq \theta\leq \pi}\frac{\theta}{1-\cos(\theta)} \approx 0.878$ and ${\rm OPT}:=\max_{x\in\{\pm 1\}^n}\frac14\sum_{i,j}A_{ij}(1-x_ix_j)$ is the value achieved by the optimal solution to the Max-Cut problem.
 :::
 
 . . .
@@ -646,7 +643,7 @@ $$
 ## Can we do better than the $\alpha_{GW}$ factor?
 
 :::{.box-yellow}
-**Question:** Is it possible to construct in polynomial time an approximating solution to the Max-Cut problem that can do better than the $\alpha_{GW}$ factor? That is to construct (in polynomial time) a cut $x^\circ$ such that
+**Question:** Is it possible to construct in polynomial time an approximating solution to the Max-Cut problem that can do better than the $\alpha_{GW}$ factor? That is to construct (in polynomial time) a cut $x^\circ\in\{\pm 1\}^{|V|}$ such that
 $$\frac14\sum_{i,j}A_{ij}(1- x^{\circ}_i x^{\circ}_j) > \alpha_{GW}\cdot{\rm OPT} ?$$
 (in a deterministic or randomized way).
 :::
@@ -663,7 +660,7 @@ $$\frac14\sum_{i,j}A_{ij}(1- x^{\circ}_i x^{\circ}_j) > \alpha_{GW}\cdot{\rm OPT
 
 
 
-# Convex relaxation for community detection
+# Relaxations for community detection
 
 ![](images/community_detection.png){width=46% fig-align="center" fig-alt="Community detection network diagram"}
 
@@ -839,7 +836,7 @@ The graph Laplacian is the *discrete analog* of the Laplacian of the heat equati
 :::
 
 :::{.box-blue}
-**Ideal case:** the communities are the connected components. They do not interact. Then ${\rm Ker}(L)={\rm span}(\mathbf{1}_{V_1},\ldots,\mathbf{1}_{V_k})$ where $\mathbf{1}_{V_i}$ are the  indicator vectors of the communities.
+**Ideal case:** the communities are the connected components. They do not interact. Then ${\rm Ker}(L)={\rm span}(\mathbf{1}_{V_1},\ldots,\mathbf{1}_{V_k})$ where $\mathbf{1}_{V_i}$ are the indicator vectors of the communities.
 :::
 
 ::: {style="height: 60px;"}
@@ -853,13 +850,13 @@ The graph Laplacian is the *discrete analog* of the Laplacian of the heat equati
 
 ## The spectral method for community detection
 
-1. Find an orthonormal basis $u_1,\ldots,u_k$ of $k$ eigenvectors for the $k$ smallest eigenvalues of $L$ ($k$ is a given parameter)
+1. Find an orthonormal basis $u_1,\ldots,u_k$ of $k$ eigenvectors for the $k$ smallest eigenvalues of $L$ ($k$ is a given parameter) [(no need to compute the full SVD of $L$, one can use Locally *Optimal Block Preconditioned Conjugate Gradient* or *Implicitly Restarted Lanczos Method* methods instead)]{style="font-size: 0.7em;"}
 1. Cluster the $|V|$ **row vectors** $y_i\in\R^k$ of the matrix $[u_1|\cdots|u_k]$ into $k$ clusters $C_1,\ldots,C_k$.
 2. Return $V_p=\{i\in V:y_i\in C_p\}$. These are the detected communities.
 
 . . .
 
-::: {.callout-tip title="Idea: cluster the rows =  cluster the nodes" icon=false}
+::: {.callout-tip title="Idea: cluster the rows =  cluster the nodes" style="font-size: 0.8em;"}
 Each node $i$ is represented by the $i$-th row of the $n\times k$ eigenbasis matrix $[u_1|\cdots|u_k]$. Clustering these rows clusters the nodes.
 :::
 
@@ -880,7 +877,7 @@ $$[u_1|\cdots|u_k]=\big[\mathbf{1}_{V_1}/\sqrt{|V_1|}|\cdots|\mathbf{1}_{V_k}/\s
 ## Graph cuts and modularity {.smaller}
 
 :::{.box-green}
-Next, let us write the spectral method as an algorithm for a **convex relaxation** problem derived from a modularity minimization problem.
+Next, let us write the spectral method as an algorithm for a **(none convex) relaxation** problem derived from a modularity minimization problem.
 :::
 
 . . .
@@ -934,7 +931,7 @@ $${\rm RatioCut}(V_1,\ldots,V_k)=\frac12\sum_{i=1}^k\frac{W(V_i,V_i^c)}{\color{r
 - The factor $1/|V_i|$ penalizes small communities.
 - Minimizing RatioCut over all partitions of $V$ is **NP-hard** in general.
 - We rewrite it as a vector optimization problem for the problem of finding two communities (then as a matrix problem for the general $k$ communities case).
-- The convex relaxation of this problem will coincide with the spectral method.
+- A relaxation of this problem will be the spectral method.
 
 ## Membership vector for two communities {.smaller}
 
@@ -961,7 +958,7 @@ $$
 . . .
 
 :::{.box-yellow}
-Is it a convex optimization problem? What could we do to make it convex?
+Is there a fast algorithm to solve this optimization problem? What makes it difficult?
 :::
 
 ## Convex relaxation for $k=2$ communities {.smaller}
@@ -972,8 +969,8 @@ $$
 $$ 
 All are NP-hard.
 
-- The map $f\mapsto f^\top Lf$ is **convex** (${\rm Hess}=2L\succeq 0$).
-- The difficulty is the discrete constraint $f=f^{V_1}$ or $V_1\subset V$.
+- The objective function $f\mapsto f^\top Lf$ is **convex** (${\rm Hess}=2L\succeq 0$). [✔]{style="color: #2e7d32;"}
+- The difficulty is the discrete constraint $f=f^{V_1}$ or $V_1\subset V$. [✘]{style="color: #c62828;"}
 
 . . .
 
@@ -981,12 +978,17 @@ All are NP-hard.
 :::
 
 :::{.box-red}
-**Convex relaxation:** Drop the *none convex* constraint $f=f^{V_1}$ to $f\in\R^{|V|}$:
+**Relaxation:** Drop the *combinatorial* constraint `$f=f^{V_1}$` to let `$f\in\R^{|V|}$`:
 $$
-\min_{f\in\R^{|V|}}\big(f^\top Lf:\norm{f}_2^2=1,\,\inr{f,\mathbf{1}}=0\big).
+\min_{f\in\color{red}{\R^{|V|}}}\big(f^\top Lf:\norm{f}_2^2=1,\,\inr{f,\mathbf{1}}=0\big).
 $$
 :::
 
+. . .
+
+:::{.box-yellow}
+Is this a convex optimization problem? Is it better than the discrete problems?
+:::
 
 ## The Fiedler vector {.smaller}
 
@@ -1014,7 +1016,7 @@ with equality at $f=u_2$. $\square$
 
 . . .
 
-This **is** the spectral method for $k=2$, with first eigenvector $u_1=\mathbf{1}$ (clustering the rows of $[u_1|u_2]$ is the same as clustering the coordinates of $u_2$).
+This **is** the spectral method for $k=2$, with first eigenvector $u_1=\mathbf{1}$ [(clustering the rows of $[u_1|u_2]$ is the same as clustering the coordinates of $u_2$)]{style="font-size: 0.7em;"}.
 
 ## Membership matrix for $k$ communities {.smaller}
 
@@ -1046,16 +1048,20 @@ $${\rm span}(h_1,\ldots,h_k)={\rm span}(u_1,\ldots,u_k).$$
 ::: {.callout-note title="Algorithm (spectral method)" icon=false}
 **Input:** Laplacian $L$ of $G$, and $k$.
 
-1. Compute an orthonormal basis of $k$ eigenvectors for the $k$ smallest eigenvalues of $L$.
-2. Form the $n\times k$ matrix $H$ with these columns.
-3. Cluster the $n$ rows $y_1,\ldots,y_n\in\R^k$ into $k$ clusters $C_1,\ldots,C_k$.
+1. Compute an orthonormal basis of $k$ eigenvectors $u_1,\ldots,u_k$ for the $k$ smallest eigenvalues of $L$.
+2. Form the $n\times k$ matrix $H=[u_1|\cdots|u_k]$ with these columns.
+3. Cluster the $n$ rows $y_1,\ldots,y_n\in\R^k$ of $H$ into $k$ clusters $C_1,\ldots,C_k$.
 4. **Output:** communities $\{i:y_i\in C_p\}$, $p=1,\ldots,k$.
 :::
 
-- Justified by the RatioCut relaxation, or by the ideal connected-component picture.
-- Choose $k$ by an **elbow** in the spectrum of $L$, or by evaluating a modularity (e.g. RatioCut) as a function of $k$.
+- Justified by the **relaxation of the RatioCut minimization problem**, or by the ideal connected-component picture.
+ 
+:::{.box-blue}
+Choose $k$ by an **elbow** in the spectrum of $L$, or by evaluating a modularity (e.g. RatioCut) as a function of $k$.
+:::
 
-# Probabilistic graph models
+
+# Probabilistic graph models for community detection
 
 ## Why a random graph?
 
